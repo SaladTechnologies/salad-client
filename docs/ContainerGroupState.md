@@ -8,13 +8,13 @@ Name | Type | Description | Notes
 **Description** | Pointer to **NullableString** |  | [optional] 
 **StartTime** | **time.Time** |  | 
 **FinishTime** | **time.Time** |  | 
-**InstanceStatusCount** | [**ContainerGroupInstanceStatusCount**](ContainerGroupInstanceStatusCount.md) |  | 
+**InstanceStatusCounts** | [**ContainerGroupInstanceStatusCount**](ContainerGroupInstanceStatusCount.md) |  | 
 
 ## Methods
 
 ### NewContainerGroupState
 
-`func NewContainerGroupState(status ContainerGroupStatus, startTime time.Time, finishTime time.Time, instanceStatusCount ContainerGroupInstanceStatusCount, ) *ContainerGroupState`
+`func NewContainerGroupState(status ContainerGroupStatus, startTime time.Time, finishTime time.Time, instanceStatusCounts ContainerGroupInstanceStatusCount, ) *ContainerGroupState`
 
 NewContainerGroupState instantiates a new ContainerGroupState object
 This constructor will assign default values to properties that have it defined,
@@ -124,24 +124,24 @@ and a boolean to check if the value has been set.
 SetFinishTime sets FinishTime field to given value.
 
 
-### GetInstanceStatusCount
+### GetInstanceStatusCounts
 
-`func (o *ContainerGroupState) GetInstanceStatusCount() ContainerGroupInstanceStatusCount`
+`func (o *ContainerGroupState) GetInstanceStatusCounts() ContainerGroupInstanceStatusCount`
 
-GetInstanceStatusCount returns the InstanceStatusCount field if non-nil, zero value otherwise.
+GetInstanceStatusCounts returns the InstanceStatusCounts field if non-nil, zero value otherwise.
 
-### GetInstanceStatusCountOk
+### GetInstanceStatusCountsOk
 
-`func (o *ContainerGroupState) GetInstanceStatusCountOk() (*ContainerGroupInstanceStatusCount, bool)`
+`func (o *ContainerGroupState) GetInstanceStatusCountsOk() (*ContainerGroupInstanceStatusCount, bool)`
 
-GetInstanceStatusCountOk returns a tuple with the InstanceStatusCount field if it's non-nil, zero value otherwise
+GetInstanceStatusCountsOk returns a tuple with the InstanceStatusCounts field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetInstanceStatusCount
+### SetInstanceStatusCounts
 
-`func (o *ContainerGroupState) SetInstanceStatusCount(v ContainerGroupInstanceStatusCount)`
+`func (o *ContainerGroupState) SetInstanceStatusCounts(v ContainerGroupInstanceStatusCount)`
 
-SetInstanceStatusCount sets InstanceStatusCount field to given value.
+SetInstanceStatusCounts sets InstanceStatusCounts field to given value.
 
 
 

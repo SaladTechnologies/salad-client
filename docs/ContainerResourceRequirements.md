@@ -6,8 +6,8 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Cpu** | **int32** |  | 
 **Memory** | **int32** |  | 
-**GpuClass** | Pointer to **NullableString** |  | [optional] 
 **GpuClasses** | Pointer to **[]string** |  | [optional] 
+**StorageAmount** | Pointer to **NullableInt64** |  | [optional] 
 
 ## Methods
 
@@ -68,41 +68,6 @@ and a boolean to check if the value has been set.
 SetMemory sets Memory field to given value.
 
 
-### GetGpuClass
-
-`func (o *ContainerResourceRequirements) GetGpuClass() string`
-
-GetGpuClass returns the GpuClass field if non-nil, zero value otherwise.
-
-### GetGpuClassOk
-
-`func (o *ContainerResourceRequirements) GetGpuClassOk() (*string, bool)`
-
-GetGpuClassOk returns a tuple with the GpuClass field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetGpuClass
-
-`func (o *ContainerResourceRequirements) SetGpuClass(v string)`
-
-SetGpuClass sets GpuClass field to given value.
-
-### HasGpuClass
-
-`func (o *ContainerResourceRequirements) HasGpuClass() bool`
-
-HasGpuClass returns a boolean if a field has been set.
-
-### SetGpuClassNil
-
-`func (o *ContainerResourceRequirements) SetGpuClassNil(b bool)`
-
- SetGpuClassNil sets the value for GpuClass to be an explicit nil
-
-### UnsetGpuClass
-`func (o *ContainerResourceRequirements) UnsetGpuClass()`
-
-UnsetGpuClass ensures that no value is present for GpuClass, not even an explicit nil
 ### GetGpuClasses
 
 `func (o *ContainerResourceRequirements) GetGpuClasses() []string`
@@ -138,6 +103,41 @@ HasGpuClasses returns a boolean if a field has been set.
 `func (o *ContainerResourceRequirements) UnsetGpuClasses()`
 
 UnsetGpuClasses ensures that no value is present for GpuClasses, not even an explicit nil
+### GetStorageAmount
+
+`func (o *ContainerResourceRequirements) GetStorageAmount() int64`
+
+GetStorageAmount returns the StorageAmount field if non-nil, zero value otherwise.
+
+### GetStorageAmountOk
+
+`func (o *ContainerResourceRequirements) GetStorageAmountOk() (*int64, bool)`
+
+GetStorageAmountOk returns a tuple with the StorageAmount field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetStorageAmount
+
+`func (o *ContainerResourceRequirements) SetStorageAmount(v int64)`
+
+SetStorageAmount sets StorageAmount field to given value.
+
+### HasStorageAmount
+
+`func (o *ContainerResourceRequirements) HasStorageAmount() bool`
+
+HasStorageAmount returns a boolean if a field has been set.
+
+### SetStorageAmountNil
+
+`func (o *ContainerResourceRequirements) SetStorageAmountNil(b bool)`
+
+ SetStorageAmountNil sets the value for StorageAmount to be an explicit nil
+
+### UnsetStorageAmount
+`func (o *ContainerResourceRequirements) UnsetStorageAmount()`
+
+UnsetStorageAmount ensures that no value is present for StorageAmount, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

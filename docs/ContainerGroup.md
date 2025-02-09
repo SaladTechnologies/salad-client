@@ -8,22 +8,27 @@ Name | Type | Description | Notes
 **Name** | **string** |  | 
 **DisplayName** | **string** |  | 
 **Container** | [**Container**](Container.md) |  | 
+**AutostartPolicy** | **bool** |  | 
 **RestartPolicy** | [**ContainerRestartPolicy**](ContainerRestartPolicy.md) |  | 
 **Replicas** | **int32** |  | 
 **CurrentState** | [**ContainerGroupState**](ContainerGroupState.md) |  | 
-**CountryCodes** | Pointer to [**[]CountryCode**](CountryCode.md) |  | [optional] 
+**CountryCodes** | Pointer to [**[]CountryCode**](CountryCode.md) | List of countries nodes must be located in. Remove this field to permit nodes from any country. | [optional] 
 **Networking** | Pointer to [**NullableContainerGroupNetworking**](ContainerGroupNetworking.md) |  | [optional] 
-**LivenessProbe** | Pointer to [**NullableContainerGroupProbe**](ContainerGroupProbe.md) |  | [optional] 
-**ReadinessProbe** | Pointer to [**NullableContainerGroupProbe**](ContainerGroupProbe.md) |  | [optional] 
-**StartupProbe** | Pointer to [**NullableContainerGroupProbe**](ContainerGroupProbe.md) |  | [optional] 
+**LivenessProbe** | Pointer to [**NullableContainerGroupLivenessProbe**](ContainerGroupLivenessProbe.md) |  | [optional] 
+**ReadinessProbe** | Pointer to [**NullableContainerGroupReadinessProbe**](ContainerGroupReadinessProbe.md) |  | [optional] 
+**StartupProbe** | Pointer to [**NullableContainerGroupStartupProbe**](ContainerGroupStartupProbe.md) |  | [optional] 
+**QueueConnection** | Pointer to [**NullableContainerGroupQueueConnection**](ContainerGroupQueueConnection.md) |  | [optional] 
 **CreateTime** | **time.Time** |  | 
 **UpdateTime** | **time.Time** |  | 
+**PendingChange** | **bool** |  | 
+**Version** | **int32** |  | 
+**QueueAutoscaler** | Pointer to [**NullableQueueAutoscaler**](QueueAutoscaler.md) |  | [optional] 
 
 ## Methods
 
 ### NewContainerGroup
 
-`func NewContainerGroup(id string, name string, displayName string, container Container, restartPolicy ContainerRestartPolicy, replicas int32, currentState ContainerGroupState, createTime time.Time, updateTime time.Time, ) *ContainerGroup`
+`func NewContainerGroup(id string, name string, displayName string, container Container, autostartPolicy bool, restartPolicy ContainerRestartPolicy, replicas int32, currentState ContainerGroupState, createTime time.Time, updateTime time.Time, pendingChange bool, version int32, ) *ContainerGroup`
 
 NewContainerGroup instantiates a new ContainerGroup object
 This constructor will assign default values to properties that have it defined,
@@ -116,6 +121,26 @@ and a boolean to check if the value has been set.
 `func (o *ContainerGroup) SetContainer(v Container)`
 
 SetContainer sets Container field to given value.
+
+
+### GetAutostartPolicy
+
+`func (o *ContainerGroup) GetAutostartPolicy() bool`
+
+GetAutostartPolicy returns the AutostartPolicy field if non-nil, zero value otherwise.
+
+### GetAutostartPolicyOk
+
+`func (o *ContainerGroup) GetAutostartPolicyOk() (*bool, bool)`
+
+GetAutostartPolicyOk returns a tuple with the AutostartPolicy field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAutostartPolicy
+
+`func (o *ContainerGroup) SetAutostartPolicy(v bool)`
+
+SetAutostartPolicy sets AutostartPolicy field to given value.
 
 
 ### GetRestartPolicy
@@ -240,20 +265,20 @@ HasNetworking returns a boolean if a field has been set.
 UnsetNetworking ensures that no value is present for Networking, not even an explicit nil
 ### GetLivenessProbe
 
-`func (o *ContainerGroup) GetLivenessProbe() ContainerGroupProbe`
+`func (o *ContainerGroup) GetLivenessProbe() ContainerGroupLivenessProbe`
 
 GetLivenessProbe returns the LivenessProbe field if non-nil, zero value otherwise.
 
 ### GetLivenessProbeOk
 
-`func (o *ContainerGroup) GetLivenessProbeOk() (*ContainerGroupProbe, bool)`
+`func (o *ContainerGroup) GetLivenessProbeOk() (*ContainerGroupLivenessProbe, bool)`
 
 GetLivenessProbeOk returns a tuple with the LivenessProbe field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetLivenessProbe
 
-`func (o *ContainerGroup) SetLivenessProbe(v ContainerGroupProbe)`
+`func (o *ContainerGroup) SetLivenessProbe(v ContainerGroupLivenessProbe)`
 
 SetLivenessProbe sets LivenessProbe field to given value.
 
@@ -275,20 +300,20 @@ HasLivenessProbe returns a boolean if a field has been set.
 UnsetLivenessProbe ensures that no value is present for LivenessProbe, not even an explicit nil
 ### GetReadinessProbe
 
-`func (o *ContainerGroup) GetReadinessProbe() ContainerGroupProbe`
+`func (o *ContainerGroup) GetReadinessProbe() ContainerGroupReadinessProbe`
 
 GetReadinessProbe returns the ReadinessProbe field if non-nil, zero value otherwise.
 
 ### GetReadinessProbeOk
 
-`func (o *ContainerGroup) GetReadinessProbeOk() (*ContainerGroupProbe, bool)`
+`func (o *ContainerGroup) GetReadinessProbeOk() (*ContainerGroupReadinessProbe, bool)`
 
 GetReadinessProbeOk returns a tuple with the ReadinessProbe field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetReadinessProbe
 
-`func (o *ContainerGroup) SetReadinessProbe(v ContainerGroupProbe)`
+`func (o *ContainerGroup) SetReadinessProbe(v ContainerGroupReadinessProbe)`
 
 SetReadinessProbe sets ReadinessProbe field to given value.
 
@@ -310,20 +335,20 @@ HasReadinessProbe returns a boolean if a field has been set.
 UnsetReadinessProbe ensures that no value is present for ReadinessProbe, not even an explicit nil
 ### GetStartupProbe
 
-`func (o *ContainerGroup) GetStartupProbe() ContainerGroupProbe`
+`func (o *ContainerGroup) GetStartupProbe() ContainerGroupStartupProbe`
 
 GetStartupProbe returns the StartupProbe field if non-nil, zero value otherwise.
 
 ### GetStartupProbeOk
 
-`func (o *ContainerGroup) GetStartupProbeOk() (*ContainerGroupProbe, bool)`
+`func (o *ContainerGroup) GetStartupProbeOk() (*ContainerGroupStartupProbe, bool)`
 
 GetStartupProbeOk returns a tuple with the StartupProbe field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetStartupProbe
 
-`func (o *ContainerGroup) SetStartupProbe(v ContainerGroupProbe)`
+`func (o *ContainerGroup) SetStartupProbe(v ContainerGroupStartupProbe)`
 
 SetStartupProbe sets StartupProbe field to given value.
 
@@ -343,6 +368,41 @@ HasStartupProbe returns a boolean if a field has been set.
 `func (o *ContainerGroup) UnsetStartupProbe()`
 
 UnsetStartupProbe ensures that no value is present for StartupProbe, not even an explicit nil
+### GetQueueConnection
+
+`func (o *ContainerGroup) GetQueueConnection() ContainerGroupQueueConnection`
+
+GetQueueConnection returns the QueueConnection field if non-nil, zero value otherwise.
+
+### GetQueueConnectionOk
+
+`func (o *ContainerGroup) GetQueueConnectionOk() (*ContainerGroupQueueConnection, bool)`
+
+GetQueueConnectionOk returns a tuple with the QueueConnection field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetQueueConnection
+
+`func (o *ContainerGroup) SetQueueConnection(v ContainerGroupQueueConnection)`
+
+SetQueueConnection sets QueueConnection field to given value.
+
+### HasQueueConnection
+
+`func (o *ContainerGroup) HasQueueConnection() bool`
+
+HasQueueConnection returns a boolean if a field has been set.
+
+### SetQueueConnectionNil
+
+`func (o *ContainerGroup) SetQueueConnectionNil(b bool)`
+
+ SetQueueConnectionNil sets the value for QueueConnection to be an explicit nil
+
+### UnsetQueueConnection
+`func (o *ContainerGroup) UnsetQueueConnection()`
+
+UnsetQueueConnection ensures that no value is present for QueueConnection, not even an explicit nil
 ### GetCreateTime
 
 `func (o *ContainerGroup) GetCreateTime() time.Time`
@@ -383,6 +443,81 @@ and a boolean to check if the value has been set.
 SetUpdateTime sets UpdateTime field to given value.
 
 
+### GetPendingChange
+
+`func (o *ContainerGroup) GetPendingChange() bool`
+
+GetPendingChange returns the PendingChange field if non-nil, zero value otherwise.
+
+### GetPendingChangeOk
+
+`func (o *ContainerGroup) GetPendingChangeOk() (*bool, bool)`
+
+GetPendingChangeOk returns a tuple with the PendingChange field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPendingChange
+
+`func (o *ContainerGroup) SetPendingChange(v bool)`
+
+SetPendingChange sets PendingChange field to given value.
+
+
+### GetVersion
+
+`func (o *ContainerGroup) GetVersion() int32`
+
+GetVersion returns the Version field if non-nil, zero value otherwise.
+
+### GetVersionOk
+
+`func (o *ContainerGroup) GetVersionOk() (*int32, bool)`
+
+GetVersionOk returns a tuple with the Version field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetVersion
+
+`func (o *ContainerGroup) SetVersion(v int32)`
+
+SetVersion sets Version field to given value.
+
+
+### GetQueueAutoscaler
+
+`func (o *ContainerGroup) GetQueueAutoscaler() QueueAutoscaler`
+
+GetQueueAutoscaler returns the QueueAutoscaler field if non-nil, zero value otherwise.
+
+### GetQueueAutoscalerOk
+
+`func (o *ContainerGroup) GetQueueAutoscalerOk() (*QueueAutoscaler, bool)`
+
+GetQueueAutoscalerOk returns a tuple with the QueueAutoscaler field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetQueueAutoscaler
+
+`func (o *ContainerGroup) SetQueueAutoscaler(v QueueAutoscaler)`
+
+SetQueueAutoscaler sets QueueAutoscaler field to given value.
+
+### HasQueueAutoscaler
+
+`func (o *ContainerGroup) HasQueueAutoscaler() bool`
+
+HasQueueAutoscaler returns a boolean if a field has been set.
+
+### SetQueueAutoscalerNil
+
+`func (o *ContainerGroup) SetQueueAutoscalerNil(b bool)`
+
+ SetQueueAutoscalerNil sets the value for QueueAutoscaler to be an explicit nil
+
+### UnsetQueueAutoscaler
+`func (o *ContainerGroup) UnsetQueueAutoscaler()`
+
+UnsetQueueAutoscaler ensures that no value is present for QueueAutoscaler, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

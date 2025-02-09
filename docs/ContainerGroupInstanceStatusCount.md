@@ -7,12 +7,13 @@ Name | Type | Description | Notes
 **AllocatingCount** | **int32** |  | 
 **CreatingCount** | **int32** |  | 
 **RunningCount** | **int32** |  | 
+**StoppingCount** | **int32** |  | 
 
 ## Methods
 
 ### NewContainerGroupInstanceStatusCount
 
-`func NewContainerGroupInstanceStatusCount(allocatingCount int32, creatingCount int32, runningCount int32, ) *ContainerGroupInstanceStatusCount`
+`func NewContainerGroupInstanceStatusCount(allocatingCount int32, creatingCount int32, runningCount int32, stoppingCount int32, ) *ContainerGroupInstanceStatusCount`
 
 NewContainerGroupInstanceStatusCount instantiates a new ContainerGroupInstanceStatusCount object
 This constructor will assign default values to properties that have it defined,
@@ -85,6 +86,26 @@ and a boolean to check if the value has been set.
 `func (o *ContainerGroupInstanceStatusCount) SetRunningCount(v int32)`
 
 SetRunningCount sets RunningCount field to given value.
+
+
+### GetStoppingCount
+
+`func (o *ContainerGroupInstanceStatusCount) GetStoppingCount() int32`
+
+GetStoppingCount returns the StoppingCount field if non-nil, zero value otherwise.
+
+### GetStoppingCountOk
+
+`func (o *ContainerGroupInstanceStatusCount) GetStoppingCountOk() (*int32, bool)`
+
+GetStoppingCountOk returns a tuple with the StoppingCount field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetStoppingCount
+
+`func (o *ContainerGroupInstanceStatusCount) SetStoppingCount(v int32)`
+
+SetStoppingCount sets StoppingCount field to given value.
 
 
 

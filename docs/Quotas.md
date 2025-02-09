@@ -6,14 +6,13 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ContainerGroupsQuotas** | [**ContainerGroupsQuotas**](ContainerGroupsQuotas.md) |  | 
 **CreateTime** | Pointer to **time.Time** | The time the resource was created | [optional] 
-**RecipesQuotas** | [**RecipesQuotas**](RecipesQuotas.md) |  | 
 **UpdateTime** | Pointer to **time.Time** | The time the resource was last updated | [optional] 
 
 ## Methods
 
 ### NewQuotas
 
-`func NewQuotas(containerGroupsQuotas ContainerGroupsQuotas, recipesQuotas RecipesQuotas, ) *Quotas`
+`func NewQuotas(containerGroupsQuotas ContainerGroupsQuotas, ) *Quotas`
 
 NewQuotas instantiates a new Quotas object
 This constructor will assign default values to properties that have it defined,
@@ -72,26 +71,6 @@ SetCreateTime sets CreateTime field to given value.
 `func (o *Quotas) HasCreateTime() bool`
 
 HasCreateTime returns a boolean if a field has been set.
-
-### GetRecipesQuotas
-
-`func (o *Quotas) GetRecipesQuotas() RecipesQuotas`
-
-GetRecipesQuotas returns the RecipesQuotas field if non-nil, zero value otherwise.
-
-### GetRecipesQuotasOk
-
-`func (o *Quotas) GetRecipesQuotasOk() (*RecipesQuotas, bool)`
-
-GetRecipesQuotasOk returns a tuple with the RecipesQuotas field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetRecipesQuotas
-
-`func (o *Quotas) SetRecipesQuotas(v RecipesQuotas)`
-
-SetRecipesQuotas sets RecipesQuotas field to given value.
-
 
 ### GetUpdateTime
 

@@ -22,24 +22,24 @@ List the GPU Classes
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/SaladTechnologies/salad-client"
 )
 
 func main() {
-    organizationName := "organizationName_example" // string | The unique organization name
+	organizationName := "acme-corp" // string | Your organization name. This identifies the billing context for the API operation and represents a security boundary for SaladCloud resources. The organization must be created before using the API, and you must be a member of the organization.
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.OrganizationDataAPI.ListGpuClasses(context.Background(), organizationName).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `OrganizationDataAPI.ListGpuClasses``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `ListGpuClasses`: GpuClassesList
-    fmt.Fprintf(os.Stdout, "Response from `OrganizationDataAPI.ListGpuClasses`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.OrganizationDataAPI.ListGpuClasses(context.Background(), organizationName).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `OrganizationDataAPI.ListGpuClasses``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ListGpuClasses`: GpuClassesList
+	fmt.Fprintf(os.Stdout, "Response from `OrganizationDataAPI.ListGpuClasses`: %v\n", resp)
 }
 ```
 
@@ -49,7 +49,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**organizationName** | **string** | The unique organization name | 
+**organizationName** | **string** | Your organization name. This identifies the billing context for the API operation and represents a security boundary for SaladCloud resources. The organization must be created before using the API, and you must be a member of the organization. | 
 
 ### Other Parameters
 

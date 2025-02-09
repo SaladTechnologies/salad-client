@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **GcpGcr** | Pointer to [**NullableCreateContainerRegistryAuthenticationGcpGcr**](CreateContainerRegistryAuthenticationGcpGcr.md) |  | [optional] 
 **AwsEcr** | Pointer to [**NullableCreateContainerRegistryAuthenticationAwsEcr**](CreateContainerRegistryAuthenticationAwsEcr.md) |  | [optional] 
 **DockerHub** | Pointer to [**NullableCreateContainerRegistryAuthenticationDockerHub**](CreateContainerRegistryAuthenticationDockerHub.md) |  | [optional] 
+**GcpGar** | Pointer to [**NullableCreateContainerRegistryAuthenticationGcpGcr**](CreateContainerRegistryAuthenticationGcpGcr.md) |  | [optional] 
 
 ## Methods
 
@@ -168,6 +169,41 @@ HasDockerHub returns a boolean if a field has been set.
 `func (o *CreateContainerRegistryAuthentication) UnsetDockerHub()`
 
 UnsetDockerHub ensures that no value is present for DockerHub, not even an explicit nil
+### GetGcpGar
+
+`func (o *CreateContainerRegistryAuthentication) GetGcpGar() CreateContainerRegistryAuthenticationGcpGcr`
+
+GetGcpGar returns the GcpGar field if non-nil, zero value otherwise.
+
+### GetGcpGarOk
+
+`func (o *CreateContainerRegistryAuthentication) GetGcpGarOk() (*CreateContainerRegistryAuthenticationGcpGcr, bool)`
+
+GetGcpGarOk returns a tuple with the GcpGar field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetGcpGar
+
+`func (o *CreateContainerRegistryAuthentication) SetGcpGar(v CreateContainerRegistryAuthenticationGcpGcr)`
+
+SetGcpGar sets GcpGar field to given value.
+
+### HasGcpGar
+
+`func (o *CreateContainerRegistryAuthentication) HasGcpGar() bool`
+
+HasGcpGar returns a boolean if a field has been set.
+
+### SetGcpGarNil
+
+`func (o *CreateContainerRegistryAuthentication) SetGcpGarNil(b bool)`
+
+ SetGcpGarNil sets the value for GcpGar to be an explicit nil
+
+### UnsetGcpGar
+`func (o *CreateContainerRegistryAuthentication) UnsetGcpGar()`
+
+UnsetGcpGar ensures that no value is present for GcpGar, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

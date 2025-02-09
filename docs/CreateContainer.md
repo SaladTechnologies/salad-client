@@ -6,7 +6,8 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Image** | **string** |  | 
 **Resources** | [**ContainerResourceRequirements**](ContainerResourceRequirements.md) |  | 
-**Command** | Pointer to **[]string** |  | [optional] 
+**Command** | Pointer to **[]string** | Pass a command (and optional arguments) to override the ENTRYPOINT and CMD of a container image. | [optional] 
+**Priority** | Pointer to [**NullableContainerGroupPriority**](ContainerGroupPriority.md) |  | [optional] 
 **EnvironmentVariables** | Pointer to **map[string]string** |  | [optional] 
 **Logging** | Pointer to [**NullableContainerLogging**](ContainerLogging.md) |  | [optional] 
 **RegistryAuthentication** | Pointer to [**NullableCreateContainerRegistryAuthentication**](CreateContainerRegistryAuthentication.md) |  | [optional] 
@@ -105,6 +106,41 @@ HasCommand returns a boolean if a field has been set.
 `func (o *CreateContainer) UnsetCommand()`
 
 UnsetCommand ensures that no value is present for Command, not even an explicit nil
+### GetPriority
+
+`func (o *CreateContainer) GetPriority() ContainerGroupPriority`
+
+GetPriority returns the Priority field if non-nil, zero value otherwise.
+
+### GetPriorityOk
+
+`func (o *CreateContainer) GetPriorityOk() (*ContainerGroupPriority, bool)`
+
+GetPriorityOk returns a tuple with the Priority field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPriority
+
+`func (o *CreateContainer) SetPriority(v ContainerGroupPriority)`
+
+SetPriority sets Priority field to given value.
+
+### HasPriority
+
+`func (o *CreateContainer) HasPriority() bool`
+
+HasPriority returns a boolean if a field has been set.
+
+### SetPriorityNil
+
+`func (o *CreateContainer) SetPriorityNil(b bool)`
+
+ SetPriorityNil sets the value for Priority to be an explicit nil
+
+### UnsetPriority
+`func (o *CreateContainer) UnsetPriority()`
+
+UnsetPriority ensures that no value is present for Priority, not even an explicit nil
 ### GetEnvironmentVariables
 
 `func (o *CreateContainer) GetEnvironmentVariables() map[string]string`

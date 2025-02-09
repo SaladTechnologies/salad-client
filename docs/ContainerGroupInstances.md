@@ -4,13 +4,13 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Instances** | [**[]ContainerGroupInstancesInstancesInner**](ContainerGroupInstancesInstancesInner.md) |  | 
+**Instances** | [**[]ContainerGroupInstance**](ContainerGroupInstance.md) |  | 
 
 ## Methods
 
 ### NewContainerGroupInstances
 
-`func NewContainerGroupInstances(instances []ContainerGroupInstancesInstancesInner, ) *ContainerGroupInstances`
+`func NewContainerGroupInstances(instances []ContainerGroupInstance, ) *ContainerGroupInstances`
 
 NewContainerGroupInstances instantiates a new ContainerGroupInstances object
 This constructor will assign default values to properties that have it defined,
@@ -27,20 +27,20 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetInstances
 
-`func (o *ContainerGroupInstances) GetInstances() []ContainerGroupInstancesInstancesInner`
+`func (o *ContainerGroupInstances) GetInstances() []ContainerGroupInstance`
 
 GetInstances returns the Instances field if non-nil, zero value otherwise.
 
 ### GetInstancesOk
 
-`func (o *ContainerGroupInstances) GetInstancesOk() (*[]ContainerGroupInstancesInstancesInner, bool)`
+`func (o *ContainerGroupInstances) GetInstancesOk() (*[]ContainerGroupInstance, bool)`
 
 GetInstancesOk returns a tuple with the Instances field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetInstances
 
-`func (o *ContainerGroupInstances) SetInstances(v []ContainerGroupInstancesInstancesInner)`
+`func (o *ContainerGroupInstances) SetInstances(v []ContainerGroupInstance)`
 
 SetInstances sets Instances field to given value.
 

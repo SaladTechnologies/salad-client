@@ -7,6 +7,9 @@ Name | Type | Description | Notes
 **Image** | **string** |  | 
 **Resources** | [**ContainerResourceRequirements**](ContainerResourceRequirements.md) |  | 
 **Command** | **[]string** |  | 
+**Priority** | Pointer to [**NullableContainerGroupPriority**](ContainerGroupPriority.md) |  | [optional] 
+**Size** | Pointer to **int64** |  | [optional] 
+**Hash** | Pointer to **string** |  | [optional] 
 **EnvironmentVariables** | Pointer to **map[string]string** |  | [optional] 
 **Logging** | Pointer to [**NullableContainerLogging**](ContainerLogging.md) |  | [optional] 
 
@@ -88,6 +91,91 @@ and a boolean to check if the value has been set.
 
 SetCommand sets Command field to given value.
 
+
+### GetPriority
+
+`func (o *Container) GetPriority() ContainerGroupPriority`
+
+GetPriority returns the Priority field if non-nil, zero value otherwise.
+
+### GetPriorityOk
+
+`func (o *Container) GetPriorityOk() (*ContainerGroupPriority, bool)`
+
+GetPriorityOk returns a tuple with the Priority field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPriority
+
+`func (o *Container) SetPriority(v ContainerGroupPriority)`
+
+SetPriority sets Priority field to given value.
+
+### HasPriority
+
+`func (o *Container) HasPriority() bool`
+
+HasPriority returns a boolean if a field has been set.
+
+### SetPriorityNil
+
+`func (o *Container) SetPriorityNil(b bool)`
+
+ SetPriorityNil sets the value for Priority to be an explicit nil
+
+### UnsetPriority
+`func (o *Container) UnsetPriority()`
+
+UnsetPriority ensures that no value is present for Priority, not even an explicit nil
+### GetSize
+
+`func (o *Container) GetSize() int64`
+
+GetSize returns the Size field if non-nil, zero value otherwise.
+
+### GetSizeOk
+
+`func (o *Container) GetSizeOk() (*int64, bool)`
+
+GetSizeOk returns a tuple with the Size field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSize
+
+`func (o *Container) SetSize(v int64)`
+
+SetSize sets Size field to given value.
+
+### HasSize
+
+`func (o *Container) HasSize() bool`
+
+HasSize returns a boolean if a field has been set.
+
+### GetHash
+
+`func (o *Container) GetHash() string`
+
+GetHash returns the Hash field if non-nil, zero value otherwise.
+
+### GetHashOk
+
+`func (o *Container) GetHashOk() (*string, bool)`
+
+GetHashOk returns a tuple with the Hash field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetHash
+
+`func (o *Container) SetHash(v string)`
+
+SetHash sets Hash field to given value.
+
+### HasHash
+
+`func (o *Container) HasHash() bool`
+
+HasHash returns a boolean if a field has been set.
 
 ### GetEnvironmentVariables
 

@@ -5,7 +5,14 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **DisplayName** | Pointer to **NullableString** |  | [optional] 
+**Container** | Pointer to [**NullableUpdateContainer**](UpdateContainer.md) |  | [optional] 
 **Replicas** | Pointer to **NullableInt32** |  | [optional] 
+**CountryCodes** | Pointer to [**[]CountryCode**](CountryCode.md) | List of countries nodes must be located in. Remove this field to permit nodes from any country. | [optional] 
+**Networking** | Pointer to [**UpdateContainerGroupNetworking**](UpdateContainerGroupNetworking.md) |  | [optional] 
+**LivenessProbe** | Pointer to [**NullableContainerGroupLivenessProbe**](ContainerGroupLivenessProbe.md) |  | [optional] 
+**ReadinessProbe** | Pointer to [**NullableContainerGroupReadinessProbe**](ContainerGroupReadinessProbe.md) |  | [optional] 
+**StartupProbe** | Pointer to [**NullableContainerGroupStartupProbe**](ContainerGroupStartupProbe.md) |  | [optional] 
+**QueueAutoscaler** | Pointer to [**NullableQueueAutoscaler**](QueueAutoscaler.md) |  | [optional] 
 
 ## Methods
 
@@ -61,6 +68,41 @@ HasDisplayName returns a boolean if a field has been set.
 `func (o *UpdateContainerGroup) UnsetDisplayName()`
 
 UnsetDisplayName ensures that no value is present for DisplayName, not even an explicit nil
+### GetContainer
+
+`func (o *UpdateContainerGroup) GetContainer() UpdateContainer`
+
+GetContainer returns the Container field if non-nil, zero value otherwise.
+
+### GetContainerOk
+
+`func (o *UpdateContainerGroup) GetContainerOk() (*UpdateContainer, bool)`
+
+GetContainerOk returns a tuple with the Container field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetContainer
+
+`func (o *UpdateContainerGroup) SetContainer(v UpdateContainer)`
+
+SetContainer sets Container field to given value.
+
+### HasContainer
+
+`func (o *UpdateContainerGroup) HasContainer() bool`
+
+HasContainer returns a boolean if a field has been set.
+
+### SetContainerNil
+
+`func (o *UpdateContainerGroup) SetContainerNil(b bool)`
+
+ SetContainerNil sets the value for Container to be an explicit nil
+
+### UnsetContainer
+`func (o *UpdateContainerGroup) UnsetContainer()`
+
+UnsetContainer ensures that no value is present for Container, not even an explicit nil
 ### GetReplicas
 
 `func (o *UpdateContainerGroup) GetReplicas() int32`
@@ -96,6 +138,206 @@ HasReplicas returns a boolean if a field has been set.
 `func (o *UpdateContainerGroup) UnsetReplicas()`
 
 UnsetReplicas ensures that no value is present for Replicas, not even an explicit nil
+### GetCountryCodes
+
+`func (o *UpdateContainerGroup) GetCountryCodes() []CountryCode`
+
+GetCountryCodes returns the CountryCodes field if non-nil, zero value otherwise.
+
+### GetCountryCodesOk
+
+`func (o *UpdateContainerGroup) GetCountryCodesOk() (*[]CountryCode, bool)`
+
+GetCountryCodesOk returns a tuple with the CountryCodes field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCountryCodes
+
+`func (o *UpdateContainerGroup) SetCountryCodes(v []CountryCode)`
+
+SetCountryCodes sets CountryCodes field to given value.
+
+### HasCountryCodes
+
+`func (o *UpdateContainerGroup) HasCountryCodes() bool`
+
+HasCountryCodes returns a boolean if a field has been set.
+
+### SetCountryCodesNil
+
+`func (o *UpdateContainerGroup) SetCountryCodesNil(b bool)`
+
+ SetCountryCodesNil sets the value for CountryCodes to be an explicit nil
+
+### UnsetCountryCodes
+`func (o *UpdateContainerGroup) UnsetCountryCodes()`
+
+UnsetCountryCodes ensures that no value is present for CountryCodes, not even an explicit nil
+### GetNetworking
+
+`func (o *UpdateContainerGroup) GetNetworking() UpdateContainerGroupNetworking`
+
+GetNetworking returns the Networking field if non-nil, zero value otherwise.
+
+### GetNetworkingOk
+
+`func (o *UpdateContainerGroup) GetNetworkingOk() (*UpdateContainerGroupNetworking, bool)`
+
+GetNetworkingOk returns a tuple with the Networking field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetNetworking
+
+`func (o *UpdateContainerGroup) SetNetworking(v UpdateContainerGroupNetworking)`
+
+SetNetworking sets Networking field to given value.
+
+### HasNetworking
+
+`func (o *UpdateContainerGroup) HasNetworking() bool`
+
+HasNetworking returns a boolean if a field has been set.
+
+### GetLivenessProbe
+
+`func (o *UpdateContainerGroup) GetLivenessProbe() ContainerGroupLivenessProbe`
+
+GetLivenessProbe returns the LivenessProbe field if non-nil, zero value otherwise.
+
+### GetLivenessProbeOk
+
+`func (o *UpdateContainerGroup) GetLivenessProbeOk() (*ContainerGroupLivenessProbe, bool)`
+
+GetLivenessProbeOk returns a tuple with the LivenessProbe field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLivenessProbe
+
+`func (o *UpdateContainerGroup) SetLivenessProbe(v ContainerGroupLivenessProbe)`
+
+SetLivenessProbe sets LivenessProbe field to given value.
+
+### HasLivenessProbe
+
+`func (o *UpdateContainerGroup) HasLivenessProbe() bool`
+
+HasLivenessProbe returns a boolean if a field has been set.
+
+### SetLivenessProbeNil
+
+`func (o *UpdateContainerGroup) SetLivenessProbeNil(b bool)`
+
+ SetLivenessProbeNil sets the value for LivenessProbe to be an explicit nil
+
+### UnsetLivenessProbe
+`func (o *UpdateContainerGroup) UnsetLivenessProbe()`
+
+UnsetLivenessProbe ensures that no value is present for LivenessProbe, not even an explicit nil
+### GetReadinessProbe
+
+`func (o *UpdateContainerGroup) GetReadinessProbe() ContainerGroupReadinessProbe`
+
+GetReadinessProbe returns the ReadinessProbe field if non-nil, zero value otherwise.
+
+### GetReadinessProbeOk
+
+`func (o *UpdateContainerGroup) GetReadinessProbeOk() (*ContainerGroupReadinessProbe, bool)`
+
+GetReadinessProbeOk returns a tuple with the ReadinessProbe field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetReadinessProbe
+
+`func (o *UpdateContainerGroup) SetReadinessProbe(v ContainerGroupReadinessProbe)`
+
+SetReadinessProbe sets ReadinessProbe field to given value.
+
+### HasReadinessProbe
+
+`func (o *UpdateContainerGroup) HasReadinessProbe() bool`
+
+HasReadinessProbe returns a boolean if a field has been set.
+
+### SetReadinessProbeNil
+
+`func (o *UpdateContainerGroup) SetReadinessProbeNil(b bool)`
+
+ SetReadinessProbeNil sets the value for ReadinessProbe to be an explicit nil
+
+### UnsetReadinessProbe
+`func (o *UpdateContainerGroup) UnsetReadinessProbe()`
+
+UnsetReadinessProbe ensures that no value is present for ReadinessProbe, not even an explicit nil
+### GetStartupProbe
+
+`func (o *UpdateContainerGroup) GetStartupProbe() ContainerGroupStartupProbe`
+
+GetStartupProbe returns the StartupProbe field if non-nil, zero value otherwise.
+
+### GetStartupProbeOk
+
+`func (o *UpdateContainerGroup) GetStartupProbeOk() (*ContainerGroupStartupProbe, bool)`
+
+GetStartupProbeOk returns a tuple with the StartupProbe field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetStartupProbe
+
+`func (o *UpdateContainerGroup) SetStartupProbe(v ContainerGroupStartupProbe)`
+
+SetStartupProbe sets StartupProbe field to given value.
+
+### HasStartupProbe
+
+`func (o *UpdateContainerGroup) HasStartupProbe() bool`
+
+HasStartupProbe returns a boolean if a field has been set.
+
+### SetStartupProbeNil
+
+`func (o *UpdateContainerGroup) SetStartupProbeNil(b bool)`
+
+ SetStartupProbeNil sets the value for StartupProbe to be an explicit nil
+
+### UnsetStartupProbe
+`func (o *UpdateContainerGroup) UnsetStartupProbe()`
+
+UnsetStartupProbe ensures that no value is present for StartupProbe, not even an explicit nil
+### GetQueueAutoscaler
+
+`func (o *UpdateContainerGroup) GetQueueAutoscaler() QueueAutoscaler`
+
+GetQueueAutoscaler returns the QueueAutoscaler field if non-nil, zero value otherwise.
+
+### GetQueueAutoscalerOk
+
+`func (o *UpdateContainerGroup) GetQueueAutoscalerOk() (*QueueAutoscaler, bool)`
+
+GetQueueAutoscalerOk returns a tuple with the QueueAutoscaler field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetQueueAutoscaler
+
+`func (o *UpdateContainerGroup) SetQueueAutoscaler(v QueueAutoscaler)`
+
+SetQueueAutoscaler sets QueueAutoscaler field to given value.
+
+### HasQueueAutoscaler
+
+`func (o *UpdateContainerGroup) HasQueueAutoscaler() bool`
+
+HasQueueAutoscaler returns a boolean if a field has been set.
+
+### SetQueueAutoscalerNil
+
+`func (o *UpdateContainerGroup) SetQueueAutoscalerNil(b bool)`
+
+ SetQueueAutoscalerNil sets the value for QueueAutoscaler to be an explicit nil
+
+### UnsetQueueAutoscaler
+`func (o *UpdateContainerGroup) UnsetQueueAutoscaler()`
+
+UnsetQueueAutoscaler ensures that no value is present for QueueAutoscaler, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

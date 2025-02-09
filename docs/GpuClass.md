@@ -4,15 +4,16 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Id** | **string** | The GPU class id | 
+**Id** | **string** | The unique identifier | 
 **Name** | **string** | The GPU class name | 
-**IsHighDemand** | Pointer to **bool** |  | [optional] 
+**Prices** | [**[]GpuClassPrice**](GpuClassPrice.md) | The list of prices for each container group priority | 
+**IsHighDemand** | Pointer to **bool** | Whether the GPU class is in high demand | [optional] 
 
 ## Methods
 
 ### NewGpuClass
 
-`func NewGpuClass(id string, name string, ) *GpuClass`
+`func NewGpuClass(id string, name string, prices []GpuClassPrice, ) *GpuClass`
 
 NewGpuClass instantiates a new GpuClass object
 This constructor will assign default values to properties that have it defined,
@@ -65,6 +66,26 @@ and a boolean to check if the value has been set.
 `func (o *GpuClass) SetName(v string)`
 
 SetName sets Name field to given value.
+
+
+### GetPrices
+
+`func (o *GpuClass) GetPrices() []GpuClassPrice`
+
+GetPrices returns the Prices field if non-nil, zero value otherwise.
+
+### GetPricesOk
+
+`func (o *GpuClass) GetPricesOk() (*[]GpuClassPrice, bool)`
+
+GetPricesOk returns a tuple with the Prices field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPrices
+
+`func (o *GpuClass) SetPrices(v []GpuClassPrice)`
+
+SetPrices sets Prices field to given value.
 
 
 ### GetIsHighDemand

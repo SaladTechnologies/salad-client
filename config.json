@@ -1,0 +1,9 @@
+{
+  "generatorName": "go",
+  "inputSpec": "https://raw.githubusercontent.com/SaladTechnologies/salad-cloud-docs/refs/heads/main/api-specs/salad-cloud.yaml",
+  "outputDir": ".",
+  "additionalProperties": {
+    "packageName": "saladclient",
+    "enumClassPrefix": true
+  }
+}
