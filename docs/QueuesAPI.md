@@ -37,8 +37,8 @@ import (
 )
 
 func main() {
-	organizationName := "acme-corp" // string | Your organization name. This identifies the billing context for the API operation and represents a security boundary for SaladCloud resources. The organization must be created before using the API, and you must be a member of the organization.
-	projectName := "default" // string | Your project name. This represents a collection of related SaladCloud resources. The project must be created before using the API.
+	organizationName := "organizationName_example" // string | Your organization name. This identifies the billing context for the API operation and represents a security boundary for SaladCloud resources. The organization must be created before using the API, and you must be a member of the organization.
+	projectName := "projectName_example" // string | Your project name. This represents a collection of related SaladCloud resources. The project must be created before using the API.
 	createQueue := *openapiclient.NewCreateQueue("Name_example") // CreateQueue | 
 
 	configuration := openapiclient.NewConfiguration()
@@ -112,9 +112,9 @@ import (
 )
 
 func main() {
-	organizationName := "acme-corp" // string | Your organization name. This identifies the billing context for the API operation and represents a security boundary for SaladCloud resources. The organization must be created before using the API, and you must be a member of the organization.
-	projectName := "default" // string | Your project name. This represents a collection of related SaladCloud resources. The project must be created before using the API.
-	queueName := "fifo-queue" // string | The queue name.
+	organizationName := "organizationName_example" // string | Your organization name. This identifies the billing context for the API operation and represents a security boundary for SaladCloud resources. The organization must be created before using the API, and you must be a member of the organization.
+	projectName := "projectName_example" // string | Your project name. This represents a collection of related SaladCloud resources. The project must be created before using the API.
+	queueName := "queueName_example" // string | The queue name.
 	createQueueJob := *openapiclient.NewCreateQueueJob(interface{}(123)) // CreateQueueJob | 
 
 	configuration := openapiclient.NewConfiguration()
@@ -190,9 +190,9 @@ import (
 )
 
 func main() {
-	organizationName := "acme-corp" // string | Your organization name. This identifies the billing context for the API operation and represents a security boundary for SaladCloud resources. The organization must be created before using the API, and you must be a member of the organization.
-	projectName := "default" // string | Your project name. This represents a collection of related SaladCloud resources. The project must be created before using the API.
-	queueName := "fifo-queue" // string | The queue name.
+	organizationName := "organizationName_example" // string | Your organization name. This identifies the billing context for the API operation and represents a security boundary for SaladCloud resources. The organization must be created before using the API, and you must be a member of the organization.
+	projectName := "projectName_example" // string | Your project name. This represents a collection of related SaladCloud resources. The project must be created before using the API.
+	queueName := "queueName_example" // string | The queue name.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -264,10 +264,10 @@ import (
 )
 
 func main() {
-	organizationName := "acme-corp" // string | Your organization name. This identifies the billing context for the API operation and represents a security boundary for SaladCloud resources. The organization must be created before using the API, and you must be a member of the organization.
-	projectName := "default" // string | Your project name. This represents a collection of related SaladCloud resources. The project must be created before using the API.
-	queueName := "fifo-queue" // string | The queue name.
-	queueJobId := "7dcd6922-50e9-4d56-89b5-91cde26f0211" // string | The job identifier. This is automatically generated and assigned when the job is created.
+	organizationName := "organizationName_example" // string | Your organization name. This identifies the billing context for the API operation and represents a security boundary for SaladCloud resources. The organization must be created before using the API, and you must be a member of the organization.
+	projectName := "projectName_example" // string | Your project name. This represents a collection of related SaladCloud resources. The project must be created before using the API.
+	queueName := "queueName_example" // string | The queue name.
+	queueJobId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The job identifier. This is automatically generated and assigned when the job is created.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -341,9 +341,9 @@ import (
 )
 
 func main() {
-	organizationName := "acme-corp" // string | Your organization name. This identifies the billing context for the API operation and represents a security boundary for SaladCloud resources. The organization must be created before using the API, and you must be a member of the organization.
-	projectName := "default" // string | Your project name. This represents a collection of related SaladCloud resources. The project must be created before using the API.
-	queueName := "fifo-queue" // string | The queue name.
+	organizationName := "organizationName_example" // string | Your organization name. This identifies the billing context for the API operation and represents a security boundary for SaladCloud resources. The organization must be created before using the API, and you must be a member of the organization.
+	projectName := "projectName_example" // string | Your project name. This represents a collection of related SaladCloud resources. The project must be created before using the API.
+	queueName := "queueName_example" // string | The queue name.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -417,10 +417,10 @@ import (
 )
 
 func main() {
-	organizationName := "acme-corp" // string | Your organization name. This identifies the billing context for the API operation and represents a security boundary for SaladCloud resources. The organization must be created before using the API, and you must be a member of the organization.
-	projectName := "default" // string | Your project name. This represents a collection of related SaladCloud resources. The project must be created before using the API.
-	queueName := "fifo-queue" // string | The queue name.
-	queueJobId := "7dcd6922-50e9-4d56-89b5-91cde26f0211" // string | The job identifier. This is automatically generated and assigned when the job is created.
+	organizationName := "organizationName_example" // string | Your organization name. This identifies the billing context for the API operation and represents a security boundary for SaladCloud resources. The organization must be created before using the API, and you must be a member of the organization.
+	projectName := "projectName_example" // string | Your project name. This represents a collection of related SaladCloud resources. The project must be created before using the API.
+	queueName := "queueName_example" // string | The queue name.
+	queueJobId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The job identifier. This is automatically generated and assigned when the job is created.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -496,11 +496,11 @@ import (
 )
 
 func main() {
-	organizationName := "acme-corp" // string | Your organization name. This identifies the billing context for the API operation and represents a security boundary for SaladCloud resources. The organization must be created before using the API, and you must be a member of the organization.
-	projectName := "default" // string | Your project name. This represents a collection of related SaladCloud resources. The project must be created before using the API.
-	queueName := "fifo-queue" // string | The queue name.
-	page := int32(56) // int32 | The page number (optional)
-	pageSize := int32(56) // int32 | The number of items per page (optional)
+	organizationName := "organizationName_example" // string | Your organization name. This identifies the billing context for the API operation and represents a security boundary for SaladCloud resources. The organization must be created before using the API, and you must be a member of the organization.
+	projectName := "projectName_example" // string | Your project name. This represents a collection of related SaladCloud resources. The project must be created before using the API.
+	queueName := "queueName_example" // string | The queue name.
+	page := int32(56) // int32 |  (optional)
+	pageSize := int32(56) // int32 |  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -534,8 +534,8 @@ Name | Type | Description  | Notes
 
 
 
- **page** | **int32** | The page number | 
- **pageSize** | **int32** | The number of items per page | 
+ **page** | **int32** |  | 
+ **pageSize** | **int32** |  | 
 
 ### Return type
 
@@ -576,8 +576,8 @@ import (
 )
 
 func main() {
-	organizationName := "acme-corp" // string | Your organization name. This identifies the billing context for the API operation and represents a security boundary for SaladCloud resources. The organization must be created before using the API, and you must be a member of the organization.
-	projectName := "default" // string | Your project name. This represents a collection of related SaladCloud resources. The project must be created before using the API.
+	organizationName := "organizationName_example" // string | Your organization name. This identifies the billing context for the API operation and represents a security boundary for SaladCloud resources. The organization must be created before using the API, and you must be a member of the organization.
+	projectName := "projectName_example" // string | Your project name. This represents a collection of related SaladCloud resources. The project must be created before using the API.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -649,9 +649,9 @@ import (
 )
 
 func main() {
-	organizationName := "acme-corp" // string | Your organization name. This identifies the billing context for the API operation and represents a security boundary for SaladCloud resources. The organization must be created before using the API, and you must be a member of the organization.
-	projectName := "default" // string | Your project name. This represents a collection of related SaladCloud resources. The project must be created before using the API.
-	queueName := "fifo-queue" // string | The queue name.
+	organizationName := "organizationName_example" // string | Your organization name. This identifies the billing context for the API operation and represents a security boundary for SaladCloud resources. The organization must be created before using the API, and you must be a member of the organization.
+	projectName := "projectName_example" // string | Your project name. This represents a collection of related SaladCloud resources. The project must be created before using the API.
+	queueName := "queueName_example" // string | The queue name.
 	updateQueue := *openapiclient.NewUpdateQueue() // UpdateQueue | 
 
 	configuration := openapiclient.NewConfiguration()

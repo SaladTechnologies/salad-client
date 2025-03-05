@@ -17,38 +17,38 @@ import (
 	"fmt"
 )
 
-// checks if the HttpHeadersInner type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &HttpHeadersInner{}
+// checks if the ContainerLoggingDatadogTagsInner type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &ContainerLoggingDatadogTagsInner{}
 
-// HttpHeadersInner struct for HttpHeadersInner
-type HttpHeadersInner struct {
+// ContainerLoggingDatadogTagsInner struct for ContainerLoggingDatadogTagsInner
+type ContainerLoggingDatadogTagsInner struct {
 	Name string `json:"name"`
 	Value string `json:"value"`
 }
 
-type _HttpHeadersInner HttpHeadersInner
+type _ContainerLoggingDatadogTagsInner ContainerLoggingDatadogTagsInner
 
-// NewHttpHeadersInner instantiates a new HttpHeadersInner object
+// NewContainerLoggingDatadogTagsInner instantiates a new ContainerLoggingDatadogTagsInner object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewHttpHeadersInner(name string, value string) *HttpHeadersInner {
-	this := HttpHeadersInner{}
+func NewContainerLoggingDatadogTagsInner(name string, value string) *ContainerLoggingDatadogTagsInner {
+	this := ContainerLoggingDatadogTagsInner{}
 	this.Name = name
 	this.Value = value
 	return &this
 }
 
-// NewHttpHeadersInnerWithDefaults instantiates a new HttpHeadersInner object
+// NewContainerLoggingDatadogTagsInnerWithDefaults instantiates a new ContainerLoggingDatadogTagsInner object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewHttpHeadersInnerWithDefaults() *HttpHeadersInner {
-	this := HttpHeadersInner{}
+func NewContainerLoggingDatadogTagsInnerWithDefaults() *ContainerLoggingDatadogTagsInner {
+	this := ContainerLoggingDatadogTagsInner{}
 	return &this
 }
 
 // GetName returns the Name field value
-func (o *HttpHeadersInner) GetName() string {
+func (o *ContainerLoggingDatadogTagsInner) GetName() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -59,7 +59,7 @@ func (o *HttpHeadersInner) GetName() string {
 
 // GetNameOk returns a tuple with the Name field value
 // and a boolean to check if the value has been set.
-func (o *HttpHeadersInner) GetNameOk() (*string, bool) {
+func (o *ContainerLoggingDatadogTagsInner) GetNameOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -67,12 +67,12 @@ func (o *HttpHeadersInner) GetNameOk() (*string, bool) {
 }
 
 // SetName sets field value
-func (o *HttpHeadersInner) SetName(v string) {
+func (o *ContainerLoggingDatadogTagsInner) SetName(v string) {
 	o.Name = v
 }
 
 // GetValue returns the Value field value
-func (o *HttpHeadersInner) GetValue() string {
+func (o *ContainerLoggingDatadogTagsInner) GetValue() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -83,7 +83,7 @@ func (o *HttpHeadersInner) GetValue() string {
 
 // GetValueOk returns a tuple with the Value field value
 // and a boolean to check if the value has been set.
-func (o *HttpHeadersInner) GetValueOk() (*string, bool) {
+func (o *ContainerLoggingDatadogTagsInner) GetValueOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -91,11 +91,11 @@ func (o *HttpHeadersInner) GetValueOk() (*string, bool) {
 }
 
 // SetValue sets field value
-func (o *HttpHeadersInner) SetValue(v string) {
+func (o *ContainerLoggingDatadogTagsInner) SetValue(v string) {
 	o.Value = v
 }
 
-func (o HttpHeadersInner) MarshalJSON() ([]byte, error) {
+func (o ContainerLoggingDatadogTagsInner) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -103,14 +103,14 @@ func (o HttpHeadersInner) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o HttpHeadersInner) ToMap() (map[string]interface{}, error) {
+func (o ContainerLoggingDatadogTagsInner) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["name"] = o.Name
 	toSerialize["value"] = o.Value
 	return toSerialize, nil
 }
 
-func (o *HttpHeadersInner) UnmarshalJSON(data []byte) (err error) {
+func (o *ContainerLoggingDatadogTagsInner) UnmarshalJSON(data []byte) (err error) {
 	// This validates that all required properties are included in the JSON object
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
@@ -133,53 +133,53 @@ func (o *HttpHeadersInner) UnmarshalJSON(data []byte) (err error) {
 		}
 	}
 
-	varHttpHeadersInner := _HttpHeadersInner{}
+	varContainerLoggingDatadogTagsInner := _ContainerLoggingDatadogTagsInner{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
 	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varHttpHeadersInner)
+	err = decoder.Decode(&varContainerLoggingDatadogTagsInner)
 
 	if err != nil {
 		return err
 	}
 
-	*o = HttpHeadersInner(varHttpHeadersInner)
+	*o = ContainerLoggingDatadogTagsInner(varContainerLoggingDatadogTagsInner)
 
 	return err
 }
 
-type NullableHttpHeadersInner struct {
-	value *HttpHeadersInner
+type NullableContainerLoggingDatadogTagsInner struct {
+	value *ContainerLoggingDatadogTagsInner
 	isSet bool
 }
 
-func (v NullableHttpHeadersInner) Get() *HttpHeadersInner {
+func (v NullableContainerLoggingDatadogTagsInner) Get() *ContainerLoggingDatadogTagsInner {
 	return v.value
 }
 
-func (v *NullableHttpHeadersInner) Set(val *HttpHeadersInner) {
+func (v *NullableContainerLoggingDatadogTagsInner) Set(val *ContainerLoggingDatadogTagsInner) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableHttpHeadersInner) IsSet() bool {
+func (v NullableContainerLoggingDatadogTagsInner) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableHttpHeadersInner) Unset() {
+func (v *NullableContainerLoggingDatadogTagsInner) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableHttpHeadersInner(val *HttpHeadersInner) *NullableHttpHeadersInner {
-	return &NullableHttpHeadersInner{value: val, isSet: true}
+func NewNullableContainerLoggingDatadogTagsInner(val *ContainerLoggingDatadogTagsInner) *NullableContainerLoggingDatadogTagsInner {
+	return &NullableContainerLoggingDatadogTagsInner{value: val, isSet: true}
 }
 
-func (v NullableHttpHeadersInner) MarshalJSON() ([]byte, error) {
+func (v NullableContainerLoggingDatadogTagsInner) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableHttpHeadersInner) UnmarshalJSON(src []byte) error {
+func (v *NullableContainerLoggingDatadogTagsInner) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

@@ -6,11 +6,11 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Host** | **string** |  | 
 **Port** | **int32** |  | 
-**User** | Pointer to **NullableString** |  | [optional] 
-**Password** | Pointer to **NullableString** |  | [optional] 
-**Path** | Pointer to **NullableString** |  | [optional] 
+**User** | Pointer to **string** |  | [optional] 
+**Password** | Pointer to **string** |  | [optional] 
+**Path** | Pointer to **string** |  | [optional] 
 **Format** | **string** |  | 
-**Headers** | Pointer to [**[]HttpHeadersInner**](HttpHeadersInner.md) |  | [optional] 
+**Headers** | Pointer to [**[]ContainerLoggingDatadogTagsInner**](ContainerLoggingDatadogTagsInner.md) |  | [optional] 
 **Compression** | **string** |  | 
 
 ## Methods
@@ -97,16 +97,6 @@ SetUser sets User field to given value.
 
 HasUser returns a boolean if a field has been set.
 
-### SetUserNil
-
-`func (o *ContainerLoggingHttp) SetUserNil(b bool)`
-
- SetUserNil sets the value for User to be an explicit nil
-
-### UnsetUser
-`func (o *ContainerLoggingHttp) UnsetUser()`
-
-UnsetUser ensures that no value is present for User, not even an explicit nil
 ### GetPassword
 
 `func (o *ContainerLoggingHttp) GetPassword() string`
@@ -132,16 +122,6 @@ SetPassword sets Password field to given value.
 
 HasPassword returns a boolean if a field has been set.
 
-### SetPasswordNil
-
-`func (o *ContainerLoggingHttp) SetPasswordNil(b bool)`
-
- SetPasswordNil sets the value for Password to be an explicit nil
-
-### UnsetPassword
-`func (o *ContainerLoggingHttp) UnsetPassword()`
-
-UnsetPassword ensures that no value is present for Password, not even an explicit nil
 ### GetPath
 
 `func (o *ContainerLoggingHttp) GetPath() string`
@@ -167,16 +147,6 @@ SetPath sets Path field to given value.
 
 HasPath returns a boolean if a field has been set.
 
-### SetPathNil
-
-`func (o *ContainerLoggingHttp) SetPathNil(b bool)`
-
- SetPathNil sets the value for Path to be an explicit nil
-
-### UnsetPath
-`func (o *ContainerLoggingHttp) UnsetPath()`
-
-UnsetPath ensures that no value is present for Path, not even an explicit nil
 ### GetFormat
 
 `func (o *ContainerLoggingHttp) GetFormat() string`
@@ -199,20 +169,20 @@ SetFormat sets Format field to given value.
 
 ### GetHeaders
 
-`func (o *ContainerLoggingHttp) GetHeaders() []HttpHeadersInner`
+`func (o *ContainerLoggingHttp) GetHeaders() []ContainerLoggingDatadogTagsInner`
 
 GetHeaders returns the Headers field if non-nil, zero value otherwise.
 
 ### GetHeadersOk
 
-`func (o *ContainerLoggingHttp) GetHeadersOk() (*[]HttpHeadersInner, bool)`
+`func (o *ContainerLoggingHttp) GetHeadersOk() (*[]ContainerLoggingDatadogTagsInner, bool)`
 
 GetHeadersOk returns a tuple with the Headers field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetHeaders
 
-`func (o *ContainerLoggingHttp) SetHeaders(v []HttpHeadersInner)`
+`func (o *ContainerLoggingHttp) SetHeaders(v []ContainerLoggingDatadogTagsInner)`
 
 SetHeaders sets Headers field to given value.
 
@@ -222,16 +192,6 @@ SetHeaders sets Headers field to given value.
 
 HasHeaders returns a boolean if a field has been set.
 
-### SetHeadersNil
-
-`func (o *ContainerLoggingHttp) SetHeadersNil(b bool)`
-
- SetHeadersNil sets the value for Headers to be an explicit nil
-
-### UnsetHeaders
-`func (o *ContainerLoggingHttp) UnsetHeaders()`
-
-UnsetHeaders ensures that no value is present for Headers, not even an explicit nil
 ### GetCompression
 
 `func (o *ContainerLoggingHttp) GetCompression() string`

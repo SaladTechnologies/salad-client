@@ -4,9 +4,10 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Input** | **interface{}** | The job input. May be any valid JSON. | 
+**Input** | **interface{}** |  | 
 **Metadata** | Pointer to **map[string]interface{}** |  | [optional] 
-**Webhook** | Pointer to **NullableString** |  | [optional] 
+**Webhook** | Pointer to **string** |  | [optional] 
+**WebhookUrl** | Pointer to **string** |  | [optional] 
 
 ## Methods
 
@@ -82,16 +83,6 @@ SetMetadata sets Metadata field to given value.
 
 HasMetadata returns a boolean if a field has been set.
 
-### SetMetadataNil
-
-`func (o *CreateInferenceEndpointJob) SetMetadataNil(b bool)`
-
- SetMetadataNil sets the value for Metadata to be an explicit nil
-
-### UnsetMetadata
-`func (o *CreateInferenceEndpointJob) UnsetMetadata()`
-
-UnsetMetadata ensures that no value is present for Metadata, not even an explicit nil
 ### GetWebhook
 
 `func (o *CreateInferenceEndpointJob) GetWebhook() string`
@@ -117,16 +108,31 @@ SetWebhook sets Webhook field to given value.
 
 HasWebhook returns a boolean if a field has been set.
 
-### SetWebhookNil
+### GetWebhookUrl
 
-`func (o *CreateInferenceEndpointJob) SetWebhookNil(b bool)`
+`func (o *CreateInferenceEndpointJob) GetWebhookUrl() string`
 
- SetWebhookNil sets the value for Webhook to be an explicit nil
+GetWebhookUrl returns the WebhookUrl field if non-nil, zero value otherwise.
 
-### UnsetWebhook
-`func (o *CreateInferenceEndpointJob) UnsetWebhook()`
+### GetWebhookUrlOk
 
-UnsetWebhook ensures that no value is present for Webhook, not even an explicit nil
+`func (o *CreateInferenceEndpointJob) GetWebhookUrlOk() (*string, bool)`
+
+GetWebhookUrlOk returns a tuple with the WebhookUrl field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetWebhookUrl
+
+`func (o *CreateInferenceEndpointJob) SetWebhookUrl(v string)`
+
+SetWebhookUrl sets WebhookUrl field to given value.
+
+### HasWebhookUrl
+
+`func (o *CreateInferenceEndpointJob) HasWebhookUrl() bool`
+
+HasWebhookUrl returns a boolean if a field has been set.
+
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

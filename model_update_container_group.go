@@ -3,7 +3,7 @@ SaladCloud API
 
 The SaladCloud REST API. Please refer to the [SaladCloud API Documentation](https://docs.salad.com/api-reference) for more details.
 
-API version: 0.9.0-alpha.6
+API version: 0.9.0-alpha.7
 Contact: cloud@salad.com
 */
 
@@ -21,15 +21,15 @@ var _ MappedNullable = &UpdateContainerGroup{}
 // UpdateContainerGroup Represents a request to update a container group
 type UpdateContainerGroup struct {
 	DisplayName NullableString `json:"display_name,omitempty" validate:"regexp=^[ ,-.0-9A-Za-z]+$"`
-	Container NullableUpdateContainer `json:"container,omitempty"`
+	Container *UpdateContainer `json:"container,omitempty"`
 	Replicas NullableInt32 `json:"replicas,omitempty"`
 	// List of countries nodes must be located in. Remove this field to permit nodes from any country.
 	CountryCodes []CountryCode `json:"country_codes,omitempty"`
 	Networking *UpdateContainerGroupNetworking `json:"networking,omitempty"`
-	LivenessProbe NullableContainerGroupLivenessProbe `json:"liveness_probe,omitempty"`
-	ReadinessProbe NullableContainerGroupReadinessProbe `json:"readiness_probe,omitempty"`
-	StartupProbe NullableContainerGroupStartupProbe `json:"startup_probe,omitempty"`
-	QueueAutoscaler NullableQueueAutoscaler `json:"queue_autoscaler,omitempty"`
+	LivenessProbe *ContainerGroupLivenessProbe `json:"liveness_probe,omitempty"`
+	ReadinessProbe *ContainerGroupReadinessProbe `json:"readiness_probe,omitempty"`
+	StartupProbe *ContainerGroupStartupProbe `json:"startup_probe,omitempty"`
+	QueueAutoscaler *QueueAutoscaler `json:"queue_autoscaler,omitempty"`
 }
 
 // NewUpdateContainerGroup instantiates a new UpdateContainerGroup object
@@ -91,46 +91,36 @@ func (o *UpdateContainerGroup) UnsetDisplayName() {
 	o.DisplayName.Unset()
 }
 
-// GetContainer returns the Container field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetContainer returns the Container field value if set, zero value otherwise.
 func (o *UpdateContainerGroup) GetContainer() UpdateContainer {
-	if o == nil || IsNil(o.Container.Get()) {
+	if o == nil || IsNil(o.Container) {
 		var ret UpdateContainer
 		return ret
 	}
-	return *o.Container.Get()
+	return *o.Container
 }
 
 // GetContainerOk returns a tuple with the Container field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *UpdateContainerGroup) GetContainerOk() (*UpdateContainer, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Container) {
 		return nil, false
 	}
-	return o.Container.Get(), o.Container.IsSet()
+	return o.Container, true
 }
 
 // HasContainer returns a boolean if a field has been set.
 func (o *UpdateContainerGroup) HasContainer() bool {
-	if o != nil && o.Container.IsSet() {
+	if o != nil && !IsNil(o.Container) {
 		return true
 	}
 
 	return false
 }
 
-// SetContainer gets a reference to the given NullableUpdateContainer and assigns it to the Container field.
+// SetContainer gets a reference to the given UpdateContainer and assigns it to the Container field.
 func (o *UpdateContainerGroup) SetContainer(v UpdateContainer) {
-	o.Container.Set(&v)
-}
-// SetContainerNil sets the value for Container to be an explicit nil
-func (o *UpdateContainerGroup) SetContainerNil() {
-	o.Container.Set(nil)
-}
-
-// UnsetContainer ensures that no value is present for Container, not even an explicit nil
-func (o *UpdateContainerGroup) UnsetContainer() {
-	o.Container.Unset()
+	o.Container = &v
 }
 
 // GetReplicas returns the Replicas field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -240,172 +230,132 @@ func (o *UpdateContainerGroup) SetNetworking(v UpdateContainerGroupNetworking) {
 	o.Networking = &v
 }
 
-// GetLivenessProbe returns the LivenessProbe field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetLivenessProbe returns the LivenessProbe field value if set, zero value otherwise.
 func (o *UpdateContainerGroup) GetLivenessProbe() ContainerGroupLivenessProbe {
-	if o == nil || IsNil(o.LivenessProbe.Get()) {
+	if o == nil || IsNil(o.LivenessProbe) {
 		var ret ContainerGroupLivenessProbe
 		return ret
 	}
-	return *o.LivenessProbe.Get()
+	return *o.LivenessProbe
 }
 
 // GetLivenessProbeOk returns a tuple with the LivenessProbe field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *UpdateContainerGroup) GetLivenessProbeOk() (*ContainerGroupLivenessProbe, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.LivenessProbe) {
 		return nil, false
 	}
-	return o.LivenessProbe.Get(), o.LivenessProbe.IsSet()
+	return o.LivenessProbe, true
 }
 
 // HasLivenessProbe returns a boolean if a field has been set.
 func (o *UpdateContainerGroup) HasLivenessProbe() bool {
-	if o != nil && o.LivenessProbe.IsSet() {
+	if o != nil && !IsNil(o.LivenessProbe) {
 		return true
 	}
 
 	return false
 }
 
-// SetLivenessProbe gets a reference to the given NullableContainerGroupLivenessProbe and assigns it to the LivenessProbe field.
+// SetLivenessProbe gets a reference to the given ContainerGroupLivenessProbe and assigns it to the LivenessProbe field.
 func (o *UpdateContainerGroup) SetLivenessProbe(v ContainerGroupLivenessProbe) {
-	o.LivenessProbe.Set(&v)
-}
-// SetLivenessProbeNil sets the value for LivenessProbe to be an explicit nil
-func (o *UpdateContainerGroup) SetLivenessProbeNil() {
-	o.LivenessProbe.Set(nil)
+	o.LivenessProbe = &v
 }
 
-// UnsetLivenessProbe ensures that no value is present for LivenessProbe, not even an explicit nil
-func (o *UpdateContainerGroup) UnsetLivenessProbe() {
-	o.LivenessProbe.Unset()
-}
-
-// GetReadinessProbe returns the ReadinessProbe field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetReadinessProbe returns the ReadinessProbe field value if set, zero value otherwise.
 func (o *UpdateContainerGroup) GetReadinessProbe() ContainerGroupReadinessProbe {
-	if o == nil || IsNil(o.ReadinessProbe.Get()) {
+	if o == nil || IsNil(o.ReadinessProbe) {
 		var ret ContainerGroupReadinessProbe
 		return ret
 	}
-	return *o.ReadinessProbe.Get()
+	return *o.ReadinessProbe
 }
 
 // GetReadinessProbeOk returns a tuple with the ReadinessProbe field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *UpdateContainerGroup) GetReadinessProbeOk() (*ContainerGroupReadinessProbe, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.ReadinessProbe) {
 		return nil, false
 	}
-	return o.ReadinessProbe.Get(), o.ReadinessProbe.IsSet()
+	return o.ReadinessProbe, true
 }
 
 // HasReadinessProbe returns a boolean if a field has been set.
 func (o *UpdateContainerGroup) HasReadinessProbe() bool {
-	if o != nil && o.ReadinessProbe.IsSet() {
+	if o != nil && !IsNil(o.ReadinessProbe) {
 		return true
 	}
 
 	return false
 }
 
-// SetReadinessProbe gets a reference to the given NullableContainerGroupReadinessProbe and assigns it to the ReadinessProbe field.
+// SetReadinessProbe gets a reference to the given ContainerGroupReadinessProbe and assigns it to the ReadinessProbe field.
 func (o *UpdateContainerGroup) SetReadinessProbe(v ContainerGroupReadinessProbe) {
-	o.ReadinessProbe.Set(&v)
-}
-// SetReadinessProbeNil sets the value for ReadinessProbe to be an explicit nil
-func (o *UpdateContainerGroup) SetReadinessProbeNil() {
-	o.ReadinessProbe.Set(nil)
+	o.ReadinessProbe = &v
 }
 
-// UnsetReadinessProbe ensures that no value is present for ReadinessProbe, not even an explicit nil
-func (o *UpdateContainerGroup) UnsetReadinessProbe() {
-	o.ReadinessProbe.Unset()
-}
-
-// GetStartupProbe returns the StartupProbe field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetStartupProbe returns the StartupProbe field value if set, zero value otherwise.
 func (o *UpdateContainerGroup) GetStartupProbe() ContainerGroupStartupProbe {
-	if o == nil || IsNil(o.StartupProbe.Get()) {
+	if o == nil || IsNil(o.StartupProbe) {
 		var ret ContainerGroupStartupProbe
 		return ret
 	}
-	return *o.StartupProbe.Get()
+	return *o.StartupProbe
 }
 
 // GetStartupProbeOk returns a tuple with the StartupProbe field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *UpdateContainerGroup) GetStartupProbeOk() (*ContainerGroupStartupProbe, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.StartupProbe) {
 		return nil, false
 	}
-	return o.StartupProbe.Get(), o.StartupProbe.IsSet()
+	return o.StartupProbe, true
 }
 
 // HasStartupProbe returns a boolean if a field has been set.
 func (o *UpdateContainerGroup) HasStartupProbe() bool {
-	if o != nil && o.StartupProbe.IsSet() {
+	if o != nil && !IsNil(o.StartupProbe) {
 		return true
 	}
 
 	return false
 }
 
-// SetStartupProbe gets a reference to the given NullableContainerGroupStartupProbe and assigns it to the StartupProbe field.
+// SetStartupProbe gets a reference to the given ContainerGroupStartupProbe and assigns it to the StartupProbe field.
 func (o *UpdateContainerGroup) SetStartupProbe(v ContainerGroupStartupProbe) {
-	o.StartupProbe.Set(&v)
-}
-// SetStartupProbeNil sets the value for StartupProbe to be an explicit nil
-func (o *UpdateContainerGroup) SetStartupProbeNil() {
-	o.StartupProbe.Set(nil)
+	o.StartupProbe = &v
 }
 
-// UnsetStartupProbe ensures that no value is present for StartupProbe, not even an explicit nil
-func (o *UpdateContainerGroup) UnsetStartupProbe() {
-	o.StartupProbe.Unset()
-}
-
-// GetQueueAutoscaler returns the QueueAutoscaler field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetQueueAutoscaler returns the QueueAutoscaler field value if set, zero value otherwise.
 func (o *UpdateContainerGroup) GetQueueAutoscaler() QueueAutoscaler {
-	if o == nil || IsNil(o.QueueAutoscaler.Get()) {
+	if o == nil || IsNil(o.QueueAutoscaler) {
 		var ret QueueAutoscaler
 		return ret
 	}
-	return *o.QueueAutoscaler.Get()
+	return *o.QueueAutoscaler
 }
 
 // GetQueueAutoscalerOk returns a tuple with the QueueAutoscaler field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *UpdateContainerGroup) GetQueueAutoscalerOk() (*QueueAutoscaler, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.QueueAutoscaler) {
 		return nil, false
 	}
-	return o.QueueAutoscaler.Get(), o.QueueAutoscaler.IsSet()
+	return o.QueueAutoscaler, true
 }
 
 // HasQueueAutoscaler returns a boolean if a field has been set.
 func (o *UpdateContainerGroup) HasQueueAutoscaler() bool {
-	if o != nil && o.QueueAutoscaler.IsSet() {
+	if o != nil && !IsNil(o.QueueAutoscaler) {
 		return true
 	}
 
 	return false
 }
 
-// SetQueueAutoscaler gets a reference to the given NullableQueueAutoscaler and assigns it to the QueueAutoscaler field.
+// SetQueueAutoscaler gets a reference to the given QueueAutoscaler and assigns it to the QueueAutoscaler field.
 func (o *UpdateContainerGroup) SetQueueAutoscaler(v QueueAutoscaler) {
-	o.QueueAutoscaler.Set(&v)
-}
-// SetQueueAutoscalerNil sets the value for QueueAutoscaler to be an explicit nil
-func (o *UpdateContainerGroup) SetQueueAutoscalerNil() {
-	o.QueueAutoscaler.Set(nil)
-}
-
-// UnsetQueueAutoscaler ensures that no value is present for QueueAutoscaler, not even an explicit nil
-func (o *UpdateContainerGroup) UnsetQueueAutoscaler() {
-	o.QueueAutoscaler.Unset()
+	o.QueueAutoscaler = &v
 }
 
 func (o UpdateContainerGroup) MarshalJSON() ([]byte, error) {
@@ -421,8 +371,8 @@ func (o UpdateContainerGroup) ToMap() (map[string]interface{}, error) {
 	if o.DisplayName.IsSet() {
 		toSerialize["display_name"] = o.DisplayName.Get()
 	}
-	if o.Container.IsSet() {
-		toSerialize["container"] = o.Container.Get()
+	if !IsNil(o.Container) {
+		toSerialize["container"] = o.Container
 	}
 	if o.Replicas.IsSet() {
 		toSerialize["replicas"] = o.Replicas.Get()
@@ -433,17 +383,17 @@ func (o UpdateContainerGroup) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Networking) {
 		toSerialize["networking"] = o.Networking
 	}
-	if o.LivenessProbe.IsSet() {
-		toSerialize["liveness_probe"] = o.LivenessProbe.Get()
+	if !IsNil(o.LivenessProbe) {
+		toSerialize["liveness_probe"] = o.LivenessProbe
 	}
-	if o.ReadinessProbe.IsSet() {
-		toSerialize["readiness_probe"] = o.ReadinessProbe.Get()
+	if !IsNil(o.ReadinessProbe) {
+		toSerialize["readiness_probe"] = o.ReadinessProbe
 	}
-	if o.StartupProbe.IsSet() {
-		toSerialize["startup_probe"] = o.StartupProbe.Get()
+	if !IsNil(o.StartupProbe) {
+		toSerialize["startup_probe"] = o.StartupProbe
 	}
-	if o.QueueAutoscaler.IsSet() {
-		toSerialize["queue_autoscaler"] = o.QueueAutoscaler.Get()
+	if !IsNil(o.QueueAutoscaler) {
+		toSerialize["queue_autoscaler"] = o.QueueAutoscaler
 	}
 	return toSerialize, nil
 }

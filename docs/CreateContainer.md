@@ -9,8 +9,9 @@ Name | Type | Description | Notes
 **Command** | Pointer to **[]string** | Pass a command (and optional arguments) to override the ENTRYPOINT and CMD of a container image. | [optional] 
 **Priority** | Pointer to [**NullableContainerGroupPriority**](ContainerGroupPriority.md) |  | [optional] 
 **EnvironmentVariables** | Pointer to **map[string]string** |  | [optional] 
-**Logging** | Pointer to [**NullableContainerLogging**](ContainerLogging.md) |  | [optional] 
-**RegistryAuthentication** | Pointer to [**NullableCreateContainerRegistryAuthentication**](CreateContainerRegistryAuthentication.md) |  | [optional] 
+**Logging** | Pointer to [**ContainerLogging**](ContainerLogging.md) |  | [optional] 
+**RegistryAuthentication** | Pointer to [**CreateContainerRegistryAuthentication**](CreateContainerRegistryAuthentication.md) |  | [optional] 
+**ImageCaching** | Pointer to **bool** |  | [optional] 
 
 ## Methods
 
@@ -96,16 +97,6 @@ SetCommand sets Command field to given value.
 
 HasCommand returns a boolean if a field has been set.
 
-### SetCommandNil
-
-`func (o *CreateContainer) SetCommandNil(b bool)`
-
- SetCommandNil sets the value for Command to be an explicit nil
-
-### UnsetCommand
-`func (o *CreateContainer) UnsetCommand()`
-
-UnsetCommand ensures that no value is present for Command, not even an explicit nil
 ### GetPriority
 
 `func (o *CreateContainer) GetPriority() ContainerGroupPriority`
@@ -191,16 +182,6 @@ SetLogging sets Logging field to given value.
 
 HasLogging returns a boolean if a field has been set.
 
-### SetLoggingNil
-
-`func (o *CreateContainer) SetLoggingNil(b bool)`
-
- SetLoggingNil sets the value for Logging to be an explicit nil
-
-### UnsetLogging
-`func (o *CreateContainer) UnsetLogging()`
-
-UnsetLogging ensures that no value is present for Logging, not even an explicit nil
 ### GetRegistryAuthentication
 
 `func (o *CreateContainer) GetRegistryAuthentication() CreateContainerRegistryAuthentication`
@@ -226,16 +207,31 @@ SetRegistryAuthentication sets RegistryAuthentication field to given value.
 
 HasRegistryAuthentication returns a boolean if a field has been set.
 
-### SetRegistryAuthenticationNil
+### GetImageCaching
 
-`func (o *CreateContainer) SetRegistryAuthenticationNil(b bool)`
+`func (o *CreateContainer) GetImageCaching() bool`
 
- SetRegistryAuthenticationNil sets the value for RegistryAuthentication to be an explicit nil
+GetImageCaching returns the ImageCaching field if non-nil, zero value otherwise.
 
-### UnsetRegistryAuthentication
-`func (o *CreateContainer) UnsetRegistryAuthentication()`
+### GetImageCachingOk
 
-UnsetRegistryAuthentication ensures that no value is present for RegistryAuthentication, not even an explicit nil
+`func (o *CreateContainer) GetImageCachingOk() (*bool, bool)`
+
+GetImageCachingOk returns a tuple with the ImageCaching field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetImageCaching
+
+`func (o *CreateContainer) SetImageCaching(v bool)`
+
+SetImageCaching sets ImageCaching field to given value.
+
+### HasImageCaching
+
+`func (o *CreateContainer) HasImageCaching() bool`
+
+HasImageCaching returns a boolean if a field has been set.
+
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

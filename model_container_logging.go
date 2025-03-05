@@ -3,7 +3,7 @@ SaladCloud API
 
 The SaladCloud REST API. Please refer to the [SaladCloud API Documentation](https://docs.salad.com/api-reference) for more details.
 
-API version: 0.9.0-alpha.6
+API version: 0.9.0-alpha.7
 Contact: cloud@salad.com
 */
 
@@ -20,12 +20,12 @@ var _ MappedNullable = &ContainerLogging{}
 
 // ContainerLogging struct for ContainerLogging
 type ContainerLogging struct {
-	Axiom NullableContainerLoggingAxiom `json:"axiom,omitempty"`
-	Datadog NullableContainerLoggingDatadog `json:"datadog,omitempty"`
-	NewRelic NullableContainerLoggingNewRelic `json:"new_relic,omitempty"`
-	Splunk NullableContainerLoggingSplunk `json:"splunk,omitempty"`
-	Tcp NullableContainerLoggingTcp `json:"tcp,omitempty"`
-	Http NullableContainerLoggingHttp `json:"http,omitempty"`
+	Axiom *ContainerLoggingAxiom `json:"axiom,omitempty"`
+	Datadog *ContainerLoggingDatadog `json:"datadog,omitempty"`
+	NewRelic *ContainerLoggingNewRelic `json:"new_relic,omitempty"`
+	Splunk *ContainerLoggingSplunk `json:"splunk,omitempty"`
+	Tcp *ContainerLoggingTcp `json:"tcp,omitempty"`
+	Http *ContainerLoggingHttp `json:"http,omitempty"`
 }
 
 // NewContainerLogging instantiates a new ContainerLogging object
@@ -45,256 +45,196 @@ func NewContainerLoggingWithDefaults() *ContainerLogging {
 	return &this
 }
 
-// GetAxiom returns the Axiom field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetAxiom returns the Axiom field value if set, zero value otherwise.
 func (o *ContainerLogging) GetAxiom() ContainerLoggingAxiom {
-	if o == nil || IsNil(o.Axiom.Get()) {
+	if o == nil || IsNil(o.Axiom) {
 		var ret ContainerLoggingAxiom
 		return ret
 	}
-	return *o.Axiom.Get()
+	return *o.Axiom
 }
 
 // GetAxiomOk returns a tuple with the Axiom field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ContainerLogging) GetAxiomOk() (*ContainerLoggingAxiom, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Axiom) {
 		return nil, false
 	}
-	return o.Axiom.Get(), o.Axiom.IsSet()
+	return o.Axiom, true
 }
 
 // HasAxiom returns a boolean if a field has been set.
 func (o *ContainerLogging) HasAxiom() bool {
-	if o != nil && o.Axiom.IsSet() {
+	if o != nil && !IsNil(o.Axiom) {
 		return true
 	}
 
 	return false
 }
 
-// SetAxiom gets a reference to the given NullableContainerLoggingAxiom and assigns it to the Axiom field.
+// SetAxiom gets a reference to the given ContainerLoggingAxiom and assigns it to the Axiom field.
 func (o *ContainerLogging) SetAxiom(v ContainerLoggingAxiom) {
-	o.Axiom.Set(&v)
-}
-// SetAxiomNil sets the value for Axiom to be an explicit nil
-func (o *ContainerLogging) SetAxiomNil() {
-	o.Axiom.Set(nil)
+	o.Axiom = &v
 }
 
-// UnsetAxiom ensures that no value is present for Axiom, not even an explicit nil
-func (o *ContainerLogging) UnsetAxiom() {
-	o.Axiom.Unset()
-}
-
-// GetDatadog returns the Datadog field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetDatadog returns the Datadog field value if set, zero value otherwise.
 func (o *ContainerLogging) GetDatadog() ContainerLoggingDatadog {
-	if o == nil || IsNil(o.Datadog.Get()) {
+	if o == nil || IsNil(o.Datadog) {
 		var ret ContainerLoggingDatadog
 		return ret
 	}
-	return *o.Datadog.Get()
+	return *o.Datadog
 }
 
 // GetDatadogOk returns a tuple with the Datadog field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ContainerLogging) GetDatadogOk() (*ContainerLoggingDatadog, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Datadog) {
 		return nil, false
 	}
-	return o.Datadog.Get(), o.Datadog.IsSet()
+	return o.Datadog, true
 }
 
 // HasDatadog returns a boolean if a field has been set.
 func (o *ContainerLogging) HasDatadog() bool {
-	if o != nil && o.Datadog.IsSet() {
+	if o != nil && !IsNil(o.Datadog) {
 		return true
 	}
 
 	return false
 }
 
-// SetDatadog gets a reference to the given NullableContainerLoggingDatadog and assigns it to the Datadog field.
+// SetDatadog gets a reference to the given ContainerLoggingDatadog and assigns it to the Datadog field.
 func (o *ContainerLogging) SetDatadog(v ContainerLoggingDatadog) {
-	o.Datadog.Set(&v)
-}
-// SetDatadogNil sets the value for Datadog to be an explicit nil
-func (o *ContainerLogging) SetDatadogNil() {
-	o.Datadog.Set(nil)
+	o.Datadog = &v
 }
 
-// UnsetDatadog ensures that no value is present for Datadog, not even an explicit nil
-func (o *ContainerLogging) UnsetDatadog() {
-	o.Datadog.Unset()
-}
-
-// GetNewRelic returns the NewRelic field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetNewRelic returns the NewRelic field value if set, zero value otherwise.
 func (o *ContainerLogging) GetNewRelic() ContainerLoggingNewRelic {
-	if o == nil || IsNil(o.NewRelic.Get()) {
+	if o == nil || IsNil(o.NewRelic) {
 		var ret ContainerLoggingNewRelic
 		return ret
 	}
-	return *o.NewRelic.Get()
+	return *o.NewRelic
 }
 
 // GetNewRelicOk returns a tuple with the NewRelic field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ContainerLogging) GetNewRelicOk() (*ContainerLoggingNewRelic, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.NewRelic) {
 		return nil, false
 	}
-	return o.NewRelic.Get(), o.NewRelic.IsSet()
+	return o.NewRelic, true
 }
 
 // HasNewRelic returns a boolean if a field has been set.
 func (o *ContainerLogging) HasNewRelic() bool {
-	if o != nil && o.NewRelic.IsSet() {
+	if o != nil && !IsNil(o.NewRelic) {
 		return true
 	}
 
 	return false
 }
 
-// SetNewRelic gets a reference to the given NullableContainerLoggingNewRelic and assigns it to the NewRelic field.
+// SetNewRelic gets a reference to the given ContainerLoggingNewRelic and assigns it to the NewRelic field.
 func (o *ContainerLogging) SetNewRelic(v ContainerLoggingNewRelic) {
-	o.NewRelic.Set(&v)
-}
-// SetNewRelicNil sets the value for NewRelic to be an explicit nil
-func (o *ContainerLogging) SetNewRelicNil() {
-	o.NewRelic.Set(nil)
+	o.NewRelic = &v
 }
 
-// UnsetNewRelic ensures that no value is present for NewRelic, not even an explicit nil
-func (o *ContainerLogging) UnsetNewRelic() {
-	o.NewRelic.Unset()
-}
-
-// GetSplunk returns the Splunk field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetSplunk returns the Splunk field value if set, zero value otherwise.
 func (o *ContainerLogging) GetSplunk() ContainerLoggingSplunk {
-	if o == nil || IsNil(o.Splunk.Get()) {
+	if o == nil || IsNil(o.Splunk) {
 		var ret ContainerLoggingSplunk
 		return ret
 	}
-	return *o.Splunk.Get()
+	return *o.Splunk
 }
 
 // GetSplunkOk returns a tuple with the Splunk field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ContainerLogging) GetSplunkOk() (*ContainerLoggingSplunk, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Splunk) {
 		return nil, false
 	}
-	return o.Splunk.Get(), o.Splunk.IsSet()
+	return o.Splunk, true
 }
 
 // HasSplunk returns a boolean if a field has been set.
 func (o *ContainerLogging) HasSplunk() bool {
-	if o != nil && o.Splunk.IsSet() {
+	if o != nil && !IsNil(o.Splunk) {
 		return true
 	}
 
 	return false
 }
 
-// SetSplunk gets a reference to the given NullableContainerLoggingSplunk and assigns it to the Splunk field.
+// SetSplunk gets a reference to the given ContainerLoggingSplunk and assigns it to the Splunk field.
 func (o *ContainerLogging) SetSplunk(v ContainerLoggingSplunk) {
-	o.Splunk.Set(&v)
-}
-// SetSplunkNil sets the value for Splunk to be an explicit nil
-func (o *ContainerLogging) SetSplunkNil() {
-	o.Splunk.Set(nil)
+	o.Splunk = &v
 }
 
-// UnsetSplunk ensures that no value is present for Splunk, not even an explicit nil
-func (o *ContainerLogging) UnsetSplunk() {
-	o.Splunk.Unset()
-}
-
-// GetTcp returns the Tcp field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetTcp returns the Tcp field value if set, zero value otherwise.
 func (o *ContainerLogging) GetTcp() ContainerLoggingTcp {
-	if o == nil || IsNil(o.Tcp.Get()) {
+	if o == nil || IsNil(o.Tcp) {
 		var ret ContainerLoggingTcp
 		return ret
 	}
-	return *o.Tcp.Get()
+	return *o.Tcp
 }
 
 // GetTcpOk returns a tuple with the Tcp field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ContainerLogging) GetTcpOk() (*ContainerLoggingTcp, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Tcp) {
 		return nil, false
 	}
-	return o.Tcp.Get(), o.Tcp.IsSet()
+	return o.Tcp, true
 }
 
 // HasTcp returns a boolean if a field has been set.
 func (o *ContainerLogging) HasTcp() bool {
-	if o != nil && o.Tcp.IsSet() {
+	if o != nil && !IsNil(o.Tcp) {
 		return true
 	}
 
 	return false
 }
 
-// SetTcp gets a reference to the given NullableContainerLoggingTcp and assigns it to the Tcp field.
+// SetTcp gets a reference to the given ContainerLoggingTcp and assigns it to the Tcp field.
 func (o *ContainerLogging) SetTcp(v ContainerLoggingTcp) {
-	o.Tcp.Set(&v)
-}
-// SetTcpNil sets the value for Tcp to be an explicit nil
-func (o *ContainerLogging) SetTcpNil() {
-	o.Tcp.Set(nil)
+	o.Tcp = &v
 }
 
-// UnsetTcp ensures that no value is present for Tcp, not even an explicit nil
-func (o *ContainerLogging) UnsetTcp() {
-	o.Tcp.Unset()
-}
-
-// GetHttp returns the Http field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetHttp returns the Http field value if set, zero value otherwise.
 func (o *ContainerLogging) GetHttp() ContainerLoggingHttp {
-	if o == nil || IsNil(o.Http.Get()) {
+	if o == nil || IsNil(o.Http) {
 		var ret ContainerLoggingHttp
 		return ret
 	}
-	return *o.Http.Get()
+	return *o.Http
 }
 
 // GetHttpOk returns a tuple with the Http field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ContainerLogging) GetHttpOk() (*ContainerLoggingHttp, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Http) {
 		return nil, false
 	}
-	return o.Http.Get(), o.Http.IsSet()
+	return o.Http, true
 }
 
 // HasHttp returns a boolean if a field has been set.
 func (o *ContainerLogging) HasHttp() bool {
-	if o != nil && o.Http.IsSet() {
+	if o != nil && !IsNil(o.Http) {
 		return true
 	}
 
 	return false
 }
 
-// SetHttp gets a reference to the given NullableContainerLoggingHttp and assigns it to the Http field.
+// SetHttp gets a reference to the given ContainerLoggingHttp and assigns it to the Http field.
 func (o *ContainerLogging) SetHttp(v ContainerLoggingHttp) {
-	o.Http.Set(&v)
-}
-// SetHttpNil sets the value for Http to be an explicit nil
-func (o *ContainerLogging) SetHttpNil() {
-	o.Http.Set(nil)
-}
-
-// UnsetHttp ensures that no value is present for Http, not even an explicit nil
-func (o *ContainerLogging) UnsetHttp() {
-	o.Http.Unset()
+	o.Http = &v
 }
 
 func (o ContainerLogging) MarshalJSON() ([]byte, error) {
@@ -307,23 +247,23 @@ func (o ContainerLogging) MarshalJSON() ([]byte, error) {
 
 func (o ContainerLogging) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if o.Axiom.IsSet() {
-		toSerialize["axiom"] = o.Axiom.Get()
+	if !IsNil(o.Axiom) {
+		toSerialize["axiom"] = o.Axiom
 	}
-	if o.Datadog.IsSet() {
-		toSerialize["datadog"] = o.Datadog.Get()
+	if !IsNil(o.Datadog) {
+		toSerialize["datadog"] = o.Datadog
 	}
-	if o.NewRelic.IsSet() {
-		toSerialize["new_relic"] = o.NewRelic.Get()
+	if !IsNil(o.NewRelic) {
+		toSerialize["new_relic"] = o.NewRelic
 	}
-	if o.Splunk.IsSet() {
-		toSerialize["splunk"] = o.Splunk.Get()
+	if !IsNil(o.Splunk) {
+		toSerialize["splunk"] = o.Splunk
 	}
-	if o.Tcp.IsSet() {
-		toSerialize["tcp"] = o.Tcp.Get()
+	if !IsNil(o.Tcp) {
+		toSerialize["tcp"] = o.Tcp
 	}
-	if o.Http.IsSet() {
-		toSerialize["http"] = o.Http.Get()
+	if !IsNil(o.Http) {
+		toSerialize["http"] = o.Http
 	}
 	return toSerialize, nil
 }

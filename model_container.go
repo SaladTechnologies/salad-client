@@ -3,7 +3,7 @@ SaladCloud API
 
 The SaladCloud REST API. Please refer to the [SaladCloud API Documentation](https://docs.salad.com/api-reference) for more details.
 
-API version: 0.9.0-alpha.6
+API version: 0.9.0-alpha.7
 Contact: cloud@salad.com
 */
 
@@ -13,7 +13,6 @@ package saladclient
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -28,8 +27,10 @@ type Container struct {
 	Priority NullableContainerGroupPriority `json:"priority,omitempty"`
 	Size *int64 `json:"size,omitempty"`
 	Hash *string `json:"hash,omitempty"`
-	EnvironmentVariables *map[string]string `json:"environment_variables,omitempty"`
-	Logging NullableContainerLogging `json:"logging,omitempty"`
+	EnvironmentVariables map[string]string `json:"environment_variables,omitempty"`
+	Logging *ContainerLogging `json:"logging,omitempty"`
+	ImageCaching *bool `json:"image_caching,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _Container Container
@@ -238,14 +239,14 @@ func (o *Container) GetEnvironmentVariables() map[string]string {
 		var ret map[string]string
 		return ret
 	}
-	return *o.EnvironmentVariables
+	return o.EnvironmentVariables
 }
 
 // GetEnvironmentVariablesOk returns a tuple with the EnvironmentVariables field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Container) GetEnvironmentVariablesOk() (*map[string]string, bool) {
+func (o *Container) GetEnvironmentVariablesOk() (map[string]string, bool) {
 	if o == nil || IsNil(o.EnvironmentVariables) {
-		return nil, false
+		return map[string]string{}, false
 	}
 	return o.EnvironmentVariables, true
 }
@@ -261,49 +262,71 @@ func (o *Container) HasEnvironmentVariables() bool {
 
 // SetEnvironmentVariables gets a reference to the given map[string]string and assigns it to the EnvironmentVariables field.
 func (o *Container) SetEnvironmentVariables(v map[string]string) {
-	o.EnvironmentVariables = &v
+	o.EnvironmentVariables = v
 }
 
-// GetLogging returns the Logging field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetLogging returns the Logging field value if set, zero value otherwise.
 func (o *Container) GetLogging() ContainerLogging {
-	if o == nil || IsNil(o.Logging.Get()) {
+	if o == nil || IsNil(o.Logging) {
 		var ret ContainerLogging
 		return ret
 	}
-	return *o.Logging.Get()
+	return *o.Logging
 }
 
 // GetLoggingOk returns a tuple with the Logging field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *Container) GetLoggingOk() (*ContainerLogging, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Logging) {
 		return nil, false
 	}
-	return o.Logging.Get(), o.Logging.IsSet()
+	return o.Logging, true
 }
 
 // HasLogging returns a boolean if a field has been set.
 func (o *Container) HasLogging() bool {
-	if o != nil && o.Logging.IsSet() {
+	if o != nil && !IsNil(o.Logging) {
 		return true
 	}
 
 	return false
 }
 
-// SetLogging gets a reference to the given NullableContainerLogging and assigns it to the Logging field.
+// SetLogging gets a reference to the given ContainerLogging and assigns it to the Logging field.
 func (o *Container) SetLogging(v ContainerLogging) {
-	o.Logging.Set(&v)
-}
-// SetLoggingNil sets the value for Logging to be an explicit nil
-func (o *Container) SetLoggingNil() {
-	o.Logging.Set(nil)
+	o.Logging = &v
 }
 
-// UnsetLogging ensures that no value is present for Logging, not even an explicit nil
-func (o *Container) UnsetLogging() {
-	o.Logging.Unset()
+// GetImageCaching returns the ImageCaching field value if set, zero value otherwise.
+func (o *Container) GetImageCaching() bool {
+	if o == nil || IsNil(o.ImageCaching) {
+		var ret bool
+		return ret
+	}
+	return *o.ImageCaching
+}
+
+// GetImageCachingOk returns a tuple with the ImageCaching field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Container) GetImageCachingOk() (*bool, bool) {
+	if o == nil || IsNil(o.ImageCaching) {
+		return nil, false
+	}
+	return o.ImageCaching, true
+}
+
+// HasImageCaching returns a boolean if a field has been set.
+func (o *Container) HasImageCaching() bool {
+	if o != nil && !IsNil(o.ImageCaching) {
+		return true
+	}
+
+	return false
+}
+
+// SetImageCaching gets a reference to the given bool and assigns it to the ImageCaching field.
+func (o *Container) SetImageCaching(v bool) {
+	o.ImageCaching = &v
 }
 
 func (o Container) MarshalJSON() ([]byte, error) {
@@ -331,9 +354,17 @@ func (o Container) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.EnvironmentVariables) {
 		toSerialize["environment_variables"] = o.EnvironmentVariables
 	}
-	if o.Logging.IsSet() {
-		toSerialize["logging"] = o.Logging.Get()
+	if !IsNil(o.Logging) {
+		toSerialize["logging"] = o.Logging
 	}
+	if !IsNil(o.ImageCaching) {
+		toSerialize["image_caching"] = o.ImageCaching
+	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -363,15 +394,28 @@ func (o *Container) UnmarshalJSON(data []byte) (err error) {
 
 	varContainer := _Container{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varContainer)
+	err = json.Unmarshal(data, &varContainer)
 
 	if err != nil {
 		return err
 	}
 
 	*o = Container(varContainer)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "image")
+		delete(additionalProperties, "resources")
+		delete(additionalProperties, "command")
+		delete(additionalProperties, "priority")
+		delete(additionalProperties, "size")
+		delete(additionalProperties, "hash")
+		delete(additionalProperties, "environment_variables")
+		delete(additionalProperties, "logging")
+		delete(additionalProperties, "image_caching")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

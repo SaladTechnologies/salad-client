@@ -3,7 +3,7 @@ SaladCloud API
 
 The SaladCloud REST API. Please refer to the [SaladCloud API Documentation](https://docs.salad.com/api-reference) for more details.
 
-API version: 0.9.0-alpha.6
+API version: 0.9.0-alpha.7
 Contact: cloud@salad.com
 */
 
@@ -20,11 +20,11 @@ var _ MappedNullable = &CreateContainerRegistryAuthentication{}
 
 // CreateContainerRegistryAuthentication struct for CreateContainerRegistryAuthentication
 type CreateContainerRegistryAuthentication struct {
-	Basic NullableCreateContainerRegistryAuthenticationBasic `json:"basic,omitempty"`
-	GcpGcr NullableCreateContainerRegistryAuthenticationGcpGcr `json:"gcp_gcr,omitempty"`
-	AwsEcr NullableCreateContainerRegistryAuthenticationAwsEcr `json:"aws_ecr,omitempty"`
-	DockerHub NullableCreateContainerRegistryAuthenticationDockerHub `json:"docker_hub,omitempty"`
-	GcpGar NullableCreateContainerRegistryAuthenticationGcpGcr `json:"gcp_gar,omitempty"`
+	Basic *CreateContainerRegistryAuthenticationBasic `json:"basic,omitempty"`
+	GcpGcr *CreateContainerRegistryAuthenticationGcpGcr `json:"gcp_gcr,omitempty"`
+	AwsEcr *CreateContainerRegistryAuthenticationAwsEcr `json:"aws_ecr,omitempty"`
+	DockerHub *CreateContainerRegistryAuthenticationDockerHub `json:"docker_hub,omitempty"`
+	GcpGar *CreateContainerRegistryAuthenticationGcpGcr `json:"gcp_gar,omitempty"`
 }
 
 // NewCreateContainerRegistryAuthentication instantiates a new CreateContainerRegistryAuthentication object
@@ -44,214 +44,164 @@ func NewCreateContainerRegistryAuthenticationWithDefaults() *CreateContainerRegi
 	return &this
 }
 
-// GetBasic returns the Basic field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetBasic returns the Basic field value if set, zero value otherwise.
 func (o *CreateContainerRegistryAuthentication) GetBasic() CreateContainerRegistryAuthenticationBasic {
-	if o == nil || IsNil(o.Basic.Get()) {
+	if o == nil || IsNil(o.Basic) {
 		var ret CreateContainerRegistryAuthenticationBasic
 		return ret
 	}
-	return *o.Basic.Get()
+	return *o.Basic
 }
 
 // GetBasicOk returns a tuple with the Basic field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CreateContainerRegistryAuthentication) GetBasicOk() (*CreateContainerRegistryAuthenticationBasic, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Basic) {
 		return nil, false
 	}
-	return o.Basic.Get(), o.Basic.IsSet()
+	return o.Basic, true
 }
 
 // HasBasic returns a boolean if a field has been set.
 func (o *CreateContainerRegistryAuthentication) HasBasic() bool {
-	if o != nil && o.Basic.IsSet() {
+	if o != nil && !IsNil(o.Basic) {
 		return true
 	}
 
 	return false
 }
 
-// SetBasic gets a reference to the given NullableCreateContainerRegistryAuthenticationBasic and assigns it to the Basic field.
+// SetBasic gets a reference to the given CreateContainerRegistryAuthenticationBasic and assigns it to the Basic field.
 func (o *CreateContainerRegistryAuthentication) SetBasic(v CreateContainerRegistryAuthenticationBasic) {
-	o.Basic.Set(&v)
-}
-// SetBasicNil sets the value for Basic to be an explicit nil
-func (o *CreateContainerRegistryAuthentication) SetBasicNil() {
-	o.Basic.Set(nil)
+	o.Basic = &v
 }
 
-// UnsetBasic ensures that no value is present for Basic, not even an explicit nil
-func (o *CreateContainerRegistryAuthentication) UnsetBasic() {
-	o.Basic.Unset()
-}
-
-// GetGcpGcr returns the GcpGcr field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetGcpGcr returns the GcpGcr field value if set, zero value otherwise.
 func (o *CreateContainerRegistryAuthentication) GetGcpGcr() CreateContainerRegistryAuthenticationGcpGcr {
-	if o == nil || IsNil(o.GcpGcr.Get()) {
+	if o == nil || IsNil(o.GcpGcr) {
 		var ret CreateContainerRegistryAuthenticationGcpGcr
 		return ret
 	}
-	return *o.GcpGcr.Get()
+	return *o.GcpGcr
 }
 
 // GetGcpGcrOk returns a tuple with the GcpGcr field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CreateContainerRegistryAuthentication) GetGcpGcrOk() (*CreateContainerRegistryAuthenticationGcpGcr, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.GcpGcr) {
 		return nil, false
 	}
-	return o.GcpGcr.Get(), o.GcpGcr.IsSet()
+	return o.GcpGcr, true
 }
 
 // HasGcpGcr returns a boolean if a field has been set.
 func (o *CreateContainerRegistryAuthentication) HasGcpGcr() bool {
-	if o != nil && o.GcpGcr.IsSet() {
+	if o != nil && !IsNil(o.GcpGcr) {
 		return true
 	}
 
 	return false
 }
 
-// SetGcpGcr gets a reference to the given NullableCreateContainerRegistryAuthenticationGcpGcr and assigns it to the GcpGcr field.
+// SetGcpGcr gets a reference to the given CreateContainerRegistryAuthenticationGcpGcr and assigns it to the GcpGcr field.
 func (o *CreateContainerRegistryAuthentication) SetGcpGcr(v CreateContainerRegistryAuthenticationGcpGcr) {
-	o.GcpGcr.Set(&v)
-}
-// SetGcpGcrNil sets the value for GcpGcr to be an explicit nil
-func (o *CreateContainerRegistryAuthentication) SetGcpGcrNil() {
-	o.GcpGcr.Set(nil)
+	o.GcpGcr = &v
 }
 
-// UnsetGcpGcr ensures that no value is present for GcpGcr, not even an explicit nil
-func (o *CreateContainerRegistryAuthentication) UnsetGcpGcr() {
-	o.GcpGcr.Unset()
-}
-
-// GetAwsEcr returns the AwsEcr field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetAwsEcr returns the AwsEcr field value if set, zero value otherwise.
 func (o *CreateContainerRegistryAuthentication) GetAwsEcr() CreateContainerRegistryAuthenticationAwsEcr {
-	if o == nil || IsNil(o.AwsEcr.Get()) {
+	if o == nil || IsNil(o.AwsEcr) {
 		var ret CreateContainerRegistryAuthenticationAwsEcr
 		return ret
 	}
-	return *o.AwsEcr.Get()
+	return *o.AwsEcr
 }
 
 // GetAwsEcrOk returns a tuple with the AwsEcr field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CreateContainerRegistryAuthentication) GetAwsEcrOk() (*CreateContainerRegistryAuthenticationAwsEcr, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.AwsEcr) {
 		return nil, false
 	}
-	return o.AwsEcr.Get(), o.AwsEcr.IsSet()
+	return o.AwsEcr, true
 }
 
 // HasAwsEcr returns a boolean if a field has been set.
 func (o *CreateContainerRegistryAuthentication) HasAwsEcr() bool {
-	if o != nil && o.AwsEcr.IsSet() {
+	if o != nil && !IsNil(o.AwsEcr) {
 		return true
 	}
 
 	return false
 }
 
-// SetAwsEcr gets a reference to the given NullableCreateContainerRegistryAuthenticationAwsEcr and assigns it to the AwsEcr field.
+// SetAwsEcr gets a reference to the given CreateContainerRegistryAuthenticationAwsEcr and assigns it to the AwsEcr field.
 func (o *CreateContainerRegistryAuthentication) SetAwsEcr(v CreateContainerRegistryAuthenticationAwsEcr) {
-	o.AwsEcr.Set(&v)
-}
-// SetAwsEcrNil sets the value for AwsEcr to be an explicit nil
-func (o *CreateContainerRegistryAuthentication) SetAwsEcrNil() {
-	o.AwsEcr.Set(nil)
+	o.AwsEcr = &v
 }
 
-// UnsetAwsEcr ensures that no value is present for AwsEcr, not even an explicit nil
-func (o *CreateContainerRegistryAuthentication) UnsetAwsEcr() {
-	o.AwsEcr.Unset()
-}
-
-// GetDockerHub returns the DockerHub field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetDockerHub returns the DockerHub field value if set, zero value otherwise.
 func (o *CreateContainerRegistryAuthentication) GetDockerHub() CreateContainerRegistryAuthenticationDockerHub {
-	if o == nil || IsNil(o.DockerHub.Get()) {
+	if o == nil || IsNil(o.DockerHub) {
 		var ret CreateContainerRegistryAuthenticationDockerHub
 		return ret
 	}
-	return *o.DockerHub.Get()
+	return *o.DockerHub
 }
 
 // GetDockerHubOk returns a tuple with the DockerHub field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CreateContainerRegistryAuthentication) GetDockerHubOk() (*CreateContainerRegistryAuthenticationDockerHub, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.DockerHub) {
 		return nil, false
 	}
-	return o.DockerHub.Get(), o.DockerHub.IsSet()
+	return o.DockerHub, true
 }
 
 // HasDockerHub returns a boolean if a field has been set.
 func (o *CreateContainerRegistryAuthentication) HasDockerHub() bool {
-	if o != nil && o.DockerHub.IsSet() {
+	if o != nil && !IsNil(o.DockerHub) {
 		return true
 	}
 
 	return false
 }
 
-// SetDockerHub gets a reference to the given NullableCreateContainerRegistryAuthenticationDockerHub and assigns it to the DockerHub field.
+// SetDockerHub gets a reference to the given CreateContainerRegistryAuthenticationDockerHub and assigns it to the DockerHub field.
 func (o *CreateContainerRegistryAuthentication) SetDockerHub(v CreateContainerRegistryAuthenticationDockerHub) {
-	o.DockerHub.Set(&v)
-}
-// SetDockerHubNil sets the value for DockerHub to be an explicit nil
-func (o *CreateContainerRegistryAuthentication) SetDockerHubNil() {
-	o.DockerHub.Set(nil)
+	o.DockerHub = &v
 }
 
-// UnsetDockerHub ensures that no value is present for DockerHub, not even an explicit nil
-func (o *CreateContainerRegistryAuthentication) UnsetDockerHub() {
-	o.DockerHub.Unset()
-}
-
-// GetGcpGar returns the GcpGar field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetGcpGar returns the GcpGar field value if set, zero value otherwise.
 func (o *CreateContainerRegistryAuthentication) GetGcpGar() CreateContainerRegistryAuthenticationGcpGcr {
-	if o == nil || IsNil(o.GcpGar.Get()) {
+	if o == nil || IsNil(o.GcpGar) {
 		var ret CreateContainerRegistryAuthenticationGcpGcr
 		return ret
 	}
-	return *o.GcpGar.Get()
+	return *o.GcpGar
 }
 
 // GetGcpGarOk returns a tuple with the GcpGar field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CreateContainerRegistryAuthentication) GetGcpGarOk() (*CreateContainerRegistryAuthenticationGcpGcr, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.GcpGar) {
 		return nil, false
 	}
-	return o.GcpGar.Get(), o.GcpGar.IsSet()
+	return o.GcpGar, true
 }
 
 // HasGcpGar returns a boolean if a field has been set.
 func (o *CreateContainerRegistryAuthentication) HasGcpGar() bool {
-	if o != nil && o.GcpGar.IsSet() {
+	if o != nil && !IsNil(o.GcpGar) {
 		return true
 	}
 
 	return false
 }
 
-// SetGcpGar gets a reference to the given NullableCreateContainerRegistryAuthenticationGcpGcr and assigns it to the GcpGar field.
+// SetGcpGar gets a reference to the given CreateContainerRegistryAuthenticationGcpGcr and assigns it to the GcpGar field.
 func (o *CreateContainerRegistryAuthentication) SetGcpGar(v CreateContainerRegistryAuthenticationGcpGcr) {
-	o.GcpGar.Set(&v)
-}
-// SetGcpGarNil sets the value for GcpGar to be an explicit nil
-func (o *CreateContainerRegistryAuthentication) SetGcpGarNil() {
-	o.GcpGar.Set(nil)
-}
-
-// UnsetGcpGar ensures that no value is present for GcpGar, not even an explicit nil
-func (o *CreateContainerRegistryAuthentication) UnsetGcpGar() {
-	o.GcpGar.Unset()
+	o.GcpGar = &v
 }
 
 func (o CreateContainerRegistryAuthentication) MarshalJSON() ([]byte, error) {
@@ -264,20 +214,20 @@ func (o CreateContainerRegistryAuthentication) MarshalJSON() ([]byte, error) {
 
 func (o CreateContainerRegistryAuthentication) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if o.Basic.IsSet() {
-		toSerialize["basic"] = o.Basic.Get()
+	if !IsNil(o.Basic) {
+		toSerialize["basic"] = o.Basic
 	}
-	if o.GcpGcr.IsSet() {
-		toSerialize["gcp_gcr"] = o.GcpGcr.Get()
+	if !IsNil(o.GcpGcr) {
+		toSerialize["gcp_gcr"] = o.GcpGcr
 	}
-	if o.AwsEcr.IsSet() {
-		toSerialize["aws_ecr"] = o.AwsEcr.Get()
+	if !IsNil(o.AwsEcr) {
+		toSerialize["aws_ecr"] = o.AwsEcr
 	}
-	if o.DockerHub.IsSet() {
-		toSerialize["docker_hub"] = o.DockerHub.Get()
+	if !IsNil(o.DockerHub) {
+		toSerialize["docker_hub"] = o.DockerHub
 	}
-	if o.GcpGar.IsSet() {
-		toSerialize["gcp_gar"] = o.GcpGar.Get()
+	if !IsNil(o.GcpGar) {
+		toSerialize["gcp_gar"] = o.GcpGar
 	}
 	return toSerialize, nil
 }

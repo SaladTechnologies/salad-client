@@ -4,13 +4,14 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Image** | Pointer to **NullableString** |  | [optional] 
-**Resources** | Pointer to [**NullableUpdateContainerResources**](UpdateContainerResources.md) |  | [optional] 
+**Image** | Pointer to **string** |  | [optional] 
+**Resources** | Pointer to [**UpdateContainerResources**](UpdateContainerResources.md) |  | [optional] 
 **Command** | Pointer to **[]string** | Pass a command (and optional arguments) to override the ENTRYPOINT and CMD of a container image. | [optional] 
 **Priority** | Pointer to [**NullableContainerGroupPriority**](ContainerGroupPriority.md) |  | [optional] 
 **EnvironmentVariables** | Pointer to **map[string]string** |  | [optional] 
-**Logging** | Pointer to [**NullableContainerLogging**](ContainerLogging.md) |  | [optional] 
-**RegistryAuthentication** | Pointer to [**NullableCreateContainerRegistryAuthentication**](CreateContainerRegistryAuthentication.md) |  | [optional] 
+**Logging** | Pointer to [**ContainerLogging**](ContainerLogging.md) |  | [optional] 
+**RegistryAuthentication** | Pointer to [**CreateContainerRegistryAuthentication**](CreateContainerRegistryAuthentication.md) |  | [optional] 
+**ImageCaching** | Pointer to **bool** |  | [optional] 
 
 ## Methods
 
@@ -56,16 +57,6 @@ SetImage sets Image field to given value.
 
 HasImage returns a boolean if a field has been set.
 
-### SetImageNil
-
-`func (o *UpdateContainer) SetImageNil(b bool)`
-
- SetImageNil sets the value for Image to be an explicit nil
-
-### UnsetImage
-`func (o *UpdateContainer) UnsetImage()`
-
-UnsetImage ensures that no value is present for Image, not even an explicit nil
 ### GetResources
 
 `func (o *UpdateContainer) GetResources() UpdateContainerResources`
@@ -91,16 +82,6 @@ SetResources sets Resources field to given value.
 
 HasResources returns a boolean if a field has been set.
 
-### SetResourcesNil
-
-`func (o *UpdateContainer) SetResourcesNil(b bool)`
-
- SetResourcesNil sets the value for Resources to be an explicit nil
-
-### UnsetResources
-`func (o *UpdateContainer) UnsetResources()`
-
-UnsetResources ensures that no value is present for Resources, not even an explicit nil
 ### GetCommand
 
 `func (o *UpdateContainer) GetCommand() []string`
@@ -126,16 +107,6 @@ SetCommand sets Command field to given value.
 
 HasCommand returns a boolean if a field has been set.
 
-### SetCommandNil
-
-`func (o *UpdateContainer) SetCommandNil(b bool)`
-
- SetCommandNil sets the value for Command to be an explicit nil
-
-### UnsetCommand
-`func (o *UpdateContainer) UnsetCommand()`
-
-UnsetCommand ensures that no value is present for Command, not even an explicit nil
 ### GetPriority
 
 `func (o *UpdateContainer) GetPriority() ContainerGroupPriority`
@@ -221,16 +192,6 @@ SetLogging sets Logging field to given value.
 
 HasLogging returns a boolean if a field has been set.
 
-### SetLoggingNil
-
-`func (o *UpdateContainer) SetLoggingNil(b bool)`
-
- SetLoggingNil sets the value for Logging to be an explicit nil
-
-### UnsetLogging
-`func (o *UpdateContainer) UnsetLogging()`
-
-UnsetLogging ensures that no value is present for Logging, not even an explicit nil
 ### GetRegistryAuthentication
 
 `func (o *UpdateContainer) GetRegistryAuthentication() CreateContainerRegistryAuthentication`
@@ -256,16 +217,31 @@ SetRegistryAuthentication sets RegistryAuthentication field to given value.
 
 HasRegistryAuthentication returns a boolean if a field has been set.
 
-### SetRegistryAuthenticationNil
+### GetImageCaching
 
-`func (o *UpdateContainer) SetRegistryAuthenticationNil(b bool)`
+`func (o *UpdateContainer) GetImageCaching() bool`
 
- SetRegistryAuthenticationNil sets the value for RegistryAuthentication to be an explicit nil
+GetImageCaching returns the ImageCaching field if non-nil, zero value otherwise.
 
-### UnsetRegistryAuthentication
-`func (o *UpdateContainer) UnsetRegistryAuthentication()`
+### GetImageCachingOk
 
-UnsetRegistryAuthentication ensures that no value is present for RegistryAuthentication, not even an explicit nil
+`func (o *UpdateContainer) GetImageCachingOk() (*bool, bool)`
+
+GetImageCachingOk returns a tuple with the ImageCaching field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetImageCaching
+
+`func (o *UpdateContainer) SetImageCaching(v bool)`
+
+SetImageCaching sets ImageCaching field to given value.
+
+### HasImageCaching
+
+`func (o *UpdateContainer) HasImageCaching() bool`
+
+HasImageCaching returns a boolean if a field has been set.
+
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

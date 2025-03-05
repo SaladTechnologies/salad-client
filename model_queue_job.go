@@ -3,7 +3,7 @@ SaladCloud API
 
 The SaladCloud REST API. Please refer to the [SaladCloud API Documentation](https://docs.salad.com/api-reference) for more details.
 
-API version: 0.9.0-alpha.6
+API version: 0.9.0-alpha.7
 Contact: cloud@salad.com
 */
 
@@ -24,13 +24,11 @@ var _ MappedNullable = &QueueJob{}
 // QueueJob Represents a queue job
 type QueueJob struct {
 	Id string `json:"id"`
-	// The job input. May be any valid JSON.
 	Input interface{} `json:"input"`
 	Metadata map[string]interface{} `json:"metadata,omitempty"`
 	Webhook NullableString `json:"webhook,omitempty"`
 	Status string `json:"status"`
 	Events []QueueJobEvent `json:"events"`
-	// The job output. May be any valid JSON.
 	Output interface{} `json:"output,omitempty"`
 	CreateTime time.Time `json:"create_time"`
 	UpdateTime time.Time `json:"update_time"`

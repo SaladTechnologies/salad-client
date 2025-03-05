@@ -11,7 +11,8 @@ Name | Type | Description | Notes
 **Size** | Pointer to **int64** |  | [optional] 
 **Hash** | Pointer to **string** |  | [optional] 
 **EnvironmentVariables** | Pointer to **map[string]string** |  | [optional] 
-**Logging** | Pointer to [**NullableContainerLogging**](ContainerLogging.md) |  | [optional] 
+**Logging** | Pointer to [**ContainerLogging**](ContainerLogging.md) |  | [optional] 
+**ImageCaching** | Pointer to **bool** |  | [optional] 
 
 ## Methods
 
@@ -227,16 +228,31 @@ SetLogging sets Logging field to given value.
 
 HasLogging returns a boolean if a field has been set.
 
-### SetLoggingNil
+### GetImageCaching
 
-`func (o *Container) SetLoggingNil(b bool)`
+`func (o *Container) GetImageCaching() bool`
 
- SetLoggingNil sets the value for Logging to be an explicit nil
+GetImageCaching returns the ImageCaching field if non-nil, zero value otherwise.
 
-### UnsetLogging
-`func (o *Container) UnsetLogging()`
+### GetImageCachingOk
 
-UnsetLogging ensures that no value is present for Logging, not even an explicit nil
+`func (o *Container) GetImageCachingOk() (*bool, bool)`
+
+GetImageCachingOk returns a tuple with the ImageCaching field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetImageCaching
+
+`func (o *Container) SetImageCaching(v bool)`
+
+SetImageCaching sets ImageCaching field to given value.
+
+### HasImageCaching
+
+`func (o *Container) HasImageCaching() bool`
+
+HasImageCaching returns a boolean if a field has been set.
+
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

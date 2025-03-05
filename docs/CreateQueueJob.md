@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Input** | **interface{}** | The job input. May be any valid JSON. | 
+**Input** | **interface{}** |  | 
 **Metadata** | Pointer to **map[string]interface{}** |  | [optional] 
 **Webhook** | Pointer to **NullableString** |  | [optional] 
 

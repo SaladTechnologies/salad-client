@@ -11,12 +11,12 @@ Name | Type | Description | Notes
 **RestartPolicy** | [**ContainerRestartPolicy**](ContainerRestartPolicy.md) |  | 
 **Replicas** | **int32** |  | 
 **CountryCodes** | Pointer to [**[]CountryCode**](CountryCode.md) | List of countries nodes must be located in. Remove this field to permit nodes from any country. | [optional] 
-**Networking** | Pointer to [**NullableCreateContainerGroupNetworking**](CreateContainerGroupNetworking.md) |  | [optional] 
-**LivenessProbe** | Pointer to [**NullableContainerGroupLivenessProbe**](ContainerGroupLivenessProbe.md) |  | [optional] 
-**ReadinessProbe** | Pointer to [**NullableContainerGroupReadinessProbe**](ContainerGroupReadinessProbe.md) |  | [optional] 
-**StartupProbe** | Pointer to [**NullableContainerGroupStartupProbe**](ContainerGroupStartupProbe.md) |  | [optional] 
-**QueueConnection** | Pointer to [**NullableContainerGroupQueueConnection**](ContainerGroupQueueConnection.md) |  | [optional] 
-**QueueAutoscaler** | Pointer to [**NullableQueueAutoscaler**](QueueAutoscaler.md) |  | [optional] 
+**Networking** | Pointer to [**CreateContainerGroupNetworking**](CreateContainerGroupNetworking.md) |  | [optional] 
+**LivenessProbe** | Pointer to [**ContainerGroupLivenessProbe**](ContainerGroupLivenessProbe.md) |  | [optional] 
+**ReadinessProbe** | Pointer to [**ContainerGroupReadinessProbe**](ContainerGroupReadinessProbe.md) |  | [optional] 
+**StartupProbe** | Pointer to [**ContainerGroupStartupProbe**](ContainerGroupStartupProbe.md) |  | [optional] 
+**QueueConnection** | Pointer to [**ContainerGroupQueueConnection**](ContainerGroupQueueConnection.md) |  | [optional] 
+**QueueAutoscaler** | Pointer to [**QueueAutoscaler**](QueueAutoscaler.md) |  | [optional] 
 
 ## Methods
 
@@ -222,16 +222,6 @@ SetNetworking sets Networking field to given value.
 
 HasNetworking returns a boolean if a field has been set.
 
-### SetNetworkingNil
-
-`func (o *CreateContainerGroup) SetNetworkingNil(b bool)`
-
- SetNetworkingNil sets the value for Networking to be an explicit nil
-
-### UnsetNetworking
-`func (o *CreateContainerGroup) UnsetNetworking()`
-
-UnsetNetworking ensures that no value is present for Networking, not even an explicit nil
 ### GetLivenessProbe
 
 `func (o *CreateContainerGroup) GetLivenessProbe() ContainerGroupLivenessProbe`
@@ -257,16 +247,6 @@ SetLivenessProbe sets LivenessProbe field to given value.
 
 HasLivenessProbe returns a boolean if a field has been set.
 
-### SetLivenessProbeNil
-
-`func (o *CreateContainerGroup) SetLivenessProbeNil(b bool)`
-
- SetLivenessProbeNil sets the value for LivenessProbe to be an explicit nil
-
-### UnsetLivenessProbe
-`func (o *CreateContainerGroup) UnsetLivenessProbe()`
-
-UnsetLivenessProbe ensures that no value is present for LivenessProbe, not even an explicit nil
 ### GetReadinessProbe
 
 `func (o *CreateContainerGroup) GetReadinessProbe() ContainerGroupReadinessProbe`
@@ -292,16 +272,6 @@ SetReadinessProbe sets ReadinessProbe field to given value.
 
 HasReadinessProbe returns a boolean if a field has been set.
 
-### SetReadinessProbeNil
-
-`func (o *CreateContainerGroup) SetReadinessProbeNil(b bool)`
-
- SetReadinessProbeNil sets the value for ReadinessProbe to be an explicit nil
-
-### UnsetReadinessProbe
-`func (o *CreateContainerGroup) UnsetReadinessProbe()`
-
-UnsetReadinessProbe ensures that no value is present for ReadinessProbe, not even an explicit nil
 ### GetStartupProbe
 
 `func (o *CreateContainerGroup) GetStartupProbe() ContainerGroupStartupProbe`
@@ -327,16 +297,6 @@ SetStartupProbe sets StartupProbe field to given value.
 
 HasStartupProbe returns a boolean if a field has been set.
 
-### SetStartupProbeNil
-
-`func (o *CreateContainerGroup) SetStartupProbeNil(b bool)`
-
- SetStartupProbeNil sets the value for StartupProbe to be an explicit nil
-
-### UnsetStartupProbe
-`func (o *CreateContainerGroup) UnsetStartupProbe()`
-
-UnsetStartupProbe ensures that no value is present for StartupProbe, not even an explicit nil
 ### GetQueueConnection
 
 `func (o *CreateContainerGroup) GetQueueConnection() ContainerGroupQueueConnection`
@@ -362,16 +322,6 @@ SetQueueConnection sets QueueConnection field to given value.
 
 HasQueueConnection returns a boolean if a field has been set.
 
-### SetQueueConnectionNil
-
-`func (o *CreateContainerGroup) SetQueueConnectionNil(b bool)`
-
- SetQueueConnectionNil sets the value for QueueConnection to be an explicit nil
-
-### UnsetQueueConnection
-`func (o *CreateContainerGroup) UnsetQueueConnection()`
-
-UnsetQueueConnection ensures that no value is present for QueueConnection, not even an explicit nil
 ### GetQueueAutoscaler
 
 `func (o *CreateContainerGroup) GetQueueAutoscaler() QueueAutoscaler`
@@ -397,16 +347,6 @@ SetQueueAutoscaler sets QueueAutoscaler field to given value.
 
 HasQueueAutoscaler returns a boolean if a field has been set.
 
-### SetQueueAutoscalerNil
-
-`func (o *CreateContainerGroup) SetQueueAutoscalerNil(b bool)`
-
- SetQueueAutoscalerNil sets the value for QueueAutoscaler to be an explicit nil
-
-### UnsetQueueAutoscaler
-`func (o *CreateContainerGroup) UnsetQueueAutoscaler()`
-
-UnsetQueueAutoscaler ensures that no value is present for QueueAutoscaler, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

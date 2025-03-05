@@ -17,13 +17,13 @@ import (
 	"fmt"
 )
 
-// checks if the InferenceEndpointJobList type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &InferenceEndpointJobList{}
+// checks if the InferenceEndpointList type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &InferenceEndpointList{}
 
-// InferenceEndpointJobList Represents a list of inference endpoint jobs
-type InferenceEndpointJobList struct {
-	// The list of inference endpoint jobs.
-	Items []InferenceEndpointJob `json:"items"`
+// InferenceEndpointList Represents a page from the collection of inference endpoints.
+type InferenceEndpointList struct {
+	// The list of inference endpoints.
+	Items []InferenceEndpoint `json:"items"`
 	// The page number.
 	Page int32 `json:"page"`
 	// The maximum number of items per page.
@@ -32,14 +32,14 @@ type InferenceEndpointJobList struct {
 	TotalSize int32 `json:"total_size"`
 }
 
-type _InferenceEndpointJobList InferenceEndpointJobList
+type _InferenceEndpointList InferenceEndpointList
 
-// NewInferenceEndpointJobList instantiates a new InferenceEndpointJobList object
+// NewInferenceEndpointList instantiates a new InferenceEndpointList object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewInferenceEndpointJobList(items []InferenceEndpointJob, page int32, pageSize int32, totalSize int32) *InferenceEndpointJobList {
-	this := InferenceEndpointJobList{}
+func NewInferenceEndpointList(items []InferenceEndpoint, page int32, pageSize int32, totalSize int32) *InferenceEndpointList {
+	this := InferenceEndpointList{}
 	this.Items = items
 	this.Page = page
 	this.PageSize = pageSize
@@ -47,18 +47,18 @@ func NewInferenceEndpointJobList(items []InferenceEndpointJob, page int32, pageS
 	return &this
 }
 
-// NewInferenceEndpointJobListWithDefaults instantiates a new InferenceEndpointJobList object
+// NewInferenceEndpointListWithDefaults instantiates a new InferenceEndpointList object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewInferenceEndpointJobListWithDefaults() *InferenceEndpointJobList {
-	this := InferenceEndpointJobList{}
+func NewInferenceEndpointListWithDefaults() *InferenceEndpointList {
+	this := InferenceEndpointList{}
 	return &this
 }
 
 // GetItems returns the Items field value
-func (o *InferenceEndpointJobList) GetItems() []InferenceEndpointJob {
+func (o *InferenceEndpointList) GetItems() []InferenceEndpoint {
 	if o == nil {
-		var ret []InferenceEndpointJob
+		var ret []InferenceEndpoint
 		return ret
 	}
 
@@ -67,7 +67,7 @@ func (o *InferenceEndpointJobList) GetItems() []InferenceEndpointJob {
 
 // GetItemsOk returns a tuple with the Items field value
 // and a boolean to check if the value has been set.
-func (o *InferenceEndpointJobList) GetItemsOk() ([]InferenceEndpointJob, bool) {
+func (o *InferenceEndpointList) GetItemsOk() ([]InferenceEndpoint, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -75,12 +75,12 @@ func (o *InferenceEndpointJobList) GetItemsOk() ([]InferenceEndpointJob, bool) {
 }
 
 // SetItems sets field value
-func (o *InferenceEndpointJobList) SetItems(v []InferenceEndpointJob) {
+func (o *InferenceEndpointList) SetItems(v []InferenceEndpoint) {
 	o.Items = v
 }
 
 // GetPage returns the Page field value
-func (o *InferenceEndpointJobList) GetPage() int32 {
+func (o *InferenceEndpointList) GetPage() int32 {
 	if o == nil {
 		var ret int32
 		return ret
@@ -91,7 +91,7 @@ func (o *InferenceEndpointJobList) GetPage() int32 {
 
 // GetPageOk returns a tuple with the Page field value
 // and a boolean to check if the value has been set.
-func (o *InferenceEndpointJobList) GetPageOk() (*int32, bool) {
+func (o *InferenceEndpointList) GetPageOk() (*int32, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -99,12 +99,12 @@ func (o *InferenceEndpointJobList) GetPageOk() (*int32, bool) {
 }
 
 // SetPage sets field value
-func (o *InferenceEndpointJobList) SetPage(v int32) {
+func (o *InferenceEndpointList) SetPage(v int32) {
 	o.Page = v
 }
 
 // GetPageSize returns the PageSize field value
-func (o *InferenceEndpointJobList) GetPageSize() int32 {
+func (o *InferenceEndpointList) GetPageSize() int32 {
 	if o == nil {
 		var ret int32
 		return ret
@@ -115,7 +115,7 @@ func (o *InferenceEndpointJobList) GetPageSize() int32 {
 
 // GetPageSizeOk returns a tuple with the PageSize field value
 // and a boolean to check if the value has been set.
-func (o *InferenceEndpointJobList) GetPageSizeOk() (*int32, bool) {
+func (o *InferenceEndpointList) GetPageSizeOk() (*int32, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -123,12 +123,12 @@ func (o *InferenceEndpointJobList) GetPageSizeOk() (*int32, bool) {
 }
 
 // SetPageSize sets field value
-func (o *InferenceEndpointJobList) SetPageSize(v int32) {
+func (o *InferenceEndpointList) SetPageSize(v int32) {
 	o.PageSize = v
 }
 
 // GetTotalSize returns the TotalSize field value
-func (o *InferenceEndpointJobList) GetTotalSize() int32 {
+func (o *InferenceEndpointList) GetTotalSize() int32 {
 	if o == nil {
 		var ret int32
 		return ret
@@ -139,7 +139,7 @@ func (o *InferenceEndpointJobList) GetTotalSize() int32 {
 
 // GetTotalSizeOk returns a tuple with the TotalSize field value
 // and a boolean to check if the value has been set.
-func (o *InferenceEndpointJobList) GetTotalSizeOk() (*int32, bool) {
+func (o *InferenceEndpointList) GetTotalSizeOk() (*int32, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -147,11 +147,11 @@ func (o *InferenceEndpointJobList) GetTotalSizeOk() (*int32, bool) {
 }
 
 // SetTotalSize sets field value
-func (o *InferenceEndpointJobList) SetTotalSize(v int32) {
+func (o *InferenceEndpointList) SetTotalSize(v int32) {
 	o.TotalSize = v
 }
 
-func (o InferenceEndpointJobList) MarshalJSON() ([]byte, error) {
+func (o InferenceEndpointList) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -159,7 +159,7 @@ func (o InferenceEndpointJobList) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o InferenceEndpointJobList) ToMap() (map[string]interface{}, error) {
+func (o InferenceEndpointList) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["items"] = o.Items
 	toSerialize["page"] = o.Page
@@ -168,7 +168,7 @@ func (o InferenceEndpointJobList) ToMap() (map[string]interface{}, error) {
 	return toSerialize, nil
 }
 
-func (o *InferenceEndpointJobList) UnmarshalJSON(data []byte) (err error) {
+func (o *InferenceEndpointList) UnmarshalJSON(data []byte) (err error) {
 	// This validates that all required properties are included in the JSON object
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
@@ -193,53 +193,53 @@ func (o *InferenceEndpointJobList) UnmarshalJSON(data []byte) (err error) {
 		}
 	}
 
-	varInferenceEndpointJobList := _InferenceEndpointJobList{}
+	varInferenceEndpointList := _InferenceEndpointList{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
 	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varInferenceEndpointJobList)
+	err = decoder.Decode(&varInferenceEndpointList)
 
 	if err != nil {
 		return err
 	}
 
-	*o = InferenceEndpointJobList(varInferenceEndpointJobList)
+	*o = InferenceEndpointList(varInferenceEndpointList)
 
 	return err
 }
 
-type NullableInferenceEndpointJobList struct {
-	value *InferenceEndpointJobList
+type NullableInferenceEndpointList struct {
+	value *InferenceEndpointList
 	isSet bool
 }
 
-func (v NullableInferenceEndpointJobList) Get() *InferenceEndpointJobList {
+func (v NullableInferenceEndpointList) Get() *InferenceEndpointList {
 	return v.value
 }
 
-func (v *NullableInferenceEndpointJobList) Set(val *InferenceEndpointJobList) {
+func (v *NullableInferenceEndpointList) Set(val *InferenceEndpointList) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableInferenceEndpointJobList) IsSet() bool {
+func (v NullableInferenceEndpointList) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableInferenceEndpointJobList) Unset() {
+func (v *NullableInferenceEndpointList) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableInferenceEndpointJobList(val *InferenceEndpointJobList) *NullableInferenceEndpointJobList {
-	return &NullableInferenceEndpointJobList{value: val, isSet: true}
+func NewNullableInferenceEndpointList(val *InferenceEndpointList) *NullableInferenceEndpointList {
+	return &NullableInferenceEndpointList{value: val, isSet: true}
 }
 
-func (v NullableInferenceEndpointJobList) MarshalJSON() ([]byte, error) {
+func (v NullableInferenceEndpointList) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableInferenceEndpointJobList) UnmarshalJSON(src []byte) error {
+func (v *NullableInferenceEndpointList) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

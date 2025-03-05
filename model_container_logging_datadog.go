@@ -3,7 +3,7 @@ SaladCloud API
 
 The SaladCloud REST API. Please refer to the [SaladCloud API Documentation](https://docs.salad.com/api-reference) for more details.
 
-API version: 0.9.0-alpha.6
+API version: 0.9.0-alpha.7
 Contact: cloud@salad.com
 */
 
@@ -24,7 +24,7 @@ var _ MappedNullable = &ContainerLoggingDatadog{}
 type ContainerLoggingDatadog struct {
 	Host string `json:"host"`
 	ApiKey string `json:"api_key"`
-	Tags []HttpHeadersInner `json:"tags,omitempty"`
+	Tags []ContainerLoggingDatadogTagsInner `json:"tags,omitempty"`
 }
 
 type _ContainerLoggingDatadog ContainerLoggingDatadog
@@ -96,10 +96,10 @@ func (o *ContainerLoggingDatadog) SetApiKey(v string) {
 	o.ApiKey = v
 }
 
-// GetTags returns the Tags field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *ContainerLoggingDatadog) GetTags() []HttpHeadersInner {
-	if o == nil {
-		var ret []HttpHeadersInner
+// GetTags returns the Tags field value if set, zero value otherwise.
+func (o *ContainerLoggingDatadog) GetTags() []ContainerLoggingDatadogTagsInner {
+	if o == nil || IsNil(o.Tags) {
+		var ret []ContainerLoggingDatadogTagsInner
 		return ret
 	}
 	return o.Tags
@@ -107,8 +107,7 @@ func (o *ContainerLoggingDatadog) GetTags() []HttpHeadersInner {
 
 // GetTagsOk returns a tuple with the Tags field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *ContainerLoggingDatadog) GetTagsOk() ([]HttpHeadersInner, bool) {
+func (o *ContainerLoggingDatadog) GetTagsOk() ([]ContainerLoggingDatadogTagsInner, bool) {
 	if o == nil || IsNil(o.Tags) {
 		return nil, false
 	}
@@ -124,8 +123,8 @@ func (o *ContainerLoggingDatadog) HasTags() bool {
 	return false
 }
 
-// SetTags gets a reference to the given []HttpHeadersInner and assigns it to the Tags field.
-func (o *ContainerLoggingDatadog) SetTags(v []HttpHeadersInner) {
+// SetTags gets a reference to the given []ContainerLoggingDatadogTagsInner and assigns it to the Tags field.
+func (o *ContainerLoggingDatadog) SetTags(v []ContainerLoggingDatadogTagsInner) {
 	o.Tags = v
 }
 
@@ -141,7 +140,7 @@ func (o ContainerLoggingDatadog) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["host"] = o.Host
 	toSerialize["api_key"] = o.ApiKey
-	if o.Tags != nil {
+	if !IsNil(o.Tags) {
 		toSerialize["tags"] = o.Tags
 	}
 	return toSerialize, nil

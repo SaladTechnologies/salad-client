@@ -4,11 +4,11 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Basic** | Pointer to [**NullableCreateContainerRegistryAuthenticationBasic**](CreateContainerRegistryAuthenticationBasic.md) |  | [optional] 
-**GcpGcr** | Pointer to [**NullableCreateContainerRegistryAuthenticationGcpGcr**](CreateContainerRegistryAuthenticationGcpGcr.md) |  | [optional] 
-**AwsEcr** | Pointer to [**NullableCreateContainerRegistryAuthenticationAwsEcr**](CreateContainerRegistryAuthenticationAwsEcr.md) |  | [optional] 
-**DockerHub** | Pointer to [**NullableCreateContainerRegistryAuthenticationDockerHub**](CreateContainerRegistryAuthenticationDockerHub.md) |  | [optional] 
-**GcpGar** | Pointer to [**NullableCreateContainerRegistryAuthenticationGcpGcr**](CreateContainerRegistryAuthenticationGcpGcr.md) |  | [optional] 
+**Basic** | Pointer to [**CreateContainerRegistryAuthenticationBasic**](CreateContainerRegistryAuthenticationBasic.md) |  | [optional] 
+**GcpGcr** | Pointer to [**CreateContainerRegistryAuthenticationGcpGcr**](CreateContainerRegistryAuthenticationGcpGcr.md) |  | [optional] 
+**AwsEcr** | Pointer to [**CreateContainerRegistryAuthenticationAwsEcr**](CreateContainerRegistryAuthenticationAwsEcr.md) |  | [optional] 
+**DockerHub** | Pointer to [**CreateContainerRegistryAuthenticationDockerHub**](CreateContainerRegistryAuthenticationDockerHub.md) |  | [optional] 
+**GcpGar** | Pointer to [**CreateContainerRegistryAuthenticationGcpGcr**](CreateContainerRegistryAuthenticationGcpGcr.md) |  | [optional] 
 
 ## Methods
 
@@ -54,16 +54,6 @@ SetBasic sets Basic field to given value.
 
 HasBasic returns a boolean if a field has been set.
 
-### SetBasicNil
-
-`func (o *CreateContainerRegistryAuthentication) SetBasicNil(b bool)`
-
- SetBasicNil sets the value for Basic to be an explicit nil
-
-### UnsetBasic
-`func (o *CreateContainerRegistryAuthentication) UnsetBasic()`
-
-UnsetBasic ensures that no value is present for Basic, not even an explicit nil
 ### GetGcpGcr
 
 `func (o *CreateContainerRegistryAuthentication) GetGcpGcr() CreateContainerRegistryAuthenticationGcpGcr`
@@ -89,16 +79,6 @@ SetGcpGcr sets GcpGcr field to given value.
 
 HasGcpGcr returns a boolean if a field has been set.
 
-### SetGcpGcrNil
-
-`func (o *CreateContainerRegistryAuthentication) SetGcpGcrNil(b bool)`
-
- SetGcpGcrNil sets the value for GcpGcr to be an explicit nil
-
-### UnsetGcpGcr
-`func (o *CreateContainerRegistryAuthentication) UnsetGcpGcr()`
-
-UnsetGcpGcr ensures that no value is present for GcpGcr, not even an explicit nil
 ### GetAwsEcr
 
 `func (o *CreateContainerRegistryAuthentication) GetAwsEcr() CreateContainerRegistryAuthenticationAwsEcr`
@@ -124,16 +104,6 @@ SetAwsEcr sets AwsEcr field to given value.
 
 HasAwsEcr returns a boolean if a field has been set.
 
-### SetAwsEcrNil
-
-`func (o *CreateContainerRegistryAuthentication) SetAwsEcrNil(b bool)`
-
- SetAwsEcrNil sets the value for AwsEcr to be an explicit nil
-
-### UnsetAwsEcr
-`func (o *CreateContainerRegistryAuthentication) UnsetAwsEcr()`
-
-UnsetAwsEcr ensures that no value is present for AwsEcr, not even an explicit nil
 ### GetDockerHub
 
 `func (o *CreateContainerRegistryAuthentication) GetDockerHub() CreateContainerRegistryAuthenticationDockerHub`
@@ -159,16 +129,6 @@ SetDockerHub sets DockerHub field to given value.
 
 HasDockerHub returns a boolean if a field has been set.
 
-### SetDockerHubNil
-
-`func (o *CreateContainerRegistryAuthentication) SetDockerHubNil(b bool)`
-
- SetDockerHubNil sets the value for DockerHub to be an explicit nil
-
-### UnsetDockerHub
-`func (o *CreateContainerRegistryAuthentication) UnsetDockerHub()`
-
-UnsetDockerHub ensures that no value is present for DockerHub, not even an explicit nil
 ### GetGcpGar
 
 `func (o *CreateContainerRegistryAuthentication) GetGcpGar() CreateContainerRegistryAuthenticationGcpGcr`
@@ -194,16 +154,6 @@ SetGcpGar sets GcpGar field to given value.
 
 HasGcpGar returns a boolean if a field has been set.
 
-### SetGcpGarNil
-
-`func (o *CreateContainerRegistryAuthentication) SetGcpGarNil(b bool)`
-
- SetGcpGarNil sets the value for GcpGar to be an explicit nil
-
-### UnsetGcpGar
-`func (o *CreateContainerRegistryAuthentication) UnsetGcpGar()`
-
-UnsetGcpGar ensures that no value is present for GcpGar, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

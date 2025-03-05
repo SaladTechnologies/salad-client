@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Host** | **string** |  | 
 **ApiKey** | **string** |  | 
-**Tags** | Pointer to [**[]HttpHeadersInner**](HttpHeadersInner.md) |  | [optional] 
+**Tags** | Pointer to [**[]ContainerLoggingDatadogTagsInner**](ContainerLoggingDatadogTagsInner.md) |  | [optional] 
 
 ## Methods
 
@@ -69,20 +69,20 @@ SetApiKey sets ApiKey field to given value.
 
 ### GetTags
 
-`func (o *ContainerLoggingDatadog) GetTags() []HttpHeadersInner`
+`func (o *ContainerLoggingDatadog) GetTags() []ContainerLoggingDatadogTagsInner`
 
 GetTags returns the Tags field if non-nil, zero value otherwise.
 
 ### GetTagsOk
 
-`func (o *ContainerLoggingDatadog) GetTagsOk() (*[]HttpHeadersInner, bool)`
+`func (o *ContainerLoggingDatadog) GetTagsOk() (*[]ContainerLoggingDatadogTagsInner, bool)`
 
 GetTagsOk returns a tuple with the Tags field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetTags
 
-`func (o *ContainerLoggingDatadog) SetTags(v []HttpHeadersInner)`
+`func (o *ContainerLoggingDatadog) SetTags(v []ContainerLoggingDatadogTagsInner)`
 
 SetTags sets Tags field to given value.
 
@@ -92,16 +92,6 @@ SetTags sets Tags field to given value.
 
 HasTags returns a boolean if a field has been set.
 
-### SetTagsNil
-
-`func (o *ContainerLoggingDatadog) SetTagsNil(b bool)`
-
- SetTagsNil sets the value for Tags to be an explicit nil
-
-### UnsetTags
-`func (o *ContainerLoggingDatadog) UnsetTags()`
-
-UnsetTags ensures that no value is present for Tags, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

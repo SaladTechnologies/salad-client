@@ -40,8 +40,8 @@ import (
 )
 
 func main() {
-	organizationName := "acme-corp" // string | Your organization name. This identifies the billing context for the API operation and represents a security boundary for SaladCloud resources. The organization must be created before using the API, and you must be a member of the organization.
-	projectName := "default" // string | Your project name. This represents a collection of related SaladCloud resources. The project must be created before using the API.
+	organizationName := "organizationName_example" // string | Your organization name. This identifies the billing context for the API operation and represents a security boundary for SaladCloud resources. The organization must be created before using the API, and you must be a member of the organization.
+	projectName := "projectName_example" // string | Your project name. This represents a collection of related SaladCloud resources. The project must be created before using the API.
 	createContainerGroup := *openapiclient.NewCreateContainerGroup("Name_example", *openapiclient.NewCreateContainer("Image_example", *openapiclient.NewContainerResourceRequirements(int32(123), int32(123))), false, openapiclient.ContainerRestartPolicy("always"), int32(123)) // CreateContainerGroup | 
 
 	configuration := openapiclient.NewConfiguration()
@@ -115,8 +115,8 @@ import (
 )
 
 func main() {
-	organizationName := "acme-corp" // string | Your organization name. This identifies the billing context for the API operation and represents a security boundary for SaladCloud resources. The organization must be created before using the API, and you must be a member of the organization.
-	projectName := "default" // string | Your project name. This represents a collection of related SaladCloud resources. The project must be created before using the API.
+	organizationName := "organizationName_example" // string | Your organization name. This identifies the billing context for the API operation and represents a security boundary for SaladCloud resources. The organization must be created before using the API, and you must be a member of the organization.
+	projectName := "projectName_example" // string | Your project name. This represents a collection of related SaladCloud resources. The project must be created before using the API.
 	containerGroupName := "containerGroupName_example" // string | The unique container group name
 
 	configuration := openapiclient.NewConfiguration()
@@ -189,8 +189,8 @@ import (
 )
 
 func main() {
-	organizationName := "acme-corp" // string | Your organization name. This identifies the billing context for the API operation and represents a security boundary for SaladCloud resources. The organization must be created before using the API, and you must be a member of the organization.
-	projectName := "default" // string | Your project name. This represents a collection of related SaladCloud resources. The project must be created before using the API.
+	organizationName := "organizationName_example" // string | Your organization name. This identifies the billing context for the API operation and represents a security boundary for SaladCloud resources. The organization must be created before using the API, and you must be a member of the organization.
+	projectName := "projectName_example" // string | Your project name. This represents a collection of related SaladCloud resources. The project must be created before using the API.
 	containerGroupName := "containerGroupName_example" // string | The unique container group name
 
 	configuration := openapiclient.NewConfiguration()
@@ -265,8 +265,8 @@ import (
 )
 
 func main() {
-	organizationName := "acme-corp" // string | Your organization name. This identifies the billing context for the API operation and represents a security boundary for SaladCloud resources. The organization must be created before using the API, and you must be a member of the organization.
-	projectName := "default" // string | Your project name. This represents a collection of related SaladCloud resources. The project must be created before using the API.
+	organizationName := "organizationName_example" // string | Your organization name. This identifies the billing context for the API operation and represents a security boundary for SaladCloud resources. The organization must be created before using the API, and you must be a member of the organization.
+	projectName := "projectName_example" // string | Your project name. This represents a collection of related SaladCloud resources. The project must be created before using the API.
 	containerGroupName := "containerGroupName_example" // string | The unique container group name
 	containerGroupInstanceId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The unique instance identifier
 
@@ -344,8 +344,8 @@ import (
 )
 
 func main() {
-	organizationName := "acme-corp" // string | Your organization name. This identifies the billing context for the API operation and represents a security boundary for SaladCloud resources. The organization must be created before using the API, and you must be a member of the organization.
-	projectName := "default" // string | Your project name. This represents a collection of related SaladCloud resources. The project must be created before using the API.
+	organizationName := "organizationName_example" // string | Your organization name. This identifies the billing context for the API operation and represents a security boundary for SaladCloud resources. The organization must be created before using the API, and you must be a member of the organization.
+	projectName := "projectName_example" // string | Your project name. This represents a collection of related SaladCloud resources. The project must be created before using the API.
 	containerGroupName := "containerGroupName_example" // string | The unique container group name
 
 	configuration := openapiclient.NewConfiguration()
@@ -420,8 +420,8 @@ import (
 )
 
 func main() {
-	organizationName := "acme-corp" // string | Your organization name. This identifies the billing context for the API operation and represents a security boundary for SaladCloud resources. The organization must be created before using the API, and you must be a member of the organization.
-	projectName := "default" // string | Your project name. This represents a collection of related SaladCloud resources. The project must be created before using the API.
+	organizationName := "organizationName_example" // string | Your organization name. This identifies the billing context for the API operation and represents a security boundary for SaladCloud resources. The organization must be created before using the API, and you must be a member of the organization.
+	projectName := "projectName_example" // string | Your project name. This represents a collection of related SaladCloud resources. The project must be created before using the API.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -493,8 +493,8 @@ import (
 )
 
 func main() {
-	organizationName := "acme-corp" // string | Your organization name. This identifies the billing context for the API operation and represents a security boundary for SaladCloud resources. The organization must be created before using the API, and you must be a member of the organization.
-	projectName := "default" // string | Your project name. This represents a collection of related SaladCloud resources. The project must be created before using the API.
+	organizationName := "organizationName_example" // string | Your organization name. This identifies the billing context for the API operation and represents a security boundary for SaladCloud resources. The organization must be created before using the API, and you must be a member of the organization.
+	projectName := "projectName_example" // string | Your project name. This represents a collection of related SaladCloud resources. The project must be created before using the API.
 	containerGroupName := "containerGroupName_example" // string | The unique container group name
 	containerGroupInstanceId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The unique instance identifier
 
@@ -570,8 +570,8 @@ import (
 )
 
 func main() {
-	organizationName := "acme-corp" // string | Your organization name. This identifies the billing context for the API operation and represents a security boundary for SaladCloud resources. The organization must be created before using the API, and you must be a member of the organization.
-	projectName := "default" // string | Your project name. This represents a collection of related SaladCloud resources. The project must be created before using the API.
+	organizationName := "organizationName_example" // string | Your organization name. This identifies the billing context for the API operation and represents a security boundary for SaladCloud resources. The organization must be created before using the API, and you must be a member of the organization.
+	projectName := "projectName_example" // string | Your project name. This represents a collection of related SaladCloud resources. The project must be created before using the API.
 	containerGroupName := "containerGroupName_example" // string | The unique container group name
 	containerGroupInstanceId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The unique instance identifier
 
@@ -647,8 +647,8 @@ import (
 )
 
 func main() {
-	organizationName := "acme-corp" // string | Your organization name. This identifies the billing context for the API operation and represents a security boundary for SaladCloud resources. The organization must be created before using the API, and you must be a member of the organization.
-	projectName := "default" // string | Your project name. This represents a collection of related SaladCloud resources. The project must be created before using the API.
+	organizationName := "organizationName_example" // string | Your organization name. This identifies the billing context for the API operation and represents a security boundary for SaladCloud resources. The organization must be created before using the API, and you must be a member of the organization.
+	projectName := "projectName_example" // string | Your project name. This represents a collection of related SaladCloud resources. The project must be created before using the API.
 	containerGroupName := "containerGroupName_example" // string | The unique container group name
 	containerGroupInstanceId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The unique instance identifier
 
@@ -724,8 +724,8 @@ import (
 )
 
 func main() {
-	organizationName := "acme-corp" // string | Your organization name. This identifies the billing context for the API operation and represents a security boundary for SaladCloud resources. The organization must be created before using the API, and you must be a member of the organization.
-	projectName := "default" // string | Your project name. This represents a collection of related SaladCloud resources. The project must be created before using the API.
+	organizationName := "organizationName_example" // string | Your organization name. This identifies the billing context for the API operation and represents a security boundary for SaladCloud resources. The organization must be created before using the API, and you must be a member of the organization.
+	projectName := "projectName_example" // string | Your project name. This represents a collection of related SaladCloud resources. The project must be created before using the API.
 	containerGroupName := "containerGroupName_example" // string | The unique container group name
 
 	configuration := openapiclient.NewConfiguration()
@@ -798,8 +798,8 @@ import (
 )
 
 func main() {
-	organizationName := "acme-corp" // string | Your organization name. This identifies the billing context for the API operation and represents a security boundary for SaladCloud resources. The organization must be created before using the API, and you must be a member of the organization.
-	projectName := "default" // string | Your project name. This represents a collection of related SaladCloud resources. The project must be created before using the API.
+	organizationName := "organizationName_example" // string | Your organization name. This identifies the billing context for the API operation and represents a security boundary for SaladCloud resources. The organization must be created before using the API, and you must be a member of the organization.
+	projectName := "projectName_example" // string | Your project name. This represents a collection of related SaladCloud resources. The project must be created before using the API.
 	containerGroupName := "containerGroupName_example" // string | The unique container group name
 
 	configuration := openapiclient.NewConfiguration()
@@ -872,8 +872,8 @@ import (
 )
 
 func main() {
-	organizationName := "acme-corp" // string | Your organization name. This identifies the billing context for the API operation and represents a security boundary for SaladCloud resources. The organization must be created before using the API, and you must be a member of the organization.
-	projectName := "default" // string | Your project name. This represents a collection of related SaladCloud resources. The project must be created before using the API.
+	organizationName := "organizationName_example" // string | Your organization name. This identifies the billing context for the API operation and represents a security boundary for SaladCloud resources. The organization must be created before using the API, and you must be a member of the organization.
+	projectName := "projectName_example" // string | Your project name. This represents a collection of related SaladCloud resources. The project must be created before using the API.
 	containerGroupName := "containerGroupName_example" // string | The unique container group name
 	updateContainerGroup := *openapiclient.NewUpdateContainerGroup() // UpdateContainerGroup | 
 

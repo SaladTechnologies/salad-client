@@ -3,7 +3,7 @@ SaladCloud API
 
 The SaladCloud REST API. Please refer to the [SaladCloud API Documentation](https://docs.salad.com/api-reference) for more details.
 
-API version: 0.9.0-alpha.6
+API version: 0.9.0-alpha.7
 Contact: cloud@salad.com
 */
 
@@ -23,20 +23,27 @@ var _ MappedNullable = &InferenceEndpointJob{}
 
 // InferenceEndpointJob Represents a inference endpoint job
 type InferenceEndpointJob struct {
+	// The inference endpoint job identifier.
 	Id string `json:"id"`
-	// The job input. May be any valid JSON.
+	// The inference endpoint name.
+	InferenceEndpointName string `json:"inference_endpoint_name" validate:"regexp=^[a-z][a-z0-9-]{0,61}[a-z0-9]$"`
+	// The organization name.
+	OrganizationName string `json:"organization_name" validate:"regexp=^[a-z][a-z0-9-]{0,61}[a-z0-9]$"`
 	Input interface{} `json:"input"`
-	// The inference endpoint name
-	InferenceEndpointName string `json:"inference_endpoint_name"`
+	// The job metadata. May be any valid JSON.
 	Metadata map[string]interface{} `json:"metadata,omitempty"`
-	Webhook NullableString `json:"webhook,omitempty"`
-	Status string `json:"status"`
+	// The webhook URL called when the job completes.
+	// Deprecated
+	Webhook *string `json:"webhook,omitempty"`
+	// The webhook URL called when the job completes.
+	WebhookUrl *string `json:"webhook_url,omitempty"`
+	Status InferenceEndpointJobStatus `json:"status"`
+	// The list of events.
 	Events []InferenceEndpointJobEvent `json:"events"`
-	// The organization name
-	OrganizationName string `json:"organization_name"`
-	// The job output. May be any valid JSON.
 	Output interface{} `json:"output,omitempty"`
+	// The time the job was created.
 	CreateTime time.Time `json:"create_time"`
+	// The time the job was last updated.
 	UpdateTime time.Time `json:"update_time"`
 }
 
@@ -46,14 +53,14 @@ type _InferenceEndpointJob InferenceEndpointJob
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewInferenceEndpointJob(id string, input interface{}, inferenceEndpointName string, status string, events []InferenceEndpointJobEvent, organizationName string, createTime time.Time, updateTime time.Time) *InferenceEndpointJob {
+func NewInferenceEndpointJob(id string, inferenceEndpointName string, organizationName string, input interface{}, status InferenceEndpointJobStatus, events []InferenceEndpointJobEvent, createTime time.Time, updateTime time.Time) *InferenceEndpointJob {
 	this := InferenceEndpointJob{}
 	this.Id = id
-	this.Input = input
 	this.InferenceEndpointName = inferenceEndpointName
+	this.OrganizationName = organizationName
+	this.Input = input
 	this.Status = status
 	this.Events = events
-	this.OrganizationName = organizationName
 	this.CreateTime = createTime
 	this.UpdateTime = updateTime
 	return &this
@@ -91,6 +98,54 @@ func (o *InferenceEndpointJob) SetId(v string) {
 	o.Id = v
 }
 
+// GetInferenceEndpointName returns the InferenceEndpointName field value
+func (o *InferenceEndpointJob) GetInferenceEndpointName() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.InferenceEndpointName
+}
+
+// GetInferenceEndpointNameOk returns a tuple with the InferenceEndpointName field value
+// and a boolean to check if the value has been set.
+func (o *InferenceEndpointJob) GetInferenceEndpointNameOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.InferenceEndpointName, true
+}
+
+// SetInferenceEndpointName sets field value
+func (o *InferenceEndpointJob) SetInferenceEndpointName(v string) {
+	o.InferenceEndpointName = v
+}
+
+// GetOrganizationName returns the OrganizationName field value
+func (o *InferenceEndpointJob) GetOrganizationName() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.OrganizationName
+}
+
+// GetOrganizationNameOk returns a tuple with the OrganizationName field value
+// and a boolean to check if the value has been set.
+func (o *InferenceEndpointJob) GetOrganizationNameOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.OrganizationName, true
+}
+
+// SetOrganizationName sets field value
+func (o *InferenceEndpointJob) SetOrganizationName(v string) {
+	o.OrganizationName = v
+}
+
 // GetInput returns the Input field value
 // If the value is explicit nil, the zero value for interface{} will be returned
 func (o *InferenceEndpointJob) GetInput() interface{} {
@@ -117,33 +172,9 @@ func (o *InferenceEndpointJob) SetInput(v interface{}) {
 	o.Input = v
 }
 
-// GetInferenceEndpointName returns the InferenceEndpointName field value
-func (o *InferenceEndpointJob) GetInferenceEndpointName() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.InferenceEndpointName
-}
-
-// GetInferenceEndpointNameOk returns a tuple with the InferenceEndpointName field value
-// and a boolean to check if the value has been set.
-func (o *InferenceEndpointJob) GetInferenceEndpointNameOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.InferenceEndpointName, true
-}
-
-// SetInferenceEndpointName sets field value
-func (o *InferenceEndpointJob) SetInferenceEndpointName(v string) {
-	o.InferenceEndpointName = v
-}
-
-// GetMetadata returns the Metadata field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetMetadata returns the Metadata field value if set, zero value otherwise.
 func (o *InferenceEndpointJob) GetMetadata() map[string]interface{} {
-	if o == nil {
+	if o == nil || IsNil(o.Metadata) {
 		var ret map[string]interface{}
 		return ret
 	}
@@ -152,7 +183,6 @@ func (o *InferenceEndpointJob) GetMetadata() map[string]interface{} {
 
 // GetMetadataOk returns a tuple with the Metadata field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *InferenceEndpointJob) GetMetadataOk() (map[string]interface{}, bool) {
 	if o == nil || IsNil(o.Metadata) {
 		return map[string]interface{}{}, false
@@ -174,52 +204,77 @@ func (o *InferenceEndpointJob) SetMetadata(v map[string]interface{}) {
 	o.Metadata = v
 }
 
-// GetWebhook returns the Webhook field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetWebhook returns the Webhook field value if set, zero value otherwise.
+// Deprecated
 func (o *InferenceEndpointJob) GetWebhook() string {
-	if o == nil || IsNil(o.Webhook.Get()) {
+	if o == nil || IsNil(o.Webhook) {
 		var ret string
 		return ret
 	}
-	return *o.Webhook.Get()
+	return *o.Webhook
 }
 
 // GetWebhookOk returns a tuple with the Webhook field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
+// Deprecated
 func (o *InferenceEndpointJob) GetWebhookOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Webhook) {
 		return nil, false
 	}
-	return o.Webhook.Get(), o.Webhook.IsSet()
+	return o.Webhook, true
 }
 
 // HasWebhook returns a boolean if a field has been set.
 func (o *InferenceEndpointJob) HasWebhook() bool {
-	if o != nil && o.Webhook.IsSet() {
+	if o != nil && !IsNil(o.Webhook) {
 		return true
 	}
 
 	return false
 }
 
-// SetWebhook gets a reference to the given NullableString and assigns it to the Webhook field.
+// SetWebhook gets a reference to the given string and assigns it to the Webhook field.
+// Deprecated
 func (o *InferenceEndpointJob) SetWebhook(v string) {
-	o.Webhook.Set(&v)
-}
-// SetWebhookNil sets the value for Webhook to be an explicit nil
-func (o *InferenceEndpointJob) SetWebhookNil() {
-	o.Webhook.Set(nil)
+	o.Webhook = &v
 }
 
-// UnsetWebhook ensures that no value is present for Webhook, not even an explicit nil
-func (o *InferenceEndpointJob) UnsetWebhook() {
-	o.Webhook.Unset()
+// GetWebhookUrl returns the WebhookUrl field value if set, zero value otherwise.
+func (o *InferenceEndpointJob) GetWebhookUrl() string {
+	if o == nil || IsNil(o.WebhookUrl) {
+		var ret string
+		return ret
+	}
+	return *o.WebhookUrl
+}
+
+// GetWebhookUrlOk returns a tuple with the WebhookUrl field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *InferenceEndpointJob) GetWebhookUrlOk() (*string, bool) {
+	if o == nil || IsNil(o.WebhookUrl) {
+		return nil, false
+	}
+	return o.WebhookUrl, true
+}
+
+// HasWebhookUrl returns a boolean if a field has been set.
+func (o *InferenceEndpointJob) HasWebhookUrl() bool {
+	if o != nil && !IsNil(o.WebhookUrl) {
+		return true
+	}
+
+	return false
+}
+
+// SetWebhookUrl gets a reference to the given string and assigns it to the WebhookUrl field.
+func (o *InferenceEndpointJob) SetWebhookUrl(v string) {
+	o.WebhookUrl = &v
 }
 
 // GetStatus returns the Status field value
-func (o *InferenceEndpointJob) GetStatus() string {
+func (o *InferenceEndpointJob) GetStatus() InferenceEndpointJobStatus {
 	if o == nil {
-		var ret string
+		var ret InferenceEndpointJobStatus
 		return ret
 	}
 
@@ -228,7 +283,7 @@ func (o *InferenceEndpointJob) GetStatus() string {
 
 // GetStatusOk returns a tuple with the Status field value
 // and a boolean to check if the value has been set.
-func (o *InferenceEndpointJob) GetStatusOk() (*string, bool) {
+func (o *InferenceEndpointJob) GetStatusOk() (*InferenceEndpointJobStatus, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -236,7 +291,7 @@ func (o *InferenceEndpointJob) GetStatusOk() (*string, bool) {
 }
 
 // SetStatus sets field value
-func (o *InferenceEndpointJob) SetStatus(v string) {
+func (o *InferenceEndpointJob) SetStatus(v InferenceEndpointJobStatus) {
 	o.Status = v
 }
 
@@ -262,30 +317,6 @@ func (o *InferenceEndpointJob) GetEventsOk() ([]InferenceEndpointJobEvent, bool)
 // SetEvents sets field value
 func (o *InferenceEndpointJob) SetEvents(v []InferenceEndpointJobEvent) {
 	o.Events = v
-}
-
-// GetOrganizationName returns the OrganizationName field value
-func (o *InferenceEndpointJob) GetOrganizationName() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.OrganizationName
-}
-
-// GetOrganizationNameOk returns a tuple with the OrganizationName field value
-// and a boolean to check if the value has been set.
-func (o *InferenceEndpointJob) GetOrganizationNameOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.OrganizationName, true
-}
-
-// SetOrganizationName sets field value
-func (o *InferenceEndpointJob) SetOrganizationName(v string) {
-	o.OrganizationName = v
 }
 
 // GetOutput returns the Output field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -380,19 +411,22 @@ func (o InferenceEndpointJob) MarshalJSON() ([]byte, error) {
 func (o InferenceEndpointJob) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["id"] = o.Id
+	toSerialize["inference_endpoint_name"] = o.InferenceEndpointName
+	toSerialize["organization_name"] = o.OrganizationName
 	if o.Input != nil {
 		toSerialize["input"] = o.Input
 	}
-	toSerialize["inference_endpoint_name"] = o.InferenceEndpointName
-	if o.Metadata != nil {
+	if !IsNil(o.Metadata) {
 		toSerialize["metadata"] = o.Metadata
 	}
-	if o.Webhook.IsSet() {
-		toSerialize["webhook"] = o.Webhook.Get()
+	if !IsNil(o.Webhook) {
+		toSerialize["webhook"] = o.Webhook
+	}
+	if !IsNil(o.WebhookUrl) {
+		toSerialize["webhook_url"] = o.WebhookUrl
 	}
 	toSerialize["status"] = o.Status
 	toSerialize["events"] = o.Events
-	toSerialize["organization_name"] = o.OrganizationName
 	if o.Output != nil {
 		toSerialize["output"] = o.Output
 	}
@@ -407,11 +441,11 @@ func (o *InferenceEndpointJob) UnmarshalJSON(data []byte) (err error) {
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
 		"id",
-		"input",
 		"inference_endpoint_name",
+		"organization_name",
+		"input",
 		"status",
 		"events",
-		"organization_name",
 		"create_time",
 		"update_time",
 	}

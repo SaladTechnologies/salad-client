@@ -4,20 +4,22 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Id** | **string** | The unique identifier | 
-**Name** | **string** | The inference endpoint name | 
-**DisplayName** | **string** | The inference endpoint display name | 
-**Description** | **string** | a brief description of the inference endpoint | 
-**EndpointUrl** | **string** | The URL of the inference endpoint | 
+**Id** | **string** | The inference endpoint identifier. | 
+**Name** | **string** | The inference endpoint name. | 
+**OrganizationName** | **string** | The organization name. | 
+**DisplayName** | **string** | The display-friendly name of the resource. | 
+**Description** | **string** | The detailed description of the resource. | 
 **Readme** | **string** | A markdown file containing a detailed description of the inference endpoint | 
 **PriceDescription** | **string** | A description of the price | 
-**IconImage** | **string** | The URL of the icon image | 
+**IconUrl** | **string** | The URL of the icon image | 
+**InputSchema** | **string** | The input schema | 
+**OutputSchema** | **string** | The output schema | 
 
 ## Methods
 
 ### NewInferenceEndpoint
 
-`func NewInferenceEndpoint(id string, name string, displayName string, description string, endpointUrl string, readme string, priceDescription string, iconImage string, ) *InferenceEndpoint`
+`func NewInferenceEndpoint(id string, name string, organizationName string, displayName string, description string, readme string, priceDescription string, iconUrl string, inputSchema string, outputSchema string, ) *InferenceEndpoint`
 
 NewInferenceEndpoint instantiates a new InferenceEndpoint object
 This constructor will assign default values to properties that have it defined,
@@ -72,6 +74,26 @@ and a boolean to check if the value has been set.
 SetName sets Name field to given value.
 
 
+### GetOrganizationName
+
+`func (o *InferenceEndpoint) GetOrganizationName() string`
+
+GetOrganizationName returns the OrganizationName field if non-nil, zero value otherwise.
+
+### GetOrganizationNameOk
+
+`func (o *InferenceEndpoint) GetOrganizationNameOk() (*string, bool)`
+
+GetOrganizationNameOk returns a tuple with the OrganizationName field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetOrganizationName
+
+`func (o *InferenceEndpoint) SetOrganizationName(v string)`
+
+SetOrganizationName sets OrganizationName field to given value.
+
+
 ### GetDisplayName
 
 `func (o *InferenceEndpoint) GetDisplayName() string`
@@ -110,26 +132,6 @@ and a boolean to check if the value has been set.
 `func (o *InferenceEndpoint) SetDescription(v string)`
 
 SetDescription sets Description field to given value.
-
-
-### GetEndpointUrl
-
-`func (o *InferenceEndpoint) GetEndpointUrl() string`
-
-GetEndpointUrl returns the EndpointUrl field if non-nil, zero value otherwise.
-
-### GetEndpointUrlOk
-
-`func (o *InferenceEndpoint) GetEndpointUrlOk() (*string, bool)`
-
-GetEndpointUrlOk returns a tuple with the EndpointUrl field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetEndpointUrl
-
-`func (o *InferenceEndpoint) SetEndpointUrl(v string)`
-
-SetEndpointUrl sets EndpointUrl field to given value.
 
 
 ### GetReadme
@@ -172,24 +174,64 @@ and a boolean to check if the value has been set.
 SetPriceDescription sets PriceDescription field to given value.
 
 
-### GetIconImage
+### GetIconUrl
 
-`func (o *InferenceEndpoint) GetIconImage() string`
+`func (o *InferenceEndpoint) GetIconUrl() string`
 
-GetIconImage returns the IconImage field if non-nil, zero value otherwise.
+GetIconUrl returns the IconUrl field if non-nil, zero value otherwise.
 
-### GetIconImageOk
+### GetIconUrlOk
 
-`func (o *InferenceEndpoint) GetIconImageOk() (*string, bool)`
+`func (o *InferenceEndpoint) GetIconUrlOk() (*string, bool)`
 
-GetIconImageOk returns a tuple with the IconImage field if it's non-nil, zero value otherwise
+GetIconUrlOk returns a tuple with the IconUrl field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetIconImage
+### SetIconUrl
 
-`func (o *InferenceEndpoint) SetIconImage(v string)`
+`func (o *InferenceEndpoint) SetIconUrl(v string)`
 
-SetIconImage sets IconImage field to given value.
+SetIconUrl sets IconUrl field to given value.
+
+
+### GetInputSchema
+
+`func (o *InferenceEndpoint) GetInputSchema() string`
+
+GetInputSchema returns the InputSchema field if non-nil, zero value otherwise.
+
+### GetInputSchemaOk
+
+`func (o *InferenceEndpoint) GetInputSchemaOk() (*string, bool)`
+
+GetInputSchemaOk returns a tuple with the InputSchema field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetInputSchema
+
+`func (o *InferenceEndpoint) SetInputSchema(v string)`
+
+SetInputSchema sets InputSchema field to given value.
+
+
+### GetOutputSchema
+
+`func (o *InferenceEndpoint) GetOutputSchema() string`
+
+GetOutputSchema returns the OutputSchema field if non-nil, zero value otherwise.
+
+### GetOutputSchemaOk
+
+`func (o *InferenceEndpoint) GetOutputSchemaOk() (*string, bool)`
+
+GetOutputSchemaOk returns a tuple with the OutputSchema field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetOutputSchema
+
+`func (o *InferenceEndpoint) SetOutputSchema(v string)`
+
+SetOutputSchema sets OutputSchema field to given value.
 
 
 

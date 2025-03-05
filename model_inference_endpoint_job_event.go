@@ -3,7 +3,7 @@ SaladCloud API
 
 The SaladCloud REST API. Please refer to the [SaladCloud API Documentation](https://docs.salad.com/api-reference) for more details.
 
-API version: 0.9.0-alpha.6
+API version: 0.9.0-alpha.7
 Contact: cloud@salad.com
 */
 
@@ -23,7 +23,7 @@ var _ MappedNullable = &InferenceEndpointJobEvent{}
 
 // InferenceEndpointJobEvent Represents an event for inference endpoint job
 type InferenceEndpointJobEvent struct {
-	Action string `json:"action"`
+	Action InferenceEndpointJobEventAction `json:"action"`
 	Time time.Time `json:"time"`
 }
 
@@ -33,7 +33,7 @@ type _InferenceEndpointJobEvent InferenceEndpointJobEvent
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewInferenceEndpointJobEvent(action string, time time.Time) *InferenceEndpointJobEvent {
+func NewInferenceEndpointJobEvent(action InferenceEndpointJobEventAction, time time.Time) *InferenceEndpointJobEvent {
 	this := InferenceEndpointJobEvent{}
 	this.Action = action
 	this.Time = time
@@ -49,9 +49,9 @@ func NewInferenceEndpointJobEventWithDefaults() *InferenceEndpointJobEvent {
 }
 
 // GetAction returns the Action field value
-func (o *InferenceEndpointJobEvent) GetAction() string {
+func (o *InferenceEndpointJobEvent) GetAction() InferenceEndpointJobEventAction {
 	if o == nil {
-		var ret string
+		var ret InferenceEndpointJobEventAction
 		return ret
 	}
 
@@ -60,7 +60,7 @@ func (o *InferenceEndpointJobEvent) GetAction() string {
 
 // GetActionOk returns a tuple with the Action field value
 // and a boolean to check if the value has been set.
-func (o *InferenceEndpointJobEvent) GetActionOk() (*string, bool) {
+func (o *InferenceEndpointJobEvent) GetActionOk() (*InferenceEndpointJobEventAction, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -68,7 +68,7 @@ func (o *InferenceEndpointJobEvent) GetActionOk() (*string, bool) {
 }
 
 // SetAction sets field value
-func (o *InferenceEndpointJobEvent) SetAction(v string) {
+func (o *InferenceEndpointJobEvent) SetAction(v InferenceEndpointJobEventAction) {
 	o.Action = v
 }
 

@@ -3,7 +3,7 @@ SaladCloud API
 
 The SaladCloud REST API. Please refer to the [SaladCloud API Documentation](https://docs.salad.com/api-reference) for more details.
 
-API version: 0.9.0-alpha.6
+API version: 0.9.0-alpha.7
 Contact: cloud@salad.com
 */
 
@@ -22,22 +22,26 @@ var _ MappedNullable = &InferenceEndpoint{}
 
 // InferenceEndpoint Represents an inference endpoint
 type InferenceEndpoint struct {
-	// The unique identifier
+	// The inference endpoint identifier.
 	Id string `json:"id"`
-	// The inference endpoint name
-	Name string `json:"name"`
-	// The inference endpoint display name
+	// The inference endpoint name.
+	Name string `json:"name" validate:"regexp=^[a-z][a-z0-9-]{0,61}[a-z0-9]$"`
+	// The organization name.
+	OrganizationName string `json:"organization_name" validate:"regexp=^[a-z][a-z0-9-]{0,61}[a-z0-9]$"`
+	// The display-friendly name of the resource.
 	DisplayName string `json:"display_name" validate:"regexp=^[ ,-.0-9A-Za-z]+$"`
-	// a brief description of the inference endpoint
-	Description string `json:"description"`
-	// The URL of the inference endpoint
-	EndpointUrl string `json:"endpoint_url"`
+	// The detailed description of the resource.
+	Description string `json:"description" validate:"regexp=^[\\\\P{Cc}\\\\P{Cn}\\\\P{Cs}]*$"`
 	// A markdown file containing a detailed description of the inference endpoint
 	Readme string `json:"readme"`
 	// A description of the price
 	PriceDescription string `json:"price_description"`
 	// The URL of the icon image
-	IconImage string `json:"icon_image"`
+	IconUrl string `json:"icon_url"`
+	// The input schema
+	InputSchema string `json:"input_schema"`
+	// The output schema
+	OutputSchema string `json:"output_schema"`
 }
 
 type _InferenceEndpoint InferenceEndpoint
@@ -46,16 +50,18 @@ type _InferenceEndpoint InferenceEndpoint
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewInferenceEndpoint(id string, name string, displayName string, description string, endpointUrl string, readme string, priceDescription string, iconImage string) *InferenceEndpoint {
+func NewInferenceEndpoint(id string, name string, organizationName string, displayName string, description string, readme string, priceDescription string, iconUrl string, inputSchema string, outputSchema string) *InferenceEndpoint {
 	this := InferenceEndpoint{}
 	this.Id = id
 	this.Name = name
+	this.OrganizationName = organizationName
 	this.DisplayName = displayName
 	this.Description = description
-	this.EndpointUrl = endpointUrl
 	this.Readme = readme
 	this.PriceDescription = priceDescription
-	this.IconImage = iconImage
+	this.IconUrl = iconUrl
+	this.InputSchema = inputSchema
+	this.OutputSchema = outputSchema
 	return &this
 }
 
@@ -115,6 +121,30 @@ func (o *InferenceEndpoint) SetName(v string) {
 	o.Name = v
 }
 
+// GetOrganizationName returns the OrganizationName field value
+func (o *InferenceEndpoint) GetOrganizationName() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.OrganizationName
+}
+
+// GetOrganizationNameOk returns a tuple with the OrganizationName field value
+// and a boolean to check if the value has been set.
+func (o *InferenceEndpoint) GetOrganizationNameOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.OrganizationName, true
+}
+
+// SetOrganizationName sets field value
+func (o *InferenceEndpoint) SetOrganizationName(v string) {
+	o.OrganizationName = v
+}
+
 // GetDisplayName returns the DisplayName field value
 func (o *InferenceEndpoint) GetDisplayName() string {
 	if o == nil {
@@ -161,30 +191,6 @@ func (o *InferenceEndpoint) GetDescriptionOk() (*string, bool) {
 // SetDescription sets field value
 func (o *InferenceEndpoint) SetDescription(v string) {
 	o.Description = v
-}
-
-// GetEndpointUrl returns the EndpointUrl field value
-func (o *InferenceEndpoint) GetEndpointUrl() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.EndpointUrl
-}
-
-// GetEndpointUrlOk returns a tuple with the EndpointUrl field value
-// and a boolean to check if the value has been set.
-func (o *InferenceEndpoint) GetEndpointUrlOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.EndpointUrl, true
-}
-
-// SetEndpointUrl sets field value
-func (o *InferenceEndpoint) SetEndpointUrl(v string) {
-	o.EndpointUrl = v
 }
 
 // GetReadme returns the Readme field value
@@ -235,28 +241,76 @@ func (o *InferenceEndpoint) SetPriceDescription(v string) {
 	o.PriceDescription = v
 }
 
-// GetIconImage returns the IconImage field value
-func (o *InferenceEndpoint) GetIconImage() string {
+// GetIconUrl returns the IconUrl field value
+func (o *InferenceEndpoint) GetIconUrl() string {
 	if o == nil {
 		var ret string
 		return ret
 	}
 
-	return o.IconImage
+	return o.IconUrl
 }
 
-// GetIconImageOk returns a tuple with the IconImage field value
+// GetIconUrlOk returns a tuple with the IconUrl field value
 // and a boolean to check if the value has been set.
-func (o *InferenceEndpoint) GetIconImageOk() (*string, bool) {
+func (o *InferenceEndpoint) GetIconUrlOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.IconImage, true
+	return &o.IconUrl, true
 }
 
-// SetIconImage sets field value
-func (o *InferenceEndpoint) SetIconImage(v string) {
-	o.IconImage = v
+// SetIconUrl sets field value
+func (o *InferenceEndpoint) SetIconUrl(v string) {
+	o.IconUrl = v
+}
+
+// GetInputSchema returns the InputSchema field value
+func (o *InferenceEndpoint) GetInputSchema() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.InputSchema
+}
+
+// GetInputSchemaOk returns a tuple with the InputSchema field value
+// and a boolean to check if the value has been set.
+func (o *InferenceEndpoint) GetInputSchemaOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.InputSchema, true
+}
+
+// SetInputSchema sets field value
+func (o *InferenceEndpoint) SetInputSchema(v string) {
+	o.InputSchema = v
+}
+
+// GetOutputSchema returns the OutputSchema field value
+func (o *InferenceEndpoint) GetOutputSchema() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.OutputSchema
+}
+
+// GetOutputSchemaOk returns a tuple with the OutputSchema field value
+// and a boolean to check if the value has been set.
+func (o *InferenceEndpoint) GetOutputSchemaOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.OutputSchema, true
+}
+
+// SetOutputSchema sets field value
+func (o *InferenceEndpoint) SetOutputSchema(v string) {
+	o.OutputSchema = v
 }
 
 func (o InferenceEndpoint) MarshalJSON() ([]byte, error) {
@@ -271,12 +325,14 @@ func (o InferenceEndpoint) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["id"] = o.Id
 	toSerialize["name"] = o.Name
+	toSerialize["organization_name"] = o.OrganizationName
 	toSerialize["display_name"] = o.DisplayName
 	toSerialize["description"] = o.Description
-	toSerialize["endpoint_url"] = o.EndpointUrl
 	toSerialize["readme"] = o.Readme
 	toSerialize["price_description"] = o.PriceDescription
-	toSerialize["icon_image"] = o.IconImage
+	toSerialize["icon_url"] = o.IconUrl
+	toSerialize["input_schema"] = o.InputSchema
+	toSerialize["output_schema"] = o.OutputSchema
 	return toSerialize, nil
 }
 
@@ -287,12 +343,14 @@ func (o *InferenceEndpoint) UnmarshalJSON(data []byte) (err error) {
 	requiredProperties := []string{
 		"id",
 		"name",
+		"organization_name",
 		"display_name",
 		"description",
-		"endpoint_url",
 		"readme",
 		"price_description",
-		"icon_image",
+		"icon_url",
+		"input_schema",
+		"output_schema",
 	}
 
 	allProperties := make(map[string]interface{})

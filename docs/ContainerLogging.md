@@ -4,12 +4,12 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Axiom** | Pointer to [**NullableContainerLoggingAxiom**](ContainerLoggingAxiom.md) |  | [optional] 
-**Datadog** | Pointer to [**NullableContainerLoggingDatadog**](ContainerLoggingDatadog.md) |  | [optional] 
-**NewRelic** | Pointer to [**NullableContainerLoggingNewRelic**](ContainerLoggingNewRelic.md) |  | [optional] 
-**Splunk** | Pointer to [**NullableContainerLoggingSplunk**](ContainerLoggingSplunk.md) |  | [optional] 
-**Tcp** | Pointer to [**NullableContainerLoggingTcp**](ContainerLoggingTcp.md) |  | [optional] 
-**Http** | Pointer to [**NullableContainerLoggingHttp**](ContainerLoggingHttp.md) |  | [optional] 
+**Axiom** | Pointer to [**ContainerLoggingAxiom**](ContainerLoggingAxiom.md) |  | [optional] 
+**Datadog** | Pointer to [**ContainerLoggingDatadog**](ContainerLoggingDatadog.md) |  | [optional] 
+**NewRelic** | Pointer to [**ContainerLoggingNewRelic**](ContainerLoggingNewRelic.md) |  | [optional] 
+**Splunk** | Pointer to [**ContainerLoggingSplunk**](ContainerLoggingSplunk.md) |  | [optional] 
+**Tcp** | Pointer to [**ContainerLoggingTcp**](ContainerLoggingTcp.md) |  | [optional] 
+**Http** | Pointer to [**ContainerLoggingHttp**](ContainerLoggingHttp.md) |  | [optional] 
 
 ## Methods
 
@@ -55,16 +55,6 @@ SetAxiom sets Axiom field to given value.
 
 HasAxiom returns a boolean if a field has been set.
 
-### SetAxiomNil
-
-`func (o *ContainerLogging) SetAxiomNil(b bool)`
-
- SetAxiomNil sets the value for Axiom to be an explicit nil
-
-### UnsetAxiom
-`func (o *ContainerLogging) UnsetAxiom()`
-
-UnsetAxiom ensures that no value is present for Axiom, not even an explicit nil
 ### GetDatadog
 
 `func (o *ContainerLogging) GetDatadog() ContainerLoggingDatadog`
@@ -90,16 +80,6 @@ SetDatadog sets Datadog field to given value.
 
 HasDatadog returns a boolean if a field has been set.
 
-### SetDatadogNil
-
-`func (o *ContainerLogging) SetDatadogNil(b bool)`
-
- SetDatadogNil sets the value for Datadog to be an explicit nil
-
-### UnsetDatadog
-`func (o *ContainerLogging) UnsetDatadog()`
-
-UnsetDatadog ensures that no value is present for Datadog, not even an explicit nil
 ### GetNewRelic
 
 `func (o *ContainerLogging) GetNewRelic() ContainerLoggingNewRelic`
@@ -125,16 +105,6 @@ SetNewRelic sets NewRelic field to given value.
 
 HasNewRelic returns a boolean if a field has been set.
 
-### SetNewRelicNil
-
-`func (o *ContainerLogging) SetNewRelicNil(b bool)`
-
- SetNewRelicNil sets the value for NewRelic to be an explicit nil
-
-### UnsetNewRelic
-`func (o *ContainerLogging) UnsetNewRelic()`
-
-UnsetNewRelic ensures that no value is present for NewRelic, not even an explicit nil
 ### GetSplunk
 
 `func (o *ContainerLogging) GetSplunk() ContainerLoggingSplunk`
@@ -160,16 +130,6 @@ SetSplunk sets Splunk field to given value.
 
 HasSplunk returns a boolean if a field has been set.
 
-### SetSplunkNil
-
-`func (o *ContainerLogging) SetSplunkNil(b bool)`
-
- SetSplunkNil sets the value for Splunk to be an explicit nil
-
-### UnsetSplunk
-`func (o *ContainerLogging) UnsetSplunk()`
-
-UnsetSplunk ensures that no value is present for Splunk, not even an explicit nil
 ### GetTcp
 
 `func (o *ContainerLogging) GetTcp() ContainerLoggingTcp`
@@ -195,16 +155,6 @@ SetTcp sets Tcp field to given value.
 
 HasTcp returns a boolean if a field has been set.
 
-### SetTcpNil
-
-`func (o *ContainerLogging) SetTcpNil(b bool)`
-
- SetTcpNil sets the value for Tcp to be an explicit nil
-
-### UnsetTcp
-`func (o *ContainerLogging) UnsetTcp()`
-
-UnsetTcp ensures that no value is present for Tcp, not even an explicit nil
 ### GetHttp
 
 `func (o *ContainerLogging) GetHttp() ContainerLoggingHttp`
@@ -230,16 +180,6 @@ SetHttp sets Http field to given value.
 
 HasHttp returns a boolean if a field has been set.
 
-### SetHttpNil
-
-`func (o *ContainerLogging) SetHttpNil(b bool)`
-
- SetHttpNil sets the value for Http to be an explicit nil
-
-### UnsetHttp
-`func (o *ContainerLogging) UnsetHttp()`
-
-UnsetHttp ensures that no value is present for Http, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -3,7 +3,7 @@ SaladCloud API
 
 The SaladCloud REST API. Please refer to the [SaladCloud API Documentation](https://docs.salad.com/api-reference) for more details.
 
-API version: 0.9.0-alpha.6
+API version: 0.9.0-alpha.7
 Contact: cloud@salad.com
 */
 
@@ -22,10 +22,11 @@ var _ MappedNullable = &CreateInferenceEndpointJob{}
 
 // CreateInferenceEndpointJob Represents a request to create a inference endpoint job
 type CreateInferenceEndpointJob struct {
-	// The job input. May be any valid JSON.
 	Input interface{} `json:"input"`
 	Metadata map[string]interface{} `json:"metadata,omitempty"`
-	Webhook NullableString `json:"webhook,omitempty"`
+	// Deprecated
+	Webhook *string `json:"webhook,omitempty"`
+	WebhookUrl *string `json:"webhook_url,omitempty"`
 }
 
 type _CreateInferenceEndpointJob CreateInferenceEndpointJob
@@ -74,9 +75,9 @@ func (o *CreateInferenceEndpointJob) SetInput(v interface{}) {
 	o.Input = v
 }
 
-// GetMetadata returns the Metadata field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetMetadata returns the Metadata field value if set, zero value otherwise.
 func (o *CreateInferenceEndpointJob) GetMetadata() map[string]interface{} {
-	if o == nil {
+	if o == nil || IsNil(o.Metadata) {
 		var ret map[string]interface{}
 		return ret
 	}
@@ -85,7 +86,6 @@ func (o *CreateInferenceEndpointJob) GetMetadata() map[string]interface{} {
 
 // GetMetadataOk returns a tuple with the Metadata field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CreateInferenceEndpointJob) GetMetadataOk() (map[string]interface{}, bool) {
 	if o == nil || IsNil(o.Metadata) {
 		return map[string]interface{}{}, false
@@ -107,46 +107,71 @@ func (o *CreateInferenceEndpointJob) SetMetadata(v map[string]interface{}) {
 	o.Metadata = v
 }
 
-// GetWebhook returns the Webhook field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetWebhook returns the Webhook field value if set, zero value otherwise.
+// Deprecated
 func (o *CreateInferenceEndpointJob) GetWebhook() string {
-	if o == nil || IsNil(o.Webhook.Get()) {
+	if o == nil || IsNil(o.Webhook) {
 		var ret string
 		return ret
 	}
-	return *o.Webhook.Get()
+	return *o.Webhook
 }
 
 // GetWebhookOk returns a tuple with the Webhook field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
+// Deprecated
 func (o *CreateInferenceEndpointJob) GetWebhookOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Webhook) {
 		return nil, false
 	}
-	return o.Webhook.Get(), o.Webhook.IsSet()
+	return o.Webhook, true
 }
 
 // HasWebhook returns a boolean if a field has been set.
 func (o *CreateInferenceEndpointJob) HasWebhook() bool {
-	if o != nil && o.Webhook.IsSet() {
+	if o != nil && !IsNil(o.Webhook) {
 		return true
 	}
 
 	return false
 }
 
-// SetWebhook gets a reference to the given NullableString and assigns it to the Webhook field.
+// SetWebhook gets a reference to the given string and assigns it to the Webhook field.
+// Deprecated
 func (o *CreateInferenceEndpointJob) SetWebhook(v string) {
-	o.Webhook.Set(&v)
-}
-// SetWebhookNil sets the value for Webhook to be an explicit nil
-func (o *CreateInferenceEndpointJob) SetWebhookNil() {
-	o.Webhook.Set(nil)
+	o.Webhook = &v
 }
 
-// UnsetWebhook ensures that no value is present for Webhook, not even an explicit nil
-func (o *CreateInferenceEndpointJob) UnsetWebhook() {
-	o.Webhook.Unset()
+// GetWebhookUrl returns the WebhookUrl field value if set, zero value otherwise.
+func (o *CreateInferenceEndpointJob) GetWebhookUrl() string {
+	if o == nil || IsNil(o.WebhookUrl) {
+		var ret string
+		return ret
+	}
+	return *o.WebhookUrl
+}
+
+// GetWebhookUrlOk returns a tuple with the WebhookUrl field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateInferenceEndpointJob) GetWebhookUrlOk() (*string, bool) {
+	if o == nil || IsNil(o.WebhookUrl) {
+		return nil, false
+	}
+	return o.WebhookUrl, true
+}
+
+// HasWebhookUrl returns a boolean if a field has been set.
+func (o *CreateInferenceEndpointJob) HasWebhookUrl() bool {
+	if o != nil && !IsNil(o.WebhookUrl) {
+		return true
+	}
+
+	return false
+}
+
+// SetWebhookUrl gets a reference to the given string and assigns it to the WebhookUrl field.
+func (o *CreateInferenceEndpointJob) SetWebhookUrl(v string) {
+	o.WebhookUrl = &v
 }
 
 func (o CreateInferenceEndpointJob) MarshalJSON() ([]byte, error) {
@@ -162,11 +187,14 @@ func (o CreateInferenceEndpointJob) ToMap() (map[string]interface{}, error) {
 	if o.Input != nil {
 		toSerialize["input"] = o.Input
 	}
-	if o.Metadata != nil {
+	if !IsNil(o.Metadata) {
 		toSerialize["metadata"] = o.Metadata
 	}
-	if o.Webhook.IsSet() {
-		toSerialize["webhook"] = o.Webhook.Get()
+	if !IsNil(o.Webhook) {
+		toSerialize["webhook"] = o.Webhook
+	}
+	if !IsNil(o.WebhookUrl) {
+		toSerialize["webhook_url"] = o.WebhookUrl
 	}
 	return toSerialize, nil
 }

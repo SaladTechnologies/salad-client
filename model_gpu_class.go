@@ -3,7 +3,7 @@ SaladCloud API
 
 The SaladCloud REST API. Please refer to the [SaladCloud API Documentation](https://docs.salad.com/api-reference) for more details.
 
-API version: 0.9.0-alpha.6
+API version: 0.9.0-alpha.7
 Contact: cloud@salad.com
 */
 
@@ -25,7 +25,7 @@ type GpuClass struct {
 	// The unique identifier
 	Id string `json:"id"`
 	// The GPU class name
-	Name string `json:"name"`
+	Name string `json:"name" validate:"regexp=^[ -~]{2,63}$"`
 	// The list of prices for each container group priority
 	Prices []GpuClassPrice `json:"prices"`
 	// Whether the GPU class is in high demand

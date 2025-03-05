@@ -1,10 +1,8 @@
 .gitignore
-.openapi-generator-ignore
 .travis.yml
 README.md
 api/openapi.yaml
 api_container_groups.go
-api_default.go
 api_inference_endpoints.go
 api_organization_data.go
 api_queues.go
@@ -37,6 +35,7 @@ docs/ContainerGroupsQuotas.md
 docs/ContainerLogging.md
 docs/ContainerLoggingAxiom.md
 docs/ContainerLoggingDatadog.md
+docs/ContainerLoggingDatadogTagsInner.md
 docs/ContainerLoggingHttp.md
 docs/ContainerLoggingNewRelic.md
 docs/ContainerLoggingSplunk.md
@@ -57,7 +56,6 @@ docs/CreateContainerRegistryAuthenticationGcpGcr.md
 docs/CreateInferenceEndpointJob.md
 docs/CreateQueue.md
 docs/CreateQueueJob.md
-docs/DefaultAPI.md
 docs/GpuClass.md
 docs/GpuClassPrice.md
 docs/GpuClassesList.md
@@ -65,9 +63,11 @@ docs/HttpHeadersInner.md
 docs/InferenceEndpoint.md
 docs/InferenceEndpointJob.md
 docs/InferenceEndpointJobEvent.md
+docs/InferenceEndpointJobEventAction.md
 docs/InferenceEndpointJobList.md
+docs/InferenceEndpointJobStatus.md
+docs/InferenceEndpointList.md
 docs/InferenceEndpointsAPI.md
-docs/InferenceEndpointsList.md
 docs/OrganizationDataAPI.md
 docs/ProblemDetails.md
 docs/Queue.md
@@ -117,6 +117,7 @@ model_container_groups_quotas.go
 model_container_logging.go
 model_container_logging_axiom.go
 model_container_logging_datadog.go
+model_container_logging_datadog_tags_inner.go
 model_container_logging_http.go
 model_container_logging_new_relic.go
 model_container_logging_splunk.go
@@ -144,8 +145,10 @@ model_http_headers_inner.go
 model_inference_endpoint.go
 model_inference_endpoint_job.go
 model_inference_endpoint_job_event.go
+model_inference_endpoint_job_event_action.go
 model_inference_endpoint_job_list.go
-model_inference_endpoints_list.go
+model_inference_endpoint_job_status.go
+model_inference_endpoint_list.go
 model_problem_details.go
 model_queue.go
 model_queue_autoscaler.go
@@ -165,13 +168,4 @@ model_webhook_secret_key.go
 model_workload_error.go
 model_workload_error_list.go
 response.go
-test/api_container_groups_test.go
-test/api_default_test.go
-test/api_inference_endpoints_test.go
-test/api_organization_data_test.go
-test/api_queues_test.go
-test/api_quotas_test.go
-test/api_system_logs_test.go
-test/api_webhook_secret_key_test.go
-test/api_workload_errors_test.go
 utils.go

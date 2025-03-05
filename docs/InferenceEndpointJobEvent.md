@@ -4,14 +4,14 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Action** | **string** |  | 
+**Action** | [**InferenceEndpointJobEventAction**](InferenceEndpointJobEventAction.md) |  | 
 **Time** | **time.Time** |  | 
 
 ## Methods
 
 ### NewInferenceEndpointJobEvent
 
-`func NewInferenceEndpointJobEvent(action string, time time.Time, ) *InferenceEndpointJobEvent`
+`func NewInferenceEndpointJobEvent(action InferenceEndpointJobEventAction, time time.Time, ) *InferenceEndpointJobEvent`
 
 NewInferenceEndpointJobEvent instantiates a new InferenceEndpointJobEvent object
 This constructor will assign default values to properties that have it defined,
@@ -28,20 +28,20 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetAction
 
-`func (o *InferenceEndpointJobEvent) GetAction() string`
+`func (o *InferenceEndpointJobEvent) GetAction() InferenceEndpointJobEventAction`
 
 GetAction returns the Action field if non-nil, zero value otherwise.
 
 ### GetActionOk
 
-`func (o *InferenceEndpointJobEvent) GetActionOk() (*string, bool)`
+`func (o *InferenceEndpointJobEvent) GetActionOk() (*InferenceEndpointJobEventAction, bool)`
 
 GetActionOk returns a tuple with the Action field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetAction
 
-`func (o *InferenceEndpointJobEvent) SetAction(v string)`
+`func (o *InferenceEndpointJobEvent) SetAction(v InferenceEndpointJobEventAction)`
 
 SetAction sets Action field to given value.
 

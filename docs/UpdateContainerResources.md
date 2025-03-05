@@ -4,10 +4,10 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Cpu** | Pointer to **NullableInt32** |  | [optional] 
-**Memory** | Pointer to **NullableInt32** |  | [optional] 
+**Cpu** | Pointer to **int32** |  | [optional] 
+**Memory** | Pointer to **int32** |  | [optional] 
 **GpuClasses** | Pointer to **[]string** |  | [optional] 
-**StorageAmount** | Pointer to **NullableInt64** |  | [optional] 
+**StorageAmount** | Pointer to **int64** |  | [optional] 
 
 ## Methods
 
@@ -53,16 +53,6 @@ SetCpu sets Cpu field to given value.
 
 HasCpu returns a boolean if a field has been set.
 
-### SetCpuNil
-
-`func (o *UpdateContainerResources) SetCpuNil(b bool)`
-
- SetCpuNil sets the value for Cpu to be an explicit nil
-
-### UnsetCpu
-`func (o *UpdateContainerResources) UnsetCpu()`
-
-UnsetCpu ensures that no value is present for Cpu, not even an explicit nil
 ### GetMemory
 
 `func (o *UpdateContainerResources) GetMemory() int32`
@@ -88,16 +78,6 @@ SetMemory sets Memory field to given value.
 
 HasMemory returns a boolean if a field has been set.
 
-### SetMemoryNil
-
-`func (o *UpdateContainerResources) SetMemoryNil(b bool)`
-
- SetMemoryNil sets the value for Memory to be an explicit nil
-
-### UnsetMemory
-`func (o *UpdateContainerResources) UnsetMemory()`
-
-UnsetMemory ensures that no value is present for Memory, not even an explicit nil
 ### GetGpuClasses
 
 `func (o *UpdateContainerResources) GetGpuClasses() []string`
@@ -123,16 +103,6 @@ SetGpuClasses sets GpuClasses field to given value.
 
 HasGpuClasses returns a boolean if a field has been set.
 
-### SetGpuClassesNil
-
-`func (o *UpdateContainerResources) SetGpuClassesNil(b bool)`
-
- SetGpuClassesNil sets the value for GpuClasses to be an explicit nil
-
-### UnsetGpuClasses
-`func (o *UpdateContainerResources) UnsetGpuClasses()`
-
-UnsetGpuClasses ensures that no value is present for GpuClasses, not even an explicit nil
 ### GetStorageAmount
 
 `func (o *UpdateContainerResources) GetStorageAmount() int64`
@@ -158,16 +128,6 @@ SetStorageAmount sets StorageAmount field to given value.
 
 HasStorageAmount returns a boolean if a field has been set.
 
-### SetStorageAmountNil
-
-`func (o *UpdateContainerResources) SetStorageAmountNil(b bool)`
-
- SetStorageAmountNil sets the value for StorageAmount to be an explicit nil
-
-### UnsetStorageAmount
-`func (o *UpdateContainerResources) UnsetStorageAmount()`
-
-UnsetStorageAmount ensures that no value is present for StorageAmount, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

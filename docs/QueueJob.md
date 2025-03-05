@@ -5,12 +5,12 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Id** | **string** |  | 
-**Input** | **interface{}** | The job input. May be any valid JSON. | 
+**Input** | **interface{}** |  | 
 **Metadata** | Pointer to **map[string]interface{}** |  | [optional] 
 **Webhook** | Pointer to **NullableString** |  | [optional] 
 **Status** | **string** |  | 
 **Events** | [**[]QueueJobEvent**](QueueJobEvent.md) |  | 
-**Output** | Pointer to **interface{}** | The job output. May be any valid JSON. | [optional] 
+**Output** | Pointer to **interface{}** |  | [optional] 
 **CreateTime** | **time.Time** |  | 
 **UpdateTime** | **time.Time** |  | 
 

@@ -1,109 +1,109 @@
-# InferenceEndpointJobList
+# InferenceEndpointList
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Items** | [**[]InferenceEndpointJob**](InferenceEndpointJob.md) | The list of inference endpoint jobs. | 
+**Items** | [**[]InferenceEndpoint**](InferenceEndpoint.md) | The list of inference endpoints. | 
 **Page** | **int32** | The page number. | 
 **PageSize** | **int32** | The maximum number of items per page. | 
 **TotalSize** | **int32** | The total number of items in the collection. | 
 
 ## Methods
 
-### NewInferenceEndpointJobList
+### NewInferenceEndpointList
 
-`func NewInferenceEndpointJobList(items []InferenceEndpointJob, page int32, pageSize int32, totalSize int32, ) *InferenceEndpointJobList`
+`func NewInferenceEndpointList(items []InferenceEndpoint, page int32, pageSize int32, totalSize int32, ) *InferenceEndpointList`
 
-NewInferenceEndpointJobList instantiates a new InferenceEndpointJobList object
+NewInferenceEndpointList instantiates a new InferenceEndpointList object
 This constructor will assign default values to properties that have it defined,
 and makes sure properties required by API are set, but the set of arguments
 will change when the set of required properties is changed
 
-### NewInferenceEndpointJobListWithDefaults
+### NewInferenceEndpointListWithDefaults
 
-`func NewInferenceEndpointJobListWithDefaults() *InferenceEndpointJobList`
+`func NewInferenceEndpointListWithDefaults() *InferenceEndpointList`
 
-NewInferenceEndpointJobListWithDefaults instantiates a new InferenceEndpointJobList object
+NewInferenceEndpointListWithDefaults instantiates a new InferenceEndpointList object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
 ### GetItems
 
-`func (o *InferenceEndpointJobList) GetItems() []InferenceEndpointJob`
+`func (o *InferenceEndpointList) GetItems() []InferenceEndpoint`
 
 GetItems returns the Items field if non-nil, zero value otherwise.
 
 ### GetItemsOk
 
-`func (o *InferenceEndpointJobList) GetItemsOk() (*[]InferenceEndpointJob, bool)`
+`func (o *InferenceEndpointList) GetItemsOk() (*[]InferenceEndpoint, bool)`
 
 GetItemsOk returns a tuple with the Items field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetItems
 
-`func (o *InferenceEndpointJobList) SetItems(v []InferenceEndpointJob)`
+`func (o *InferenceEndpointList) SetItems(v []InferenceEndpoint)`
 
 SetItems sets Items field to given value.
 
 
 ### GetPage
 
-`func (o *InferenceEndpointJobList) GetPage() int32`
+`func (o *InferenceEndpointList) GetPage() int32`
 
 GetPage returns the Page field if non-nil, zero value otherwise.
 
 ### GetPageOk
 
-`func (o *InferenceEndpointJobList) GetPageOk() (*int32, bool)`
+`func (o *InferenceEndpointList) GetPageOk() (*int32, bool)`
 
 GetPageOk returns a tuple with the Page field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetPage
 
-`func (o *InferenceEndpointJobList) SetPage(v int32)`
+`func (o *InferenceEndpointList) SetPage(v int32)`
 
 SetPage sets Page field to given value.
 
 
 ### GetPageSize
 
-`func (o *InferenceEndpointJobList) GetPageSize() int32`
+`func (o *InferenceEndpointList) GetPageSize() int32`
 
 GetPageSize returns the PageSize field if non-nil, zero value otherwise.
 
 ### GetPageSizeOk
 
-`func (o *InferenceEndpointJobList) GetPageSizeOk() (*int32, bool)`
+`func (o *InferenceEndpointList) GetPageSizeOk() (*int32, bool)`
 
 GetPageSizeOk returns a tuple with the PageSize field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetPageSize
 
-`func (o *InferenceEndpointJobList) SetPageSize(v int32)`
+`func (o *InferenceEndpointList) SetPageSize(v int32)`
 
 SetPageSize sets PageSize field to given value.
 
 
 ### GetTotalSize
 
-`func (o *InferenceEndpointJobList) GetTotalSize() int32`
+`func (o *InferenceEndpointList) GetTotalSize() int32`
 
 GetTotalSize returns the TotalSize field if non-nil, zero value otherwise.
 
 ### GetTotalSizeOk
 
-`func (o *InferenceEndpointJobList) GetTotalSizeOk() (*int32, bool)`
+`func (o *InferenceEndpointList) GetTotalSizeOk() (*int32, bool)`
 
 GetTotalSizeOk returns a tuple with the TotalSize field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetTotalSize
 
-`func (o *InferenceEndpointJobList) SetTotalSize(v int32)`
+`func (o *InferenceEndpointList) SetTotalSize(v int32)`
 
 SetTotalSize sets TotalSize field to given value.
 

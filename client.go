@@ -3,7 +3,7 @@ SaladCloud API
 
 The SaladCloud REST API. Please refer to the [SaladCloud API Documentation](https://docs.salad.com/api-reference) for more details.
 
-API version: 0.9.0-alpha.6
+API version: 0.9.0-alpha.7
 Contact: cloud@salad.com
 */
 
@@ -42,7 +42,7 @@ var (
 	queryDescape    = strings.NewReplacer( "%5B", "[", "%5D", "]" )
 )
 
-// APIClient manages communication with the SaladCloud API API v0.9.0-alpha.6
+// APIClient manages communication with the SaladCloud API API v0.9.0-alpha.7
 // In most cases there should be only one, shared, APIClient.
 type APIClient struct {
 	cfg    *Configuration
@@ -51,8 +51,6 @@ type APIClient struct {
 	// API Services
 
 	ContainerGroupsAPI *ContainerGroupsAPIService
-
-	DefaultAPI *DefaultAPIService
 
 	InferenceEndpointsAPI *InferenceEndpointsAPIService
 
@@ -86,7 +84,6 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 
 	// API Services
 	c.ContainerGroupsAPI = (*ContainerGroupsAPIService)(&c.common)
-	c.DefaultAPI = (*DefaultAPIService)(&c.common)
 	c.InferenceEndpointsAPI = (*InferenceEndpointsAPIService)(&c.common)
 	c.OrganizationDataAPI = (*OrganizationDataAPIService)(&c.common)
 	c.QueuesAPI = (*QueuesAPIService)(&c.common)

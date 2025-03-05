@@ -5,14 +5,14 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **DisplayName** | Pointer to **NullableString** |  | [optional] 
-**Container** | Pointer to [**NullableUpdateContainer**](UpdateContainer.md) |  | [optional] 
+**Container** | Pointer to [**UpdateContainer**](UpdateContainer.md) |  | [optional] 
 **Replicas** | Pointer to **NullableInt32** |  | [optional] 
 **CountryCodes** | Pointer to [**[]CountryCode**](CountryCode.md) | List of countries nodes must be located in. Remove this field to permit nodes from any country. | [optional] 
 **Networking** | Pointer to [**UpdateContainerGroupNetworking**](UpdateContainerGroupNetworking.md) |  | [optional] 
-**LivenessProbe** | Pointer to [**NullableContainerGroupLivenessProbe**](ContainerGroupLivenessProbe.md) |  | [optional] 
-**ReadinessProbe** | Pointer to [**NullableContainerGroupReadinessProbe**](ContainerGroupReadinessProbe.md) |  | [optional] 
-**StartupProbe** | Pointer to [**NullableContainerGroupStartupProbe**](ContainerGroupStartupProbe.md) |  | [optional] 
-**QueueAutoscaler** | Pointer to [**NullableQueueAutoscaler**](QueueAutoscaler.md) |  | [optional] 
+**LivenessProbe** | Pointer to [**ContainerGroupLivenessProbe**](ContainerGroupLivenessProbe.md) |  | [optional] 
+**ReadinessProbe** | Pointer to [**ContainerGroupReadinessProbe**](ContainerGroupReadinessProbe.md) |  | [optional] 
+**StartupProbe** | Pointer to [**ContainerGroupStartupProbe**](ContainerGroupStartupProbe.md) |  | [optional] 
+**QueueAutoscaler** | Pointer to [**QueueAutoscaler**](QueueAutoscaler.md) |  | [optional] 
 
 ## Methods
 
@@ -93,16 +93,6 @@ SetContainer sets Container field to given value.
 
 HasContainer returns a boolean if a field has been set.
 
-### SetContainerNil
-
-`func (o *UpdateContainerGroup) SetContainerNil(b bool)`
-
- SetContainerNil sets the value for Container to be an explicit nil
-
-### UnsetContainer
-`func (o *UpdateContainerGroup) UnsetContainer()`
-
-UnsetContainer ensures that no value is present for Container, not even an explicit nil
 ### GetReplicas
 
 `func (o *UpdateContainerGroup) GetReplicas() int32`
@@ -223,16 +213,6 @@ SetLivenessProbe sets LivenessProbe field to given value.
 
 HasLivenessProbe returns a boolean if a field has been set.
 
-### SetLivenessProbeNil
-
-`func (o *UpdateContainerGroup) SetLivenessProbeNil(b bool)`
-
- SetLivenessProbeNil sets the value for LivenessProbe to be an explicit nil
-
-### UnsetLivenessProbe
-`func (o *UpdateContainerGroup) UnsetLivenessProbe()`
-
-UnsetLivenessProbe ensures that no value is present for LivenessProbe, not even an explicit nil
 ### GetReadinessProbe
 
 `func (o *UpdateContainerGroup) GetReadinessProbe() ContainerGroupReadinessProbe`
@@ -258,16 +238,6 @@ SetReadinessProbe sets ReadinessProbe field to given value.
 
 HasReadinessProbe returns a boolean if a field has been set.
 
-### SetReadinessProbeNil
-
-`func (o *UpdateContainerGroup) SetReadinessProbeNil(b bool)`
-
- SetReadinessProbeNil sets the value for ReadinessProbe to be an explicit nil
-
-### UnsetReadinessProbe
-`func (o *UpdateContainerGroup) UnsetReadinessProbe()`
-
-UnsetReadinessProbe ensures that no value is present for ReadinessProbe, not even an explicit nil
 ### GetStartupProbe
 
 `func (o *UpdateContainerGroup) GetStartupProbe() ContainerGroupStartupProbe`
@@ -293,16 +263,6 @@ SetStartupProbe sets StartupProbe field to given value.
 
 HasStartupProbe returns a boolean if a field has been set.
 
-### SetStartupProbeNil
-
-`func (o *UpdateContainerGroup) SetStartupProbeNil(b bool)`
-
- SetStartupProbeNil sets the value for StartupProbe to be an explicit nil
-
-### UnsetStartupProbe
-`func (o *UpdateContainerGroup) UnsetStartupProbe()`
-
-UnsetStartupProbe ensures that no value is present for StartupProbe, not even an explicit nil
 ### GetQueueAutoscaler
 
 `func (o *UpdateContainerGroup) GetQueueAutoscaler() QueueAutoscaler`
@@ -328,16 +288,6 @@ SetQueueAutoscaler sets QueueAutoscaler field to given value.
 
 HasQueueAutoscaler returns a boolean if a field has been set.
 
-### SetQueueAutoscalerNil
-
-`func (o *UpdateContainerGroup) SetQueueAutoscalerNil(b bool)`
-
- SetQueueAutoscalerNil sets the value for QueueAutoscaler to be an explicit nil
-
-### UnsetQueueAutoscaler
-`func (o *UpdateContainerGroup) UnsetQueueAutoscaler()`
-
-UnsetQueueAutoscaler ensures that no value is present for QueueAutoscaler, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -3,7 +3,7 @@ SaladCloud API
 
 The SaladCloud REST API. Please refer to the [SaladCloud API Documentation](https://docs.salad.com/api-reference) for more details.
 
-API version: 0.9.0-alpha.6
+API version: 0.9.0-alpha.7
 Contact: cloud@salad.com
 */
 
@@ -1092,13 +1092,11 @@ type ApiListQueueJobsRequest struct {
 	pageSize *int32
 }
 
-// The page number
 func (r ApiListQueueJobsRequest) Page(page int32) ApiListQueueJobsRequest {
 	r.page = &page
 	return r
 }
 
-// The number of items per page
 func (r ApiListQueueJobsRequest) PageSize(pageSize int32) ApiListQueueJobsRequest {
 	r.pageSize = &pageSize
 	return r
