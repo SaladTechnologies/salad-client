@@ -3,7 +3,7 @@ SaladCloud API
 
 The SaladCloud REST API. Please refer to the [SaladCloud API Documentation](https://docs.salad.com/api-reference) for more details.
 
-API version: 0.9.0-alpha.7
+API version: 0.9.0-alpha.11
 Contact: cloud@salad.com
 */
 
@@ -31,17 +31,17 @@ type InferenceEndpoint struct {
 	// The display-friendly name of the resource.
 	DisplayName string `json:"display_name" validate:"regexp=^[ ,-.0-9A-Za-z]+$"`
 	// The detailed description of the resource.
-	Description string `json:"description" validate:"regexp=^[\\\\P{Cc}\\\\P{Cn}\\\\P{Cs}]*$"`
+	Description string `json:"description" validate:"regexp=^.*$"`
 	// A markdown file containing a detailed description of the inference endpoint
-	Readme string `json:"readme"`
+	Readme string `json:"readme" validate:"regexp=^.*$"`
 	// A description of the price
-	PriceDescription string `json:"price_description"`
+	PriceDescription string `json:"price_description" validate:"regexp=^.*$"`
 	// The URL of the icon image
-	IconUrl string `json:"icon_url"`
+	IconUrl string `json:"icon_url" validate:"regexp=^.*$"`
 	// The input schema
-	InputSchema string `json:"input_schema"`
+	InputSchema string `json:"input_schema" validate:"regexp=^.*$"`
 	// The output schema
-	OutputSchema string `json:"output_schema"`
+	OutputSchema string `json:"output_schema" validate:"regexp=^.*$"`
 }
 
 type _InferenceEndpoint InferenceEndpoint

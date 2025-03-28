@@ -4,10 +4,10 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**AllocatingCount** | **int32** |  | 
-**CreatingCount** | **int32** |  | 
-**RunningCount** | **int32** |  | 
-**StoppingCount** | **int32** |  | 
+**AllocatingCount** | **int32** | The number of container instances that are currently being allocated resources | 
+**CreatingCount** | **int32** | The number of container instances that are in the process of being created | 
+**RunningCount** | **int32** | The number of container instances that are currently running and operational | 
+**StoppingCount** | **int32** | The number of container instances that are in the process of stopping | 
 
 ## Methods
 

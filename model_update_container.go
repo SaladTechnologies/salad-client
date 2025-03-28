@@ -3,7 +3,7 @@ SaladCloud API
 
 The SaladCloud REST API. Please refer to the [SaladCloud API Documentation](https://docs.salad.com/api-reference) for more details.
 
-API version: 0.9.0-alpha.7
+API version: 0.9.0-alpha.11
 Contact: cloud@salad.com
 */
 
@@ -20,19 +20,19 @@ var _ MappedNullable = &UpdateContainer{}
 
 // UpdateContainer Represents an update container object
 type UpdateContainer struct {
-	Image *string `json:"image,omitempty"`
-	Resources *UpdateContainerResources `json:"resources,omitempty"`
 	// Pass a command (and optional arguments) to override the ENTRYPOINT and CMD of a container image.
 	Command []string `json:"command,omitempty"`
-	Priority NullableContainerGroupPriority `json:"priority,omitempty"`
+	// Environment variables to set in the container.
 	EnvironmentVariables map[string]string `json:"environment_variables,omitempty"`
-	Logging *ContainerLogging `json:"logging,omitempty"`
-	RegistryAuthentication *CreateContainerRegistryAuthentication `json:"registry_authentication,omitempty"`
+	// The container image to use.
+	Image NullableString `json:"image,omitempty" validate:"regexp=^.*$"`
+	// The container image caching.
 	ImageCaching *bool `json:"image_caching,omitempty"`
-	AdditionalProperties map[string]interface{}
+	Logging *UpdateContainerLogging `json:"logging,omitempty"`
+	Priority NullableContainerGroupPriority `json:"priority,omitempty"`
+	RegistryAuthentication *ContainerRegistryAuthentication `json:"registry_authentication,omitempty"`
+	Resources *UpdateContainerResources `json:"resources,omitempty"`
 }
-
-type _UpdateContainer UpdateContainer
 
 // NewUpdateContainer instantiates a new UpdateContainer object
 // This constructor will assign default values to properties that have it defined,
@@ -51,73 +51,9 @@ func NewUpdateContainerWithDefaults() *UpdateContainer {
 	return &this
 }
 
-// GetImage returns the Image field value if set, zero value otherwise.
-func (o *UpdateContainer) GetImage() string {
-	if o == nil || IsNil(o.Image) {
-		var ret string
-		return ret
-	}
-	return *o.Image
-}
-
-// GetImageOk returns a tuple with the Image field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *UpdateContainer) GetImageOk() (*string, bool) {
-	if o == nil || IsNil(o.Image) {
-		return nil, false
-	}
-	return o.Image, true
-}
-
-// HasImage returns a boolean if a field has been set.
-func (o *UpdateContainer) HasImage() bool {
-	if o != nil && !IsNil(o.Image) {
-		return true
-	}
-
-	return false
-}
-
-// SetImage gets a reference to the given string and assigns it to the Image field.
-func (o *UpdateContainer) SetImage(v string) {
-	o.Image = &v
-}
-
-// GetResources returns the Resources field value if set, zero value otherwise.
-func (o *UpdateContainer) GetResources() UpdateContainerResources {
-	if o == nil || IsNil(o.Resources) {
-		var ret UpdateContainerResources
-		return ret
-	}
-	return *o.Resources
-}
-
-// GetResourcesOk returns a tuple with the Resources field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *UpdateContainer) GetResourcesOk() (*UpdateContainerResources, bool) {
-	if o == nil || IsNil(o.Resources) {
-		return nil, false
-	}
-	return o.Resources, true
-}
-
-// HasResources returns a boolean if a field has been set.
-func (o *UpdateContainer) HasResources() bool {
-	if o != nil && !IsNil(o.Resources) {
-		return true
-	}
-
-	return false
-}
-
-// SetResources gets a reference to the given UpdateContainerResources and assigns it to the Resources field.
-func (o *UpdateContainer) SetResources(v UpdateContainerResources) {
-	o.Resources = &v
-}
-
-// GetCommand returns the Command field value if set, zero value otherwise.
+// GetCommand returns the Command field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *UpdateContainer) GetCommand() []string {
-	if o == nil || IsNil(o.Command) {
+	if o == nil {
 		var ret []string
 		return ret
 	}
@@ -126,6 +62,7 @@ func (o *UpdateContainer) GetCommand() []string {
 
 // GetCommandOk returns a tuple with the Command field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *UpdateContainer) GetCommandOk() ([]string, bool) {
 	if o == nil || IsNil(o.Command) {
 		return nil, false
@@ -145,6 +82,144 @@ func (o *UpdateContainer) HasCommand() bool {
 // SetCommand gets a reference to the given []string and assigns it to the Command field.
 func (o *UpdateContainer) SetCommand(v []string) {
 	o.Command = v
+}
+
+// GetEnvironmentVariables returns the EnvironmentVariables field value if set, zero value otherwise.
+func (o *UpdateContainer) GetEnvironmentVariables() map[string]string {
+	if o == nil || IsNil(o.EnvironmentVariables) {
+		var ret map[string]string
+		return ret
+	}
+	return o.EnvironmentVariables
+}
+
+// GetEnvironmentVariablesOk returns a tuple with the EnvironmentVariables field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdateContainer) GetEnvironmentVariablesOk() (map[string]string, bool) {
+	if o == nil || IsNil(o.EnvironmentVariables) {
+		return map[string]string{}, false
+	}
+	return o.EnvironmentVariables, true
+}
+
+// HasEnvironmentVariables returns a boolean if a field has been set.
+func (o *UpdateContainer) HasEnvironmentVariables() bool {
+	if o != nil && !IsNil(o.EnvironmentVariables) {
+		return true
+	}
+
+	return false
+}
+
+// SetEnvironmentVariables gets a reference to the given map[string]string and assigns it to the EnvironmentVariables field.
+func (o *UpdateContainer) SetEnvironmentVariables(v map[string]string) {
+	o.EnvironmentVariables = v
+}
+
+// GetImage returns the Image field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *UpdateContainer) GetImage() string {
+	if o == nil || IsNil(o.Image.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.Image.Get()
+}
+
+// GetImageOk returns a tuple with the Image field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *UpdateContainer) GetImageOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.Image.Get(), o.Image.IsSet()
+}
+
+// HasImage returns a boolean if a field has been set.
+func (o *UpdateContainer) HasImage() bool {
+	if o != nil && o.Image.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetImage gets a reference to the given NullableString and assigns it to the Image field.
+func (o *UpdateContainer) SetImage(v string) {
+	o.Image.Set(&v)
+}
+// SetImageNil sets the value for Image to be an explicit nil
+func (o *UpdateContainer) SetImageNil() {
+	o.Image.Set(nil)
+}
+
+// UnsetImage ensures that no value is present for Image, not even an explicit nil
+func (o *UpdateContainer) UnsetImage() {
+	o.Image.Unset()
+}
+
+// GetImageCaching returns the ImageCaching field value if set, zero value otherwise.
+func (o *UpdateContainer) GetImageCaching() bool {
+	if o == nil || IsNil(o.ImageCaching) {
+		var ret bool
+		return ret
+	}
+	return *o.ImageCaching
+}
+
+// GetImageCachingOk returns a tuple with the ImageCaching field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdateContainer) GetImageCachingOk() (*bool, bool) {
+	if o == nil || IsNil(o.ImageCaching) {
+		return nil, false
+	}
+	return o.ImageCaching, true
+}
+
+// HasImageCaching returns a boolean if a field has been set.
+func (o *UpdateContainer) HasImageCaching() bool {
+	if o != nil && !IsNil(o.ImageCaching) {
+		return true
+	}
+
+	return false
+}
+
+// SetImageCaching gets a reference to the given bool and assigns it to the ImageCaching field.
+func (o *UpdateContainer) SetImageCaching(v bool) {
+	o.ImageCaching = &v
+}
+
+// GetLogging returns the Logging field value if set, zero value otherwise.
+func (o *UpdateContainer) GetLogging() UpdateContainerLogging {
+	if o == nil || IsNil(o.Logging) {
+		var ret UpdateContainerLogging
+		return ret
+	}
+	return *o.Logging
+}
+
+// GetLoggingOk returns a tuple with the Logging field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdateContainer) GetLoggingOk() (*UpdateContainerLogging, bool) {
+	if o == nil || IsNil(o.Logging) {
+		return nil, false
+	}
+	return o.Logging, true
+}
+
+// HasLogging returns a boolean if a field has been set.
+func (o *UpdateContainer) HasLogging() bool {
+	if o != nil && !IsNil(o.Logging) {
+		return true
+	}
+
+	return false
+}
+
+// SetLogging gets a reference to the given UpdateContainerLogging and assigns it to the Logging field.
+func (o *UpdateContainer) SetLogging(v UpdateContainerLogging) {
+	o.Logging = &v
 }
 
 // GetPriority returns the Priority field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -189,74 +264,10 @@ func (o *UpdateContainer) UnsetPriority() {
 	o.Priority.Unset()
 }
 
-// GetEnvironmentVariables returns the EnvironmentVariables field value if set, zero value otherwise.
-func (o *UpdateContainer) GetEnvironmentVariables() map[string]string {
-	if o == nil || IsNil(o.EnvironmentVariables) {
-		var ret map[string]string
-		return ret
-	}
-	return o.EnvironmentVariables
-}
-
-// GetEnvironmentVariablesOk returns a tuple with the EnvironmentVariables field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *UpdateContainer) GetEnvironmentVariablesOk() (map[string]string, bool) {
-	if o == nil || IsNil(o.EnvironmentVariables) {
-		return map[string]string{}, false
-	}
-	return o.EnvironmentVariables, true
-}
-
-// HasEnvironmentVariables returns a boolean if a field has been set.
-func (o *UpdateContainer) HasEnvironmentVariables() bool {
-	if o != nil && !IsNil(o.EnvironmentVariables) {
-		return true
-	}
-
-	return false
-}
-
-// SetEnvironmentVariables gets a reference to the given map[string]string and assigns it to the EnvironmentVariables field.
-func (o *UpdateContainer) SetEnvironmentVariables(v map[string]string) {
-	o.EnvironmentVariables = v
-}
-
-// GetLogging returns the Logging field value if set, zero value otherwise.
-func (o *UpdateContainer) GetLogging() ContainerLogging {
-	if o == nil || IsNil(o.Logging) {
-		var ret ContainerLogging
-		return ret
-	}
-	return *o.Logging
-}
-
-// GetLoggingOk returns a tuple with the Logging field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *UpdateContainer) GetLoggingOk() (*ContainerLogging, bool) {
-	if o == nil || IsNil(o.Logging) {
-		return nil, false
-	}
-	return o.Logging, true
-}
-
-// HasLogging returns a boolean if a field has been set.
-func (o *UpdateContainer) HasLogging() bool {
-	if o != nil && !IsNil(o.Logging) {
-		return true
-	}
-
-	return false
-}
-
-// SetLogging gets a reference to the given ContainerLogging and assigns it to the Logging field.
-func (o *UpdateContainer) SetLogging(v ContainerLogging) {
-	o.Logging = &v
-}
-
 // GetRegistryAuthentication returns the RegistryAuthentication field value if set, zero value otherwise.
-func (o *UpdateContainer) GetRegistryAuthentication() CreateContainerRegistryAuthentication {
+func (o *UpdateContainer) GetRegistryAuthentication() ContainerRegistryAuthentication {
 	if o == nil || IsNil(o.RegistryAuthentication) {
-		var ret CreateContainerRegistryAuthentication
+		var ret ContainerRegistryAuthentication
 		return ret
 	}
 	return *o.RegistryAuthentication
@@ -264,7 +275,7 @@ func (o *UpdateContainer) GetRegistryAuthentication() CreateContainerRegistryAut
 
 // GetRegistryAuthenticationOk returns a tuple with the RegistryAuthentication field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *UpdateContainer) GetRegistryAuthenticationOk() (*CreateContainerRegistryAuthentication, bool) {
+func (o *UpdateContainer) GetRegistryAuthenticationOk() (*ContainerRegistryAuthentication, bool) {
 	if o == nil || IsNil(o.RegistryAuthentication) {
 		return nil, false
 	}
@@ -280,41 +291,41 @@ func (o *UpdateContainer) HasRegistryAuthentication() bool {
 	return false
 }
 
-// SetRegistryAuthentication gets a reference to the given CreateContainerRegistryAuthentication and assigns it to the RegistryAuthentication field.
-func (o *UpdateContainer) SetRegistryAuthentication(v CreateContainerRegistryAuthentication) {
+// SetRegistryAuthentication gets a reference to the given ContainerRegistryAuthentication and assigns it to the RegistryAuthentication field.
+func (o *UpdateContainer) SetRegistryAuthentication(v ContainerRegistryAuthentication) {
 	o.RegistryAuthentication = &v
 }
 
-// GetImageCaching returns the ImageCaching field value if set, zero value otherwise.
-func (o *UpdateContainer) GetImageCaching() bool {
-	if o == nil || IsNil(o.ImageCaching) {
-		var ret bool
+// GetResources returns the Resources field value if set, zero value otherwise.
+func (o *UpdateContainer) GetResources() UpdateContainerResources {
+	if o == nil || IsNil(o.Resources) {
+		var ret UpdateContainerResources
 		return ret
 	}
-	return *o.ImageCaching
+	return *o.Resources
 }
 
-// GetImageCachingOk returns a tuple with the ImageCaching field value if set, nil otherwise
+// GetResourcesOk returns a tuple with the Resources field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *UpdateContainer) GetImageCachingOk() (*bool, bool) {
-	if o == nil || IsNil(o.ImageCaching) {
+func (o *UpdateContainer) GetResourcesOk() (*UpdateContainerResources, bool) {
+	if o == nil || IsNil(o.Resources) {
 		return nil, false
 	}
-	return o.ImageCaching, true
+	return o.Resources, true
 }
 
-// HasImageCaching returns a boolean if a field has been set.
-func (o *UpdateContainer) HasImageCaching() bool {
-	if o != nil && !IsNil(o.ImageCaching) {
+// HasResources returns a boolean if a field has been set.
+func (o *UpdateContainer) HasResources() bool {
+	if o != nil && !IsNil(o.Resources) {
 		return true
 	}
 
 	return false
 }
 
-// SetImageCaching gets a reference to the given bool and assigns it to the ImageCaching field.
-func (o *UpdateContainer) SetImageCaching(v bool) {
-	o.ImageCaching = &v
+// SetResources gets a reference to the given UpdateContainerResources and assigns it to the Resources field.
+func (o *UpdateContainer) SetResources(v UpdateContainerResources) {
+	o.Resources = &v
 }
 
 func (o UpdateContainer) MarshalJSON() ([]byte, error) {
@@ -327,64 +338,31 @@ func (o UpdateContainer) MarshalJSON() ([]byte, error) {
 
 func (o UpdateContainer) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Image) {
-		toSerialize["image"] = o.Image
-	}
-	if !IsNil(o.Resources) {
-		toSerialize["resources"] = o.Resources
-	}
-	if !IsNil(o.Command) {
+	if o.Command != nil {
 		toSerialize["command"] = o.Command
-	}
-	if o.Priority.IsSet() {
-		toSerialize["priority"] = o.Priority.Get()
 	}
 	if !IsNil(o.EnvironmentVariables) {
 		toSerialize["environment_variables"] = o.EnvironmentVariables
 	}
-	if !IsNil(o.Logging) {
-		toSerialize["logging"] = o.Logging
-	}
-	if !IsNil(o.RegistryAuthentication) {
-		toSerialize["registry_authentication"] = o.RegistryAuthentication
+	if o.Image.IsSet() {
+		toSerialize["image"] = o.Image.Get()
 	}
 	if !IsNil(o.ImageCaching) {
 		toSerialize["image_caching"] = o.ImageCaching
 	}
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
+	if !IsNil(o.Logging) {
+		toSerialize["logging"] = o.Logging
 	}
-
+	if o.Priority.IsSet() {
+		toSerialize["priority"] = o.Priority.Get()
+	}
+	if !IsNil(o.RegistryAuthentication) {
+		toSerialize["registry_authentication"] = o.RegistryAuthentication
+	}
+	if !IsNil(o.Resources) {
+		toSerialize["resources"] = o.Resources
+	}
 	return toSerialize, nil
-}
-
-func (o *UpdateContainer) UnmarshalJSON(data []byte) (err error) {
-	varUpdateContainer := _UpdateContainer{}
-
-	err = json.Unmarshal(data, &varUpdateContainer)
-
-	if err != nil {
-		return err
-	}
-
-	*o = UpdateContainer(varUpdateContainer)
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "image")
-		delete(additionalProperties, "resources")
-		delete(additionalProperties, "command")
-		delete(additionalProperties, "priority")
-		delete(additionalProperties, "environment_variables")
-		delete(additionalProperties, "logging")
-		delete(additionalProperties, "registry_authentication")
-		delete(additionalProperties, "image_caching")
-		o.AdditionalProperties = additionalProperties
-	}
-
-	return err
 }
 
 type NullableUpdateContainer struct {

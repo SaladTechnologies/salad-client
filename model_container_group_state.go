@@ -3,7 +3,7 @@ SaladCloud API
 
 The SaladCloud REST API. Please refer to the [SaladCloud API Documentation](https://docs.salad.com/api-reference) for more details.
 
-API version: 0.9.0-alpha.7
+API version: 0.9.0-alpha.11
 Contact: cloud@salad.com
 */
 
@@ -21,13 +21,16 @@ import (
 // checks if the ContainerGroupState type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ContainerGroupState{}
 
-// ContainerGroupState Represents a container group state
+// ContainerGroupState Represents the operational state of a container group during its lifecycle, including timing information, status, and instance distribution metrics. This state captures the current execution status, start and finish times, and provides visibility into the operational health across instances.
 type ContainerGroupState struct {
-	Status ContainerGroupStatus `json:"status"`
-	Description NullableString `json:"description,omitempty"`
-	StartTime time.Time `json:"start_time"`
+	// Optional textual description or notes about the current state of the container group
+	Description NullableString `json:"description,omitempty" validate:"regexp=^.*$"`
+	// Timestamp when the container group execution finished or is expected to finish
 	FinishTime time.Time `json:"finish_time"`
 	InstanceStatusCounts ContainerGroupInstanceStatusCount `json:"instance_status_counts"`
+	// Timestamp when the container group execution started
+	StartTime time.Time `json:"start_time"`
+	Status ContainerGroupStatus `json:"status"`
 }
 
 type _ContainerGroupState ContainerGroupState
@@ -36,12 +39,12 @@ type _ContainerGroupState ContainerGroupState
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewContainerGroupState(status ContainerGroupStatus, startTime time.Time, finishTime time.Time, instanceStatusCounts ContainerGroupInstanceStatusCount) *ContainerGroupState {
+func NewContainerGroupState(finishTime time.Time, instanceStatusCounts ContainerGroupInstanceStatusCount, startTime time.Time, status ContainerGroupStatus) *ContainerGroupState {
 	this := ContainerGroupState{}
-	this.Status = status
-	this.StartTime = startTime
 	this.FinishTime = finishTime
 	this.InstanceStatusCounts = instanceStatusCounts
+	this.StartTime = startTime
+	this.Status = status
 	return &this
 }
 
@@ -51,30 +54,6 @@ func NewContainerGroupState(status ContainerGroupStatus, startTime time.Time, fi
 func NewContainerGroupStateWithDefaults() *ContainerGroupState {
 	this := ContainerGroupState{}
 	return &this
-}
-
-// GetStatus returns the Status field value
-func (o *ContainerGroupState) GetStatus() ContainerGroupStatus {
-	if o == nil {
-		var ret ContainerGroupStatus
-		return ret
-	}
-
-	return o.Status
-}
-
-// GetStatusOk returns a tuple with the Status field value
-// and a boolean to check if the value has been set.
-func (o *ContainerGroupState) GetStatusOk() (*ContainerGroupStatus, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Status, true
-}
-
-// SetStatus sets field value
-func (o *ContainerGroupState) SetStatus(v ContainerGroupStatus) {
-	o.Status = v
 }
 
 // GetDescription returns the Description field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -117,30 +96,6 @@ func (o *ContainerGroupState) SetDescriptionNil() {
 // UnsetDescription ensures that no value is present for Description, not even an explicit nil
 func (o *ContainerGroupState) UnsetDescription() {
 	o.Description.Unset()
-}
-
-// GetStartTime returns the StartTime field value
-func (o *ContainerGroupState) GetStartTime() time.Time {
-	if o == nil {
-		var ret time.Time
-		return ret
-	}
-
-	return o.StartTime
-}
-
-// GetStartTimeOk returns a tuple with the StartTime field value
-// and a boolean to check if the value has been set.
-func (o *ContainerGroupState) GetStartTimeOk() (*time.Time, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.StartTime, true
-}
-
-// SetStartTime sets field value
-func (o *ContainerGroupState) SetStartTime(v time.Time) {
-	o.StartTime = v
 }
 
 // GetFinishTime returns the FinishTime field value
@@ -191,6 +146,54 @@ func (o *ContainerGroupState) SetInstanceStatusCounts(v ContainerGroupInstanceSt
 	o.InstanceStatusCounts = v
 }
 
+// GetStartTime returns the StartTime field value
+func (o *ContainerGroupState) GetStartTime() time.Time {
+	if o == nil {
+		var ret time.Time
+		return ret
+	}
+
+	return o.StartTime
+}
+
+// GetStartTimeOk returns a tuple with the StartTime field value
+// and a boolean to check if the value has been set.
+func (o *ContainerGroupState) GetStartTimeOk() (*time.Time, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.StartTime, true
+}
+
+// SetStartTime sets field value
+func (o *ContainerGroupState) SetStartTime(v time.Time) {
+	o.StartTime = v
+}
+
+// GetStatus returns the Status field value
+func (o *ContainerGroupState) GetStatus() ContainerGroupStatus {
+	if o == nil {
+		var ret ContainerGroupStatus
+		return ret
+	}
+
+	return o.Status
+}
+
+// GetStatusOk returns a tuple with the Status field value
+// and a boolean to check if the value has been set.
+func (o *ContainerGroupState) GetStatusOk() (*ContainerGroupStatus, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Status, true
+}
+
+// SetStatus sets field value
+func (o *ContainerGroupState) SetStatus(v ContainerGroupStatus) {
+	o.Status = v
+}
+
 func (o ContainerGroupState) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -201,13 +204,13 @@ func (o ContainerGroupState) MarshalJSON() ([]byte, error) {
 
 func (o ContainerGroupState) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["status"] = o.Status
 	if o.Description.IsSet() {
 		toSerialize["description"] = o.Description.Get()
 	}
-	toSerialize["start_time"] = o.StartTime
 	toSerialize["finish_time"] = o.FinishTime
 	toSerialize["instance_status_counts"] = o.InstanceStatusCounts
+	toSerialize["start_time"] = o.StartTime
+	toSerialize["status"] = o.Status
 	return toSerialize, nil
 }
 
@@ -216,10 +219,10 @@ func (o *ContainerGroupState) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"status",
-		"start_time",
 		"finish_time",
 		"instance_status_counts",
+		"start_time",
+		"status",
 	}
 
 	allProperties := make(map[string]interface{})

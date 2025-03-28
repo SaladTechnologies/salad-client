@@ -3,7 +3,7 @@ SaladCloud API
 
 The SaladCloud REST API. Please refer to the [SaladCloud API Documentation](https://docs.salad.com/api-reference) for more details.
 
-API version: 0.9.0-alpha.7
+API version: 0.9.0-alpha.11
 Contact: cloud@salad.com
 */
 
@@ -19,7 +19,7 @@ import (
 // InferenceEndpointJobStatus The current status.
 type InferenceEndpointJobStatus string
 
-// List of inference_endpoint_job_status
+// List of InferenceEndpointJobStatus
 const (
 	INFERENCEENDPOINTJOBSTATUS_PENDING InferenceEndpointJobStatus = "pending"
 	INFERENCEENDPOINTJOBSTATUS_RUNNING InferenceEndpointJobStatus = "running"
@@ -75,7 +75,7 @@ func (v InferenceEndpointJobStatus) IsValid() bool {
 	return false
 }
 
-// Ptr returns reference to inference_endpoint_job_status value
+// Ptr returns reference to InferenceEndpointJobStatus value
 func (v InferenceEndpointJobStatus) Ptr() *InferenceEndpointJobStatus {
 	return &v
 }

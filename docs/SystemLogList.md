@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Items** | [**[]SystemLog**](SystemLog.md) |  | 
+**Items** | [**[]SystemLog**](SystemLog.md) | A list of system logs | 
 
 ## Methods
 

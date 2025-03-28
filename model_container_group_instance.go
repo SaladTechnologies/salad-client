@@ -3,7 +3,7 @@ SaladCloud API
 
 The SaladCloud REST API. Please refer to the [SaladCloud API Documentation](https://docs.salad.com/api-reference) for more details.
 
-API version: 0.9.0-alpha.7
+API version: 0.9.0-alpha.11
 Contact: cloud@salad.com
 */
 
@@ -21,22 +21,23 @@ import (
 // checks if the ContainerGroupInstance type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ContainerGroupInstance{}
 
-// ContainerGroupInstance Represents the details of a single container group instance
+// ContainerGroupInstance A Container Group Instance represents a running instance of a container group on a specific machine. It provides information about the execution state, readiness, and version of the deployed container group.
 type ContainerGroupInstance struct {
-	// The unique instance ID
-	InstanceId string `json:"instance_id"`
-	// The machine ID
+	// The container group instance identifier.
+	Id string `json:"id"`
+	// The container group machine identifier.
 	MachineId string `json:"machine_id"`
-	// The state of the container group instance
-	State string `json:"state"`
-	// The UTC date & time when the workload on this machine transitioned to the current state
+	State ContainerGroupInstanceState `json:"state"`
+	// The UTC timestamp when the container group instance last changed its state. This helps track the lifecycle and state transitions of the instance.
 	UpdateTime time.Time `json:"update_time"`
-	// The version of the running container group
+	// The version of the container group definition currently running on this instance. Used to track deployment and update progress across the container group fleet.
 	Version int32 `json:"version"`
-	// Specifies whether the container group instance is currently passing its readiness check. If no readiness probe is defined, is true once fully started.
+	// Indicates whether the container group instance is currently passing its readiness checks and is able to receive traffic or perform its intended function. If no readiness probe is defined, this will be true once the instance is fully started.
 	Ready *bool `json:"ready,omitempty"`
-	// Specifies whether the container group instance passed its startup probe. Is always true when no startup probe is defined.
+	// Indicates whether the container group instance has successfully completed its startup sequence and passed any configured startup probes. This will always be true when no startup probe is defined for the container group.
 	Started *bool `json:"started,omitempty"`
+	// The cost of deleting the container group instance
+	DeletionCost *int32 `json:"deletion_cost,omitempty"`
 }
 
 type _ContainerGroupInstance ContainerGroupInstance
@@ -45,13 +46,15 @@ type _ContainerGroupInstance ContainerGroupInstance
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewContainerGroupInstance(instanceId string, machineId string, state string, updateTime time.Time, version int32) *ContainerGroupInstance {
+func NewContainerGroupInstance(id string, machineId string, state ContainerGroupInstanceState, updateTime time.Time, version int32) *ContainerGroupInstance {
 	this := ContainerGroupInstance{}
-	this.InstanceId = instanceId
+	this.Id = id
 	this.MachineId = machineId
 	this.State = state
 	this.UpdateTime = updateTime
 	this.Version = version
+	var deletionCost int32 = 0
+	this.DeletionCost = &deletionCost
 	return &this
 }
 
@@ -60,31 +63,33 @@ func NewContainerGroupInstance(instanceId string, machineId string, state string
 // but it doesn't guarantee that properties required by API are set
 func NewContainerGroupInstanceWithDefaults() *ContainerGroupInstance {
 	this := ContainerGroupInstance{}
+	var deletionCost int32 = 0
+	this.DeletionCost = &deletionCost
 	return &this
 }
 
-// GetInstanceId returns the InstanceId field value
-func (o *ContainerGroupInstance) GetInstanceId() string {
+// GetId returns the Id field value
+func (o *ContainerGroupInstance) GetId() string {
 	if o == nil {
 		var ret string
 		return ret
 	}
 
-	return o.InstanceId
+	return o.Id
 }
 
-// GetInstanceIdOk returns a tuple with the InstanceId field value
+// GetIdOk returns a tuple with the Id field value
 // and a boolean to check if the value has been set.
-func (o *ContainerGroupInstance) GetInstanceIdOk() (*string, bool) {
+func (o *ContainerGroupInstance) GetIdOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.InstanceId, true
+	return &o.Id, true
 }
 
-// SetInstanceId sets field value
-func (o *ContainerGroupInstance) SetInstanceId(v string) {
-	o.InstanceId = v
+// SetId sets field value
+func (o *ContainerGroupInstance) SetId(v string) {
+	o.Id = v
 }
 
 // GetMachineId returns the MachineId field value
@@ -112,9 +117,9 @@ func (o *ContainerGroupInstance) SetMachineId(v string) {
 }
 
 // GetState returns the State field value
-func (o *ContainerGroupInstance) GetState() string {
+func (o *ContainerGroupInstance) GetState() ContainerGroupInstanceState {
 	if o == nil {
-		var ret string
+		var ret ContainerGroupInstanceState
 		return ret
 	}
 
@@ -123,7 +128,7 @@ func (o *ContainerGroupInstance) GetState() string {
 
 // GetStateOk returns a tuple with the State field value
 // and a boolean to check if the value has been set.
-func (o *ContainerGroupInstance) GetStateOk() (*string, bool) {
+func (o *ContainerGroupInstance) GetStateOk() (*ContainerGroupInstanceState, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -131,7 +136,7 @@ func (o *ContainerGroupInstance) GetStateOk() (*string, bool) {
 }
 
 // SetState sets field value
-func (o *ContainerGroupInstance) SetState(v string) {
+func (o *ContainerGroupInstance) SetState(v ContainerGroupInstanceState) {
 	o.State = v
 }
 
@@ -247,6 +252,38 @@ func (o *ContainerGroupInstance) SetStarted(v bool) {
 	o.Started = &v
 }
 
+// GetDeletionCost returns the DeletionCost field value if set, zero value otherwise.
+func (o *ContainerGroupInstance) GetDeletionCost() int32 {
+	if o == nil || IsNil(o.DeletionCost) {
+		var ret int32
+		return ret
+	}
+	return *o.DeletionCost
+}
+
+// GetDeletionCostOk returns a tuple with the DeletionCost field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ContainerGroupInstance) GetDeletionCostOk() (*int32, bool) {
+	if o == nil || IsNil(o.DeletionCost) {
+		return nil, false
+	}
+	return o.DeletionCost, true
+}
+
+// HasDeletionCost returns a boolean if a field has been set.
+func (o *ContainerGroupInstance) HasDeletionCost() bool {
+	if o != nil && !IsNil(o.DeletionCost) {
+		return true
+	}
+
+	return false
+}
+
+// SetDeletionCost gets a reference to the given int32 and assigns it to the DeletionCost field.
+func (o *ContainerGroupInstance) SetDeletionCost(v int32) {
+	o.DeletionCost = &v
+}
+
 func (o ContainerGroupInstance) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -257,7 +294,7 @@ func (o ContainerGroupInstance) MarshalJSON() ([]byte, error) {
 
 func (o ContainerGroupInstance) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["instance_id"] = o.InstanceId
+	toSerialize["id"] = o.Id
 	toSerialize["machine_id"] = o.MachineId
 	toSerialize["state"] = o.State
 	toSerialize["update_time"] = o.UpdateTime
@@ -268,6 +305,9 @@ func (o ContainerGroupInstance) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Started) {
 		toSerialize["started"] = o.Started
 	}
+	if !IsNil(o.DeletionCost) {
+		toSerialize["deletion_cost"] = o.DeletionCost
+	}
 	return toSerialize, nil
 }
 
@@ -276,7 +316,7 @@ func (o *ContainerGroupInstance) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"instance_id",
+		"id",
 		"machine_id",
 		"state",
 		"update_time",

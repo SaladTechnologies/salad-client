@@ -3,7 +3,7 @@ SaladCloud API
 
 The SaladCloud REST API. Please refer to the [SaladCloud API Documentation](https://docs.salad.com/api-reference) for more details.
 
-API version: 0.9.0-alpha.7
+API version: 0.9.0-alpha.11
 Contact: cloud@salad.com
 */
 
@@ -18,12 +18,16 @@ import (
 // checks if the UpdateContainerResources type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &UpdateContainerResources{}
 
-// UpdateContainerResources struct for UpdateContainerResources
+// UpdateContainerResources Defines the resource specifications that can be modified for a container group, including CPU, memory, GPU classes, and storage allocations.
 type UpdateContainerResources struct {
-	Cpu *int32 `json:"cpu,omitempty"`
-	Memory *int32 `json:"memory,omitempty"`
+	// The number of CPU cores to allocate to the container (between 1 and 16 cores).
+	Cpu NullableInt32 `json:"cpu,omitempty"`
+	// The amount of memory to allocate to the container in megabytes (between 1024MB and 61440MB).
+	Memory NullableInt32 `json:"memory,omitempty"`
+	// List of GPU class identifiers that the container can use, specified as UUIDs.
 	GpuClasses []string `json:"gpu_classes,omitempty"`
-	StorageAmount *int64 `json:"storage_amount,omitempty"`
+	// The amount of storage to allocate to the container in bytes (between 1GB and 50GB).
+	StorageAmount NullableInt64 `json:"storage_amount,omitempty"`
 }
 
 // NewUpdateContainerResources instantiates a new UpdateContainerResources object
@@ -43,73 +47,93 @@ func NewUpdateContainerResourcesWithDefaults() *UpdateContainerResources {
 	return &this
 }
 
-// GetCpu returns the Cpu field value if set, zero value otherwise.
+// GetCpu returns the Cpu field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *UpdateContainerResources) GetCpu() int32 {
-	if o == nil || IsNil(o.Cpu) {
+	if o == nil || IsNil(o.Cpu.Get()) {
 		var ret int32
 		return ret
 	}
-	return *o.Cpu
+	return *o.Cpu.Get()
 }
 
 // GetCpuOk returns a tuple with the Cpu field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *UpdateContainerResources) GetCpuOk() (*int32, bool) {
-	if o == nil || IsNil(o.Cpu) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Cpu, true
+	return o.Cpu.Get(), o.Cpu.IsSet()
 }
 
 // HasCpu returns a boolean if a field has been set.
 func (o *UpdateContainerResources) HasCpu() bool {
-	if o != nil && !IsNil(o.Cpu) {
+	if o != nil && o.Cpu.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetCpu gets a reference to the given int32 and assigns it to the Cpu field.
+// SetCpu gets a reference to the given NullableInt32 and assigns it to the Cpu field.
 func (o *UpdateContainerResources) SetCpu(v int32) {
-	o.Cpu = &v
+	o.Cpu.Set(&v)
+}
+// SetCpuNil sets the value for Cpu to be an explicit nil
+func (o *UpdateContainerResources) SetCpuNil() {
+	o.Cpu.Set(nil)
 }
 
-// GetMemory returns the Memory field value if set, zero value otherwise.
+// UnsetCpu ensures that no value is present for Cpu, not even an explicit nil
+func (o *UpdateContainerResources) UnsetCpu() {
+	o.Cpu.Unset()
+}
+
+// GetMemory returns the Memory field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *UpdateContainerResources) GetMemory() int32 {
-	if o == nil || IsNil(o.Memory) {
+	if o == nil || IsNil(o.Memory.Get()) {
 		var ret int32
 		return ret
 	}
-	return *o.Memory
+	return *o.Memory.Get()
 }
 
 // GetMemoryOk returns a tuple with the Memory field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *UpdateContainerResources) GetMemoryOk() (*int32, bool) {
-	if o == nil || IsNil(o.Memory) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Memory, true
+	return o.Memory.Get(), o.Memory.IsSet()
 }
 
 // HasMemory returns a boolean if a field has been set.
 func (o *UpdateContainerResources) HasMemory() bool {
-	if o != nil && !IsNil(o.Memory) {
+	if o != nil && o.Memory.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetMemory gets a reference to the given int32 and assigns it to the Memory field.
+// SetMemory gets a reference to the given NullableInt32 and assigns it to the Memory field.
 func (o *UpdateContainerResources) SetMemory(v int32) {
-	o.Memory = &v
+	o.Memory.Set(&v)
+}
+// SetMemoryNil sets the value for Memory to be an explicit nil
+func (o *UpdateContainerResources) SetMemoryNil() {
+	o.Memory.Set(nil)
 }
 
-// GetGpuClasses returns the GpuClasses field value if set, zero value otherwise.
+// UnsetMemory ensures that no value is present for Memory, not even an explicit nil
+func (o *UpdateContainerResources) UnsetMemory() {
+	o.Memory.Unset()
+}
+
+// GetGpuClasses returns the GpuClasses field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *UpdateContainerResources) GetGpuClasses() []string {
-	if o == nil || IsNil(o.GpuClasses) {
+	if o == nil {
 		var ret []string
 		return ret
 	}
@@ -118,6 +142,7 @@ func (o *UpdateContainerResources) GetGpuClasses() []string {
 
 // GetGpuClassesOk returns a tuple with the GpuClasses field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *UpdateContainerResources) GetGpuClassesOk() ([]string, bool) {
 	if o == nil || IsNil(o.GpuClasses) {
 		return nil, false
@@ -139,36 +164,46 @@ func (o *UpdateContainerResources) SetGpuClasses(v []string) {
 	o.GpuClasses = v
 }
 
-// GetStorageAmount returns the StorageAmount field value if set, zero value otherwise.
+// GetStorageAmount returns the StorageAmount field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *UpdateContainerResources) GetStorageAmount() int64 {
-	if o == nil || IsNil(o.StorageAmount) {
+	if o == nil || IsNil(o.StorageAmount.Get()) {
 		var ret int64
 		return ret
 	}
-	return *o.StorageAmount
+	return *o.StorageAmount.Get()
 }
 
 // GetStorageAmountOk returns a tuple with the StorageAmount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *UpdateContainerResources) GetStorageAmountOk() (*int64, bool) {
-	if o == nil || IsNil(o.StorageAmount) {
+	if o == nil {
 		return nil, false
 	}
-	return o.StorageAmount, true
+	return o.StorageAmount.Get(), o.StorageAmount.IsSet()
 }
 
 // HasStorageAmount returns a boolean if a field has been set.
 func (o *UpdateContainerResources) HasStorageAmount() bool {
-	if o != nil && !IsNil(o.StorageAmount) {
+	if o != nil && o.StorageAmount.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetStorageAmount gets a reference to the given int64 and assigns it to the StorageAmount field.
+// SetStorageAmount gets a reference to the given NullableInt64 and assigns it to the StorageAmount field.
 func (o *UpdateContainerResources) SetStorageAmount(v int64) {
-	o.StorageAmount = &v
+	o.StorageAmount.Set(&v)
+}
+// SetStorageAmountNil sets the value for StorageAmount to be an explicit nil
+func (o *UpdateContainerResources) SetStorageAmountNil() {
+	o.StorageAmount.Set(nil)
+}
+
+// UnsetStorageAmount ensures that no value is present for StorageAmount, not even an explicit nil
+func (o *UpdateContainerResources) UnsetStorageAmount() {
+	o.StorageAmount.Unset()
 }
 
 func (o UpdateContainerResources) MarshalJSON() ([]byte, error) {
@@ -181,17 +216,17 @@ func (o UpdateContainerResources) MarshalJSON() ([]byte, error) {
 
 func (o UpdateContainerResources) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Cpu) {
-		toSerialize["cpu"] = o.Cpu
+	if o.Cpu.IsSet() {
+		toSerialize["cpu"] = o.Cpu.Get()
 	}
-	if !IsNil(o.Memory) {
-		toSerialize["memory"] = o.Memory
+	if o.Memory.IsSet() {
+		toSerialize["memory"] = o.Memory.Get()
 	}
-	if !IsNil(o.GpuClasses) {
+	if o.GpuClasses != nil {
 		toSerialize["gpu_classes"] = o.GpuClasses
 	}
-	if !IsNil(o.StorageAmount) {
-		toSerialize["storage_amount"] = o.StorageAmount
+	if o.StorageAmount.IsSet() {
+		toSerialize["storage_amount"] = o.StorageAmount.Get()
 	}
 	return toSerialize, nil
 }

@@ -18,7 +18,7 @@ Method | HTTP request | Description
 
 ## CreateQueue
 
-> Queue CreateQueue(ctx, organizationName, projectName).CreateQueue(createQueue).Execute()
+> Queue CreateQueue(ctx, organizationName, projectName).QueuePrototype(queuePrototype).Execute()
 
 Create Queue
 
@@ -39,11 +39,11 @@ import (
 func main() {
 	organizationName := "organizationName_example" // string | Your organization name. This identifies the billing context for the API operation and represents a security boundary for SaladCloud resources. The organization must be created before using the API, and you must be a member of the organization.
 	projectName := "projectName_example" // string | Your project name. This represents a collection of related SaladCloud resources. The project must be created before using the API.
-	createQueue := *openapiclient.NewCreateQueue("Name_example") // CreateQueue | 
+	queuePrototype := *openapiclient.NewQueuePrototype("Name_example") // QueuePrototype | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.QueuesAPI.CreateQueue(context.Background(), organizationName, projectName).CreateQueue(createQueue).Execute()
+	resp, r, err := apiClient.QueuesAPI.CreateQueue(context.Background(), organizationName, projectName).QueuePrototype(queuePrototype).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `QueuesAPI.CreateQueue``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -71,7 +71,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **createQueue** | [**CreateQueue**](CreateQueue.md) |  | 
+ **queuePrototype** | [**QueuePrototype**](QueuePrototype.md) |  | 
 
 ### Return type
 
@@ -93,7 +93,7 @@ Name | Type | Description  | Notes
 
 ## CreateQueueJob
 
-> QueueJob CreateQueueJob(ctx, organizationName, projectName, queueName).CreateQueueJob(createQueueJob).Execute()
+> QueueJob CreateQueueJob(ctx, organizationName, projectName, queueName).QueueJobPrototype(queueJobPrototype).Execute()
 
 Create Job
 
@@ -115,11 +115,11 @@ func main() {
 	organizationName := "organizationName_example" // string | Your organization name. This identifies the billing context for the API operation and represents a security boundary for SaladCloud resources. The organization must be created before using the API, and you must be a member of the organization.
 	projectName := "projectName_example" // string | Your project name. This represents a collection of related SaladCloud resources. The project must be created before using the API.
 	queueName := "queueName_example" // string | The queue name.
-	createQueueJob := *openapiclient.NewCreateQueueJob(interface{}(123)) // CreateQueueJob | 
+	queueJobPrototype := *openapiclient.NewQueueJobPrototype(interface{}(123)) // QueueJobPrototype | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.QueuesAPI.CreateQueueJob(context.Background(), organizationName, projectName, queueName).CreateQueueJob(createQueueJob).Execute()
+	resp, r, err := apiClient.QueuesAPI.CreateQueueJob(context.Background(), organizationName, projectName, queueName).QueueJobPrototype(queueJobPrototype).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `QueuesAPI.CreateQueueJob``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -149,7 +149,7 @@ Name | Type | Description  | Notes
 
 
 
- **createQueueJob** | [**CreateQueueJob**](CreateQueueJob.md) |  | 
+ **queueJobPrototype** | [**QueueJobPrototype**](QueueJobPrototype.md) |  | 
 
 ### Return type
 
@@ -477,7 +477,7 @@ Name | Type | Description  | Notes
 
 ## ListQueueJobs
 
-> QueueJobList ListQueueJobs(ctx, organizationName, projectName, queueName).Page(page).PageSize(pageSize).Execute()
+> QueueJobCollection ListQueueJobs(ctx, organizationName, projectName, queueName).Page(page).PageSize(pageSize).Execute()
 
 List Jobs
 
@@ -499,8 +499,8 @@ func main() {
 	organizationName := "organizationName_example" // string | Your organization name. This identifies the billing context for the API operation and represents a security boundary for SaladCloud resources. The organization must be created before using the API, and you must be a member of the organization.
 	projectName := "projectName_example" // string | Your project name. This represents a collection of related SaladCloud resources. The project must be created before using the API.
 	queueName := "queueName_example" // string | The queue name.
-	page := int32(56) // int32 |  (optional)
-	pageSize := int32(56) // int32 |  (optional)
+	page := int32(56) // int32 | The page number. (optional)
+	pageSize := int32(56) // int32 | The maximum number of items per page. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -509,7 +509,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `QueuesAPI.ListQueueJobs``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `ListQueueJobs`: QueueJobList
+	// response from `ListQueueJobs`: QueueJobCollection
 	fmt.Fprintf(os.Stdout, "Response from `QueuesAPI.ListQueueJobs`: %v\n", resp)
 }
 ```
@@ -534,12 +534,12 @@ Name | Type | Description  | Notes
 
 
 
- **page** | **int32** |  | 
- **pageSize** | **int32** |  | 
+ **page** | **int32** | The page number. | 
+ **pageSize** | **int32** | The maximum number of items per page. | 
 
 ### Return type
 
-[**QueueJobList**](QueueJobList.md)
+[**QueueJobCollection**](QueueJobCollection.md)
 
 ### Authorization
 
@@ -557,7 +557,7 @@ Name | Type | Description  | Notes
 
 ## ListQueues
 
-> QueueList ListQueues(ctx, organizationName, projectName).Execute()
+> QueueCollection ListQueues(ctx, organizationName, projectName).Execute()
 
 List Queues
 
@@ -586,7 +586,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `QueuesAPI.ListQueues``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `ListQueues`: QueueList
+	// response from `ListQueues`: QueueCollection
 	fmt.Fprintf(os.Stdout, "Response from `QueuesAPI.ListQueues`: %v\n", resp)
 }
 ```
@@ -612,7 +612,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**QueueList**](QueueList.md)
+[**QueueCollection**](QueueCollection.md)
 
 ### Authorization
 
@@ -630,7 +630,7 @@ Name | Type | Description  | Notes
 
 ## UpdateQueue
 
-> Queue UpdateQueue(ctx, organizationName, projectName, queueName).UpdateQueue(updateQueue).Execute()
+> Queue UpdateQueue(ctx, organizationName, projectName, queueName).QueuePatch(queuePatch).Execute()
 
 Update Queue
 
@@ -652,11 +652,11 @@ func main() {
 	organizationName := "organizationName_example" // string | Your organization name. This identifies the billing context for the API operation and represents a security boundary for SaladCloud resources. The organization must be created before using the API, and you must be a member of the organization.
 	projectName := "projectName_example" // string | Your project name. This represents a collection of related SaladCloud resources. The project must be created before using the API.
 	queueName := "queueName_example" // string | The queue name.
-	updateQueue := *openapiclient.NewUpdateQueue() // UpdateQueue | 
+	queuePatch := *openapiclient.NewQueuePatch() // QueuePatch | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.QueuesAPI.UpdateQueue(context.Background(), organizationName, projectName, queueName).UpdateQueue(updateQueue).Execute()
+	resp, r, err := apiClient.QueuesAPI.UpdateQueue(context.Background(), organizationName, projectName, queueName).QueuePatch(queuePatch).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `QueuesAPI.UpdateQueue``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -686,7 +686,7 @@ Name | Type | Description  | Notes
 
 
 
- **updateQueue** | [**UpdateQueue**](UpdateQueue.md) |  | 
+ **queuePatch** | [**QueuePatch**](QueuePatch.md) |  | 
 
 ### Return type
 

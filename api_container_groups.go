@@ -3,7 +3,7 @@ SaladCloud API
 
 The SaladCloud REST API. Please refer to the [SaladCloud API Documentation](https://docs.salad.com/api-reference) for more details.
 
-API version: 0.9.0-alpha.7
+API version: 0.9.0-alpha.11
 Contact: cloud@salad.com
 */
 
@@ -29,11 +29,11 @@ type ApiCreateContainerGroupRequest struct {
 	ApiService *ContainerGroupsAPIService
 	organizationName string
 	projectName string
-	createContainerGroup *CreateContainerGroup
+	containerGroupPrototype *ContainerGroupPrototype
 }
 
-func (r ApiCreateContainerGroupRequest) CreateContainerGroup(createContainerGroup CreateContainerGroup) ApiCreateContainerGroupRequest {
-	r.createContainerGroup = &createContainerGroup
+func (r ApiCreateContainerGroupRequest) ContainerGroupPrototype(containerGroupPrototype ContainerGroupPrototype) ApiCreateContainerGroupRequest {
+	r.containerGroupPrototype = &containerGroupPrototype
 	return r
 }
 
@@ -94,8 +94,8 @@ func (a *ContainerGroupsAPIService) CreateContainerGroupExecute(r ApiCreateConta
 	if strlen(r.projectName) > 63 {
 		return localVarReturnValue, nil, reportError("projectName must have less than 63 elements")
 	}
-	if r.createContainerGroup == nil {
-		return localVarReturnValue, nil, reportError("createContainerGroup is required and must be specified")
+	if r.containerGroupPrototype == nil {
+		return localVarReturnValue, nil, reportError("containerGroupPrototype is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -116,7 +116,7 @@ func (a *ContainerGroupsAPIService) CreateContainerGroupExecute(r ApiCreateConta
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.createContainerGroup
+	localVarPostBody = r.containerGroupPrototype
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -577,7 +577,7 @@ Gets a container group instance
  @param organizationName Your organization name. This identifies the billing context for the API operation and represents a security boundary for SaladCloud resources. The organization must be created before using the API, and you must be a member of the organization.
  @param projectName Your project name. This represents a collection of related SaladCloud resources. The project must be created before using the API.
  @param containerGroupName The unique container group name
- @param containerGroupInstanceId The unique instance identifier
+ @param containerGroupInstanceId The unique container group instance identifier
  @return ApiGetContainerGroupInstanceRequest
 */
 func (a *ContainerGroupsAPIService) GetContainerGroupInstance(ctx context.Context, organizationName string, projectName string, containerGroupName string, containerGroupInstanceId string) ApiGetContainerGroupInstanceRequest {
@@ -740,7 +740,7 @@ type ApiListContainerGroupInstancesRequest struct {
 	containerGroupName string
 }
 
-func (r ApiListContainerGroupInstancesRequest) Execute() (*ContainerGroupInstances, *http.Response, error) {
+func (r ApiListContainerGroupInstancesRequest) Execute() (*ContainerGroupInstanceCollection, *http.Response, error) {
 	return r.ApiService.ListContainerGroupInstancesExecute(r)
 }
 
@@ -766,13 +766,13 @@ func (a *ContainerGroupsAPIService) ListContainerGroupInstances(ctx context.Cont
 }
 
 // Execute executes the request
-//  @return ContainerGroupInstances
-func (a *ContainerGroupsAPIService) ListContainerGroupInstancesExecute(r ApiListContainerGroupInstancesRequest) (*ContainerGroupInstances, *http.Response, error) {
+//  @return ContainerGroupInstanceCollection
+func (a *ContainerGroupsAPIService) ListContainerGroupInstancesExecute(r ApiListContainerGroupInstancesRequest) (*ContainerGroupInstanceCollection, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *ContainerGroupInstances
+		localVarReturnValue  *ContainerGroupInstanceCollection
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ContainerGroupsAPIService.ListContainerGroupInstances")
@@ -912,7 +912,7 @@ type ApiListContainerGroupsRequest struct {
 	projectName string
 }
 
-func (r ApiListContainerGroupsRequest) Execute() (*ContainerGroupList, *http.Response, error) {
+func (r ApiListContainerGroupsRequest) Execute() (*ContainerGroupCollection, *http.Response, error) {
 	return r.ApiService.ListContainerGroupsExecute(r)
 }
 
@@ -936,13 +936,13 @@ func (a *ContainerGroupsAPIService) ListContainerGroups(ctx context.Context, org
 }
 
 // Execute executes the request
-//  @return ContainerGroupList
-func (a *ContainerGroupsAPIService) ListContainerGroupsExecute(r ApiListContainerGroupsRequest) (*ContainerGroupList, *http.Response, error) {
+//  @return ContainerGroupCollection
+func (a *ContainerGroupsAPIService) ListContainerGroupsExecute(r ApiListContainerGroupsRequest) (*ContainerGroupCollection, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *ContainerGroupList
+		localVarReturnValue  *ContainerGroupCollection
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ContainerGroupsAPIService.ListContainerGroups")
@@ -1079,7 +1079,7 @@ Reallocates a container group instance to run on a different Salad Node
  @param organizationName Your organization name. This identifies the billing context for the API operation and represents a security boundary for SaladCloud resources. The organization must be created before using the API, and you must be a member of the organization.
  @param projectName Your project name. This represents a collection of related SaladCloud resources. The project must be created before using the API.
  @param containerGroupName The unique container group name
- @param containerGroupInstanceId The unique instance identifier
+ @param containerGroupInstanceId The unique container group instance identifier
  @return ApiReallocateContainerGroupInstanceRequest
 */
 func (a *ContainerGroupsAPIService) ReallocateContainerGroupInstance(ctx context.Context, organizationName string, projectName string, containerGroupName string, containerGroupInstanceId string) ApiReallocateContainerGroupInstanceRequest {
@@ -1245,7 +1245,7 @@ Stops a container, destroys it, and starts a new one without requiring the image
  @param organizationName Your organization name. This identifies the billing context for the API operation and represents a security boundary for SaladCloud resources. The organization must be created before using the API, and you must be a member of the organization.
  @param projectName Your project name. This represents a collection of related SaladCloud resources. The project must be created before using the API.
  @param containerGroupName The unique container group name
- @param containerGroupInstanceId The unique instance identifier
+ @param containerGroupInstanceId The unique container group instance identifier
  @return ApiRecreateContainerGroupInstanceRequest
 */
 func (a *ContainerGroupsAPIService) RecreateContainerGroupInstance(ctx context.Context, organizationName string, projectName string, containerGroupName string, containerGroupInstanceId string) ApiRecreateContainerGroupInstanceRequest {
@@ -1411,7 +1411,7 @@ Stops a container and restarts it on the same Salad Node
  @param organizationName Your organization name. This identifies the billing context for the API operation and represents a security boundary for SaladCloud resources. The organization must be created before using the API, and you must be a member of the organization.
  @param projectName Your project name. This represents a collection of related SaladCloud resources. The project must be created before using the API.
  @param containerGroupName The unique container group name
- @param containerGroupInstanceId The unique instance identifier
+ @param containerGroupInstanceId The unique container group instance identifier
  @return ApiRestartContainerGroupInstanceRequest
 */
 func (a *ContainerGroupsAPIService) RestartContainerGroupInstance(ctx context.Context, organizationName string, projectName string, containerGroupName string, containerGroupInstanceId string) ApiRestartContainerGroupInstanceRequest {
@@ -1907,11 +1907,11 @@ type ApiUpdateContainerGroupRequest struct {
 	organizationName string
 	projectName string
 	containerGroupName string
-	updateContainerGroup *UpdateContainerGroup
+	containerGroupPatch *ContainerGroupPatch
 }
 
-func (r ApiUpdateContainerGroupRequest) UpdateContainerGroup(updateContainerGroup UpdateContainerGroup) ApiUpdateContainerGroupRequest {
-	r.updateContainerGroup = &updateContainerGroup
+func (r ApiUpdateContainerGroupRequest) ContainerGroupPatch(containerGroupPatch ContainerGroupPatch) ApiUpdateContainerGroupRequest {
+	r.containerGroupPatch = &containerGroupPatch
 	return r
 }
 
@@ -1981,8 +1981,8 @@ func (a *ContainerGroupsAPIService) UpdateContainerGroupExecute(r ApiUpdateConta
 	if strlen(r.containerGroupName) > 63 {
 		return localVarReturnValue, nil, reportError("containerGroupName must have less than 63 elements")
 	}
-	if r.updateContainerGroup == nil {
-		return localVarReturnValue, nil, reportError("updateContainerGroup is required and must be specified")
+	if r.containerGroupPatch == nil {
+		return localVarReturnValue, nil, reportError("containerGroupPatch is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -2003,7 +2003,217 @@ func (a *ContainerGroupsAPIService) UpdateContainerGroupExecute(r ApiUpdateConta
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.updateContainerGroup
+	localVarPostBody = r.containerGroupPatch
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["ApiKeyAuth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["Salad-Api-Key"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v ProblemDetails
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v ProblemDetails
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v ProblemDetails
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 429 {
+			var v ProblemDetails
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+			var v ProblemDetails
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiUpdateContainerGroupInstanceRequest struct {
+	ctx context.Context
+	ApiService *ContainerGroupsAPIService
+	organizationName string
+	projectName string
+	containerGroupName string
+	containerGroupInstanceId string
+	containerGroupInstancePatch *ContainerGroupInstancePatch
+}
+
+func (r ApiUpdateContainerGroupInstanceRequest) ContainerGroupInstancePatch(containerGroupInstancePatch ContainerGroupInstancePatch) ApiUpdateContainerGroupInstanceRequest {
+	r.containerGroupInstancePatch = &containerGroupInstancePatch
+	return r
+}
+
+func (r ApiUpdateContainerGroupInstanceRequest) Execute() (*ContainerGroupInstance, *http.Response, error) {
+	return r.ApiService.UpdateContainerGroupInstanceExecute(r)
+}
+
+/*
+UpdateContainerGroupInstance Update Container Group Instance
+
+Updates a container group instance
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param organizationName Your organization name. This identifies the billing context for the API operation and represents a security boundary for SaladCloud resources. The organization must be created before using the API, and you must be a member of the organization.
+ @param projectName Your project name. This represents a collection of related SaladCloud resources. The project must be created before using the API.
+ @param containerGroupName The unique container group name
+ @param containerGroupInstanceId The unique container group instance identifier
+ @return ApiUpdateContainerGroupInstanceRequest
+*/
+func (a *ContainerGroupsAPIService) UpdateContainerGroupInstance(ctx context.Context, organizationName string, projectName string, containerGroupName string, containerGroupInstanceId string) ApiUpdateContainerGroupInstanceRequest {
+	return ApiUpdateContainerGroupInstanceRequest{
+		ApiService: a,
+		ctx: ctx,
+		organizationName: organizationName,
+		projectName: projectName,
+		containerGroupName: containerGroupName,
+		containerGroupInstanceId: containerGroupInstanceId,
+	}
+}
+
+// Execute executes the request
+//  @return ContainerGroupInstance
+func (a *ContainerGroupsAPIService) UpdateContainerGroupInstanceExecute(r ApiUpdateContainerGroupInstanceRequest) (*ContainerGroupInstance, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodPatch
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *ContainerGroupInstance
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ContainerGroupsAPIService.UpdateContainerGroupInstance")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/organizations/{organization_name}/projects/{project_name}/containers/{container_group_name}/instances/{container_group_instance_id}"
+	localVarPath = strings.Replace(localVarPath, "{"+"organization_name"+"}", url.PathEscape(parameterValueToString(r.organizationName, "organizationName")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"project_name"+"}", url.PathEscape(parameterValueToString(r.projectName, "projectName")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"container_group_name"+"}", url.PathEscape(parameterValueToString(r.containerGroupName, "containerGroupName")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"container_group_instance_id"+"}", url.PathEscape(parameterValueToString(r.containerGroupInstanceId, "containerGroupInstanceId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if strlen(r.organizationName) < 2 {
+		return localVarReturnValue, nil, reportError("organizationName must have at least 2 elements")
+	}
+	if strlen(r.organizationName) > 63 {
+		return localVarReturnValue, nil, reportError("organizationName must have less than 63 elements")
+	}
+	if strlen(r.projectName) < 2 {
+		return localVarReturnValue, nil, reportError("projectName must have at least 2 elements")
+	}
+	if strlen(r.projectName) > 63 {
+		return localVarReturnValue, nil, reportError("projectName must have less than 63 elements")
+	}
+	if strlen(r.containerGroupName) < 2 {
+		return localVarReturnValue, nil, reportError("containerGroupName must have at least 2 elements")
+	}
+	if strlen(r.containerGroupName) > 63 {
+		return localVarReturnValue, nil, reportError("containerGroupName must have less than 63 elements")
+	}
+	if r.containerGroupInstancePatch == nil {
+		return localVarReturnValue, nil, reportError("containerGroupInstancePatch is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/merge-patch+json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.containerGroupInstancePatch
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {

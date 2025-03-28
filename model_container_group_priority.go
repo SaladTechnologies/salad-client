@@ -3,7 +3,7 @@ SaladCloud API
 
 The SaladCloud REST API. Please refer to the [SaladCloud API Documentation](https://docs.salad.com/api-reference) for more details.
 
-API version: 0.9.0-alpha.7
+API version: 0.9.0-alpha.11
 Contact: cloud@salad.com
 */
 
@@ -16,7 +16,7 @@ import (
 	"fmt"
 )
 
-// ContainerGroupPriority the model 'ContainerGroupPriority'
+// ContainerGroupPriority Specifies the priority level for container group execution, which determines resource allocation and scheduling precedence.
 type ContainerGroupPriority string
 
 // List of ContainerGroupPriority

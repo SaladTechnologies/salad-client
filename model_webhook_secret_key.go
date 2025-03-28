@@ -3,7 +3,7 @@ SaladCloud API
 
 The SaladCloud REST API. Please refer to the [SaladCloud API Documentation](https://docs.salad.com/api-reference) for more details.
 
-API version: 0.9.0-alpha.7
+API version: 0.9.0-alpha.11
 Contact: cloud@salad.com
 */
 
@@ -23,7 +23,7 @@ var _ MappedNullable = &WebhookSecretKey{}
 // WebhookSecretKey Represents a webhook secret key
 type WebhookSecretKey struct {
 	// The webhook secret key
-	SecretKey string `json:"secret_key"`
+	SecretKey string `json:"secret_key" validate:"regexp=^[+\\/=0-9A-Za-z]{44,172}$"`
 }
 
 type _WebhookSecretKey WebhookSecretKey

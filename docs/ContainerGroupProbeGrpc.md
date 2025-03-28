@@ -4,14 +4,14 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Service** | **string** |  | 
-**Port** | **int32** |  | 
+**Port** | **int32** | The port number on which the gRPC health check service is exposed. | 
+**Service** | **string** | The name of the gRPC service that implements the health check protocol. | 
 
 ## Methods
 
 ### NewContainerGroupProbeGrpc
 
-`func NewContainerGroupProbeGrpc(service string, port int32, ) *ContainerGroupProbeGrpc`
+`func NewContainerGroupProbeGrpc(port int32, service string, ) *ContainerGroupProbeGrpc`
 
 NewContainerGroupProbeGrpc instantiates a new ContainerGroupProbeGrpc object
 This constructor will assign default values to properties that have it defined,
@@ -25,26 +25,6 @@ will change when the set of required properties is changed
 NewContainerGroupProbeGrpcWithDefaults instantiates a new ContainerGroupProbeGrpc object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
-
-### GetService
-
-`func (o *ContainerGroupProbeGrpc) GetService() string`
-
-GetService returns the Service field if non-nil, zero value otherwise.
-
-### GetServiceOk
-
-`func (o *ContainerGroupProbeGrpc) GetServiceOk() (*string, bool)`
-
-GetServiceOk returns a tuple with the Service field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetService
-
-`func (o *ContainerGroupProbeGrpc) SetService(v string)`
-
-SetService sets Service field to given value.
-
 
 ### GetPort
 
@@ -64,6 +44,26 @@ and a boolean to check if the value has been set.
 `func (o *ContainerGroupProbeGrpc) SetPort(v int32)`
 
 SetPort sets Port field to given value.
+
+
+### GetService
+
+`func (o *ContainerGroupProbeGrpc) GetService() string`
+
+GetService returns the Service field if non-nil, zero value otherwise.
+
+### GetServiceOk
+
+`func (o *ContainerGroupProbeGrpc) GetServiceOk() (*string, bool)`
+
+GetServiceOk returns a tuple with the Service field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetService
+
+`func (o *ContainerGroupProbeGrpc) SetService(v string)`
+
+SetService sets Service field to given value.
 
 
 

@@ -4,21 +4,21 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Tcp** | Pointer to [**ContainerGroupProbeTcp**](ContainerGroupProbeTcp.md) |  | [optional] 
-**Http** | Pointer to [**ContainerGroupProbeHttp**](ContainerGroupProbeHttp.md) |  | [optional] 
-**Grpc** | Pointer to [**ContainerGroupProbeGrpc**](ContainerGroupProbeGrpc.md) |  | [optional] 
 **Exec** | Pointer to [**ContainerGroupProbeExec**](ContainerGroupProbeExec.md) |  | [optional] 
-**InitialDelaySeconds** | **int32** |  | [default to 0]
-**PeriodSeconds** | **int32** |  | [default to 10]
-**TimeoutSeconds** | **int32** |  | [default to 30]
-**SuccessThreshold** | **int32** |  | [default to 1]
-**FailureThreshold** | **int32** |  | [default to 3]
+**FailureThreshold** | **int32** | Number of consecutive failures required to consider the probe as failed | [default to 3]
+**Grpc** | Pointer to [**ContainerGroupProbeGrpc**](ContainerGroupProbeGrpc.md) |  | [optional] 
+**Http** | Pointer to [**ContainerGroupProbeHttp**](ContainerGroupProbeHttp.md) |  | [optional] 
+**InitialDelaySeconds** | **int32** | Number of seconds to wait after container start before initiating liveness probes | [default to 0]
+**PeriodSeconds** | **int32** | Frequency in seconds at which the probe should be executed | [default to 10]
+**SuccessThreshold** | **int32** | Number of consecutive successes required to consider the probe successful | [default to 1]
+**Tcp** | Pointer to [**ContainerGroupProbeTcp**](ContainerGroupProbeTcp.md) |  | [optional] 
+**TimeoutSeconds** | **int32** | Number of seconds after which the probe times out if no response is received | [default to 30]
 
 ## Methods
 
 ### NewContainerGroupLivenessProbe
 
-`func NewContainerGroupLivenessProbe(initialDelaySeconds int32, periodSeconds int32, timeoutSeconds int32, successThreshold int32, failureThreshold int32, ) *ContainerGroupLivenessProbe`
+`func NewContainerGroupLivenessProbe(failureThreshold int32, initialDelaySeconds int32, periodSeconds int32, successThreshold int32, timeoutSeconds int32, ) *ContainerGroupLivenessProbe`
 
 NewContainerGroupLivenessProbe instantiates a new ContainerGroupLivenessProbe object
 This constructor will assign default values to properties that have it defined,
@@ -33,55 +33,50 @@ NewContainerGroupLivenessProbeWithDefaults instantiates a new ContainerGroupLive
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
-### GetTcp
+### GetExec
 
-`func (o *ContainerGroupLivenessProbe) GetTcp() ContainerGroupProbeTcp`
+`func (o *ContainerGroupLivenessProbe) GetExec() ContainerGroupProbeExec`
 
-GetTcp returns the Tcp field if non-nil, zero value otherwise.
+GetExec returns the Exec field if non-nil, zero value otherwise.
 
-### GetTcpOk
+### GetExecOk
 
-`func (o *ContainerGroupLivenessProbe) GetTcpOk() (*ContainerGroupProbeTcp, bool)`
+`func (o *ContainerGroupLivenessProbe) GetExecOk() (*ContainerGroupProbeExec, bool)`
 
-GetTcpOk returns a tuple with the Tcp field if it's non-nil, zero value otherwise
+GetExecOk returns a tuple with the Exec field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetTcp
+### SetExec
 
-`func (o *ContainerGroupLivenessProbe) SetTcp(v ContainerGroupProbeTcp)`
+`func (o *ContainerGroupLivenessProbe) SetExec(v ContainerGroupProbeExec)`
 
-SetTcp sets Tcp field to given value.
+SetExec sets Exec field to given value.
 
-### HasTcp
+### HasExec
 
-`func (o *ContainerGroupLivenessProbe) HasTcp() bool`
+`func (o *ContainerGroupLivenessProbe) HasExec() bool`
 
-HasTcp returns a boolean if a field has been set.
+HasExec returns a boolean if a field has been set.
 
-### GetHttp
+### GetFailureThreshold
 
-`func (o *ContainerGroupLivenessProbe) GetHttp() ContainerGroupProbeHttp`
+`func (o *ContainerGroupLivenessProbe) GetFailureThreshold() int32`
 
-GetHttp returns the Http field if non-nil, zero value otherwise.
+GetFailureThreshold returns the FailureThreshold field if non-nil, zero value otherwise.
 
-### GetHttpOk
+### GetFailureThresholdOk
 
-`func (o *ContainerGroupLivenessProbe) GetHttpOk() (*ContainerGroupProbeHttp, bool)`
+`func (o *ContainerGroupLivenessProbe) GetFailureThresholdOk() (*int32, bool)`
 
-GetHttpOk returns a tuple with the Http field if it's non-nil, zero value otherwise
+GetFailureThresholdOk returns a tuple with the FailureThreshold field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetHttp
+### SetFailureThreshold
 
-`func (o *ContainerGroupLivenessProbe) SetHttp(v ContainerGroupProbeHttp)`
+`func (o *ContainerGroupLivenessProbe) SetFailureThreshold(v int32)`
 
-SetHttp sets Http field to given value.
+SetFailureThreshold sets FailureThreshold field to given value.
 
-### HasHttp
-
-`func (o *ContainerGroupLivenessProbe) HasHttp() bool`
-
-HasHttp returns a boolean if a field has been set.
 
 ### GetGrpc
 
@@ -108,30 +103,30 @@ SetGrpc sets Grpc field to given value.
 
 HasGrpc returns a boolean if a field has been set.
 
-### GetExec
+### GetHttp
 
-`func (o *ContainerGroupLivenessProbe) GetExec() ContainerGroupProbeExec`
+`func (o *ContainerGroupLivenessProbe) GetHttp() ContainerGroupProbeHttp`
 
-GetExec returns the Exec field if non-nil, zero value otherwise.
+GetHttp returns the Http field if non-nil, zero value otherwise.
 
-### GetExecOk
+### GetHttpOk
 
-`func (o *ContainerGroupLivenessProbe) GetExecOk() (*ContainerGroupProbeExec, bool)`
+`func (o *ContainerGroupLivenessProbe) GetHttpOk() (*ContainerGroupProbeHttp, bool)`
 
-GetExecOk returns a tuple with the Exec field if it's non-nil, zero value otherwise
+GetHttpOk returns a tuple with the Http field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetExec
+### SetHttp
 
-`func (o *ContainerGroupLivenessProbe) SetExec(v ContainerGroupProbeExec)`
+`func (o *ContainerGroupLivenessProbe) SetHttp(v ContainerGroupProbeHttp)`
 
-SetExec sets Exec field to given value.
+SetHttp sets Http field to given value.
 
-### HasExec
+### HasHttp
 
-`func (o *ContainerGroupLivenessProbe) HasExec() bool`
+`func (o *ContainerGroupLivenessProbe) HasHttp() bool`
 
-HasExec returns a boolean if a field has been set.
+HasHttp returns a boolean if a field has been set.
 
 ### GetInitialDelaySeconds
 
@@ -173,26 +168,6 @@ and a boolean to check if the value has been set.
 SetPeriodSeconds sets PeriodSeconds field to given value.
 
 
-### GetTimeoutSeconds
-
-`func (o *ContainerGroupLivenessProbe) GetTimeoutSeconds() int32`
-
-GetTimeoutSeconds returns the TimeoutSeconds field if non-nil, zero value otherwise.
-
-### GetTimeoutSecondsOk
-
-`func (o *ContainerGroupLivenessProbe) GetTimeoutSecondsOk() (*int32, bool)`
-
-GetTimeoutSecondsOk returns a tuple with the TimeoutSeconds field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetTimeoutSeconds
-
-`func (o *ContainerGroupLivenessProbe) SetTimeoutSeconds(v int32)`
-
-SetTimeoutSeconds sets TimeoutSeconds field to given value.
-
-
 ### GetSuccessThreshold
 
 `func (o *ContainerGroupLivenessProbe) GetSuccessThreshold() int32`
@@ -213,24 +188,49 @@ and a boolean to check if the value has been set.
 SetSuccessThreshold sets SuccessThreshold field to given value.
 
 
-### GetFailureThreshold
+### GetTcp
 
-`func (o *ContainerGroupLivenessProbe) GetFailureThreshold() int32`
+`func (o *ContainerGroupLivenessProbe) GetTcp() ContainerGroupProbeTcp`
 
-GetFailureThreshold returns the FailureThreshold field if non-nil, zero value otherwise.
+GetTcp returns the Tcp field if non-nil, zero value otherwise.
 
-### GetFailureThresholdOk
+### GetTcpOk
 
-`func (o *ContainerGroupLivenessProbe) GetFailureThresholdOk() (*int32, bool)`
+`func (o *ContainerGroupLivenessProbe) GetTcpOk() (*ContainerGroupProbeTcp, bool)`
 
-GetFailureThresholdOk returns a tuple with the FailureThreshold field if it's non-nil, zero value otherwise
+GetTcpOk returns a tuple with the Tcp field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetFailureThreshold
+### SetTcp
 
-`func (o *ContainerGroupLivenessProbe) SetFailureThreshold(v int32)`
+`func (o *ContainerGroupLivenessProbe) SetTcp(v ContainerGroupProbeTcp)`
 
-SetFailureThreshold sets FailureThreshold field to given value.
+SetTcp sets Tcp field to given value.
+
+### HasTcp
+
+`func (o *ContainerGroupLivenessProbe) HasTcp() bool`
+
+HasTcp returns a boolean if a field has been set.
+
+### GetTimeoutSeconds
+
+`func (o *ContainerGroupLivenessProbe) GetTimeoutSeconds() int32`
+
+GetTimeoutSeconds returns the TimeoutSeconds field if non-nil, zero value otherwise.
+
+### GetTimeoutSecondsOk
+
+`func (o *ContainerGroupLivenessProbe) GetTimeoutSecondsOk() (*int32, bool)`
+
+GetTimeoutSecondsOk returns a tuple with the TimeoutSeconds field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTimeoutSeconds
+
+`func (o *ContainerGroupLivenessProbe) SetTimeoutSeconds(v int32)`
+
+SetTimeoutSeconds sets TimeoutSeconds field to given value.
 
 
 

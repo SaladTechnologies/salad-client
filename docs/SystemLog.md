@@ -6,19 +6,19 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **EventName** | **string** | The name of the event | 
 **EventTime** | **time.Time** | The UTC date &amp; time when the log item was created | 
-**InstanceId** | Pointer to **string** | The unique instance ID | [optional] 
-**MachineId** | Pointer to **string** | The organization-specific machine ID | [optional] 
-**Version** | **string** | The version instance ID | 
+**InstanceId** | Pointer to **string** | The container group instance identifier. | [optional] 
+**MachineId** | Pointer to **string** | The container group machine identifier. | [optional] 
 **ResourceCpu** | **NullableInt32** | The number of CPUs | 
-**ResourceMemory** | **NullableInt32** | The memory amount in MB | 
 **ResourceGpuClass** | **string** | The GPU class name | 
+**ResourceMemory** | **NullableInt32** | The memory amount in MB | 
 **ResourceStorageAmount** | **NullableInt64** | The storage amount in bytes | 
+**Version** | **string** | The version instance ID | 
 
 ## Methods
 
 ### NewSystemLog
 
-`func NewSystemLog(eventName string, eventTime time.Time, version string, resourceCpu NullableInt32, resourceMemory NullableInt32, resourceGpuClass string, resourceStorageAmount NullableInt64, ) *SystemLog`
+`func NewSystemLog(eventName string, eventTime time.Time, resourceCpu NullableInt32, resourceGpuClass string, resourceMemory NullableInt32, resourceStorageAmount NullableInt64, version string, ) *SystemLog`
 
 NewSystemLog instantiates a new SystemLog object
 This constructor will assign default values to properties that have it defined,
@@ -123,26 +123,6 @@ SetMachineId sets MachineId field to given value.
 
 HasMachineId returns a boolean if a field has been set.
 
-### GetVersion
-
-`func (o *SystemLog) GetVersion() string`
-
-GetVersion returns the Version field if non-nil, zero value otherwise.
-
-### GetVersionOk
-
-`func (o *SystemLog) GetVersionOk() (*string, bool)`
-
-GetVersionOk returns a tuple with the Version field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetVersion
-
-`func (o *SystemLog) SetVersion(v string)`
-
-SetVersion sets Version field to given value.
-
-
 ### GetResourceCpu
 
 `func (o *SystemLog) GetResourceCpu() int32`
@@ -173,6 +153,26 @@ SetResourceCpu sets ResourceCpu field to given value.
 `func (o *SystemLog) UnsetResourceCpu()`
 
 UnsetResourceCpu ensures that no value is present for ResourceCpu, not even an explicit nil
+### GetResourceGpuClass
+
+`func (o *SystemLog) GetResourceGpuClass() string`
+
+GetResourceGpuClass returns the ResourceGpuClass field if non-nil, zero value otherwise.
+
+### GetResourceGpuClassOk
+
+`func (o *SystemLog) GetResourceGpuClassOk() (*string, bool)`
+
+GetResourceGpuClassOk returns a tuple with the ResourceGpuClass field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetResourceGpuClass
+
+`func (o *SystemLog) SetResourceGpuClass(v string)`
+
+SetResourceGpuClass sets ResourceGpuClass field to given value.
+
+
 ### GetResourceMemory
 
 `func (o *SystemLog) GetResourceMemory() int32`
@@ -203,26 +203,6 @@ SetResourceMemory sets ResourceMemory field to given value.
 `func (o *SystemLog) UnsetResourceMemory()`
 
 UnsetResourceMemory ensures that no value is present for ResourceMemory, not even an explicit nil
-### GetResourceGpuClass
-
-`func (o *SystemLog) GetResourceGpuClass() string`
-
-GetResourceGpuClass returns the ResourceGpuClass field if non-nil, zero value otherwise.
-
-### GetResourceGpuClassOk
-
-`func (o *SystemLog) GetResourceGpuClassOk() (*string, bool)`
-
-GetResourceGpuClassOk returns a tuple with the ResourceGpuClass field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetResourceGpuClass
-
-`func (o *SystemLog) SetResourceGpuClass(v string)`
-
-SetResourceGpuClass sets ResourceGpuClass field to given value.
-
-
 ### GetResourceStorageAmount
 
 `func (o *SystemLog) GetResourceStorageAmount() int64`
@@ -253,6 +233,26 @@ SetResourceStorageAmount sets ResourceStorageAmount field to given value.
 `func (o *SystemLog) UnsetResourceStorageAmount()`
 
 UnsetResourceStorageAmount ensures that no value is present for ResourceStorageAmount, not even an explicit nil
+### GetVersion
+
+`func (o *SystemLog) GetVersion() string`
+
+GetVersion returns the Version field if non-nil, zero value otherwise.
+
+### GetVersionOk
+
+`func (o *SystemLog) GetVersionOk() (*string, bool)`
+
+GetVersionOk returns a tuple with the Version field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetVersion
+
+`func (o *SystemLog) SetVersion(v string)`
+
+SetVersion sets Version field to given value.
+
+
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

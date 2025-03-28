@@ -3,7 +3,7 @@ SaladCloud API
 
 The SaladCloud REST API. Please refer to the [SaladCloud API Documentation](https://docs.salad.com/api-reference) for more details.
 
-API version: 0.9.0-alpha.7
+API version: 0.9.0-alpha.11
 Contact: cloud@salad.com
 */
 
@@ -16,7 +16,7 @@ import (
 	"fmt"
 )
 
-// ContainerRestartPolicy the model 'ContainerRestartPolicy'
+// ContainerRestartPolicy Specifies the policy for restarting containers when they exit or fail.
 type ContainerRestartPolicy string
 
 // List of ContainerRestartPolicy

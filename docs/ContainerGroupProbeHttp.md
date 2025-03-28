@@ -4,16 +4,16 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Path** | **string** |  | 
-**Port** | **int32** |  | 
-**Scheme** | Pointer to [**ContainerProbeHttpScheme**](ContainerProbeHttpScheme.md) |  | [optional] 
-**Headers** | Pointer to [**[]HttpHeadersInner**](HttpHeadersInner.md) |  | [optional] 
+**Headers** | [**[]ContainerGroupProbeHttpHeader**](ContainerGroupProbeHttpHeader.md) | A collection of HTTP header name-value pairs used for configuring requests and responses in container group endpoints. Each header consists of a name and its corresponding value. | 
+**Path** | **string** | The HTTP path that will be probed to check container health. | 
+**Port** | **int32** | The TCP port number to which the HTTP request will be sent. | 
+**Scheme** | [**NullableContainerProbeHttpScheme**](ContainerProbeHttpScheme.md) |  | 
 
 ## Methods
 
 ### NewContainerGroupProbeHttp
 
-`func NewContainerGroupProbeHttp(path string, port int32, ) *ContainerGroupProbeHttp`
+`func NewContainerGroupProbeHttp(headers []ContainerGroupProbeHttpHeader, path string, port int32, scheme NullableContainerProbeHttpScheme, ) *ContainerGroupProbeHttp`
 
 NewContainerGroupProbeHttp instantiates a new ContainerGroupProbeHttp object
 This constructor will assign default values to properties that have it defined,
@@ -27,6 +27,26 @@ will change when the set of required properties is changed
 NewContainerGroupProbeHttpWithDefaults instantiates a new ContainerGroupProbeHttp object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetHeaders
+
+`func (o *ContainerGroupProbeHttp) GetHeaders() []ContainerGroupProbeHttpHeader`
+
+GetHeaders returns the Headers field if non-nil, zero value otherwise.
+
+### GetHeadersOk
+
+`func (o *ContainerGroupProbeHttp) GetHeadersOk() (*[]ContainerGroupProbeHttpHeader, bool)`
+
+GetHeadersOk returns a tuple with the Headers field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetHeaders
+
+`func (o *ContainerGroupProbeHttp) SetHeaders(v []ContainerGroupProbeHttpHeader)`
+
+SetHeaders sets Headers field to given value.
+
 
 ### GetPath
 
@@ -87,37 +107,17 @@ and a boolean to check if the value has been set.
 
 SetScheme sets Scheme field to given value.
 
-### HasScheme
 
-`func (o *ContainerGroupProbeHttp) HasScheme() bool`
+### SetSchemeNil
 
-HasScheme returns a boolean if a field has been set.
+`func (o *ContainerGroupProbeHttp) SetSchemeNil(b bool)`
 
-### GetHeaders
+ SetSchemeNil sets the value for Scheme to be an explicit nil
 
-`func (o *ContainerGroupProbeHttp) GetHeaders() []HttpHeadersInner`
+### UnsetScheme
+`func (o *ContainerGroupProbeHttp) UnsetScheme()`
 
-GetHeaders returns the Headers field if non-nil, zero value otherwise.
-
-### GetHeadersOk
-
-`func (o *ContainerGroupProbeHttp) GetHeadersOk() (*[]HttpHeadersInner, bool)`
-
-GetHeadersOk returns a tuple with the Headers field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetHeaders
-
-`func (o *ContainerGroupProbeHttp) SetHeaders(v []HttpHeadersInner)`
-
-SetHeaders sets Headers field to given value.
-
-### HasHeaders
-
-`func (o *ContainerGroupProbeHttp) HasHeaders() bool`
-
-HasHeaders returns a boolean if a field has been set.
-
+UnsetScheme ensures that no value is present for Scheme, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

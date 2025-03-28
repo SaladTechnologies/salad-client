@@ -3,7 +3,7 @@ SaladCloud API
 
 The SaladCloud REST API. Please refer to the [SaladCloud API Documentation](https://docs.salad.com/api-reference) for more details.
 
-API version: 0.9.0-alpha.7
+API version: 0.9.0-alpha.11
 Contact: cloud@salad.com
 */
 
@@ -20,12 +20,15 @@ import (
 // checks if the ContainerGroupProbeHttp type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ContainerGroupProbeHttp{}
 
-// ContainerGroupProbeHttp struct for ContainerGroupProbeHttp
+// ContainerGroupProbeHttp Defines HTTP probe configuration for container health checks within a container group.
 type ContainerGroupProbeHttp struct {
-	Path string `json:"path"`
+	// A collection of HTTP header name-value pairs used for configuring requests and responses in container group endpoints. Each header consists of a name and its corresponding value.
+	Headers []ContainerGroupProbeHttpHeader `json:"headers"`
+	// The HTTP path that will be probed to check container health.
+	Path string `json:"path" validate:"regexp=^.*$"`
+	// The TCP port number to which the HTTP request will be sent.
 	Port int32 `json:"port"`
-	Scheme *ContainerProbeHttpScheme `json:"scheme,omitempty"`
-	Headers []HttpHeadersInner `json:"headers,omitempty"`
+	Scheme NullableContainerProbeHttpScheme `json:"scheme"`
 }
 
 type _ContainerGroupProbeHttp ContainerGroupProbeHttp
@@ -34,10 +37,12 @@ type _ContainerGroupProbeHttp ContainerGroupProbeHttp
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewContainerGroupProbeHttp(path string, port int32) *ContainerGroupProbeHttp {
+func NewContainerGroupProbeHttp(headers []ContainerGroupProbeHttpHeader, path string, port int32, scheme NullableContainerProbeHttpScheme) *ContainerGroupProbeHttp {
 	this := ContainerGroupProbeHttp{}
+	this.Headers = headers
 	this.Path = path
 	this.Port = port
+	this.Scheme = scheme
 	return &this
 }
 
@@ -47,6 +52,30 @@ func NewContainerGroupProbeHttp(path string, port int32) *ContainerGroupProbeHtt
 func NewContainerGroupProbeHttpWithDefaults() *ContainerGroupProbeHttp {
 	this := ContainerGroupProbeHttp{}
 	return &this
+}
+
+// GetHeaders returns the Headers field value
+func (o *ContainerGroupProbeHttp) GetHeaders() []ContainerGroupProbeHttpHeader {
+	if o == nil {
+		var ret []ContainerGroupProbeHttpHeader
+		return ret
+	}
+
+	return o.Headers
+}
+
+// GetHeadersOk returns a tuple with the Headers field value
+// and a boolean to check if the value has been set.
+func (o *ContainerGroupProbeHttp) GetHeadersOk() ([]ContainerGroupProbeHttpHeader, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.Headers, true
+}
+
+// SetHeaders sets field value
+func (o *ContainerGroupProbeHttp) SetHeaders(v []ContainerGroupProbeHttpHeader) {
+	o.Headers = v
 }
 
 // GetPath returns the Path field value
@@ -97,68 +126,30 @@ func (o *ContainerGroupProbeHttp) SetPort(v int32) {
 	o.Port = v
 }
 
-// GetScheme returns the Scheme field value if set, zero value otherwise.
+// GetScheme returns the Scheme field value
+// If the value is explicit nil, the zero value for ContainerProbeHttpScheme will be returned
 func (o *ContainerGroupProbeHttp) GetScheme() ContainerProbeHttpScheme {
-	if o == nil || IsNil(o.Scheme) {
+	if o == nil || o.Scheme.Get() == nil {
 		var ret ContainerProbeHttpScheme
 		return ret
 	}
-	return *o.Scheme
+
+	return *o.Scheme.Get()
 }
 
-// GetSchemeOk returns a tuple with the Scheme field value if set, nil otherwise
+// GetSchemeOk returns a tuple with the Scheme field value
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ContainerGroupProbeHttp) GetSchemeOk() (*ContainerProbeHttpScheme, bool) {
-	if o == nil || IsNil(o.Scheme) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Scheme, true
+	return o.Scheme.Get(), o.Scheme.IsSet()
 }
 
-// HasScheme returns a boolean if a field has been set.
-func (o *ContainerGroupProbeHttp) HasScheme() bool {
-	if o != nil && !IsNil(o.Scheme) {
-		return true
-	}
-
-	return false
-}
-
-// SetScheme gets a reference to the given ContainerProbeHttpScheme and assigns it to the Scheme field.
+// SetScheme sets field value
 func (o *ContainerGroupProbeHttp) SetScheme(v ContainerProbeHttpScheme) {
-	o.Scheme = &v
-}
-
-// GetHeaders returns the Headers field value if set, zero value otherwise.
-func (o *ContainerGroupProbeHttp) GetHeaders() []HttpHeadersInner {
-	if o == nil || IsNil(o.Headers) {
-		var ret []HttpHeadersInner
-		return ret
-	}
-	return o.Headers
-}
-
-// GetHeadersOk returns a tuple with the Headers field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *ContainerGroupProbeHttp) GetHeadersOk() ([]HttpHeadersInner, bool) {
-	if o == nil || IsNil(o.Headers) {
-		return nil, false
-	}
-	return o.Headers, true
-}
-
-// HasHeaders returns a boolean if a field has been set.
-func (o *ContainerGroupProbeHttp) HasHeaders() bool {
-	if o != nil && !IsNil(o.Headers) {
-		return true
-	}
-
-	return false
-}
-
-// SetHeaders gets a reference to the given []HttpHeadersInner and assigns it to the Headers field.
-func (o *ContainerGroupProbeHttp) SetHeaders(v []HttpHeadersInner) {
-	o.Headers = v
+	o.Scheme.Set(&v)
 }
 
 func (o ContainerGroupProbeHttp) MarshalJSON() ([]byte, error) {
@@ -171,14 +162,10 @@ func (o ContainerGroupProbeHttp) MarshalJSON() ([]byte, error) {
 
 func (o ContainerGroupProbeHttp) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	toSerialize["headers"] = o.Headers
 	toSerialize["path"] = o.Path
 	toSerialize["port"] = o.Port
-	if !IsNil(o.Scheme) {
-		toSerialize["scheme"] = o.Scheme
-	}
-	if !IsNil(o.Headers) {
-		toSerialize["headers"] = o.Headers
-	}
+	toSerialize["scheme"] = o.Scheme.Get()
 	return toSerialize, nil
 }
 
@@ -187,8 +174,10 @@ func (o *ContainerGroupProbeHttp) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
+		"headers",
 		"path",
 		"port",
+		"scheme",
 	}
 
 	allProperties := make(map[string]interface{})

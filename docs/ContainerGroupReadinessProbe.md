@@ -4,21 +4,21 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Tcp** | Pointer to [**ContainerGroupProbeTcp**](ContainerGroupProbeTcp.md) |  | [optional] 
-**Http** | Pointer to [**ContainerGroupProbeHttp**](ContainerGroupProbeHttp.md) |  | [optional] 
-**Grpc** | Pointer to [**ContainerGroupProbeGrpc**](ContainerGroupProbeGrpc.md) |  | [optional] 
 **Exec** | Pointer to [**ContainerGroupProbeExec**](ContainerGroupProbeExec.md) |  | [optional] 
-**InitialDelaySeconds** | **int32** |  | [default to 0]
-**PeriodSeconds** | **int32** |  | [default to 1]
-**TimeoutSeconds** | **int32** |  | [default to 1]
-**SuccessThreshold** | **int32** |  | [default to 1]
-**FailureThreshold** | **int32** |  | [default to 3]
+**FailureThreshold** | **int32** | The number of consecutive failures required to consider the probe failed. After this many consecutive failures, the container is marked as not ready. | [default to 3]
+**Grpc** | Pointer to [**ContainerGroupProbeGrpc**](ContainerGroupProbeGrpc.md) |  | [optional] 
+**Http** | Pointer to [**ContainerGroupProbeHttp**](ContainerGroupProbeHttp.md) |  | [optional] 
+**InitialDelaySeconds** | **int32** | The time in seconds to wait after the container starts before initiating the first probe. This allows time for the application to initialize before being tested. | [default to 0]
+**PeriodSeconds** | **int32** | How frequently (in seconds) the probe should be executed during the container&#39;s lifetime. Specifies the interval between consecutive probe executions. | [default to 1]
+**SuccessThreshold** | **int32** | The minimum consecutive successes required to consider the probe successful after it has failed. Defines how many successful probe results are needed to transition from failure to success. | [default to 1]
+**Tcp** | Pointer to [**ContainerGroupProbeTcp**](ContainerGroupProbeTcp.md) |  | [optional] 
+**TimeoutSeconds** | **int32** | The maximum time in seconds that the probe has to complete. If the probe doesn&#39;t return a result before the timeout, it&#39;s considered failed. | [default to 1]
 
 ## Methods
 
 ### NewContainerGroupReadinessProbe
 
-`func NewContainerGroupReadinessProbe(initialDelaySeconds int32, periodSeconds int32, timeoutSeconds int32, successThreshold int32, failureThreshold int32, ) *ContainerGroupReadinessProbe`
+`func NewContainerGroupReadinessProbe(failureThreshold int32, initialDelaySeconds int32, periodSeconds int32, successThreshold int32, timeoutSeconds int32, ) *ContainerGroupReadinessProbe`
 
 NewContainerGroupReadinessProbe instantiates a new ContainerGroupReadinessProbe object
 This constructor will assign default values to properties that have it defined,
@@ -33,55 +33,50 @@ NewContainerGroupReadinessProbeWithDefaults instantiates a new ContainerGroupRea
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
-### GetTcp
+### GetExec
 
-`func (o *ContainerGroupReadinessProbe) GetTcp() ContainerGroupProbeTcp`
+`func (o *ContainerGroupReadinessProbe) GetExec() ContainerGroupProbeExec`
 
-GetTcp returns the Tcp field if non-nil, zero value otherwise.
+GetExec returns the Exec field if non-nil, zero value otherwise.
 
-### GetTcpOk
+### GetExecOk
 
-`func (o *ContainerGroupReadinessProbe) GetTcpOk() (*ContainerGroupProbeTcp, bool)`
+`func (o *ContainerGroupReadinessProbe) GetExecOk() (*ContainerGroupProbeExec, bool)`
 
-GetTcpOk returns a tuple with the Tcp field if it's non-nil, zero value otherwise
+GetExecOk returns a tuple with the Exec field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetTcp
+### SetExec
 
-`func (o *ContainerGroupReadinessProbe) SetTcp(v ContainerGroupProbeTcp)`
+`func (o *ContainerGroupReadinessProbe) SetExec(v ContainerGroupProbeExec)`
 
-SetTcp sets Tcp field to given value.
+SetExec sets Exec field to given value.
 
-### HasTcp
+### HasExec
 
-`func (o *ContainerGroupReadinessProbe) HasTcp() bool`
+`func (o *ContainerGroupReadinessProbe) HasExec() bool`
 
-HasTcp returns a boolean if a field has been set.
+HasExec returns a boolean if a field has been set.
 
-### GetHttp
+### GetFailureThreshold
 
-`func (o *ContainerGroupReadinessProbe) GetHttp() ContainerGroupProbeHttp`
+`func (o *ContainerGroupReadinessProbe) GetFailureThreshold() int32`
 
-GetHttp returns the Http field if non-nil, zero value otherwise.
+GetFailureThreshold returns the FailureThreshold field if non-nil, zero value otherwise.
 
-### GetHttpOk
+### GetFailureThresholdOk
 
-`func (o *ContainerGroupReadinessProbe) GetHttpOk() (*ContainerGroupProbeHttp, bool)`
+`func (o *ContainerGroupReadinessProbe) GetFailureThresholdOk() (*int32, bool)`
 
-GetHttpOk returns a tuple with the Http field if it's non-nil, zero value otherwise
+GetFailureThresholdOk returns a tuple with the FailureThreshold field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetHttp
+### SetFailureThreshold
 
-`func (o *ContainerGroupReadinessProbe) SetHttp(v ContainerGroupProbeHttp)`
+`func (o *ContainerGroupReadinessProbe) SetFailureThreshold(v int32)`
 
-SetHttp sets Http field to given value.
+SetFailureThreshold sets FailureThreshold field to given value.
 
-### HasHttp
-
-`func (o *ContainerGroupReadinessProbe) HasHttp() bool`
-
-HasHttp returns a boolean if a field has been set.
 
 ### GetGrpc
 
@@ -108,30 +103,30 @@ SetGrpc sets Grpc field to given value.
 
 HasGrpc returns a boolean if a field has been set.
 
-### GetExec
+### GetHttp
 
-`func (o *ContainerGroupReadinessProbe) GetExec() ContainerGroupProbeExec`
+`func (o *ContainerGroupReadinessProbe) GetHttp() ContainerGroupProbeHttp`
 
-GetExec returns the Exec field if non-nil, zero value otherwise.
+GetHttp returns the Http field if non-nil, zero value otherwise.
 
-### GetExecOk
+### GetHttpOk
 
-`func (o *ContainerGroupReadinessProbe) GetExecOk() (*ContainerGroupProbeExec, bool)`
+`func (o *ContainerGroupReadinessProbe) GetHttpOk() (*ContainerGroupProbeHttp, bool)`
 
-GetExecOk returns a tuple with the Exec field if it's non-nil, zero value otherwise
+GetHttpOk returns a tuple with the Http field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetExec
+### SetHttp
 
-`func (o *ContainerGroupReadinessProbe) SetExec(v ContainerGroupProbeExec)`
+`func (o *ContainerGroupReadinessProbe) SetHttp(v ContainerGroupProbeHttp)`
 
-SetExec sets Exec field to given value.
+SetHttp sets Http field to given value.
 
-### HasExec
+### HasHttp
 
-`func (o *ContainerGroupReadinessProbe) HasExec() bool`
+`func (o *ContainerGroupReadinessProbe) HasHttp() bool`
 
-HasExec returns a boolean if a field has been set.
+HasHttp returns a boolean if a field has been set.
 
 ### GetInitialDelaySeconds
 
@@ -173,26 +168,6 @@ and a boolean to check if the value has been set.
 SetPeriodSeconds sets PeriodSeconds field to given value.
 
 
-### GetTimeoutSeconds
-
-`func (o *ContainerGroupReadinessProbe) GetTimeoutSeconds() int32`
-
-GetTimeoutSeconds returns the TimeoutSeconds field if non-nil, zero value otherwise.
-
-### GetTimeoutSecondsOk
-
-`func (o *ContainerGroupReadinessProbe) GetTimeoutSecondsOk() (*int32, bool)`
-
-GetTimeoutSecondsOk returns a tuple with the TimeoutSeconds field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetTimeoutSeconds
-
-`func (o *ContainerGroupReadinessProbe) SetTimeoutSeconds(v int32)`
-
-SetTimeoutSeconds sets TimeoutSeconds field to given value.
-
-
 ### GetSuccessThreshold
 
 `func (o *ContainerGroupReadinessProbe) GetSuccessThreshold() int32`
@@ -213,24 +188,49 @@ and a boolean to check if the value has been set.
 SetSuccessThreshold sets SuccessThreshold field to given value.
 
 
-### GetFailureThreshold
+### GetTcp
 
-`func (o *ContainerGroupReadinessProbe) GetFailureThreshold() int32`
+`func (o *ContainerGroupReadinessProbe) GetTcp() ContainerGroupProbeTcp`
 
-GetFailureThreshold returns the FailureThreshold field if non-nil, zero value otherwise.
+GetTcp returns the Tcp field if non-nil, zero value otherwise.
 
-### GetFailureThresholdOk
+### GetTcpOk
 
-`func (o *ContainerGroupReadinessProbe) GetFailureThresholdOk() (*int32, bool)`
+`func (o *ContainerGroupReadinessProbe) GetTcpOk() (*ContainerGroupProbeTcp, bool)`
 
-GetFailureThresholdOk returns a tuple with the FailureThreshold field if it's non-nil, zero value otherwise
+GetTcpOk returns a tuple with the Tcp field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetFailureThreshold
+### SetTcp
 
-`func (o *ContainerGroupReadinessProbe) SetFailureThreshold(v int32)`
+`func (o *ContainerGroupReadinessProbe) SetTcp(v ContainerGroupProbeTcp)`
 
-SetFailureThreshold sets FailureThreshold field to given value.
+SetTcp sets Tcp field to given value.
+
+### HasTcp
+
+`func (o *ContainerGroupReadinessProbe) HasTcp() bool`
+
+HasTcp returns a boolean if a field has been set.
+
+### GetTimeoutSeconds
+
+`func (o *ContainerGroupReadinessProbe) GetTimeoutSeconds() int32`
+
+GetTimeoutSeconds returns the TimeoutSeconds field if non-nil, zero value otherwise.
+
+### GetTimeoutSecondsOk
+
+`func (o *ContainerGroupReadinessProbe) GetTimeoutSecondsOk() (*int32, bool)`
+
+GetTimeoutSecondsOk returns a tuple with the TimeoutSeconds field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTimeoutSeconds
+
+`func (o *ContainerGroupReadinessProbe) SetTimeoutSeconds(v int32)`
+
+SetTimeoutSeconds sets TimeoutSeconds field to given value.
 
 
 

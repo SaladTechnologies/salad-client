@@ -4,17 +4,17 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Status** | [**ContainerGroupStatus**](ContainerGroupStatus.md) |  | 
-**Description** | Pointer to **NullableString** |  | [optional] 
-**StartTime** | **time.Time** |  | 
-**FinishTime** | **time.Time** |  | 
+**Description** | Pointer to **NullableString** | Optional textual description or notes about the current state of the container group | [optional] 
+**FinishTime** | **time.Time** | Timestamp when the container group execution finished or is expected to finish | 
 **InstanceStatusCounts** | [**ContainerGroupInstanceStatusCount**](ContainerGroupInstanceStatusCount.md) |  | 
+**StartTime** | **time.Time** | Timestamp when the container group execution started | 
+**Status** | [**ContainerGroupStatus**](ContainerGroupStatus.md) |  | 
 
 ## Methods
 
 ### NewContainerGroupState
 
-`func NewContainerGroupState(status ContainerGroupStatus, startTime time.Time, finishTime time.Time, instanceStatusCounts ContainerGroupInstanceStatusCount, ) *ContainerGroupState`
+`func NewContainerGroupState(finishTime time.Time, instanceStatusCounts ContainerGroupInstanceStatusCount, startTime time.Time, status ContainerGroupStatus, ) *ContainerGroupState`
 
 NewContainerGroupState instantiates a new ContainerGroupState object
 This constructor will assign default values to properties that have it defined,
@@ -28,26 +28,6 @@ will change when the set of required properties is changed
 NewContainerGroupStateWithDefaults instantiates a new ContainerGroupState object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
-
-### GetStatus
-
-`func (o *ContainerGroupState) GetStatus() ContainerGroupStatus`
-
-GetStatus returns the Status field if non-nil, zero value otherwise.
-
-### GetStatusOk
-
-`func (o *ContainerGroupState) GetStatusOk() (*ContainerGroupStatus, bool)`
-
-GetStatusOk returns a tuple with the Status field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetStatus
-
-`func (o *ContainerGroupState) SetStatus(v ContainerGroupStatus)`
-
-SetStatus sets Status field to given value.
-
 
 ### GetDescription
 
@@ -84,26 +64,6 @@ HasDescription returns a boolean if a field has been set.
 `func (o *ContainerGroupState) UnsetDescription()`
 
 UnsetDescription ensures that no value is present for Description, not even an explicit nil
-### GetStartTime
-
-`func (o *ContainerGroupState) GetStartTime() time.Time`
-
-GetStartTime returns the StartTime field if non-nil, zero value otherwise.
-
-### GetStartTimeOk
-
-`func (o *ContainerGroupState) GetStartTimeOk() (*time.Time, bool)`
-
-GetStartTimeOk returns a tuple with the StartTime field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetStartTime
-
-`func (o *ContainerGroupState) SetStartTime(v time.Time)`
-
-SetStartTime sets StartTime field to given value.
-
-
 ### GetFinishTime
 
 `func (o *ContainerGroupState) GetFinishTime() time.Time`
@@ -142,6 +102,46 @@ and a boolean to check if the value has been set.
 `func (o *ContainerGroupState) SetInstanceStatusCounts(v ContainerGroupInstanceStatusCount)`
 
 SetInstanceStatusCounts sets InstanceStatusCounts field to given value.
+
+
+### GetStartTime
+
+`func (o *ContainerGroupState) GetStartTime() time.Time`
+
+GetStartTime returns the StartTime field if non-nil, zero value otherwise.
+
+### GetStartTimeOk
+
+`func (o *ContainerGroupState) GetStartTimeOk() (*time.Time, bool)`
+
+GetStartTimeOk returns a tuple with the StartTime field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetStartTime
+
+`func (o *ContainerGroupState) SetStartTime(v time.Time)`
+
+SetStartTime sets StartTime field to given value.
+
+
+### GetStatus
+
+`func (o *ContainerGroupState) GetStatus() ContainerGroupStatus`
+
+GetStatus returns the Status field if non-nil, zero value otherwise.
+
+### GetStatusOk
+
+`func (o *ContainerGroupState) GetStatusOk() (*ContainerGroupStatus, bool)`
+
+GetStatusOk returns a tuple with the Status field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetStatus
+
+`func (o *ContainerGroupState) SetStatus(v ContainerGroupStatus)`
+
+SetStatus sets Status field to given value.
 
 
 

@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Port** | Pointer to **NullableInt32** |  | [optional] 
+**Port** | Pointer to **NullableInt32** | The port number to expose on the container group | [optional] 
 
 ## Methods
 

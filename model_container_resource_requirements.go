@@ -3,7 +3,7 @@ SaladCloud API
 
 The SaladCloud REST API. Please refer to the [SaladCloud API Documentation](https://docs.salad.com/api-reference) for more details.
 
-API version: 0.9.0-alpha.7
+API version: 0.9.0-alpha.11
 Contact: cloud@salad.com
 */
 
@@ -20,12 +20,16 @@ import (
 // checks if the ContainerResourceRequirements type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ContainerResourceRequirements{}
 
-// ContainerResourceRequirements Represents a container resource requirements
+// ContainerResourceRequirements Specifies the resource requirements for a container.
 type ContainerResourceRequirements struct {
+	// The number of CPU cores required by the container. Must be between 1 and 16.
 	Cpu int32 `json:"cpu"`
+	// The amount of memory (in MB) required by the container. Must be between 1024 MB and 61440 MB.
 	Memory int32 `json:"memory"`
-	GpuClasses []string `json:"gpu_classes,omitempty"`
-	StorageAmount NullableInt64 `json:"storage_amount,omitempty"`
+	// A list of GPU class UUIDs required by the container. Can be null if no GPU is required.
+	GpuClasses []string `json:"gpu_classes"`
+	// The amount of storage (in bytes) required by the container. Must be between 1 GB (1073741824 bytes) and 50 GB (53687091200 bytes).
+	StorageAmount *int64 `json:"storage_amount,omitempty"`
 }
 
 type _ContainerResourceRequirements ContainerResourceRequirements
@@ -34,10 +38,11 @@ type _ContainerResourceRequirements ContainerResourceRequirements
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewContainerResourceRequirements(cpu int32, memory int32) *ContainerResourceRequirements {
+func NewContainerResourceRequirements(cpu int32, memory int32, gpuClasses []string) *ContainerResourceRequirements {
 	this := ContainerResourceRequirements{}
 	this.Cpu = cpu
 	this.Memory = memory
+	this.GpuClasses = gpuClasses
 	return &this
 }
 
@@ -97,16 +102,18 @@ func (o *ContainerResourceRequirements) SetMemory(v int32) {
 	o.Memory = v
 }
 
-// GetGpuClasses returns the GpuClasses field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetGpuClasses returns the GpuClasses field value
+// If the value is explicit nil, the zero value for []string will be returned
 func (o *ContainerResourceRequirements) GetGpuClasses() []string {
 	if o == nil {
 		var ret []string
 		return ret
 	}
+
 	return o.GpuClasses
 }
 
-// GetGpuClassesOk returns a tuple with the GpuClasses field value if set, nil otherwise
+// GetGpuClassesOk returns a tuple with the GpuClasses field value
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ContainerResourceRequirements) GetGpuClassesOk() ([]string, bool) {
@@ -116,60 +123,41 @@ func (o *ContainerResourceRequirements) GetGpuClassesOk() ([]string, bool) {
 	return o.GpuClasses, true
 }
 
-// HasGpuClasses returns a boolean if a field has been set.
-func (o *ContainerResourceRequirements) HasGpuClasses() bool {
-	if o != nil && !IsNil(o.GpuClasses) {
-		return true
-	}
-
-	return false
-}
-
-// SetGpuClasses gets a reference to the given []string and assigns it to the GpuClasses field.
+// SetGpuClasses sets field value
 func (o *ContainerResourceRequirements) SetGpuClasses(v []string) {
 	o.GpuClasses = v
 }
 
-// GetStorageAmount returns the StorageAmount field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetStorageAmount returns the StorageAmount field value if set, zero value otherwise.
 func (o *ContainerResourceRequirements) GetStorageAmount() int64 {
-	if o == nil || IsNil(o.StorageAmount.Get()) {
+	if o == nil || IsNil(o.StorageAmount) {
 		var ret int64
 		return ret
 	}
-	return *o.StorageAmount.Get()
+	return *o.StorageAmount
 }
 
 // GetStorageAmountOk returns a tuple with the StorageAmount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ContainerResourceRequirements) GetStorageAmountOk() (*int64, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.StorageAmount) {
 		return nil, false
 	}
-	return o.StorageAmount.Get(), o.StorageAmount.IsSet()
+	return o.StorageAmount, true
 }
 
 // HasStorageAmount returns a boolean if a field has been set.
 func (o *ContainerResourceRequirements) HasStorageAmount() bool {
-	if o != nil && o.StorageAmount.IsSet() {
+	if o != nil && !IsNil(o.StorageAmount) {
 		return true
 	}
 
 	return false
 }
 
-// SetStorageAmount gets a reference to the given NullableInt64 and assigns it to the StorageAmount field.
+// SetStorageAmount gets a reference to the given int64 and assigns it to the StorageAmount field.
 func (o *ContainerResourceRequirements) SetStorageAmount(v int64) {
-	o.StorageAmount.Set(&v)
-}
-// SetStorageAmountNil sets the value for StorageAmount to be an explicit nil
-func (o *ContainerResourceRequirements) SetStorageAmountNil() {
-	o.StorageAmount.Set(nil)
-}
-
-// UnsetStorageAmount ensures that no value is present for StorageAmount, not even an explicit nil
-func (o *ContainerResourceRequirements) UnsetStorageAmount() {
-	o.StorageAmount.Unset()
+	o.StorageAmount = &v
 }
 
 func (o ContainerResourceRequirements) MarshalJSON() ([]byte, error) {
@@ -187,8 +175,8 @@ func (o ContainerResourceRequirements) ToMap() (map[string]interface{}, error) {
 	if o.GpuClasses != nil {
 		toSerialize["gpu_classes"] = o.GpuClasses
 	}
-	if o.StorageAmount.IsSet() {
-		toSerialize["storage_amount"] = o.StorageAmount.Get()
+	if !IsNil(o.StorageAmount) {
+		toSerialize["storage_amount"] = o.StorageAmount
 	}
 	return toSerialize, nil
 }
@@ -200,6 +188,7 @@ func (o *ContainerResourceRequirements) UnmarshalJSON(data []byte) (err error) {
 	requiredProperties := []string{
 		"cpu",
 		"memory",
+		"gpu_classes",
 	}
 
 	allProperties := make(map[string]interface{})

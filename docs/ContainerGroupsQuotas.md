@@ -4,17 +4,17 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**MaxCreatedContainerGroups** | **int32** |  | 
-**ContainerInstanceQuota** | **int32** |  | 
-**MaxContainerGroupReallocationsPerMinute** | Pointer to **int32** |  | [optional] [default to 10]
-**MaxContainerGroupRecreatesPerMinute** | Pointer to **int32** |  | [optional] [default to 10]
-**MaxContainerGroupRestartsPerMinute** | Pointer to **int32** |  | [optional] [default to 10]
+**ContainerReplicasQuota** | **int32** | The maximum number of replicas that can be created for a container group | 
+**ContainerReplicasUsed** | **int32** | The number of replicas that are currently in use | 
+**MaxContainerGroupReallocationsPerMinute** | Pointer to **int32** | The maximum number of container group reallocations per minute | [optional] [default to 10]
+**MaxContainerGroupRecreatesPerMinute** | Pointer to **int32** | The maximum number of container group recreates per minute | [optional] [default to 10]
+**MaxContainerGroupRestartsPerMinute** | Pointer to **int32** | The maximum number of container group restarts per minute | [optional] [default to 10]
 
 ## Methods
 
 ### NewContainerGroupsQuotas
 
-`func NewContainerGroupsQuotas(maxCreatedContainerGroups int32, containerInstanceQuota int32, ) *ContainerGroupsQuotas`
+`func NewContainerGroupsQuotas(containerReplicasQuota int32, containerReplicasUsed int32, ) *ContainerGroupsQuotas`
 
 NewContainerGroupsQuotas instantiates a new ContainerGroupsQuotas object
 This constructor will assign default values to properties that have it defined,
@@ -29,44 +29,44 @@ NewContainerGroupsQuotasWithDefaults instantiates a new ContainerGroupsQuotas ob
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
-### GetMaxCreatedContainerGroups
+### GetContainerReplicasQuota
 
-`func (o *ContainerGroupsQuotas) GetMaxCreatedContainerGroups() int32`
+`func (o *ContainerGroupsQuotas) GetContainerReplicasQuota() int32`
 
-GetMaxCreatedContainerGroups returns the MaxCreatedContainerGroups field if non-nil, zero value otherwise.
+GetContainerReplicasQuota returns the ContainerReplicasQuota field if non-nil, zero value otherwise.
 
-### GetMaxCreatedContainerGroupsOk
+### GetContainerReplicasQuotaOk
 
-`func (o *ContainerGroupsQuotas) GetMaxCreatedContainerGroupsOk() (*int32, bool)`
+`func (o *ContainerGroupsQuotas) GetContainerReplicasQuotaOk() (*int32, bool)`
 
-GetMaxCreatedContainerGroupsOk returns a tuple with the MaxCreatedContainerGroups field if it's non-nil, zero value otherwise
+GetContainerReplicasQuotaOk returns a tuple with the ContainerReplicasQuota field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetMaxCreatedContainerGroups
+### SetContainerReplicasQuota
 
-`func (o *ContainerGroupsQuotas) SetMaxCreatedContainerGroups(v int32)`
+`func (o *ContainerGroupsQuotas) SetContainerReplicasQuota(v int32)`
 
-SetMaxCreatedContainerGroups sets MaxCreatedContainerGroups field to given value.
+SetContainerReplicasQuota sets ContainerReplicasQuota field to given value.
 
 
-### GetContainerInstanceQuota
+### GetContainerReplicasUsed
 
-`func (o *ContainerGroupsQuotas) GetContainerInstanceQuota() int32`
+`func (o *ContainerGroupsQuotas) GetContainerReplicasUsed() int32`
 
-GetContainerInstanceQuota returns the ContainerInstanceQuota field if non-nil, zero value otherwise.
+GetContainerReplicasUsed returns the ContainerReplicasUsed field if non-nil, zero value otherwise.
 
-### GetContainerInstanceQuotaOk
+### GetContainerReplicasUsedOk
 
-`func (o *ContainerGroupsQuotas) GetContainerInstanceQuotaOk() (*int32, bool)`
+`func (o *ContainerGroupsQuotas) GetContainerReplicasUsedOk() (*int32, bool)`
 
-GetContainerInstanceQuotaOk returns a tuple with the ContainerInstanceQuota field if it's non-nil, zero value otherwise
+GetContainerReplicasUsedOk returns a tuple with the ContainerReplicasUsed field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetContainerInstanceQuota
+### SetContainerReplicasUsed
 
-`func (o *ContainerGroupsQuotas) SetContainerInstanceQuota(v int32)`
+`func (o *ContainerGroupsQuotas) SetContainerReplicasUsed(v int32)`
 
-SetContainerInstanceQuota sets ContainerInstanceQuota field to given value.
+SetContainerReplicasUsed sets ContainerReplicasUsed field to given value.
 
 
 ### GetMaxContainerGroupReallocationsPerMinute

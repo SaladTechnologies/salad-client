@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Command** | **[]string** |  | 
+**Command** | **[]string** | The command to execute inside the container. Exit status of 0 is considered successful, any other exit status is considered failure. | 
 
 ## Methods
 
