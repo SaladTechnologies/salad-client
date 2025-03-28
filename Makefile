@@ -15,3 +15,11 @@ build: api/openapi.yaml
 			-i $(OPENAPI_SPEC) \
 			--git-user-id SaladTechnologies \
 			--git-repo-id salad-client
+
+.PHONY: lint
+lint:
+	golangci-lint run ./... $(LINT_ARGS)
+
+.PHONY: test
+test:
+	go test -v ./...
