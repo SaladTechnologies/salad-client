@@ -3,6 +3,7 @@
   "outputDir": ".",
   "additionalProperties": {
     "packageName": "saladclient",
-    "enumClassPrefix": true
+    "enumClassPrefix": true,
+    "withGoMod": false
   }
 }

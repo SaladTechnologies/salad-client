@@ -93,8 +93,6 @@ docs/WorkloadError.md
 docs/WorkloadErrorList.md
 docs/WorkloadErrorsAPI.md
 git_push.sh
-go.mod
-go.sum
 model_container.go
 model_container_group.go
 model_container_group_instance.go
