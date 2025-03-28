@@ -3,7 +3,7 @@ SaladCloud API
 
 The SaladCloud REST API. Please refer to the [SaladCloud API Documentation](https://docs.salad.com/api-reference) for more details.
 
-API version: 0.9.0-alpha.7
+API version: 0.9.0-alpha.11
 Contact: cloud@salad.com
 */
 
@@ -20,11 +20,14 @@ import (
 // checks if the ContainerLoggingDatadog type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ContainerLoggingDatadog{}
 
-// ContainerLoggingDatadog struct for ContainerLoggingDatadog
+// ContainerLoggingDatadog Configuration for forwarding container logs to Datadog monitoring service.
 type ContainerLoggingDatadog struct {
-	Host string `json:"host"`
-	ApiKey string `json:"api_key"`
-	Tags []ContainerLoggingDatadogTagsInner `json:"tags,omitempty"`
+	// The Datadog intake server host URL where logs will be sent.
+	Host string `json:"host" validate:"regexp=^.*$"`
+	// The Datadog API key used for authentication when sending logs.
+	ApiKey string `json:"api_key" validate:"regexp=^.*$"`
+	// Optional metadata tags to attach to logs for filtering and categorization in Datadog.
+	Tags []ContainerLoggingDatadogTag `json:"tags"`
 }
 
 type _ContainerLoggingDatadog ContainerLoggingDatadog
@@ -33,10 +36,11 @@ type _ContainerLoggingDatadog ContainerLoggingDatadog
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewContainerLoggingDatadog(host string, apiKey string) *ContainerLoggingDatadog {
+func NewContainerLoggingDatadog(host string, apiKey string, tags []ContainerLoggingDatadogTag) *ContainerLoggingDatadog {
 	this := ContainerLoggingDatadog{}
 	this.Host = host
 	this.ApiKey = apiKey
+	this.Tags = tags
 	return &this
 }
 
@@ -96,35 +100,29 @@ func (o *ContainerLoggingDatadog) SetApiKey(v string) {
 	o.ApiKey = v
 }
 
-// GetTags returns the Tags field value if set, zero value otherwise.
-func (o *ContainerLoggingDatadog) GetTags() []ContainerLoggingDatadogTagsInner {
-	if o == nil || IsNil(o.Tags) {
-		var ret []ContainerLoggingDatadogTagsInner
+// GetTags returns the Tags field value
+// If the value is explicit nil, the zero value for []ContainerLoggingDatadogTag will be returned
+func (o *ContainerLoggingDatadog) GetTags() []ContainerLoggingDatadogTag {
+	if o == nil {
+		var ret []ContainerLoggingDatadogTag
 		return ret
 	}
+
 	return o.Tags
 }
 
-// GetTagsOk returns a tuple with the Tags field value if set, nil otherwise
+// GetTagsOk returns a tuple with the Tags field value
 // and a boolean to check if the value has been set.
-func (o *ContainerLoggingDatadog) GetTagsOk() ([]ContainerLoggingDatadogTagsInner, bool) {
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *ContainerLoggingDatadog) GetTagsOk() ([]ContainerLoggingDatadogTag, bool) {
 	if o == nil || IsNil(o.Tags) {
 		return nil, false
 	}
 	return o.Tags, true
 }
 
-// HasTags returns a boolean if a field has been set.
-func (o *ContainerLoggingDatadog) HasTags() bool {
-	if o != nil && !IsNil(o.Tags) {
-		return true
-	}
-
-	return false
-}
-
-// SetTags gets a reference to the given []ContainerLoggingDatadogTagsInner and assigns it to the Tags field.
-func (o *ContainerLoggingDatadog) SetTags(v []ContainerLoggingDatadogTagsInner) {
+// SetTags sets field value
+func (o *ContainerLoggingDatadog) SetTags(v []ContainerLoggingDatadogTag) {
 	o.Tags = v
 }
 
@@ -140,7 +138,7 @@ func (o ContainerLoggingDatadog) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["host"] = o.Host
 	toSerialize["api_key"] = o.ApiKey
-	if !IsNil(o.Tags) {
+	if o.Tags != nil {
 		toSerialize["tags"] = o.Tags
 	}
 	return toSerialize, nil
@@ -153,6 +151,7 @@ func (o *ContainerLoggingDatadog) UnmarshalJSON(data []byte) (err error) {
 	requiredProperties := []string{
 		"host",
 		"api_key",
+		"tags",
 	}
 
 	allProperties := make(map[string]interface{})

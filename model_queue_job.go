@@ -3,7 +3,7 @@ SaladCloud API
 
 The SaladCloud REST API. Please refer to the [SaladCloud API Documentation](https://docs.salad.com/api-reference) for more details.
 
-API version: 0.9.0-alpha.7
+API version: 0.9.0-alpha.11
 Contact: cloud@salad.com
 */
 
@@ -23,14 +23,21 @@ var _ MappedNullable = &QueueJob{}
 
 // QueueJob Represents a queue job
 type QueueJob struct {
+	// The job identifier
 	Id string `json:"id"`
 	Input interface{} `json:"input"`
+	// Additional metadata for the job
 	Metadata map[string]interface{} `json:"metadata,omitempty"`
-	Webhook NullableString `json:"webhook,omitempty"`
+	// The webhook URL to notify when the job completes
+	Webhook *string `json:"webhook,omitempty" validate:"regexp=^\\\\\\\\d{4}-\\\\\\\\d{2}-\\\\\\\\d{2}T\\\\\\\\d{2}:\\\\\\\\d{2}:\\\\\\\\d{2}(\\\\\\\\.\\\\\\\\d+)?(Z|[+-]\\\\\\\\d{2}:\\\\\\\\d{2})$"`
+	// The job status
 	Status string `json:"status"`
+	// The job events
 	Events []QueueJobEvent `json:"events"`
 	Output interface{} `json:"output,omitempty"`
+	// The job creation time
 	CreateTime time.Time `json:"create_time"`
+	// The job update time
 	UpdateTime time.Time `json:"update_time"`
 }
 
@@ -109,9 +116,9 @@ func (o *QueueJob) SetInput(v interface{}) {
 	o.Input = v
 }
 
-// GetMetadata returns the Metadata field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetMetadata returns the Metadata field value if set, zero value otherwise.
 func (o *QueueJob) GetMetadata() map[string]interface{} {
-	if o == nil {
+	if o == nil || IsNil(o.Metadata) {
 		var ret map[string]interface{}
 		return ret
 	}
@@ -120,7 +127,6 @@ func (o *QueueJob) GetMetadata() map[string]interface{} {
 
 // GetMetadataOk returns a tuple with the Metadata field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *QueueJob) GetMetadataOk() (map[string]interface{}, bool) {
 	if o == nil || IsNil(o.Metadata) {
 		return map[string]interface{}{}, false
@@ -142,46 +148,36 @@ func (o *QueueJob) SetMetadata(v map[string]interface{}) {
 	o.Metadata = v
 }
 
-// GetWebhook returns the Webhook field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetWebhook returns the Webhook field value if set, zero value otherwise.
 func (o *QueueJob) GetWebhook() string {
-	if o == nil || IsNil(o.Webhook.Get()) {
+	if o == nil || IsNil(o.Webhook) {
 		var ret string
 		return ret
 	}
-	return *o.Webhook.Get()
+	return *o.Webhook
 }
 
 // GetWebhookOk returns a tuple with the Webhook field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *QueueJob) GetWebhookOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Webhook) {
 		return nil, false
 	}
-	return o.Webhook.Get(), o.Webhook.IsSet()
+	return o.Webhook, true
 }
 
 // HasWebhook returns a boolean if a field has been set.
 func (o *QueueJob) HasWebhook() bool {
-	if o != nil && o.Webhook.IsSet() {
+	if o != nil && !IsNil(o.Webhook) {
 		return true
 	}
 
 	return false
 }
 
-// SetWebhook gets a reference to the given NullableString and assigns it to the Webhook field.
+// SetWebhook gets a reference to the given string and assigns it to the Webhook field.
 func (o *QueueJob) SetWebhook(v string) {
-	o.Webhook.Set(&v)
-}
-// SetWebhookNil sets the value for Webhook to be an explicit nil
-func (o *QueueJob) SetWebhookNil() {
-	o.Webhook.Set(nil)
-}
-
-// UnsetWebhook ensures that no value is present for Webhook, not even an explicit nil
-func (o *QueueJob) UnsetWebhook() {
-	o.Webhook.Unset()
+	o.Webhook = &v
 }
 
 // GetStatus returns the Status field value
@@ -327,11 +323,11 @@ func (o QueueJob) ToMap() (map[string]interface{}, error) {
 	if o.Input != nil {
 		toSerialize["input"] = o.Input
 	}
-	if o.Metadata != nil {
+	if !IsNil(o.Metadata) {
 		toSerialize["metadata"] = o.Metadata
 	}
-	if o.Webhook.IsSet() {
-		toSerialize["webhook"] = o.Webhook.Get()
+	if !IsNil(o.Webhook) {
+		toSerialize["webhook"] = o.Webhook
 	}
 	toSerialize["status"] = o.Status
 	toSerialize["events"] = o.Events

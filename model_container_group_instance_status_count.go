@@ -3,7 +3,7 @@ SaladCloud API
 
 The SaladCloud REST API. Please refer to the [SaladCloud API Documentation](https://docs.salad.com/api-reference) for more details.
 
-API version: 0.9.0-alpha.7
+API version: 0.9.0-alpha.11
 Contact: cloud@salad.com
 */
 
@@ -20,11 +20,15 @@ import (
 // checks if the ContainerGroupInstanceStatusCount type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ContainerGroupInstanceStatusCount{}
 
-// ContainerGroupInstanceStatusCount Represents a container group instance status count
+// ContainerGroupInstanceStatusCount A summary of container group instances categorized by their current lifecycle status
 type ContainerGroupInstanceStatusCount struct {
+	// The number of container instances that are currently being allocated resources
 	AllocatingCount int32 `json:"allocating_count"`
+	// The number of container instances that are in the process of being created
 	CreatingCount int32 `json:"creating_count"`
+	// The number of container instances that are currently running and operational
 	RunningCount int32 `json:"running_count"`
+	// The number of container instances that are in the process of stopping
 	StoppingCount int32 `json:"stopping_count"`
 }
 

@@ -3,7 +3,7 @@ SaladCloud API
 
 The SaladCloud REST API. Please refer to the [SaladCloud API Documentation](https://docs.salad.com/api-reference) for more details.
 
-API version: 0.9.0-alpha.7
+API version: 0.9.0-alpha.11
 Contact: cloud@salad.com
 */
 
@@ -20,10 +20,12 @@ import (
 // checks if the ContainerGroupProbeGrpc type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ContainerGroupProbeGrpc{}
 
-// ContainerGroupProbeGrpc struct for ContainerGroupProbeGrpc
+// ContainerGroupProbeGrpc Configuration for gRPC-based health probes in container groups, used to determine container health status.
 type ContainerGroupProbeGrpc struct {
-	Service string `json:"service"`
+	// The port number on which the gRPC health check service is exposed.
 	Port int32 `json:"port"`
+	// The name of the gRPC service that implements the health check protocol.
+	Service string `json:"service" validate:"regexp=^.*$"`
 }
 
 type _ContainerGroupProbeGrpc ContainerGroupProbeGrpc
@@ -32,10 +34,10 @@ type _ContainerGroupProbeGrpc ContainerGroupProbeGrpc
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewContainerGroupProbeGrpc(service string, port int32) *ContainerGroupProbeGrpc {
+func NewContainerGroupProbeGrpc(port int32, service string) *ContainerGroupProbeGrpc {
 	this := ContainerGroupProbeGrpc{}
-	this.Service = service
 	this.Port = port
+	this.Service = service
 	return &this
 }
 
@@ -45,30 +47,6 @@ func NewContainerGroupProbeGrpc(service string, port int32) *ContainerGroupProbe
 func NewContainerGroupProbeGrpcWithDefaults() *ContainerGroupProbeGrpc {
 	this := ContainerGroupProbeGrpc{}
 	return &this
-}
-
-// GetService returns the Service field value
-func (o *ContainerGroupProbeGrpc) GetService() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.Service
-}
-
-// GetServiceOk returns a tuple with the Service field value
-// and a boolean to check if the value has been set.
-func (o *ContainerGroupProbeGrpc) GetServiceOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Service, true
-}
-
-// SetService sets field value
-func (o *ContainerGroupProbeGrpc) SetService(v string) {
-	o.Service = v
 }
 
 // GetPort returns the Port field value
@@ -95,6 +73,30 @@ func (o *ContainerGroupProbeGrpc) SetPort(v int32) {
 	o.Port = v
 }
 
+// GetService returns the Service field value
+func (o *ContainerGroupProbeGrpc) GetService() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.Service
+}
+
+// GetServiceOk returns a tuple with the Service field value
+// and a boolean to check if the value has been set.
+func (o *ContainerGroupProbeGrpc) GetServiceOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Service, true
+}
+
+// SetService sets field value
+func (o *ContainerGroupProbeGrpc) SetService(v string) {
+	o.Service = v
+}
+
 func (o ContainerGroupProbeGrpc) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -105,8 +107,8 @@ func (o ContainerGroupProbeGrpc) MarshalJSON() ([]byte, error) {
 
 func (o ContainerGroupProbeGrpc) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["service"] = o.Service
 	toSerialize["port"] = o.Port
+	toSerialize["service"] = o.Service
 	return toSerialize, nil
 }
 
@@ -115,8 +117,8 @@ func (o *ContainerGroupProbeGrpc) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"service",
 		"port",
+		"service",
 	}
 
 	allProperties := make(map[string]interface{})

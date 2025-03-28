@@ -3,7 +3,7 @@ SaladCloud API
 
 The SaladCloud REST API. Please refer to the [SaladCloud API Documentation](https://docs.salad.com/api-reference) for more details.
 
-API version: 0.9.0-alpha.7
+API version: 0.9.0-alpha.11
 Contact: cloud@salad.com
 */
 
@@ -22,6 +22,7 @@ var _ MappedNullable = &WorkloadErrorList{}
 
 // WorkloadErrorList Represents a list of workload errors
 type WorkloadErrorList struct {
+	// A list of workload errors
 	Items []WorkloadError `json:"items"`
 }
 

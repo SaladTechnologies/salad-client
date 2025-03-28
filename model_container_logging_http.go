@@ -3,7 +3,7 @@ SaladCloud API
 
 The SaladCloud REST API. Please refer to the [SaladCloud API Documentation](https://docs.salad.com/api-reference) for more details.
 
-API version: 0.9.0-alpha.7
+API version: 0.9.0-alpha.11
 Contact: cloud@salad.com
 */
 
@@ -20,16 +20,22 @@ import (
 // checks if the ContainerLoggingHttp type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ContainerLoggingHttp{}
 
-// ContainerLoggingHttp struct for ContainerLoggingHttp
+// ContainerLoggingHttp Configuration for sending container logs to an HTTP endpoint. Defines how logs are formatted, compressed, and transmitted.
 type ContainerLoggingHttp struct {
-	Host string `json:"host"`
+	// The hostname or IP address of the HTTP logging endpoint
+	Host string `json:"host" validate:"regexp=^.*$"`
+	// The port number of the HTTP logging endpoint (1-65535)
 	Port int32 `json:"port"`
-	User *string `json:"user,omitempty"`
-	Password *string `json:"password,omitempty"`
-	Path *string `json:"path,omitempty"`
-	Format string `json:"format"`
-	Headers []ContainerLoggingDatadogTagsInner `json:"headers,omitempty"`
-	Compression string `json:"compression"`
+	// Optional username for HTTP authentication
+	User NullableString `json:"user,omitempty" validate:"regexp=^.*$"`
+	// Optional password for HTTP authentication
+	Password NullableString `json:"password,omitempty" validate:"regexp=^.*$"`
+	// Optional URL path for the HTTP endpoint
+	Path NullableString `json:"path,omitempty" validate:"regexp=^.*$"`
+	Format ContainerLoggingHttpFormat `json:"format"`
+	// Optional HTTP headers to include in log transmission requests
+	Headers []ContainerLoggingHttpHeader `json:"headers"`
+	Compression ContainerLoggingHttpCompression `json:"compression"`
 }
 
 type _ContainerLoggingHttp ContainerLoggingHttp
@@ -38,11 +44,12 @@ type _ContainerLoggingHttp ContainerLoggingHttp
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewContainerLoggingHttp(host string, port int32, format string, compression string) *ContainerLoggingHttp {
+func NewContainerLoggingHttp(host string, port int32, format ContainerLoggingHttpFormat, headers []ContainerLoggingHttpHeader, compression ContainerLoggingHttpCompression) *ContainerLoggingHttp {
 	this := ContainerLoggingHttp{}
 	this.Host = host
 	this.Port = port
 	this.Format = format
+	this.Headers = headers
 	this.Compression = compression
 	return &this
 }
@@ -103,106 +110,136 @@ func (o *ContainerLoggingHttp) SetPort(v int32) {
 	o.Port = v
 }
 
-// GetUser returns the User field value if set, zero value otherwise.
+// GetUser returns the User field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ContainerLoggingHttp) GetUser() string {
-	if o == nil || IsNil(o.User) {
+	if o == nil || IsNil(o.User.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.User
+	return *o.User.Get()
 }
 
 // GetUserOk returns a tuple with the User field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ContainerLoggingHttp) GetUserOk() (*string, bool) {
-	if o == nil || IsNil(o.User) {
+	if o == nil {
 		return nil, false
 	}
-	return o.User, true
+	return o.User.Get(), o.User.IsSet()
 }
 
 // HasUser returns a boolean if a field has been set.
 func (o *ContainerLoggingHttp) HasUser() bool {
-	if o != nil && !IsNil(o.User) {
+	if o != nil && o.User.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetUser gets a reference to the given string and assigns it to the User field.
+// SetUser gets a reference to the given NullableString and assigns it to the User field.
 func (o *ContainerLoggingHttp) SetUser(v string) {
-	o.User = &v
+	o.User.Set(&v)
+}
+// SetUserNil sets the value for User to be an explicit nil
+func (o *ContainerLoggingHttp) SetUserNil() {
+	o.User.Set(nil)
 }
 
-// GetPassword returns the Password field value if set, zero value otherwise.
+// UnsetUser ensures that no value is present for User, not even an explicit nil
+func (o *ContainerLoggingHttp) UnsetUser() {
+	o.User.Unset()
+}
+
+// GetPassword returns the Password field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ContainerLoggingHttp) GetPassword() string {
-	if o == nil || IsNil(o.Password) {
+	if o == nil || IsNil(o.Password.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.Password
+	return *o.Password.Get()
 }
 
 // GetPasswordOk returns a tuple with the Password field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ContainerLoggingHttp) GetPasswordOk() (*string, bool) {
-	if o == nil || IsNil(o.Password) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Password, true
+	return o.Password.Get(), o.Password.IsSet()
 }
 
 // HasPassword returns a boolean if a field has been set.
 func (o *ContainerLoggingHttp) HasPassword() bool {
-	if o != nil && !IsNil(o.Password) {
+	if o != nil && o.Password.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetPassword gets a reference to the given string and assigns it to the Password field.
+// SetPassword gets a reference to the given NullableString and assigns it to the Password field.
 func (o *ContainerLoggingHttp) SetPassword(v string) {
-	o.Password = &v
+	o.Password.Set(&v)
+}
+// SetPasswordNil sets the value for Password to be an explicit nil
+func (o *ContainerLoggingHttp) SetPasswordNil() {
+	o.Password.Set(nil)
 }
 
-// GetPath returns the Path field value if set, zero value otherwise.
+// UnsetPassword ensures that no value is present for Password, not even an explicit nil
+func (o *ContainerLoggingHttp) UnsetPassword() {
+	o.Password.Unset()
+}
+
+// GetPath returns the Path field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ContainerLoggingHttp) GetPath() string {
-	if o == nil || IsNil(o.Path) {
+	if o == nil || IsNil(o.Path.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.Path
+	return *o.Path.Get()
 }
 
 // GetPathOk returns a tuple with the Path field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ContainerLoggingHttp) GetPathOk() (*string, bool) {
-	if o == nil || IsNil(o.Path) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Path, true
+	return o.Path.Get(), o.Path.IsSet()
 }
 
 // HasPath returns a boolean if a field has been set.
 func (o *ContainerLoggingHttp) HasPath() bool {
-	if o != nil && !IsNil(o.Path) {
+	if o != nil && o.Path.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetPath gets a reference to the given string and assigns it to the Path field.
+// SetPath gets a reference to the given NullableString and assigns it to the Path field.
 func (o *ContainerLoggingHttp) SetPath(v string) {
-	o.Path = &v
+	o.Path.Set(&v)
+}
+// SetPathNil sets the value for Path to be an explicit nil
+func (o *ContainerLoggingHttp) SetPathNil() {
+	o.Path.Set(nil)
+}
+
+// UnsetPath ensures that no value is present for Path, not even an explicit nil
+func (o *ContainerLoggingHttp) UnsetPath() {
+	o.Path.Unset()
 }
 
 // GetFormat returns the Format field value
-func (o *ContainerLoggingHttp) GetFormat() string {
+func (o *ContainerLoggingHttp) GetFormat() ContainerLoggingHttpFormat {
 	if o == nil {
-		var ret string
+		var ret ContainerLoggingHttpFormat
 		return ret
 	}
 
@@ -211,7 +248,7 @@ func (o *ContainerLoggingHttp) GetFormat() string {
 
 // GetFormatOk returns a tuple with the Format field value
 // and a boolean to check if the value has been set.
-func (o *ContainerLoggingHttp) GetFormatOk() (*string, bool) {
+func (o *ContainerLoggingHttp) GetFormatOk() (*ContainerLoggingHttpFormat, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -219,46 +256,40 @@ func (o *ContainerLoggingHttp) GetFormatOk() (*string, bool) {
 }
 
 // SetFormat sets field value
-func (o *ContainerLoggingHttp) SetFormat(v string) {
+func (o *ContainerLoggingHttp) SetFormat(v ContainerLoggingHttpFormat) {
 	o.Format = v
 }
 
-// GetHeaders returns the Headers field value if set, zero value otherwise.
-func (o *ContainerLoggingHttp) GetHeaders() []ContainerLoggingDatadogTagsInner {
-	if o == nil || IsNil(o.Headers) {
-		var ret []ContainerLoggingDatadogTagsInner
+// GetHeaders returns the Headers field value
+// If the value is explicit nil, the zero value for []ContainerLoggingHttpHeader will be returned
+func (o *ContainerLoggingHttp) GetHeaders() []ContainerLoggingHttpHeader {
+	if o == nil {
+		var ret []ContainerLoggingHttpHeader
 		return ret
 	}
+
 	return o.Headers
 }
 
-// GetHeadersOk returns a tuple with the Headers field value if set, nil otherwise
+// GetHeadersOk returns a tuple with the Headers field value
 // and a boolean to check if the value has been set.
-func (o *ContainerLoggingHttp) GetHeadersOk() ([]ContainerLoggingDatadogTagsInner, bool) {
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *ContainerLoggingHttp) GetHeadersOk() ([]ContainerLoggingHttpHeader, bool) {
 	if o == nil || IsNil(o.Headers) {
 		return nil, false
 	}
 	return o.Headers, true
 }
 
-// HasHeaders returns a boolean if a field has been set.
-func (o *ContainerLoggingHttp) HasHeaders() bool {
-	if o != nil && !IsNil(o.Headers) {
-		return true
-	}
-
-	return false
-}
-
-// SetHeaders gets a reference to the given []ContainerLoggingDatadogTagsInner and assigns it to the Headers field.
-func (o *ContainerLoggingHttp) SetHeaders(v []ContainerLoggingDatadogTagsInner) {
+// SetHeaders sets field value
+func (o *ContainerLoggingHttp) SetHeaders(v []ContainerLoggingHttpHeader) {
 	o.Headers = v
 }
 
 // GetCompression returns the Compression field value
-func (o *ContainerLoggingHttp) GetCompression() string {
+func (o *ContainerLoggingHttp) GetCompression() ContainerLoggingHttpCompression {
 	if o == nil {
-		var ret string
+		var ret ContainerLoggingHttpCompression
 		return ret
 	}
 
@@ -267,7 +298,7 @@ func (o *ContainerLoggingHttp) GetCompression() string {
 
 // GetCompressionOk returns a tuple with the Compression field value
 // and a boolean to check if the value has been set.
-func (o *ContainerLoggingHttp) GetCompressionOk() (*string, bool) {
+func (o *ContainerLoggingHttp) GetCompressionOk() (*ContainerLoggingHttpCompression, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -275,7 +306,7 @@ func (o *ContainerLoggingHttp) GetCompressionOk() (*string, bool) {
 }
 
 // SetCompression sets field value
-func (o *ContainerLoggingHttp) SetCompression(v string) {
+func (o *ContainerLoggingHttp) SetCompression(v ContainerLoggingHttpCompression) {
 	o.Compression = v
 }
 
@@ -291,17 +322,17 @@ func (o ContainerLoggingHttp) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["host"] = o.Host
 	toSerialize["port"] = o.Port
-	if !IsNil(o.User) {
-		toSerialize["user"] = o.User
+	if o.User.IsSet() {
+		toSerialize["user"] = o.User.Get()
 	}
-	if !IsNil(o.Password) {
-		toSerialize["password"] = o.Password
+	if o.Password.IsSet() {
+		toSerialize["password"] = o.Password.Get()
 	}
-	if !IsNil(o.Path) {
-		toSerialize["path"] = o.Path
+	if o.Path.IsSet() {
+		toSerialize["path"] = o.Path.Get()
 	}
 	toSerialize["format"] = o.Format
-	if !IsNil(o.Headers) {
+	if o.Headers != nil {
 		toSerialize["headers"] = o.Headers
 	}
 	toSerialize["compression"] = o.Compression
@@ -316,6 +347,7 @@ func (o *ContainerLoggingHttp) UnmarshalJSON(data []byte) (err error) {
 		"host",
 		"port",
 		"format",
+		"headers",
 		"compression",
 	}
 

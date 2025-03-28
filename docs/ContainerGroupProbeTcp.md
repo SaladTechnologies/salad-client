@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Port** | **int32** |  | 
+**Port** | **int32** | The TCP port number that the probe should connect to. Must be a valid port number between 0 and 65535. | 
 
 ## Methods
 

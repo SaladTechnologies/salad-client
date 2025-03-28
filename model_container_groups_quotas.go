@@ -3,7 +3,7 @@ SaladCloud API
 
 The SaladCloud REST API. Please refer to the [SaladCloud API Documentation](https://docs.salad.com/api-reference) for more details.
 
-API version: 0.9.0-alpha.7
+API version: 0.9.0-alpha.11
 Contact: cloud@salad.com
 */
 
@@ -20,12 +20,17 @@ import (
 // checks if the ContainerGroupsQuotas type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ContainerGroupsQuotas{}
 
-// ContainerGroupsQuotas struct for ContainerGroupsQuotas
+// ContainerGroupsQuotas Represents the organization quotas for container groups
 type ContainerGroupsQuotas struct {
-	MaxCreatedContainerGroups int32 `json:"max_created_container_groups"`
-	ContainerInstanceQuota int32 `json:"container_instance_quota"`
+	// The maximum number of replicas that can be created for a container group
+	ContainerReplicasQuota int32 `json:"container_replicas_quota"`
+	// The number of replicas that are currently in use
+	ContainerReplicasUsed int32 `json:"container_replicas_used"`
+	// The maximum number of container group reallocations per minute
 	MaxContainerGroupReallocationsPerMinute *int32 `json:"max_container_group_reallocations_per_minute,omitempty"`
+	// The maximum number of container group recreates per minute
 	MaxContainerGroupRecreatesPerMinute *int32 `json:"max_container_group_recreates_per_minute,omitempty"`
+	// The maximum number of container group restarts per minute
 	MaxContainerGroupRestartsPerMinute *int32 `json:"max_container_group_restarts_per_minute,omitempty"`
 }
 
@@ -35,10 +40,10 @@ type _ContainerGroupsQuotas ContainerGroupsQuotas
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewContainerGroupsQuotas(maxCreatedContainerGroups int32, containerInstanceQuota int32) *ContainerGroupsQuotas {
+func NewContainerGroupsQuotas(containerReplicasQuota int32, containerReplicasUsed int32) *ContainerGroupsQuotas {
 	this := ContainerGroupsQuotas{}
-	this.MaxCreatedContainerGroups = maxCreatedContainerGroups
-	this.ContainerInstanceQuota = containerInstanceQuota
+	this.ContainerReplicasQuota = containerReplicasQuota
+	this.ContainerReplicasUsed = containerReplicasUsed
 	var maxContainerGroupReallocationsPerMinute int32 = 10
 	this.MaxContainerGroupReallocationsPerMinute = &maxContainerGroupReallocationsPerMinute
 	var maxContainerGroupRecreatesPerMinute int32 = 10
@@ -62,52 +67,52 @@ func NewContainerGroupsQuotasWithDefaults() *ContainerGroupsQuotas {
 	return &this
 }
 
-// GetMaxCreatedContainerGroups returns the MaxCreatedContainerGroups field value
-func (o *ContainerGroupsQuotas) GetMaxCreatedContainerGroups() int32 {
+// GetContainerReplicasQuota returns the ContainerReplicasQuota field value
+func (o *ContainerGroupsQuotas) GetContainerReplicasQuota() int32 {
 	if o == nil {
 		var ret int32
 		return ret
 	}
 
-	return o.MaxCreatedContainerGroups
+	return o.ContainerReplicasQuota
 }
 
-// GetMaxCreatedContainerGroupsOk returns a tuple with the MaxCreatedContainerGroups field value
+// GetContainerReplicasQuotaOk returns a tuple with the ContainerReplicasQuota field value
 // and a boolean to check if the value has been set.
-func (o *ContainerGroupsQuotas) GetMaxCreatedContainerGroupsOk() (*int32, bool) {
+func (o *ContainerGroupsQuotas) GetContainerReplicasQuotaOk() (*int32, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.MaxCreatedContainerGroups, true
+	return &o.ContainerReplicasQuota, true
 }
 
-// SetMaxCreatedContainerGroups sets field value
-func (o *ContainerGroupsQuotas) SetMaxCreatedContainerGroups(v int32) {
-	o.MaxCreatedContainerGroups = v
+// SetContainerReplicasQuota sets field value
+func (o *ContainerGroupsQuotas) SetContainerReplicasQuota(v int32) {
+	o.ContainerReplicasQuota = v
 }
 
-// GetContainerInstanceQuota returns the ContainerInstanceQuota field value
-func (o *ContainerGroupsQuotas) GetContainerInstanceQuota() int32 {
+// GetContainerReplicasUsed returns the ContainerReplicasUsed field value
+func (o *ContainerGroupsQuotas) GetContainerReplicasUsed() int32 {
 	if o == nil {
 		var ret int32
 		return ret
 	}
 
-	return o.ContainerInstanceQuota
+	return o.ContainerReplicasUsed
 }
 
-// GetContainerInstanceQuotaOk returns a tuple with the ContainerInstanceQuota field value
+// GetContainerReplicasUsedOk returns a tuple with the ContainerReplicasUsed field value
 // and a boolean to check if the value has been set.
-func (o *ContainerGroupsQuotas) GetContainerInstanceQuotaOk() (*int32, bool) {
+func (o *ContainerGroupsQuotas) GetContainerReplicasUsedOk() (*int32, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.ContainerInstanceQuota, true
+	return &o.ContainerReplicasUsed, true
 }
 
-// SetContainerInstanceQuota sets field value
-func (o *ContainerGroupsQuotas) SetContainerInstanceQuota(v int32) {
-	o.ContainerInstanceQuota = v
+// SetContainerReplicasUsed sets field value
+func (o *ContainerGroupsQuotas) SetContainerReplicasUsed(v int32) {
+	o.ContainerReplicasUsed = v
 }
 
 // GetMaxContainerGroupReallocationsPerMinute returns the MaxContainerGroupReallocationsPerMinute field value if set, zero value otherwise.
@@ -216,8 +221,8 @@ func (o ContainerGroupsQuotas) MarshalJSON() ([]byte, error) {
 
 func (o ContainerGroupsQuotas) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["max_created_container_groups"] = o.MaxCreatedContainerGroups
-	toSerialize["container_instance_quota"] = o.ContainerInstanceQuota
+	toSerialize["container_replicas_quota"] = o.ContainerReplicasQuota
+	toSerialize["container_replicas_used"] = o.ContainerReplicasUsed
 	if !IsNil(o.MaxContainerGroupReallocationsPerMinute) {
 		toSerialize["max_container_group_reallocations_per_minute"] = o.MaxContainerGroupReallocationsPerMinute
 	}
@@ -235,8 +240,8 @@ func (o *ContainerGroupsQuotas) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"max_created_container_groups",
-		"container_instance_quota",
+		"container_replicas_quota",
+		"container_replicas_used",
 	}
 
 	allProperties := make(map[string]interface{})

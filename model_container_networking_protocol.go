@@ -3,7 +3,7 @@ SaladCloud API
 
 The SaladCloud REST API. Please refer to the [SaladCloud API Documentation](https://docs.salad.com/api-reference) for more details.
 
-API version: 0.9.0-alpha.7
+API version: 0.9.0-alpha.11
 Contact: cloud@salad.com
 */
 
@@ -16,7 +16,7 @@ import (
 	"fmt"
 )
 
-// ContainerNetworkingProtocol the model 'ContainerNetworkingProtocol'
+// ContainerNetworkingProtocol Defines the communication protocol used for network traffic between containers or external systems. Currently supports HTTP protocol for web-based communication.
 type ContainerNetworkingProtocol string
 
 // List of ContainerNetworkingProtocol

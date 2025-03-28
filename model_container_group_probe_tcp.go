@@ -3,7 +3,7 @@ SaladCloud API
 
 The SaladCloud REST API. Please refer to the [SaladCloud API Documentation](https://docs.salad.com/api-reference) for more details.
 
-API version: 0.9.0-alpha.7
+API version: 0.9.0-alpha.11
 Contact: cloud@salad.com
 */
 
@@ -20,8 +20,9 @@ import (
 // checks if the ContainerGroupProbeTcp type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ContainerGroupProbeTcp{}
 
-// ContainerGroupProbeTcp struct for ContainerGroupProbeTcp
+// ContainerGroupProbeTcp Configuration for a TCP probe used to check container health via network connectivity.
 type ContainerGroupProbeTcp struct {
+	// The TCP port number that the probe should connect to. Must be a valid port number between 0 and 65535.
 	Port int32 `json:"port"`
 }
 

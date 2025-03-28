@@ -4,15 +4,15 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Host** | **string** |  | 
-**ApiKey** | **string** |  | 
-**Tags** | Pointer to [**[]ContainerLoggingDatadogTagsInner**](ContainerLoggingDatadogTagsInner.md) |  | [optional] 
+**Host** | **string** | The Datadog intake server host URL where logs will be sent. | 
+**ApiKey** | **string** | The Datadog API key used for authentication when sending logs. | 
+**Tags** | [**[]ContainerLoggingDatadogTag**](ContainerLoggingDatadogTag.md) | Optional metadata tags to attach to logs for filtering and categorization in Datadog. | 
 
 ## Methods
 
 ### NewContainerLoggingDatadog
 
-`func NewContainerLoggingDatadog(host string, apiKey string, ) *ContainerLoggingDatadog`
+`func NewContainerLoggingDatadog(host string, apiKey string, tags []ContainerLoggingDatadogTag, ) *ContainerLoggingDatadog`
 
 NewContainerLoggingDatadog instantiates a new ContainerLoggingDatadog object
 This constructor will assign default values to properties that have it defined,
@@ -69,29 +69,34 @@ SetApiKey sets ApiKey field to given value.
 
 ### GetTags
 
-`func (o *ContainerLoggingDatadog) GetTags() []ContainerLoggingDatadogTagsInner`
+`func (o *ContainerLoggingDatadog) GetTags() []ContainerLoggingDatadogTag`
 
 GetTags returns the Tags field if non-nil, zero value otherwise.
 
 ### GetTagsOk
 
-`func (o *ContainerLoggingDatadog) GetTagsOk() (*[]ContainerLoggingDatadogTagsInner, bool)`
+`func (o *ContainerLoggingDatadog) GetTagsOk() (*[]ContainerLoggingDatadogTag, bool)`
 
 GetTagsOk returns a tuple with the Tags field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetTags
 
-`func (o *ContainerLoggingDatadog) SetTags(v []ContainerLoggingDatadogTagsInner)`
+`func (o *ContainerLoggingDatadog) SetTags(v []ContainerLoggingDatadogTag)`
 
 SetTags sets Tags field to given value.
 
-### HasTags
 
-`func (o *ContainerLoggingDatadog) HasTags() bool`
+### SetTagsNil
 
-HasTags returns a boolean if a field has been set.
+`func (o *ContainerLoggingDatadog) SetTagsNil(b bool)`
 
+ SetTagsNil sets the value for Tags to be an explicit nil
+
+### UnsetTags
+`func (o *ContainerLoggingDatadog) UnsetTags()`
+
+UnsetTags ensures that no value is present for Tags, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

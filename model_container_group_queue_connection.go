@@ -3,7 +3,7 @@ SaladCloud API
 
 The SaladCloud REST API. Please refer to the [SaladCloud API Documentation](https://docs.salad.com/api-reference) for more details.
 
-API version: 0.9.0-alpha.7
+API version: 0.9.0-alpha.11
 Contact: cloud@salad.com
 */
 
@@ -20,10 +20,13 @@ import (
 // checks if the ContainerGroupQueueConnection type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ContainerGroupQueueConnection{}
 
-// ContainerGroupQueueConnection Represents container group queue connection
+// ContainerGroupQueueConnection Configuration for connecting a container group to a message queue system, enabling asynchronous communication between services.
 type ContainerGroupQueueConnection struct {
-	Path string `json:"path"`
+	// The endpoint path for accessing the queue service, relative to the base URL of the queue server.
+	Path string `json:"path" validate:"regexp=^.*$"`
+	// The network port number used to connect to the queue service. Must be a valid TCP/IP port between 1 and 65535.
 	Port int32 `json:"port"`
+	// Unique identifier for the queue. Must start with a lowercase letter, can contain lowercase letters, numbers, and hyphens, and must end with a letter or number.
 	QueueName string `json:"queue_name" validate:"regexp=^[a-z][a-z0-9-]{0,61}[a-z0-9]$"`
 }
 

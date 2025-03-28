@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Items** | [**[]WorkloadError**](WorkloadError.md) |  | 
+**Items** | [**[]WorkloadError**](WorkloadError.md) | A list of workload errors | 
 
 ## Methods
 

@@ -3,7 +3,7 @@ SaladCloud API
 
 The SaladCloud REST API. Please refer to the [SaladCloud API Documentation](https://docs.salad.com/api-reference) for more details.
 
-API version: 0.9.0-alpha.7
+API version: 0.9.0-alpha.11
 Contact: cloud@salad.com
 */
 
@@ -23,12 +23,19 @@ var _ MappedNullable = &WorkloadError{}
 
 // WorkloadError Represents a workload error
 type WorkloadError struct {
-	Detail string `json:"detail"`
-	FailedAt time.Time `json:"failed_at"`
-	InstanceId string `json:"instance_id"`
-	MachineId string `json:"machine_id"`
+	// The timestamp when the workload was initially allocated to a machine
 	AllocatedAt time.Time `json:"allocated_at"`
-	StartedAt NullableTime `json:"started_at,omitempty"`
+	// A detailed error message describing the nature and cause of the workload failure
+	Detail string `json:"detail" validate:"regexp=^.*$"`
+	// The timestamp when the workload failure was detected or reported
+	FailedAt time.Time `json:"failed_at"`
+	// The container group instance identifier.
+	InstanceId string `json:"instance_id"`
+	// The container group machine identifier.
+	MachineId string `json:"machine_id"`
+	// The timestamp when the workload started execution, or null if it failed before starting
+	StartedAt *time.Time `json:"started_at,omitempty"`
+	// The schema version number for this error record, used for tracking error format changes
 	Version int32 `json:"version"`
 }
 
@@ -38,13 +45,13 @@ type _WorkloadError WorkloadError
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewWorkloadError(detail string, failedAt time.Time, instanceId string, machineId string, allocatedAt time.Time, version int32) *WorkloadError {
+func NewWorkloadError(allocatedAt time.Time, detail string, failedAt time.Time, instanceId string, machineId string, version int32) *WorkloadError {
 	this := WorkloadError{}
+	this.AllocatedAt = allocatedAt
 	this.Detail = detail
 	this.FailedAt = failedAt
 	this.InstanceId = instanceId
 	this.MachineId = machineId
-	this.AllocatedAt = allocatedAt
 	this.Version = version
 	return &this
 }
@@ -55,6 +62,30 @@ func NewWorkloadError(detail string, failedAt time.Time, instanceId string, mach
 func NewWorkloadErrorWithDefaults() *WorkloadError {
 	this := WorkloadError{}
 	return &this
+}
+
+// GetAllocatedAt returns the AllocatedAt field value
+func (o *WorkloadError) GetAllocatedAt() time.Time {
+	if o == nil {
+		var ret time.Time
+		return ret
+	}
+
+	return o.AllocatedAt
+}
+
+// GetAllocatedAtOk returns a tuple with the AllocatedAt field value
+// and a boolean to check if the value has been set.
+func (o *WorkloadError) GetAllocatedAtOk() (*time.Time, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.AllocatedAt, true
+}
+
+// SetAllocatedAt sets field value
+func (o *WorkloadError) SetAllocatedAt(v time.Time) {
+	o.AllocatedAt = v
 }
 
 // GetDetail returns the Detail field value
@@ -153,70 +184,36 @@ func (o *WorkloadError) SetMachineId(v string) {
 	o.MachineId = v
 }
 
-// GetAllocatedAt returns the AllocatedAt field value
-func (o *WorkloadError) GetAllocatedAt() time.Time {
-	if o == nil {
-		var ret time.Time
-		return ret
-	}
-
-	return o.AllocatedAt
-}
-
-// GetAllocatedAtOk returns a tuple with the AllocatedAt field value
-// and a boolean to check if the value has been set.
-func (o *WorkloadError) GetAllocatedAtOk() (*time.Time, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.AllocatedAt, true
-}
-
-// SetAllocatedAt sets field value
-func (o *WorkloadError) SetAllocatedAt(v time.Time) {
-	o.AllocatedAt = v
-}
-
-// GetStartedAt returns the StartedAt field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetStartedAt returns the StartedAt field value if set, zero value otherwise.
 func (o *WorkloadError) GetStartedAt() time.Time {
-	if o == nil || IsNil(o.StartedAt.Get()) {
+	if o == nil || IsNil(o.StartedAt) {
 		var ret time.Time
 		return ret
 	}
-	return *o.StartedAt.Get()
+	return *o.StartedAt
 }
 
 // GetStartedAtOk returns a tuple with the StartedAt field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *WorkloadError) GetStartedAtOk() (*time.Time, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.StartedAt) {
 		return nil, false
 	}
-	return o.StartedAt.Get(), o.StartedAt.IsSet()
+	return o.StartedAt, true
 }
 
 // HasStartedAt returns a boolean if a field has been set.
 func (o *WorkloadError) HasStartedAt() bool {
-	if o != nil && o.StartedAt.IsSet() {
+	if o != nil && !IsNil(o.StartedAt) {
 		return true
 	}
 
 	return false
 }
 
-// SetStartedAt gets a reference to the given NullableTime and assigns it to the StartedAt field.
+// SetStartedAt gets a reference to the given time.Time and assigns it to the StartedAt field.
 func (o *WorkloadError) SetStartedAt(v time.Time) {
-	o.StartedAt.Set(&v)
-}
-// SetStartedAtNil sets the value for StartedAt to be an explicit nil
-func (o *WorkloadError) SetStartedAtNil() {
-	o.StartedAt.Set(nil)
-}
-
-// UnsetStartedAt ensures that no value is present for StartedAt, not even an explicit nil
-func (o *WorkloadError) UnsetStartedAt() {
-	o.StartedAt.Unset()
+	o.StartedAt = &v
 }
 
 // GetVersion returns the Version field value
@@ -253,13 +250,13 @@ func (o WorkloadError) MarshalJSON() ([]byte, error) {
 
 func (o WorkloadError) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	toSerialize["allocated_at"] = o.AllocatedAt
 	toSerialize["detail"] = o.Detail
 	toSerialize["failed_at"] = o.FailedAt
 	toSerialize["instance_id"] = o.InstanceId
 	toSerialize["machine_id"] = o.MachineId
-	toSerialize["allocated_at"] = o.AllocatedAt
-	if o.StartedAt.IsSet() {
-		toSerialize["started_at"] = o.StartedAt.Get()
+	if !IsNil(o.StartedAt) {
+		toSerialize["started_at"] = o.StartedAt
 	}
 	toSerialize["version"] = o.Version
 	return toSerialize, nil
@@ -270,11 +267,11 @@ func (o *WorkloadError) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
+		"allocated_at",
 		"detail",
 		"failed_at",
 		"instance_id",
 		"machine_id",
-		"allocated_at",
 		"version",
 	}
 

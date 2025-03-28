@@ -4,16 +4,16 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Cpu** | **int32** |  | 
-**Memory** | **int32** |  | 
-**GpuClasses** | Pointer to **[]string** |  | [optional] 
-**StorageAmount** | Pointer to **NullableInt64** |  | [optional] 
+**Cpu** | **int32** | The number of CPU cores required by the container. Must be between 1 and 16. | 
+**Memory** | **int32** | The amount of memory (in MB) required by the container. Must be between 1024 MB and 61440 MB. | 
+**GpuClasses** | **[]string** | A list of GPU class UUIDs required by the container. Can be null if no GPU is required. | 
+**StorageAmount** | Pointer to **int64** | The amount of storage (in bytes) required by the container. Must be between 1 GB (1073741824 bytes) and 50 GB (53687091200 bytes). | [optional] 
 
 ## Methods
 
 ### NewContainerResourceRequirements
 
-`func NewContainerResourceRequirements(cpu int32, memory int32, ) *ContainerResourceRequirements`
+`func NewContainerResourceRequirements(cpu int32, memory int32, gpuClasses []string, ) *ContainerResourceRequirements`
 
 NewContainerResourceRequirements instantiates a new ContainerResourceRequirements object
 This constructor will assign default values to properties that have it defined,
@@ -87,11 +87,6 @@ and a boolean to check if the value has been set.
 
 SetGpuClasses sets GpuClasses field to given value.
 
-### HasGpuClasses
-
-`func (o *ContainerResourceRequirements) HasGpuClasses() bool`
-
-HasGpuClasses returns a boolean if a field has been set.
 
 ### SetGpuClassesNil
 
@@ -128,16 +123,6 @@ SetStorageAmount sets StorageAmount field to given value.
 
 HasStorageAmount returns a boolean if a field has been set.
 
-### SetStorageAmountNil
-
-`func (o *ContainerResourceRequirements) SetStorageAmountNil(b bool)`
-
- SetStorageAmountNil sets the value for StorageAmount to be an explicit nil
-
-### UnsetStorageAmount
-`func (o *ContainerResourceRequirements) UnsetStorageAmount()`
-
-UnsetStorageAmount ensures that no value is present for StorageAmount, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -3,7 +3,7 @@ SaladCloud API
 
 The SaladCloud REST API. Please refer to the [SaladCloud API Documentation](https://docs.salad.com/api-reference) for more details.
 
-API version: 0.9.0-alpha.7
+API version: 0.9.0-alpha.11
 Contact: cloud@salad.com
 */
 
@@ -20,10 +20,12 @@ import (
 // checks if the ContainerLoggingNewRelic type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ContainerLoggingNewRelic{}
 
-// ContainerLoggingNewRelic struct for ContainerLoggingNewRelic
+// ContainerLoggingNewRelic Configuration for sending container logs to New Relic's log management platform.
 type ContainerLoggingNewRelic struct {
-	Host string `json:"host"`
-	IngestionKey string `json:"ingestion_key"`
+	// The New Relic endpoint host for log ingestion (e.g., log-api.newrelic.com).
+	Host string `json:"host" validate:"regexp=^.*$"`
+	// The New Relic license or ingestion key used for authentication and data routing.
+	IngestionKey string `json:"ingestion_key" validate:"regexp=^.*$"`
 }
 
 type _ContainerLoggingNewRelic ContainerLoggingNewRelic

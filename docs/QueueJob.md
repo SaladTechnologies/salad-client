@@ -4,15 +4,15 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Id** | **string** |  | 
+**Id** | **string** | The job identifier | 
 **Input** | **interface{}** |  | 
-**Metadata** | Pointer to **map[string]interface{}** |  | [optional] 
-**Webhook** | Pointer to **NullableString** |  | [optional] 
-**Status** | **string** |  | 
-**Events** | [**[]QueueJobEvent**](QueueJobEvent.md) |  | 
+**Metadata** | Pointer to **map[string]interface{}** | Additional metadata for the job | [optional] 
+**Webhook** | Pointer to **string** | The webhook URL to notify when the job completes | [optional] 
+**Status** | **string** | The job status | 
+**Events** | [**[]QueueJobEvent**](QueueJobEvent.md) | The job events | 
 **Output** | Pointer to **interface{}** |  | [optional] 
-**CreateTime** | **time.Time** |  | 
-**UpdateTime** | **time.Time** |  | 
+**CreateTime** | **time.Time** | The job creation time | 
+**UpdateTime** | **time.Time** | The job update time | 
 
 ## Methods
 
@@ -108,16 +108,6 @@ SetMetadata sets Metadata field to given value.
 
 HasMetadata returns a boolean if a field has been set.
 
-### SetMetadataNil
-
-`func (o *QueueJob) SetMetadataNil(b bool)`
-
- SetMetadataNil sets the value for Metadata to be an explicit nil
-
-### UnsetMetadata
-`func (o *QueueJob) UnsetMetadata()`
-
-UnsetMetadata ensures that no value is present for Metadata, not even an explicit nil
 ### GetWebhook
 
 `func (o *QueueJob) GetWebhook() string`
@@ -143,16 +133,6 @@ SetWebhook sets Webhook field to given value.
 
 HasWebhook returns a boolean if a field has been set.
 
-### SetWebhookNil
-
-`func (o *QueueJob) SetWebhookNil(b bool)`
-
- SetWebhookNil sets the value for Webhook to be an explicit nil
-
-### UnsetWebhook
-`func (o *QueueJob) UnsetWebhook()`
-
-UnsetWebhook ensures that no value is present for Webhook, not even an explicit nil
 ### GetStatus
 
 `func (o *QueueJob) GetStatus() string`

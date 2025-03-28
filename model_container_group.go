@@ -3,7 +3,7 @@ SaladCloud API
 
 The SaladCloud REST API. Please refer to the [SaladCloud API Documentation](https://docs.salad.com/api-reference) for more details.
 
-API version: 0.9.0-alpha.7
+API version: 0.9.0-alpha.11
 Contact: cloud@salad.com
 */
 
@@ -21,28 +21,42 @@ import (
 // checks if the ContainerGroup type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ContainerGroup{}
 
-// ContainerGroup Represents a container group
+// ContainerGroup A container group definition that represents a scalable set of identical containers running as a distributed service
 type ContainerGroup struct {
-	Id string `json:"id"`
-	Name string `json:"name" validate:"regexp=^[a-z][a-z0-9-]{0,61}[a-z0-9]$"`
-	DisplayName string `json:"display_name" validate:"regexp=^[ ,-.0-9A-Za-z]+$"`
-	Container Container `json:"container"`
+	// Defines whether containers in this group should automatically start when deployed (true) or require manual starting (false)
 	AutostartPolicy bool `json:"autostart_policy"`
-	RestartPolicy ContainerRestartPolicy `json:"restart_policy"`
-	Replicas int32 `json:"replicas"`
-	CurrentState ContainerGroupState `json:"current_state"`
-	// List of countries nodes must be located in. Remove this field to permit nodes from any country.
-	CountryCodes []CountryCode `json:"country_codes,omitempty"`
-	Networking *ContainerGroupNetworking `json:"networking,omitempty"`
-	LivenessProbe *ContainerGroupLivenessProbe `json:"liveness_probe,omitempty"`
-	ReadinessProbe *ContainerGroupReadinessProbe `json:"readiness_probe,omitempty"`
-	StartupProbe *ContainerGroupStartupProbe `json:"startup_probe,omitempty"`
-	QueueConnection *ContainerGroupQueueConnection `json:"queue_connection,omitempty"`
+	Container Container `json:"container"`
+	// List of country codes where container instances are permitted to run. When not specified or empty, containers may run in any available region.
+	CountryCodes []CountryCode `json:"country_codes"`
+	// ISO 8601 timestamp when this container group was initially created
 	CreateTime time.Time `json:"create_time"`
-	UpdateTime time.Time `json:"update_time"`
+	CurrentState ContainerGroupState `json:"current_state"`
+	// The display-friendly name of the resource.
+	DisplayName string `json:"display_name" validate:"regexp=^[ ,-.0-9A-Za-z]+$"`
+	// The container group identifier.
+	Id string `json:"id"`
+	LivenessProbe *ContainerGroupLivenessProbe `json:"liveness_probe,omitempty"`
+	// The container group name.
+	Name string `json:"name" validate:"regexp=^[a-z][a-z0-9-]{0,61}[a-z0-9]$"`
+	Networking *ContainerGroupNetworking `json:"networking,omitempty"`
+	// The organization name.
+	OrganizationName string `json:"organization_name" validate:"regexp=^[a-z][a-z0-9-]{0,61}[a-z0-9]$"`
+	// Indicates whether a configuration change has been requested but not yet applied to all containers in the group
 	PendingChange bool `json:"pending_change"`
+	Priority NullableContainerGroupPriority `json:"priority"`
+	// The project name.
+	ProjectName string `json:"project_name" validate:"regexp=^[a-z][a-z0-9-]{0,61}[a-z0-9]$"`
+	QueueAutoscaler *ContainerGroupQueueAutoscaler `json:"queue_autoscaler,omitempty"`
+	QueueConnection *ContainerGroupQueueConnection `json:"queue_connection,omitempty"`
+	ReadinessProbe *ContainerGroupReadinessProbe `json:"readiness_probe,omitempty"`
+	// The container group replicas.
+	Replicas int32 `json:"replicas"`
+	RestartPolicy ContainerRestartPolicy `json:"restart_policy"`
+	StartupProbe *ContainerGroupStartupProbe `json:"startup_probe,omitempty"`
+	// ISO 8601 timestamp when this container group was last updated
+	UpdateTime time.Time `json:"update_time"`
+	// Incremental version number that increases with each configuration change to the container group
 	Version int32 `json:"version"`
-	QueueAutoscaler *QueueAutoscaler `json:"queue_autoscaler,omitempty"`
 }
 
 type _ContainerGroup ContainerGroup
@@ -51,19 +65,23 @@ type _ContainerGroup ContainerGroup
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewContainerGroup(id string, name string, displayName string, container Container, autostartPolicy bool, restartPolicy ContainerRestartPolicy, replicas int32, currentState ContainerGroupState, createTime time.Time, updateTime time.Time, pendingChange bool, version int32) *ContainerGroup {
+func NewContainerGroup(autostartPolicy bool, container Container, countryCodes []CountryCode, createTime time.Time, currentState ContainerGroupState, displayName string, id string, name string, organizationName string, pendingChange bool, priority NullableContainerGroupPriority, projectName string, replicas int32, restartPolicy ContainerRestartPolicy, updateTime time.Time, version int32) *ContainerGroup {
 	this := ContainerGroup{}
+	this.AutostartPolicy = autostartPolicy
+	this.Container = container
+	this.CountryCodes = countryCodes
+	this.CreateTime = createTime
+	this.CurrentState = currentState
+	this.DisplayName = displayName
 	this.Id = id
 	this.Name = name
-	this.DisplayName = displayName
-	this.Container = container
-	this.AutostartPolicy = autostartPolicy
-	this.RestartPolicy = restartPolicy
-	this.Replicas = replicas
-	this.CurrentState = currentState
-	this.CreateTime = createTime
-	this.UpdateTime = updateTime
+	this.OrganizationName = organizationName
 	this.PendingChange = pendingChange
+	this.Priority = priority
+	this.ProjectName = projectName
+	this.Replicas = replicas
+	this.RestartPolicy = restartPolicy
+	this.UpdateTime = updateTime
 	this.Version = version
 	return &this
 }
@@ -74,102 +92,6 @@ func NewContainerGroup(id string, name string, displayName string, container Con
 func NewContainerGroupWithDefaults() *ContainerGroup {
 	this := ContainerGroup{}
 	return &this
-}
-
-// GetId returns the Id field value
-func (o *ContainerGroup) GetId() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.Id
-}
-
-// GetIdOk returns a tuple with the Id field value
-// and a boolean to check if the value has been set.
-func (o *ContainerGroup) GetIdOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Id, true
-}
-
-// SetId sets field value
-func (o *ContainerGroup) SetId(v string) {
-	o.Id = v
-}
-
-// GetName returns the Name field value
-func (o *ContainerGroup) GetName() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.Name
-}
-
-// GetNameOk returns a tuple with the Name field value
-// and a boolean to check if the value has been set.
-func (o *ContainerGroup) GetNameOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Name, true
-}
-
-// SetName sets field value
-func (o *ContainerGroup) SetName(v string) {
-	o.Name = v
-}
-
-// GetDisplayName returns the DisplayName field value
-func (o *ContainerGroup) GetDisplayName() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.DisplayName
-}
-
-// GetDisplayNameOk returns a tuple with the DisplayName field value
-// and a boolean to check if the value has been set.
-func (o *ContainerGroup) GetDisplayNameOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.DisplayName, true
-}
-
-// SetDisplayName sets field value
-func (o *ContainerGroup) SetDisplayName(v string) {
-	o.DisplayName = v
-}
-
-// GetContainer returns the Container field value
-func (o *ContainerGroup) GetContainer() Container {
-	if o == nil {
-		var ret Container
-		return ret
-	}
-
-	return o.Container
-}
-
-// GetContainerOk returns a tuple with the Container field value
-// and a boolean to check if the value has been set.
-func (o *ContainerGroup) GetContainerOk() (*Container, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Container, true
-}
-
-// SetContainer sets field value
-func (o *ContainerGroup) SetContainer(v Container) {
-	o.Container = v
 }
 
 // GetAutostartPolicy returns the AutostartPolicy field value
@@ -196,52 +118,76 @@ func (o *ContainerGroup) SetAutostartPolicy(v bool) {
 	o.AutostartPolicy = v
 }
 
-// GetRestartPolicy returns the RestartPolicy field value
-func (o *ContainerGroup) GetRestartPolicy() ContainerRestartPolicy {
+// GetContainer returns the Container field value
+func (o *ContainerGroup) GetContainer() Container {
 	if o == nil {
-		var ret ContainerRestartPolicy
+		var ret Container
 		return ret
 	}
 
-	return o.RestartPolicy
+	return o.Container
 }
 
-// GetRestartPolicyOk returns a tuple with the RestartPolicy field value
+// GetContainerOk returns a tuple with the Container field value
 // and a boolean to check if the value has been set.
-func (o *ContainerGroup) GetRestartPolicyOk() (*ContainerRestartPolicy, bool) {
+func (o *ContainerGroup) GetContainerOk() (*Container, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.RestartPolicy, true
+	return &o.Container, true
 }
 
-// SetRestartPolicy sets field value
-func (o *ContainerGroup) SetRestartPolicy(v ContainerRestartPolicy) {
-	o.RestartPolicy = v
+// SetContainer sets field value
+func (o *ContainerGroup) SetContainer(v Container) {
+	o.Container = v
 }
 
-// GetReplicas returns the Replicas field value
-func (o *ContainerGroup) GetReplicas() int32 {
+// GetCountryCodes returns the CountryCodes field value
+func (o *ContainerGroup) GetCountryCodes() []CountryCode {
 	if o == nil {
-		var ret int32
+		var ret []CountryCode
 		return ret
 	}
 
-	return o.Replicas
+	return o.CountryCodes
 }
 
-// GetReplicasOk returns a tuple with the Replicas field value
+// GetCountryCodesOk returns a tuple with the CountryCodes field value
 // and a boolean to check if the value has been set.
-func (o *ContainerGroup) GetReplicasOk() (*int32, bool) {
+func (o *ContainerGroup) GetCountryCodesOk() ([]CountryCode, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.Replicas, true
+	return o.CountryCodes, true
 }
 
-// SetReplicas sets field value
-func (o *ContainerGroup) SetReplicas(v int32) {
-	o.Replicas = v
+// SetCountryCodes sets field value
+func (o *ContainerGroup) SetCountryCodes(v []CountryCode) {
+	o.CountryCodes = v
+}
+
+// GetCreateTime returns the CreateTime field value
+func (o *ContainerGroup) GetCreateTime() time.Time {
+	if o == nil {
+		var ret time.Time
+		return ret
+	}
+
+	return o.CreateTime
+}
+
+// GetCreateTimeOk returns a tuple with the CreateTime field value
+// and a boolean to check if the value has been set.
+func (o *ContainerGroup) GetCreateTimeOk() (*time.Time, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.CreateTime, true
+}
+
+// SetCreateTime sets field value
+func (o *ContainerGroup) SetCreateTime(v time.Time) {
+	o.CreateTime = v
 }
 
 // GetCurrentState returns the CurrentState field value
@@ -268,68 +214,52 @@ func (o *ContainerGroup) SetCurrentState(v ContainerGroupState) {
 	o.CurrentState = v
 }
 
-// GetCountryCodes returns the CountryCodes field value if set, zero value otherwise.
-func (o *ContainerGroup) GetCountryCodes() []CountryCode {
-	if o == nil || IsNil(o.CountryCodes) {
-		var ret []CountryCode
+// GetDisplayName returns the DisplayName field value
+func (o *ContainerGroup) GetDisplayName() string {
+	if o == nil {
+		var ret string
 		return ret
 	}
-	return o.CountryCodes
+
+	return o.DisplayName
 }
 
-// GetCountryCodesOk returns a tuple with the CountryCodes field value if set, nil otherwise
+// GetDisplayNameOk returns a tuple with the DisplayName field value
 // and a boolean to check if the value has been set.
-func (o *ContainerGroup) GetCountryCodesOk() ([]CountryCode, bool) {
-	if o == nil || IsNil(o.CountryCodes) {
+func (o *ContainerGroup) GetDisplayNameOk() (*string, bool) {
+	if o == nil {
 		return nil, false
 	}
-	return o.CountryCodes, true
+	return &o.DisplayName, true
 }
 
-// HasCountryCodes returns a boolean if a field has been set.
-func (o *ContainerGroup) HasCountryCodes() bool {
-	if o != nil && !IsNil(o.CountryCodes) {
-		return true
-	}
-
-	return false
+// SetDisplayName sets field value
+func (o *ContainerGroup) SetDisplayName(v string) {
+	o.DisplayName = v
 }
 
-// SetCountryCodes gets a reference to the given []CountryCode and assigns it to the CountryCodes field.
-func (o *ContainerGroup) SetCountryCodes(v []CountryCode) {
-	o.CountryCodes = v
-}
-
-// GetNetworking returns the Networking field value if set, zero value otherwise.
-func (o *ContainerGroup) GetNetworking() ContainerGroupNetworking {
-	if o == nil || IsNil(o.Networking) {
-		var ret ContainerGroupNetworking
+// GetId returns the Id field value
+func (o *ContainerGroup) GetId() string {
+	if o == nil {
+		var ret string
 		return ret
 	}
-	return *o.Networking
+
+	return o.Id
 }
 
-// GetNetworkingOk returns a tuple with the Networking field value if set, nil otherwise
+// GetIdOk returns a tuple with the Id field value
 // and a boolean to check if the value has been set.
-func (o *ContainerGroup) GetNetworkingOk() (*ContainerGroupNetworking, bool) {
-	if o == nil || IsNil(o.Networking) {
+func (o *ContainerGroup) GetIdOk() (*string, bool) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Networking, true
+	return &o.Id, true
 }
 
-// HasNetworking returns a boolean if a field has been set.
-func (o *ContainerGroup) HasNetworking() bool {
-	if o != nil && !IsNil(o.Networking) {
-		return true
-	}
-
-	return false
-}
-
-// SetNetworking gets a reference to the given ContainerGroupNetworking and assigns it to the Networking field.
-func (o *ContainerGroup) SetNetworking(v ContainerGroupNetworking) {
-	o.Networking = &v
+// SetId sets field value
+func (o *ContainerGroup) SetId(v string) {
+	o.Id = v
 }
 
 // GetLivenessProbe returns the LivenessProbe field value if set, zero value otherwise.
@@ -364,68 +294,190 @@ func (o *ContainerGroup) SetLivenessProbe(v ContainerGroupLivenessProbe) {
 	o.LivenessProbe = &v
 }
 
-// GetReadinessProbe returns the ReadinessProbe field value if set, zero value otherwise.
-func (o *ContainerGroup) GetReadinessProbe() ContainerGroupReadinessProbe {
-	if o == nil || IsNil(o.ReadinessProbe) {
-		var ret ContainerGroupReadinessProbe
+// GetName returns the Name field value
+func (o *ContainerGroup) GetName() string {
+	if o == nil {
+		var ret string
 		return ret
 	}
-	return *o.ReadinessProbe
+
+	return o.Name
 }
 
-// GetReadinessProbeOk returns a tuple with the ReadinessProbe field value if set, nil otherwise
+// GetNameOk returns a tuple with the Name field value
 // and a boolean to check if the value has been set.
-func (o *ContainerGroup) GetReadinessProbeOk() (*ContainerGroupReadinessProbe, bool) {
-	if o == nil || IsNil(o.ReadinessProbe) {
+func (o *ContainerGroup) GetNameOk() (*string, bool) {
+	if o == nil {
 		return nil, false
 	}
-	return o.ReadinessProbe, true
+	return &o.Name, true
 }
 
-// HasReadinessProbe returns a boolean if a field has been set.
-func (o *ContainerGroup) HasReadinessProbe() bool {
-	if o != nil && !IsNil(o.ReadinessProbe) {
+// SetName sets field value
+func (o *ContainerGroup) SetName(v string) {
+	o.Name = v
+}
+
+// GetNetworking returns the Networking field value if set, zero value otherwise.
+func (o *ContainerGroup) GetNetworking() ContainerGroupNetworking {
+	if o == nil || IsNil(o.Networking) {
+		var ret ContainerGroupNetworking
+		return ret
+	}
+	return *o.Networking
+}
+
+// GetNetworkingOk returns a tuple with the Networking field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ContainerGroup) GetNetworkingOk() (*ContainerGroupNetworking, bool) {
+	if o == nil || IsNil(o.Networking) {
+		return nil, false
+	}
+	return o.Networking, true
+}
+
+// HasNetworking returns a boolean if a field has been set.
+func (o *ContainerGroup) HasNetworking() bool {
+	if o != nil && !IsNil(o.Networking) {
 		return true
 	}
 
 	return false
 }
 
-// SetReadinessProbe gets a reference to the given ContainerGroupReadinessProbe and assigns it to the ReadinessProbe field.
-func (o *ContainerGroup) SetReadinessProbe(v ContainerGroupReadinessProbe) {
-	o.ReadinessProbe = &v
+// SetNetworking gets a reference to the given ContainerGroupNetworking and assigns it to the Networking field.
+func (o *ContainerGroup) SetNetworking(v ContainerGroupNetworking) {
+	o.Networking = &v
 }
 
-// GetStartupProbe returns the StartupProbe field value if set, zero value otherwise.
-func (o *ContainerGroup) GetStartupProbe() ContainerGroupStartupProbe {
-	if o == nil || IsNil(o.StartupProbe) {
-		var ret ContainerGroupStartupProbe
+// GetOrganizationName returns the OrganizationName field value
+func (o *ContainerGroup) GetOrganizationName() string {
+	if o == nil {
+		var ret string
 		return ret
 	}
-	return *o.StartupProbe
+
+	return o.OrganizationName
 }
 
-// GetStartupProbeOk returns a tuple with the StartupProbe field value if set, nil otherwise
+// GetOrganizationNameOk returns a tuple with the OrganizationName field value
 // and a boolean to check if the value has been set.
-func (o *ContainerGroup) GetStartupProbeOk() (*ContainerGroupStartupProbe, bool) {
-	if o == nil || IsNil(o.StartupProbe) {
+func (o *ContainerGroup) GetOrganizationNameOk() (*string, bool) {
+	if o == nil {
 		return nil, false
 	}
-	return o.StartupProbe, true
+	return &o.OrganizationName, true
 }
 
-// HasStartupProbe returns a boolean if a field has been set.
-func (o *ContainerGroup) HasStartupProbe() bool {
-	if o != nil && !IsNil(o.StartupProbe) {
+// SetOrganizationName sets field value
+func (o *ContainerGroup) SetOrganizationName(v string) {
+	o.OrganizationName = v
+}
+
+// GetPendingChange returns the PendingChange field value
+func (o *ContainerGroup) GetPendingChange() bool {
+	if o == nil {
+		var ret bool
+		return ret
+	}
+
+	return o.PendingChange
+}
+
+// GetPendingChangeOk returns a tuple with the PendingChange field value
+// and a boolean to check if the value has been set.
+func (o *ContainerGroup) GetPendingChangeOk() (*bool, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.PendingChange, true
+}
+
+// SetPendingChange sets field value
+func (o *ContainerGroup) SetPendingChange(v bool) {
+	o.PendingChange = v
+}
+
+// GetPriority returns the Priority field value
+// If the value is explicit nil, the zero value for ContainerGroupPriority will be returned
+func (o *ContainerGroup) GetPriority() ContainerGroupPriority {
+	if o == nil || o.Priority.Get() == nil {
+		var ret ContainerGroupPriority
+		return ret
+	}
+
+	return *o.Priority.Get()
+}
+
+// GetPriorityOk returns a tuple with the Priority field value
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *ContainerGroup) GetPriorityOk() (*ContainerGroupPriority, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.Priority.Get(), o.Priority.IsSet()
+}
+
+// SetPriority sets field value
+func (o *ContainerGroup) SetPriority(v ContainerGroupPriority) {
+	o.Priority.Set(&v)
+}
+
+// GetProjectName returns the ProjectName field value
+func (o *ContainerGroup) GetProjectName() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.ProjectName
+}
+
+// GetProjectNameOk returns a tuple with the ProjectName field value
+// and a boolean to check if the value has been set.
+func (o *ContainerGroup) GetProjectNameOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.ProjectName, true
+}
+
+// SetProjectName sets field value
+func (o *ContainerGroup) SetProjectName(v string) {
+	o.ProjectName = v
+}
+
+// GetQueueAutoscaler returns the QueueAutoscaler field value if set, zero value otherwise.
+func (o *ContainerGroup) GetQueueAutoscaler() ContainerGroupQueueAutoscaler {
+	if o == nil || IsNil(o.QueueAutoscaler) {
+		var ret ContainerGroupQueueAutoscaler
+		return ret
+	}
+	return *o.QueueAutoscaler
+}
+
+// GetQueueAutoscalerOk returns a tuple with the QueueAutoscaler field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ContainerGroup) GetQueueAutoscalerOk() (*ContainerGroupQueueAutoscaler, bool) {
+	if o == nil || IsNil(o.QueueAutoscaler) {
+		return nil, false
+	}
+	return o.QueueAutoscaler, true
+}
+
+// HasQueueAutoscaler returns a boolean if a field has been set.
+func (o *ContainerGroup) HasQueueAutoscaler() bool {
+	if o != nil && !IsNil(o.QueueAutoscaler) {
 		return true
 	}
 
 	return false
 }
 
-// SetStartupProbe gets a reference to the given ContainerGroupStartupProbe and assigns it to the StartupProbe field.
-func (o *ContainerGroup) SetStartupProbe(v ContainerGroupStartupProbe) {
-	o.StartupProbe = &v
+// SetQueueAutoscaler gets a reference to the given ContainerGroupQueueAutoscaler and assigns it to the QueueAutoscaler field.
+func (o *ContainerGroup) SetQueueAutoscaler(v ContainerGroupQueueAutoscaler) {
+	o.QueueAutoscaler = &v
 }
 
 // GetQueueConnection returns the QueueConnection field value if set, zero value otherwise.
@@ -460,28 +512,116 @@ func (o *ContainerGroup) SetQueueConnection(v ContainerGroupQueueConnection) {
 	o.QueueConnection = &v
 }
 
-// GetCreateTime returns the CreateTime field value
-func (o *ContainerGroup) GetCreateTime() time.Time {
+// GetReadinessProbe returns the ReadinessProbe field value if set, zero value otherwise.
+func (o *ContainerGroup) GetReadinessProbe() ContainerGroupReadinessProbe {
+	if o == nil || IsNil(o.ReadinessProbe) {
+		var ret ContainerGroupReadinessProbe
+		return ret
+	}
+	return *o.ReadinessProbe
+}
+
+// GetReadinessProbeOk returns a tuple with the ReadinessProbe field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ContainerGroup) GetReadinessProbeOk() (*ContainerGroupReadinessProbe, bool) {
+	if o == nil || IsNil(o.ReadinessProbe) {
+		return nil, false
+	}
+	return o.ReadinessProbe, true
+}
+
+// HasReadinessProbe returns a boolean if a field has been set.
+func (o *ContainerGroup) HasReadinessProbe() bool {
+	if o != nil && !IsNil(o.ReadinessProbe) {
+		return true
+	}
+
+	return false
+}
+
+// SetReadinessProbe gets a reference to the given ContainerGroupReadinessProbe and assigns it to the ReadinessProbe field.
+func (o *ContainerGroup) SetReadinessProbe(v ContainerGroupReadinessProbe) {
+	o.ReadinessProbe = &v
+}
+
+// GetReplicas returns the Replicas field value
+func (o *ContainerGroup) GetReplicas() int32 {
 	if o == nil {
-		var ret time.Time
+		var ret int32
 		return ret
 	}
 
-	return o.CreateTime
+	return o.Replicas
 }
 
-// GetCreateTimeOk returns a tuple with the CreateTime field value
+// GetReplicasOk returns a tuple with the Replicas field value
 // and a boolean to check if the value has been set.
-func (o *ContainerGroup) GetCreateTimeOk() (*time.Time, bool) {
+func (o *ContainerGroup) GetReplicasOk() (*int32, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.CreateTime, true
+	return &o.Replicas, true
 }
 
-// SetCreateTime sets field value
-func (o *ContainerGroup) SetCreateTime(v time.Time) {
-	o.CreateTime = v
+// SetReplicas sets field value
+func (o *ContainerGroup) SetReplicas(v int32) {
+	o.Replicas = v
+}
+
+// GetRestartPolicy returns the RestartPolicy field value
+func (o *ContainerGroup) GetRestartPolicy() ContainerRestartPolicy {
+	if o == nil {
+		var ret ContainerRestartPolicy
+		return ret
+	}
+
+	return o.RestartPolicy
+}
+
+// GetRestartPolicyOk returns a tuple with the RestartPolicy field value
+// and a boolean to check if the value has been set.
+func (o *ContainerGroup) GetRestartPolicyOk() (*ContainerRestartPolicy, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.RestartPolicy, true
+}
+
+// SetRestartPolicy sets field value
+func (o *ContainerGroup) SetRestartPolicy(v ContainerRestartPolicy) {
+	o.RestartPolicy = v
+}
+
+// GetStartupProbe returns the StartupProbe field value if set, zero value otherwise.
+func (o *ContainerGroup) GetStartupProbe() ContainerGroupStartupProbe {
+	if o == nil || IsNil(o.StartupProbe) {
+		var ret ContainerGroupStartupProbe
+		return ret
+	}
+	return *o.StartupProbe
+}
+
+// GetStartupProbeOk returns a tuple with the StartupProbe field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ContainerGroup) GetStartupProbeOk() (*ContainerGroupStartupProbe, bool) {
+	if o == nil || IsNil(o.StartupProbe) {
+		return nil, false
+	}
+	return o.StartupProbe, true
+}
+
+// HasStartupProbe returns a boolean if a field has been set.
+func (o *ContainerGroup) HasStartupProbe() bool {
+	if o != nil && !IsNil(o.StartupProbe) {
+		return true
+	}
+
+	return false
+}
+
+// SetStartupProbe gets a reference to the given ContainerGroupStartupProbe and assigns it to the StartupProbe field.
+func (o *ContainerGroup) SetStartupProbe(v ContainerGroupStartupProbe) {
+	o.StartupProbe = &v
 }
 
 // GetUpdateTime returns the UpdateTime field value
@@ -508,30 +648,6 @@ func (o *ContainerGroup) SetUpdateTime(v time.Time) {
 	o.UpdateTime = v
 }
 
-// GetPendingChange returns the PendingChange field value
-func (o *ContainerGroup) GetPendingChange() bool {
-	if o == nil {
-		var ret bool
-		return ret
-	}
-
-	return o.PendingChange
-}
-
-// GetPendingChangeOk returns a tuple with the PendingChange field value
-// and a boolean to check if the value has been set.
-func (o *ContainerGroup) GetPendingChangeOk() (*bool, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.PendingChange, true
-}
-
-// SetPendingChange sets field value
-func (o *ContainerGroup) SetPendingChange(v bool) {
-	o.PendingChange = v
-}
-
 // GetVersion returns the Version field value
 func (o *ContainerGroup) GetVersion() int32 {
 	if o == nil {
@@ -556,38 +672,6 @@ func (o *ContainerGroup) SetVersion(v int32) {
 	o.Version = v
 }
 
-// GetQueueAutoscaler returns the QueueAutoscaler field value if set, zero value otherwise.
-func (o *ContainerGroup) GetQueueAutoscaler() QueueAutoscaler {
-	if o == nil || IsNil(o.QueueAutoscaler) {
-		var ret QueueAutoscaler
-		return ret
-	}
-	return *o.QueueAutoscaler
-}
-
-// GetQueueAutoscalerOk returns a tuple with the QueueAutoscaler field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *ContainerGroup) GetQueueAutoscalerOk() (*QueueAutoscaler, bool) {
-	if o == nil || IsNil(o.QueueAutoscaler) {
-		return nil, false
-	}
-	return o.QueueAutoscaler, true
-}
-
-// HasQueueAutoscaler returns a boolean if a field has been set.
-func (o *ContainerGroup) HasQueueAutoscaler() bool {
-	if o != nil && !IsNil(o.QueueAutoscaler) {
-		return true
-	}
-
-	return false
-}
-
-// SetQueueAutoscaler gets a reference to the given QueueAutoscaler and assigns it to the QueueAutoscaler field.
-func (o *ContainerGroup) SetQueueAutoscaler(v QueueAutoscaler) {
-	o.QueueAutoscaler = &v
-}
-
 func (o ContainerGroup) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -598,39 +682,40 @@ func (o ContainerGroup) MarshalJSON() ([]byte, error) {
 
 func (o ContainerGroup) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["id"] = o.Id
-	toSerialize["name"] = o.Name
-	toSerialize["display_name"] = o.DisplayName
-	toSerialize["container"] = o.Container
 	toSerialize["autostart_policy"] = o.AutostartPolicy
-	toSerialize["restart_policy"] = o.RestartPolicy
-	toSerialize["replicas"] = o.Replicas
+	toSerialize["container"] = o.Container
+	toSerialize["country_codes"] = o.CountryCodes
+	toSerialize["create_time"] = o.CreateTime
 	toSerialize["current_state"] = o.CurrentState
-	if !IsNil(o.CountryCodes) {
-		toSerialize["country_codes"] = o.CountryCodes
-	}
-	if !IsNil(o.Networking) {
-		toSerialize["networking"] = o.Networking
-	}
+	toSerialize["display_name"] = o.DisplayName
+	toSerialize["id"] = o.Id
 	if !IsNil(o.LivenessProbe) {
 		toSerialize["liveness_probe"] = o.LivenessProbe
 	}
-	if !IsNil(o.ReadinessProbe) {
-		toSerialize["readiness_probe"] = o.ReadinessProbe
+	toSerialize["name"] = o.Name
+	if !IsNil(o.Networking) {
+		toSerialize["networking"] = o.Networking
 	}
-	if !IsNil(o.StartupProbe) {
-		toSerialize["startup_probe"] = o.StartupProbe
+	toSerialize["organization_name"] = o.OrganizationName
+	toSerialize["pending_change"] = o.PendingChange
+	toSerialize["priority"] = o.Priority.Get()
+	toSerialize["project_name"] = o.ProjectName
+	if !IsNil(o.QueueAutoscaler) {
+		toSerialize["queue_autoscaler"] = o.QueueAutoscaler
 	}
 	if !IsNil(o.QueueConnection) {
 		toSerialize["queue_connection"] = o.QueueConnection
 	}
-	toSerialize["create_time"] = o.CreateTime
-	toSerialize["update_time"] = o.UpdateTime
-	toSerialize["pending_change"] = o.PendingChange
-	toSerialize["version"] = o.Version
-	if !IsNil(o.QueueAutoscaler) {
-		toSerialize["queue_autoscaler"] = o.QueueAutoscaler
+	if !IsNil(o.ReadinessProbe) {
+		toSerialize["readiness_probe"] = o.ReadinessProbe
 	}
+	toSerialize["replicas"] = o.Replicas
+	toSerialize["restart_policy"] = o.RestartPolicy
+	if !IsNil(o.StartupProbe) {
+		toSerialize["startup_probe"] = o.StartupProbe
+	}
+	toSerialize["update_time"] = o.UpdateTime
+	toSerialize["version"] = o.Version
 	return toSerialize, nil
 }
 
@@ -639,17 +724,21 @@ func (o *ContainerGroup) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
+		"autostart_policy",
+		"container",
+		"country_codes",
+		"create_time",
+		"current_state",
+		"display_name",
 		"id",
 		"name",
-		"display_name",
-		"container",
-		"autostart_policy",
-		"restart_policy",
-		"replicas",
-		"current_state",
-		"create_time",
-		"update_time",
+		"organization_name",
 		"pending_change",
+		"priority",
+		"project_name",
+		"replicas",
+		"restart_policy",
+		"update_time",
 		"version",
 	}
 

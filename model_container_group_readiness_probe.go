@@ -3,7 +3,7 @@ SaladCloud API
 
 The SaladCloud REST API. Please refer to the [SaladCloud API Documentation](https://docs.salad.com/api-reference) for more details.
 
-API version: 0.9.0-alpha.7
+API version: 0.9.0-alpha.11
 Contact: cloud@salad.com
 */
 
@@ -20,17 +20,22 @@ import (
 // checks if the ContainerGroupReadinessProbe type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ContainerGroupReadinessProbe{}
 
-// ContainerGroupReadinessProbe Represents the container group readiness probe
+// ContainerGroupReadinessProbe Defines how to check if a container is ready to serve traffic. The readiness probe determines whether the container's application is ready to accept traffic. If the readiness probe fails, the container is considered not ready and traffic will not be sent to it.
 type ContainerGroupReadinessProbe struct {
-	Tcp *ContainerGroupProbeTcp `json:"tcp,omitempty"`
-	Http *ContainerGroupProbeHttp `json:"http,omitempty"`
-	Grpc *ContainerGroupProbeGrpc `json:"grpc,omitempty"`
 	Exec *ContainerGroupProbeExec `json:"exec,omitempty"`
-	InitialDelaySeconds int32 `json:"initial_delay_seconds"`
-	PeriodSeconds int32 `json:"period_seconds"`
-	TimeoutSeconds int32 `json:"timeout_seconds"`
-	SuccessThreshold int32 `json:"success_threshold"`
+	// The number of consecutive failures required to consider the probe failed. After this many consecutive failures, the container is marked as not ready.
 	FailureThreshold int32 `json:"failure_threshold"`
+	Grpc *ContainerGroupProbeGrpc `json:"grpc,omitempty"`
+	Http *ContainerGroupProbeHttp `json:"http,omitempty"`
+	// The time in seconds to wait after the container starts before initiating the first probe. This allows time for the application to initialize before being tested.
+	InitialDelaySeconds int32 `json:"initial_delay_seconds"`
+	// How frequently (in seconds) the probe should be executed during the container's lifetime. Specifies the interval between consecutive probe executions.
+	PeriodSeconds int32 `json:"period_seconds"`
+	// The minimum consecutive successes required to consider the probe successful after it has failed. Defines how many successful probe results are needed to transition from failure to success.
+	SuccessThreshold int32 `json:"success_threshold"`
+	Tcp *ContainerGroupProbeTcp `json:"tcp,omitempty"`
+	// The maximum time in seconds that the probe has to complete. If the probe doesn't return a result before the timeout, it's considered failed.
+	TimeoutSeconds int32 `json:"timeout_seconds"`
 }
 
 type _ContainerGroupReadinessProbe ContainerGroupReadinessProbe
@@ -39,13 +44,13 @@ type _ContainerGroupReadinessProbe ContainerGroupReadinessProbe
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewContainerGroupReadinessProbe(initialDelaySeconds int32, periodSeconds int32, timeoutSeconds int32, successThreshold int32, failureThreshold int32) *ContainerGroupReadinessProbe {
+func NewContainerGroupReadinessProbe(failureThreshold int32, initialDelaySeconds int32, periodSeconds int32, successThreshold int32, timeoutSeconds int32) *ContainerGroupReadinessProbe {
 	this := ContainerGroupReadinessProbe{}
+	this.FailureThreshold = failureThreshold
 	this.InitialDelaySeconds = initialDelaySeconds
 	this.PeriodSeconds = periodSeconds
-	this.TimeoutSeconds = timeoutSeconds
 	this.SuccessThreshold = successThreshold
-	this.FailureThreshold = failureThreshold
+	this.TimeoutSeconds = timeoutSeconds
 	return &this
 }
 
@@ -54,81 +59,73 @@ func NewContainerGroupReadinessProbe(initialDelaySeconds int32, periodSeconds in
 // but it doesn't guarantee that properties required by API are set
 func NewContainerGroupReadinessProbeWithDefaults() *ContainerGroupReadinessProbe {
 	this := ContainerGroupReadinessProbe{}
+	var failureThreshold int32 = 3
+	this.FailureThreshold = failureThreshold
 	var initialDelaySeconds int32 = 0
 	this.InitialDelaySeconds = initialDelaySeconds
 	var periodSeconds int32 = 1
 	this.PeriodSeconds = periodSeconds
-	var timeoutSeconds int32 = 1
-	this.TimeoutSeconds = timeoutSeconds
 	var successThreshold int32 = 1
 	this.SuccessThreshold = successThreshold
-	var failureThreshold int32 = 3
-	this.FailureThreshold = failureThreshold
+	var timeoutSeconds int32 = 1
+	this.TimeoutSeconds = timeoutSeconds
 	return &this
 }
 
-// GetTcp returns the Tcp field value if set, zero value otherwise.
-func (o *ContainerGroupReadinessProbe) GetTcp() ContainerGroupProbeTcp {
-	if o == nil || IsNil(o.Tcp) {
-		var ret ContainerGroupProbeTcp
+// GetExec returns the Exec field value if set, zero value otherwise.
+func (o *ContainerGroupReadinessProbe) GetExec() ContainerGroupProbeExec {
+	if o == nil || IsNil(o.Exec) {
+		var ret ContainerGroupProbeExec
 		return ret
 	}
-	return *o.Tcp
+	return *o.Exec
 }
 
-// GetTcpOk returns a tuple with the Tcp field value if set, nil otherwise
+// GetExecOk returns a tuple with the Exec field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ContainerGroupReadinessProbe) GetTcpOk() (*ContainerGroupProbeTcp, bool) {
-	if o == nil || IsNil(o.Tcp) {
+func (o *ContainerGroupReadinessProbe) GetExecOk() (*ContainerGroupProbeExec, bool) {
+	if o == nil || IsNil(o.Exec) {
 		return nil, false
 	}
-	return o.Tcp, true
+	return o.Exec, true
 }
 
-// HasTcp returns a boolean if a field has been set.
-func (o *ContainerGroupReadinessProbe) HasTcp() bool {
-	if o != nil && !IsNil(o.Tcp) {
+// HasExec returns a boolean if a field has been set.
+func (o *ContainerGroupReadinessProbe) HasExec() bool {
+	if o != nil && !IsNil(o.Exec) {
 		return true
 	}
 
 	return false
 }
 
-// SetTcp gets a reference to the given ContainerGroupProbeTcp and assigns it to the Tcp field.
-func (o *ContainerGroupReadinessProbe) SetTcp(v ContainerGroupProbeTcp) {
-	o.Tcp = &v
+// SetExec gets a reference to the given ContainerGroupProbeExec and assigns it to the Exec field.
+func (o *ContainerGroupReadinessProbe) SetExec(v ContainerGroupProbeExec) {
+	o.Exec = &v
 }
 
-// GetHttp returns the Http field value if set, zero value otherwise.
-func (o *ContainerGroupReadinessProbe) GetHttp() ContainerGroupProbeHttp {
-	if o == nil || IsNil(o.Http) {
-		var ret ContainerGroupProbeHttp
+// GetFailureThreshold returns the FailureThreshold field value
+func (o *ContainerGroupReadinessProbe) GetFailureThreshold() int32 {
+	if o == nil {
+		var ret int32
 		return ret
 	}
-	return *o.Http
+
+	return o.FailureThreshold
 }
 
-// GetHttpOk returns a tuple with the Http field value if set, nil otherwise
+// GetFailureThresholdOk returns a tuple with the FailureThreshold field value
 // and a boolean to check if the value has been set.
-func (o *ContainerGroupReadinessProbe) GetHttpOk() (*ContainerGroupProbeHttp, bool) {
-	if o == nil || IsNil(o.Http) {
+func (o *ContainerGroupReadinessProbe) GetFailureThresholdOk() (*int32, bool) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Http, true
+	return &o.FailureThreshold, true
 }
 
-// HasHttp returns a boolean if a field has been set.
-func (o *ContainerGroupReadinessProbe) HasHttp() bool {
-	if o != nil && !IsNil(o.Http) {
-		return true
-	}
-
-	return false
-}
-
-// SetHttp gets a reference to the given ContainerGroupProbeHttp and assigns it to the Http field.
-func (o *ContainerGroupReadinessProbe) SetHttp(v ContainerGroupProbeHttp) {
-	o.Http = &v
+// SetFailureThreshold sets field value
+func (o *ContainerGroupReadinessProbe) SetFailureThreshold(v int32) {
+	o.FailureThreshold = v
 }
 
 // GetGrpc returns the Grpc field value if set, zero value otherwise.
@@ -163,36 +160,36 @@ func (o *ContainerGroupReadinessProbe) SetGrpc(v ContainerGroupProbeGrpc) {
 	o.Grpc = &v
 }
 
-// GetExec returns the Exec field value if set, zero value otherwise.
-func (o *ContainerGroupReadinessProbe) GetExec() ContainerGroupProbeExec {
-	if o == nil || IsNil(o.Exec) {
-		var ret ContainerGroupProbeExec
+// GetHttp returns the Http field value if set, zero value otherwise.
+func (o *ContainerGroupReadinessProbe) GetHttp() ContainerGroupProbeHttp {
+	if o == nil || IsNil(o.Http) {
+		var ret ContainerGroupProbeHttp
 		return ret
 	}
-	return *o.Exec
+	return *o.Http
 }
 
-// GetExecOk returns a tuple with the Exec field value if set, nil otherwise
+// GetHttpOk returns a tuple with the Http field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ContainerGroupReadinessProbe) GetExecOk() (*ContainerGroupProbeExec, bool) {
-	if o == nil || IsNil(o.Exec) {
+func (o *ContainerGroupReadinessProbe) GetHttpOk() (*ContainerGroupProbeHttp, bool) {
+	if o == nil || IsNil(o.Http) {
 		return nil, false
 	}
-	return o.Exec, true
+	return o.Http, true
 }
 
-// HasExec returns a boolean if a field has been set.
-func (o *ContainerGroupReadinessProbe) HasExec() bool {
-	if o != nil && !IsNil(o.Exec) {
+// HasHttp returns a boolean if a field has been set.
+func (o *ContainerGroupReadinessProbe) HasHttp() bool {
+	if o != nil && !IsNil(o.Http) {
 		return true
 	}
 
 	return false
 }
 
-// SetExec gets a reference to the given ContainerGroupProbeExec and assigns it to the Exec field.
-func (o *ContainerGroupReadinessProbe) SetExec(v ContainerGroupProbeExec) {
-	o.Exec = &v
+// SetHttp gets a reference to the given ContainerGroupProbeHttp and assigns it to the Http field.
+func (o *ContainerGroupReadinessProbe) SetHttp(v ContainerGroupProbeHttp) {
+	o.Http = &v
 }
 
 // GetInitialDelaySeconds returns the InitialDelaySeconds field value
@@ -243,30 +240,6 @@ func (o *ContainerGroupReadinessProbe) SetPeriodSeconds(v int32) {
 	o.PeriodSeconds = v
 }
 
-// GetTimeoutSeconds returns the TimeoutSeconds field value
-func (o *ContainerGroupReadinessProbe) GetTimeoutSeconds() int32 {
-	if o == nil {
-		var ret int32
-		return ret
-	}
-
-	return o.TimeoutSeconds
-}
-
-// GetTimeoutSecondsOk returns a tuple with the TimeoutSeconds field value
-// and a boolean to check if the value has been set.
-func (o *ContainerGroupReadinessProbe) GetTimeoutSecondsOk() (*int32, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.TimeoutSeconds, true
-}
-
-// SetTimeoutSeconds sets field value
-func (o *ContainerGroupReadinessProbe) SetTimeoutSeconds(v int32) {
-	o.TimeoutSeconds = v
-}
-
 // GetSuccessThreshold returns the SuccessThreshold field value
 func (o *ContainerGroupReadinessProbe) GetSuccessThreshold() int32 {
 	if o == nil {
@@ -291,28 +264,60 @@ func (o *ContainerGroupReadinessProbe) SetSuccessThreshold(v int32) {
 	o.SuccessThreshold = v
 }
 
-// GetFailureThreshold returns the FailureThreshold field value
-func (o *ContainerGroupReadinessProbe) GetFailureThreshold() int32 {
+// GetTcp returns the Tcp field value if set, zero value otherwise.
+func (o *ContainerGroupReadinessProbe) GetTcp() ContainerGroupProbeTcp {
+	if o == nil || IsNil(o.Tcp) {
+		var ret ContainerGroupProbeTcp
+		return ret
+	}
+	return *o.Tcp
+}
+
+// GetTcpOk returns a tuple with the Tcp field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ContainerGroupReadinessProbe) GetTcpOk() (*ContainerGroupProbeTcp, bool) {
+	if o == nil || IsNil(o.Tcp) {
+		return nil, false
+	}
+	return o.Tcp, true
+}
+
+// HasTcp returns a boolean if a field has been set.
+func (o *ContainerGroupReadinessProbe) HasTcp() bool {
+	if o != nil && !IsNil(o.Tcp) {
+		return true
+	}
+
+	return false
+}
+
+// SetTcp gets a reference to the given ContainerGroupProbeTcp and assigns it to the Tcp field.
+func (o *ContainerGroupReadinessProbe) SetTcp(v ContainerGroupProbeTcp) {
+	o.Tcp = &v
+}
+
+// GetTimeoutSeconds returns the TimeoutSeconds field value
+func (o *ContainerGroupReadinessProbe) GetTimeoutSeconds() int32 {
 	if o == nil {
 		var ret int32
 		return ret
 	}
 
-	return o.FailureThreshold
+	return o.TimeoutSeconds
 }
 
-// GetFailureThresholdOk returns a tuple with the FailureThreshold field value
+// GetTimeoutSecondsOk returns a tuple with the TimeoutSeconds field value
 // and a boolean to check if the value has been set.
-func (o *ContainerGroupReadinessProbe) GetFailureThresholdOk() (*int32, bool) {
+func (o *ContainerGroupReadinessProbe) GetTimeoutSecondsOk() (*int32, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.FailureThreshold, true
+	return &o.TimeoutSeconds, true
 }
 
-// SetFailureThreshold sets field value
-func (o *ContainerGroupReadinessProbe) SetFailureThreshold(v int32) {
-	o.FailureThreshold = v
+// SetTimeoutSeconds sets field value
+func (o *ContainerGroupReadinessProbe) SetTimeoutSeconds(v int32) {
+	o.TimeoutSeconds = v
 }
 
 func (o ContainerGroupReadinessProbe) MarshalJSON() ([]byte, error) {
@@ -325,23 +330,23 @@ func (o ContainerGroupReadinessProbe) MarshalJSON() ([]byte, error) {
 
 func (o ContainerGroupReadinessProbe) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Tcp) {
-		toSerialize["tcp"] = o.Tcp
+	if !IsNil(o.Exec) {
+		toSerialize["exec"] = o.Exec
+	}
+	toSerialize["failure_threshold"] = o.FailureThreshold
+	if !IsNil(o.Grpc) {
+		toSerialize["grpc"] = o.Grpc
 	}
 	if !IsNil(o.Http) {
 		toSerialize["http"] = o.Http
 	}
-	if !IsNil(o.Grpc) {
-		toSerialize["grpc"] = o.Grpc
-	}
-	if !IsNil(o.Exec) {
-		toSerialize["exec"] = o.Exec
-	}
 	toSerialize["initial_delay_seconds"] = o.InitialDelaySeconds
 	toSerialize["period_seconds"] = o.PeriodSeconds
-	toSerialize["timeout_seconds"] = o.TimeoutSeconds
 	toSerialize["success_threshold"] = o.SuccessThreshold
-	toSerialize["failure_threshold"] = o.FailureThreshold
+	if !IsNil(o.Tcp) {
+		toSerialize["tcp"] = o.Tcp
+	}
+	toSerialize["timeout_seconds"] = o.TimeoutSeconds
 	return toSerialize, nil
 }
 
@@ -350,11 +355,11 @@ func (o *ContainerGroupReadinessProbe) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
+		"failure_threshold",
 		"initial_delay_seconds",
 		"period_seconds",
-		"timeout_seconds",
 		"success_threshold",
-		"failure_threshold",
+		"timeout_seconds",
 	}
 
 	allProperties := make(map[string]interface{})

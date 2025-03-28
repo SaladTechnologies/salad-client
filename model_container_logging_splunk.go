@@ -3,7 +3,7 @@ SaladCloud API
 
 The SaladCloud REST API. Please refer to the [SaladCloud API Documentation](https://docs.salad.com/api-reference) for more details.
 
-API version: 0.9.0-alpha.7
+API version: 0.9.0-alpha.11
 Contact: cloud@salad.com
 */
 
@@ -20,10 +20,12 @@ import (
 // checks if the ContainerLoggingSplunk type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ContainerLoggingSplunk{}
 
-// ContainerLoggingSplunk struct for ContainerLoggingSplunk
+// ContainerLoggingSplunk Configuration settings for forwarding container logs to a Splunk instance.
 type ContainerLoggingSplunk struct {
-	Host string `json:"host"`
-	Token string `json:"token"`
+	// The URL of the Splunk HTTP Event Collector (HEC) endpoint.
+	Host string `json:"host" validate:"regexp=^.*$"`
+	// The authentication token required to send data to the Splunk HEC endpoint.
+	Token string `json:"token" validate:"regexp=^.*$"`
 }
 
 type _ContainerLoggingSplunk ContainerLoggingSplunk

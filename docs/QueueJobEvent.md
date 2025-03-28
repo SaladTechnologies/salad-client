@@ -4,8 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Action** | **string** |  | 
-**Time** | **time.Time** |  | 
+**Action** | **string** | The action that was taken on the queue job | 
+**Time** | **time.Time** | The time the action was taken on the queue job | 
 
 ## Methods
 

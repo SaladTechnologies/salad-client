@@ -3,7 +3,7 @@ SaladCloud API
 
 The SaladCloud REST API. Please refer to the [SaladCloud API Documentation](https://docs.salad.com/api-reference) for more details.
 
-API version: 0.9.0-alpha.7
+API version: 0.9.0-alpha.11
 Contact: cloud@salad.com
 */
 
@@ -24,7 +24,7 @@ var _ MappedNullable = &GpuClassPrice{}
 type GpuClassPrice struct {
 	Priority NullableContainerGroupPriority `json:"priority"`
 	// The price
-	Price string `json:"price"`
+	Price string `json:"price" validate:"regexp=^.*$"`
 }
 
 type _GpuClassPrice GpuClassPrice

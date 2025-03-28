@@ -4,20 +4,20 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Host** | **string** |  | 
-**Port** | **int32** |  | 
-**User** | Pointer to **string** |  | [optional] 
-**Password** | Pointer to **string** |  | [optional] 
-**Path** | Pointer to **string** |  | [optional] 
-**Format** | **string** |  | 
-**Headers** | Pointer to [**[]ContainerLoggingDatadogTagsInner**](ContainerLoggingDatadogTagsInner.md) |  | [optional] 
-**Compression** | **string** |  | 
+**Host** | **string** | The hostname or IP address of the HTTP logging endpoint | 
+**Port** | **int32** | The port number of the HTTP logging endpoint (1-65535) | 
+**User** | Pointer to **NullableString** | Optional username for HTTP authentication | [optional] 
+**Password** | Pointer to **NullableString** | Optional password for HTTP authentication | [optional] 
+**Path** | Pointer to **NullableString** | Optional URL path for the HTTP endpoint | [optional] 
+**Format** | [**ContainerLoggingHttpFormat**](ContainerLoggingHttpFormat.md) |  | 
+**Headers** | [**[]ContainerLoggingHttpHeader**](ContainerLoggingHttpHeader.md) | Optional HTTP headers to include in log transmission requests | 
+**Compression** | [**ContainerLoggingHttpCompression**](ContainerLoggingHttpCompression.md) |  | 
 
 ## Methods
 
 ### NewContainerLoggingHttp
 
-`func NewContainerLoggingHttp(host string, port int32, format string, compression string, ) *ContainerLoggingHttp`
+`func NewContainerLoggingHttp(host string, port int32, format ContainerLoggingHttpFormat, headers []ContainerLoggingHttpHeader, compression ContainerLoggingHttpCompression, ) *ContainerLoggingHttp`
 
 NewContainerLoggingHttp instantiates a new ContainerLoggingHttp object
 This constructor will assign default values to properties that have it defined,
@@ -97,6 +97,16 @@ SetUser sets User field to given value.
 
 HasUser returns a boolean if a field has been set.
 
+### SetUserNil
+
+`func (o *ContainerLoggingHttp) SetUserNil(b bool)`
+
+ SetUserNil sets the value for User to be an explicit nil
+
+### UnsetUser
+`func (o *ContainerLoggingHttp) UnsetUser()`
+
+UnsetUser ensures that no value is present for User, not even an explicit nil
 ### GetPassword
 
 `func (o *ContainerLoggingHttp) GetPassword() string`
@@ -122,6 +132,16 @@ SetPassword sets Password field to given value.
 
 HasPassword returns a boolean if a field has been set.
 
+### SetPasswordNil
+
+`func (o *ContainerLoggingHttp) SetPasswordNil(b bool)`
+
+ SetPasswordNil sets the value for Password to be an explicit nil
+
+### UnsetPassword
+`func (o *ContainerLoggingHttp) UnsetPassword()`
+
+UnsetPassword ensures that no value is present for Password, not even an explicit nil
 ### GetPath
 
 `func (o *ContainerLoggingHttp) GetPath() string`
@@ -147,67 +167,82 @@ SetPath sets Path field to given value.
 
 HasPath returns a boolean if a field has been set.
 
+### SetPathNil
+
+`func (o *ContainerLoggingHttp) SetPathNil(b bool)`
+
+ SetPathNil sets the value for Path to be an explicit nil
+
+### UnsetPath
+`func (o *ContainerLoggingHttp) UnsetPath()`
+
+UnsetPath ensures that no value is present for Path, not even an explicit nil
 ### GetFormat
 
-`func (o *ContainerLoggingHttp) GetFormat() string`
+`func (o *ContainerLoggingHttp) GetFormat() ContainerLoggingHttpFormat`
 
 GetFormat returns the Format field if non-nil, zero value otherwise.
 
 ### GetFormatOk
 
-`func (o *ContainerLoggingHttp) GetFormatOk() (*string, bool)`
+`func (o *ContainerLoggingHttp) GetFormatOk() (*ContainerLoggingHttpFormat, bool)`
 
 GetFormatOk returns a tuple with the Format field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetFormat
 
-`func (o *ContainerLoggingHttp) SetFormat(v string)`
+`func (o *ContainerLoggingHttp) SetFormat(v ContainerLoggingHttpFormat)`
 
 SetFormat sets Format field to given value.
 
 
 ### GetHeaders
 
-`func (o *ContainerLoggingHttp) GetHeaders() []ContainerLoggingDatadogTagsInner`
+`func (o *ContainerLoggingHttp) GetHeaders() []ContainerLoggingHttpHeader`
 
 GetHeaders returns the Headers field if non-nil, zero value otherwise.
 
 ### GetHeadersOk
 
-`func (o *ContainerLoggingHttp) GetHeadersOk() (*[]ContainerLoggingDatadogTagsInner, bool)`
+`func (o *ContainerLoggingHttp) GetHeadersOk() (*[]ContainerLoggingHttpHeader, bool)`
 
 GetHeadersOk returns a tuple with the Headers field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetHeaders
 
-`func (o *ContainerLoggingHttp) SetHeaders(v []ContainerLoggingDatadogTagsInner)`
+`func (o *ContainerLoggingHttp) SetHeaders(v []ContainerLoggingHttpHeader)`
 
 SetHeaders sets Headers field to given value.
 
-### HasHeaders
 
-`func (o *ContainerLoggingHttp) HasHeaders() bool`
+### SetHeadersNil
 
-HasHeaders returns a boolean if a field has been set.
+`func (o *ContainerLoggingHttp) SetHeadersNil(b bool)`
 
+ SetHeadersNil sets the value for Headers to be an explicit nil
+
+### UnsetHeaders
+`func (o *ContainerLoggingHttp) UnsetHeaders()`
+
+UnsetHeaders ensures that no value is present for Headers, not even an explicit nil
 ### GetCompression
 
-`func (o *ContainerLoggingHttp) GetCompression() string`
+`func (o *ContainerLoggingHttp) GetCompression() ContainerLoggingHttpCompression`
 
 GetCompression returns the Compression field if non-nil, zero value otherwise.
 
 ### GetCompressionOk
 
-`func (o *ContainerLoggingHttp) GetCompressionOk() (*string, bool)`
+`func (o *ContainerLoggingHttp) GetCompressionOk() (*ContainerLoggingHttpCompression, bool)`
 
 GetCompressionOk returns a tuple with the Compression field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetCompression
 
-`func (o *ContainerLoggingHttp) SetCompression(v string)`
+`func (o *ContainerLoggingHttp) SetCompression(v ContainerLoggingHttpCompression)`
 
 SetCompression sets Compression field to given value.
 

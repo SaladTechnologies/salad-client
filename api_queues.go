@@ -3,7 +3,7 @@ SaladCloud API
 
 The SaladCloud REST API. Please refer to the [SaladCloud API Documentation](https://docs.salad.com/api-reference) for more details.
 
-API version: 0.9.0-alpha.7
+API version: 0.9.0-alpha.11
 Contact: cloud@salad.com
 */
 
@@ -29,11 +29,11 @@ type ApiCreateQueueRequest struct {
 	ApiService *QueuesAPIService
 	organizationName string
 	projectName string
-	createQueue *CreateQueue
+	queuePrototype *QueuePrototype
 }
 
-func (r ApiCreateQueueRequest) CreateQueue(createQueue CreateQueue) ApiCreateQueueRequest {
-	r.createQueue = &createQueue
+func (r ApiCreateQueueRequest) QueuePrototype(queuePrototype QueuePrototype) ApiCreateQueueRequest {
+	r.queuePrototype = &queuePrototype
 	return r
 }
 
@@ -94,8 +94,8 @@ func (a *QueuesAPIService) CreateQueueExecute(r ApiCreateQueueRequest) (*Queue, 
 	if strlen(r.projectName) > 63 {
 		return localVarReturnValue, nil, reportError("projectName must have less than 63 elements")
 	}
-	if r.createQueue == nil {
-		return localVarReturnValue, nil, reportError("createQueue is required and must be specified")
+	if r.queuePrototype == nil {
+		return localVarReturnValue, nil, reportError("queuePrototype is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -116,7 +116,7 @@ func (a *QueuesAPIService) CreateQueueExecute(r ApiCreateQueueRequest) (*Queue, 
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.createQueue
+	localVarPostBody = r.queuePrototype
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -215,11 +215,11 @@ type ApiCreateQueueJobRequest struct {
 	organizationName string
 	projectName string
 	queueName string
-	createQueueJob *CreateQueueJob
+	queueJobPrototype *QueueJobPrototype
 }
 
-func (r ApiCreateQueueJobRequest) CreateQueueJob(createQueueJob CreateQueueJob) ApiCreateQueueJobRequest {
-	r.createQueueJob = &createQueueJob
+func (r ApiCreateQueueJobRequest) QueueJobPrototype(queueJobPrototype QueueJobPrototype) ApiCreateQueueJobRequest {
+	r.queueJobPrototype = &queueJobPrototype
 	return r
 }
 
@@ -289,8 +289,8 @@ func (a *QueuesAPIService) CreateQueueJobExecute(r ApiCreateQueueJobRequest) (*Q
 	if strlen(r.queueName) > 63 {
 		return localVarReturnValue, nil, reportError("queueName must have less than 63 elements")
 	}
-	if r.createQueueJob == nil {
-		return localVarReturnValue, nil, reportError("createQueueJob is required and must be specified")
+	if r.queueJobPrototype == nil {
+		return localVarReturnValue, nil, reportError("queueJobPrototype is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -311,7 +311,7 @@ func (a *QueuesAPIService) CreateQueueJobExecute(r ApiCreateQueueJobRequest) (*Q
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.createQueueJob
+	localVarPostBody = r.queueJobPrototype
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -1092,17 +1092,19 @@ type ApiListQueueJobsRequest struct {
 	pageSize *int32
 }
 
+// The page number.
 func (r ApiListQueueJobsRequest) Page(page int32) ApiListQueueJobsRequest {
 	r.page = &page
 	return r
 }
 
+// The maximum number of items per page.
 func (r ApiListQueueJobsRequest) PageSize(pageSize int32) ApiListQueueJobsRequest {
 	r.pageSize = &pageSize
 	return r
 }
 
-func (r ApiListQueueJobsRequest) Execute() (*QueueJobList, *http.Response, error) {
+func (r ApiListQueueJobsRequest) Execute() (*QueueJobCollection, *http.Response, error) {
 	return r.ApiService.ListQueueJobsExecute(r)
 }
 
@@ -1128,13 +1130,13 @@ func (a *QueuesAPIService) ListQueueJobs(ctx context.Context, organizationName s
 }
 
 // Execute executes the request
-//  @return QueueJobList
-func (a *QueuesAPIService) ListQueueJobsExecute(r ApiListQueueJobsRequest) (*QueueJobList, *http.Response, error) {
+//  @return QueueJobCollection
+func (a *QueuesAPIService) ListQueueJobsExecute(r ApiListQueueJobsRequest) (*QueueJobCollection, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *QueueJobList
+		localVarReturnValue  *QueueJobCollection
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "QueuesAPIService.ListQueueJobs")
@@ -1280,7 +1282,7 @@ type ApiListQueuesRequest struct {
 	projectName string
 }
 
-func (r ApiListQueuesRequest) Execute() (*QueueList, *http.Response, error) {
+func (r ApiListQueuesRequest) Execute() (*QueueCollection, *http.Response, error) {
 	return r.ApiService.ListQueuesExecute(r)
 }
 
@@ -1304,13 +1306,13 @@ func (a *QueuesAPIService) ListQueues(ctx context.Context, organizationName stri
 }
 
 // Execute executes the request
-//  @return QueueList
-func (a *QueuesAPIService) ListQueuesExecute(r ApiListQueuesRequest) (*QueueList, *http.Response, error) {
+//  @return QueueCollection
+func (a *QueuesAPIService) ListQueuesExecute(r ApiListQueuesRequest) (*QueueCollection, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *QueueList
+		localVarReturnValue  *QueueCollection
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "QueuesAPIService.ListQueues")
@@ -1442,11 +1444,11 @@ type ApiUpdateQueueRequest struct {
 	organizationName string
 	projectName string
 	queueName string
-	updateQueue *UpdateQueue
+	queuePatch *QueuePatch
 }
 
-func (r ApiUpdateQueueRequest) UpdateQueue(updateQueue UpdateQueue) ApiUpdateQueueRequest {
-	r.updateQueue = &updateQueue
+func (r ApiUpdateQueueRequest) QueuePatch(queuePatch QueuePatch) ApiUpdateQueueRequest {
+	r.queuePatch = &queuePatch
 	return r
 }
 
@@ -1516,8 +1518,8 @@ func (a *QueuesAPIService) UpdateQueueExecute(r ApiUpdateQueueRequest) (*Queue, 
 	if strlen(r.queueName) > 63 {
 		return localVarReturnValue, nil, reportError("queueName must have less than 63 elements")
 	}
-	if r.updateQueue == nil {
-		return localVarReturnValue, nil, reportError("updateQueue is required and must be specified")
+	if r.queuePatch == nil {
+		return localVarReturnValue, nil, reportError("queuePatch is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -1538,7 +1540,7 @@ func (a *QueuesAPIService) UpdateQueueExecute(r ApiUpdateQueueRequest) (*Queue, 
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.updateQueue
+	localVarPostBody = r.queuePatch
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {

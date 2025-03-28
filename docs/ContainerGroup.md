@@ -4,31 +4,34 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Id** | **string** |  | 
-**Name** | **string** |  | 
-**DisplayName** | **string** |  | 
+**AutostartPolicy** | **bool** | Defines whether containers in this group should automatically start when deployed (true) or require manual starting (false) | 
 **Container** | [**Container**](Container.md) |  | 
-**AutostartPolicy** | **bool** |  | 
-**RestartPolicy** | [**ContainerRestartPolicy**](ContainerRestartPolicy.md) |  | 
-**Replicas** | **int32** |  | 
+**CountryCodes** | [**[]CountryCode**](CountryCode.md) | List of country codes where container instances are permitted to run. When not specified or empty, containers may run in any available region. | 
+**CreateTime** | **time.Time** | ISO 8601 timestamp when this container group was initially created | 
 **CurrentState** | [**ContainerGroupState**](ContainerGroupState.md) |  | 
-**CountryCodes** | Pointer to [**[]CountryCode**](CountryCode.md) | List of countries nodes must be located in. Remove this field to permit nodes from any country. | [optional] 
-**Networking** | Pointer to [**ContainerGroupNetworking**](ContainerGroupNetworking.md) |  | [optional] 
+**DisplayName** | **string** | The display-friendly name of the resource. | 
+**Id** | **string** | The container group identifier. | 
 **LivenessProbe** | Pointer to [**ContainerGroupLivenessProbe**](ContainerGroupLivenessProbe.md) |  | [optional] 
-**ReadinessProbe** | Pointer to [**ContainerGroupReadinessProbe**](ContainerGroupReadinessProbe.md) |  | [optional] 
-**StartupProbe** | Pointer to [**ContainerGroupStartupProbe**](ContainerGroupStartupProbe.md) |  | [optional] 
+**Name** | **string** | The container group name. | 
+**Networking** | Pointer to [**ContainerGroupNetworking**](ContainerGroupNetworking.md) |  | [optional] 
+**OrganizationName** | **string** | The organization name. | 
+**PendingChange** | **bool** | Indicates whether a configuration change has been requested but not yet applied to all containers in the group | 
+**Priority** | [**NullableContainerGroupPriority**](ContainerGroupPriority.md) |  | 
+**ProjectName** | **string** | The project name. | 
+**QueueAutoscaler** | Pointer to [**ContainerGroupQueueAutoscaler**](ContainerGroupQueueAutoscaler.md) |  | [optional] 
 **QueueConnection** | Pointer to [**ContainerGroupQueueConnection**](ContainerGroupQueueConnection.md) |  | [optional] 
-**CreateTime** | **time.Time** |  | 
-**UpdateTime** | **time.Time** |  | 
-**PendingChange** | **bool** |  | 
-**Version** | **int32** |  | 
-**QueueAutoscaler** | Pointer to [**QueueAutoscaler**](QueueAutoscaler.md) |  | [optional] 
+**ReadinessProbe** | Pointer to [**ContainerGroupReadinessProbe**](ContainerGroupReadinessProbe.md) |  | [optional] 
+**Replicas** | **int32** | The container group replicas. | 
+**RestartPolicy** | [**ContainerRestartPolicy**](ContainerRestartPolicy.md) |  | 
+**StartupProbe** | Pointer to [**ContainerGroupStartupProbe**](ContainerGroupStartupProbe.md) |  | [optional] 
+**UpdateTime** | **time.Time** | ISO 8601 timestamp when this container group was last updated | 
+**Version** | **int32** | Incremental version number that increases with each configuration change to the container group | 
 
 ## Methods
 
 ### NewContainerGroup
 
-`func NewContainerGroup(id string, name string, displayName string, container Container, autostartPolicy bool, restartPolicy ContainerRestartPolicy, replicas int32, currentState ContainerGroupState, createTime time.Time, updateTime time.Time, pendingChange bool, version int32, ) *ContainerGroup`
+`func NewContainerGroup(autostartPolicy bool, container Container, countryCodes []CountryCode, createTime time.Time, currentState ContainerGroupState, displayName string, id string, name string, organizationName string, pendingChange bool, priority NullableContainerGroupPriority, projectName string, replicas int32, restartPolicy ContainerRestartPolicy, updateTime time.Time, version int32, ) *ContainerGroup`
 
 NewContainerGroup instantiates a new ContainerGroup object
 This constructor will assign default values to properties that have it defined,
@@ -43,64 +46,24 @@ NewContainerGroupWithDefaults instantiates a new ContainerGroup object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
-### GetId
+### GetAutostartPolicy
 
-`func (o *ContainerGroup) GetId() string`
+`func (o *ContainerGroup) GetAutostartPolicy() bool`
 
-GetId returns the Id field if non-nil, zero value otherwise.
+GetAutostartPolicy returns the AutostartPolicy field if non-nil, zero value otherwise.
 
-### GetIdOk
+### GetAutostartPolicyOk
 
-`func (o *ContainerGroup) GetIdOk() (*string, bool)`
+`func (o *ContainerGroup) GetAutostartPolicyOk() (*bool, bool)`
 
-GetIdOk returns a tuple with the Id field if it's non-nil, zero value otherwise
+GetAutostartPolicyOk returns a tuple with the AutostartPolicy field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetId
+### SetAutostartPolicy
 
-`func (o *ContainerGroup) SetId(v string)`
+`func (o *ContainerGroup) SetAutostartPolicy(v bool)`
 
-SetId sets Id field to given value.
-
-
-### GetName
-
-`func (o *ContainerGroup) GetName() string`
-
-GetName returns the Name field if non-nil, zero value otherwise.
-
-### GetNameOk
-
-`func (o *ContainerGroup) GetNameOk() (*string, bool)`
-
-GetNameOk returns a tuple with the Name field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetName
-
-`func (o *ContainerGroup) SetName(v string)`
-
-SetName sets Name field to given value.
-
-
-### GetDisplayName
-
-`func (o *ContainerGroup) GetDisplayName() string`
-
-GetDisplayName returns the DisplayName field if non-nil, zero value otherwise.
-
-### GetDisplayNameOk
-
-`func (o *ContainerGroup) GetDisplayNameOk() (*string, bool)`
-
-GetDisplayNameOk returns a tuple with the DisplayName field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetDisplayName
-
-`func (o *ContainerGroup) SetDisplayName(v string)`
-
-SetDisplayName sets DisplayName field to given value.
+SetAutostartPolicy sets AutostartPolicy field to given value.
 
 
 ### GetContainer
@@ -123,64 +86,44 @@ and a boolean to check if the value has been set.
 SetContainer sets Container field to given value.
 
 
-### GetAutostartPolicy
+### GetCountryCodes
 
-`func (o *ContainerGroup) GetAutostartPolicy() bool`
+`func (o *ContainerGroup) GetCountryCodes() []CountryCode`
 
-GetAutostartPolicy returns the AutostartPolicy field if non-nil, zero value otherwise.
+GetCountryCodes returns the CountryCodes field if non-nil, zero value otherwise.
 
-### GetAutostartPolicyOk
+### GetCountryCodesOk
 
-`func (o *ContainerGroup) GetAutostartPolicyOk() (*bool, bool)`
+`func (o *ContainerGroup) GetCountryCodesOk() (*[]CountryCode, bool)`
 
-GetAutostartPolicyOk returns a tuple with the AutostartPolicy field if it's non-nil, zero value otherwise
+GetCountryCodesOk returns a tuple with the CountryCodes field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetAutostartPolicy
+### SetCountryCodes
 
-`func (o *ContainerGroup) SetAutostartPolicy(v bool)`
+`func (o *ContainerGroup) SetCountryCodes(v []CountryCode)`
 
-SetAutostartPolicy sets AutostartPolicy field to given value.
+SetCountryCodes sets CountryCodes field to given value.
 
 
-### GetRestartPolicy
+### GetCreateTime
 
-`func (o *ContainerGroup) GetRestartPolicy() ContainerRestartPolicy`
+`func (o *ContainerGroup) GetCreateTime() time.Time`
 
-GetRestartPolicy returns the RestartPolicy field if non-nil, zero value otherwise.
+GetCreateTime returns the CreateTime field if non-nil, zero value otherwise.
 
-### GetRestartPolicyOk
+### GetCreateTimeOk
 
-`func (o *ContainerGroup) GetRestartPolicyOk() (*ContainerRestartPolicy, bool)`
+`func (o *ContainerGroup) GetCreateTimeOk() (*time.Time, bool)`
 
-GetRestartPolicyOk returns a tuple with the RestartPolicy field if it's non-nil, zero value otherwise
+GetCreateTimeOk returns a tuple with the CreateTime field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetRestartPolicy
+### SetCreateTime
 
-`func (o *ContainerGroup) SetRestartPolicy(v ContainerRestartPolicy)`
+`func (o *ContainerGroup) SetCreateTime(v time.Time)`
 
-SetRestartPolicy sets RestartPolicy field to given value.
-
-
-### GetReplicas
-
-`func (o *ContainerGroup) GetReplicas() int32`
-
-GetReplicas returns the Replicas field if non-nil, zero value otherwise.
-
-### GetReplicasOk
-
-`func (o *ContainerGroup) GetReplicasOk() (*int32, bool)`
-
-GetReplicasOk returns a tuple with the Replicas field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetReplicas
-
-`func (o *ContainerGroup) SetReplicas(v int32)`
-
-SetReplicas sets Replicas field to given value.
+SetCreateTime sets CreateTime field to given value.
 
 
 ### GetCurrentState
@@ -203,55 +146,45 @@ and a boolean to check if the value has been set.
 SetCurrentState sets CurrentState field to given value.
 
 
-### GetCountryCodes
+### GetDisplayName
 
-`func (o *ContainerGroup) GetCountryCodes() []CountryCode`
+`func (o *ContainerGroup) GetDisplayName() string`
 
-GetCountryCodes returns the CountryCodes field if non-nil, zero value otherwise.
+GetDisplayName returns the DisplayName field if non-nil, zero value otherwise.
 
-### GetCountryCodesOk
+### GetDisplayNameOk
 
-`func (o *ContainerGroup) GetCountryCodesOk() (*[]CountryCode, bool)`
+`func (o *ContainerGroup) GetDisplayNameOk() (*string, bool)`
 
-GetCountryCodesOk returns a tuple with the CountryCodes field if it's non-nil, zero value otherwise
+GetDisplayNameOk returns a tuple with the DisplayName field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetCountryCodes
+### SetDisplayName
 
-`func (o *ContainerGroup) SetCountryCodes(v []CountryCode)`
+`func (o *ContainerGroup) SetDisplayName(v string)`
 
-SetCountryCodes sets CountryCodes field to given value.
+SetDisplayName sets DisplayName field to given value.
 
-### HasCountryCodes
 
-`func (o *ContainerGroup) HasCountryCodes() bool`
+### GetId
 
-HasCountryCodes returns a boolean if a field has been set.
+`func (o *ContainerGroup) GetId() string`
 
-### GetNetworking
+GetId returns the Id field if non-nil, zero value otherwise.
 
-`func (o *ContainerGroup) GetNetworking() ContainerGroupNetworking`
+### GetIdOk
 
-GetNetworking returns the Networking field if non-nil, zero value otherwise.
+`func (o *ContainerGroup) GetIdOk() (*string, bool)`
 
-### GetNetworkingOk
-
-`func (o *ContainerGroup) GetNetworkingOk() (*ContainerGroupNetworking, bool)`
-
-GetNetworkingOk returns a tuple with the Networking field if it's non-nil, zero value otherwise
+GetIdOk returns a tuple with the Id field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetNetworking
+### SetId
 
-`func (o *ContainerGroup) SetNetworking(v ContainerGroupNetworking)`
+`func (o *ContainerGroup) SetId(v string)`
 
-SetNetworking sets Networking field to given value.
+SetId sets Id field to given value.
 
-### HasNetworking
-
-`func (o *ContainerGroup) HasNetworking() bool`
-
-HasNetworking returns a boolean if a field has been set.
 
 ### GetLivenessProbe
 
@@ -278,55 +211,165 @@ SetLivenessProbe sets LivenessProbe field to given value.
 
 HasLivenessProbe returns a boolean if a field has been set.
 
-### GetReadinessProbe
+### GetName
 
-`func (o *ContainerGroup) GetReadinessProbe() ContainerGroupReadinessProbe`
+`func (o *ContainerGroup) GetName() string`
 
-GetReadinessProbe returns the ReadinessProbe field if non-nil, zero value otherwise.
+GetName returns the Name field if non-nil, zero value otherwise.
 
-### GetReadinessProbeOk
+### GetNameOk
 
-`func (o *ContainerGroup) GetReadinessProbeOk() (*ContainerGroupReadinessProbe, bool)`
+`func (o *ContainerGroup) GetNameOk() (*string, bool)`
 
-GetReadinessProbeOk returns a tuple with the ReadinessProbe field if it's non-nil, zero value otherwise
+GetNameOk returns a tuple with the Name field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetReadinessProbe
+### SetName
 
-`func (o *ContainerGroup) SetReadinessProbe(v ContainerGroupReadinessProbe)`
+`func (o *ContainerGroup) SetName(v string)`
 
-SetReadinessProbe sets ReadinessProbe field to given value.
+SetName sets Name field to given value.
 
-### HasReadinessProbe
 
-`func (o *ContainerGroup) HasReadinessProbe() bool`
+### GetNetworking
 
-HasReadinessProbe returns a boolean if a field has been set.
+`func (o *ContainerGroup) GetNetworking() ContainerGroupNetworking`
 
-### GetStartupProbe
+GetNetworking returns the Networking field if non-nil, zero value otherwise.
 
-`func (o *ContainerGroup) GetStartupProbe() ContainerGroupStartupProbe`
+### GetNetworkingOk
 
-GetStartupProbe returns the StartupProbe field if non-nil, zero value otherwise.
+`func (o *ContainerGroup) GetNetworkingOk() (*ContainerGroupNetworking, bool)`
 
-### GetStartupProbeOk
-
-`func (o *ContainerGroup) GetStartupProbeOk() (*ContainerGroupStartupProbe, bool)`
-
-GetStartupProbeOk returns a tuple with the StartupProbe field if it's non-nil, zero value otherwise
+GetNetworkingOk returns a tuple with the Networking field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetStartupProbe
+### SetNetworking
 
-`func (o *ContainerGroup) SetStartupProbe(v ContainerGroupStartupProbe)`
+`func (o *ContainerGroup) SetNetworking(v ContainerGroupNetworking)`
 
-SetStartupProbe sets StartupProbe field to given value.
+SetNetworking sets Networking field to given value.
 
-### HasStartupProbe
+### HasNetworking
 
-`func (o *ContainerGroup) HasStartupProbe() bool`
+`func (o *ContainerGroup) HasNetworking() bool`
 
-HasStartupProbe returns a boolean if a field has been set.
+HasNetworking returns a boolean if a field has been set.
+
+### GetOrganizationName
+
+`func (o *ContainerGroup) GetOrganizationName() string`
+
+GetOrganizationName returns the OrganizationName field if non-nil, zero value otherwise.
+
+### GetOrganizationNameOk
+
+`func (o *ContainerGroup) GetOrganizationNameOk() (*string, bool)`
+
+GetOrganizationNameOk returns a tuple with the OrganizationName field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetOrganizationName
+
+`func (o *ContainerGroup) SetOrganizationName(v string)`
+
+SetOrganizationName sets OrganizationName field to given value.
+
+
+### GetPendingChange
+
+`func (o *ContainerGroup) GetPendingChange() bool`
+
+GetPendingChange returns the PendingChange field if non-nil, zero value otherwise.
+
+### GetPendingChangeOk
+
+`func (o *ContainerGroup) GetPendingChangeOk() (*bool, bool)`
+
+GetPendingChangeOk returns a tuple with the PendingChange field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPendingChange
+
+`func (o *ContainerGroup) SetPendingChange(v bool)`
+
+SetPendingChange sets PendingChange field to given value.
+
+
+### GetPriority
+
+`func (o *ContainerGroup) GetPriority() ContainerGroupPriority`
+
+GetPriority returns the Priority field if non-nil, zero value otherwise.
+
+### GetPriorityOk
+
+`func (o *ContainerGroup) GetPriorityOk() (*ContainerGroupPriority, bool)`
+
+GetPriorityOk returns a tuple with the Priority field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPriority
+
+`func (o *ContainerGroup) SetPriority(v ContainerGroupPriority)`
+
+SetPriority sets Priority field to given value.
+
+
+### SetPriorityNil
+
+`func (o *ContainerGroup) SetPriorityNil(b bool)`
+
+ SetPriorityNil sets the value for Priority to be an explicit nil
+
+### UnsetPriority
+`func (o *ContainerGroup) UnsetPriority()`
+
+UnsetPriority ensures that no value is present for Priority, not even an explicit nil
+### GetProjectName
+
+`func (o *ContainerGroup) GetProjectName() string`
+
+GetProjectName returns the ProjectName field if non-nil, zero value otherwise.
+
+### GetProjectNameOk
+
+`func (o *ContainerGroup) GetProjectNameOk() (*string, bool)`
+
+GetProjectNameOk returns a tuple with the ProjectName field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetProjectName
+
+`func (o *ContainerGroup) SetProjectName(v string)`
+
+SetProjectName sets ProjectName field to given value.
+
+
+### GetQueueAutoscaler
+
+`func (o *ContainerGroup) GetQueueAutoscaler() ContainerGroupQueueAutoscaler`
+
+GetQueueAutoscaler returns the QueueAutoscaler field if non-nil, zero value otherwise.
+
+### GetQueueAutoscalerOk
+
+`func (o *ContainerGroup) GetQueueAutoscalerOk() (*ContainerGroupQueueAutoscaler, bool)`
+
+GetQueueAutoscalerOk returns a tuple with the QueueAutoscaler field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetQueueAutoscaler
+
+`func (o *ContainerGroup) SetQueueAutoscaler(v ContainerGroupQueueAutoscaler)`
+
+SetQueueAutoscaler sets QueueAutoscaler field to given value.
+
+### HasQueueAutoscaler
+
+`func (o *ContainerGroup) HasQueueAutoscaler() bool`
+
+HasQueueAutoscaler returns a boolean if a field has been set.
 
 ### GetQueueConnection
 
@@ -353,25 +396,95 @@ SetQueueConnection sets QueueConnection field to given value.
 
 HasQueueConnection returns a boolean if a field has been set.
 
-### GetCreateTime
+### GetReadinessProbe
 
-`func (o *ContainerGroup) GetCreateTime() time.Time`
+`func (o *ContainerGroup) GetReadinessProbe() ContainerGroupReadinessProbe`
 
-GetCreateTime returns the CreateTime field if non-nil, zero value otherwise.
+GetReadinessProbe returns the ReadinessProbe field if non-nil, zero value otherwise.
 
-### GetCreateTimeOk
+### GetReadinessProbeOk
 
-`func (o *ContainerGroup) GetCreateTimeOk() (*time.Time, bool)`
+`func (o *ContainerGroup) GetReadinessProbeOk() (*ContainerGroupReadinessProbe, bool)`
 
-GetCreateTimeOk returns a tuple with the CreateTime field if it's non-nil, zero value otherwise
+GetReadinessProbeOk returns a tuple with the ReadinessProbe field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetCreateTime
+### SetReadinessProbe
 
-`func (o *ContainerGroup) SetCreateTime(v time.Time)`
+`func (o *ContainerGroup) SetReadinessProbe(v ContainerGroupReadinessProbe)`
 
-SetCreateTime sets CreateTime field to given value.
+SetReadinessProbe sets ReadinessProbe field to given value.
 
+### HasReadinessProbe
+
+`func (o *ContainerGroup) HasReadinessProbe() bool`
+
+HasReadinessProbe returns a boolean if a field has been set.
+
+### GetReplicas
+
+`func (o *ContainerGroup) GetReplicas() int32`
+
+GetReplicas returns the Replicas field if non-nil, zero value otherwise.
+
+### GetReplicasOk
+
+`func (o *ContainerGroup) GetReplicasOk() (*int32, bool)`
+
+GetReplicasOk returns a tuple with the Replicas field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetReplicas
+
+`func (o *ContainerGroup) SetReplicas(v int32)`
+
+SetReplicas sets Replicas field to given value.
+
+
+### GetRestartPolicy
+
+`func (o *ContainerGroup) GetRestartPolicy() ContainerRestartPolicy`
+
+GetRestartPolicy returns the RestartPolicy field if non-nil, zero value otherwise.
+
+### GetRestartPolicyOk
+
+`func (o *ContainerGroup) GetRestartPolicyOk() (*ContainerRestartPolicy, bool)`
+
+GetRestartPolicyOk returns a tuple with the RestartPolicy field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRestartPolicy
+
+`func (o *ContainerGroup) SetRestartPolicy(v ContainerRestartPolicy)`
+
+SetRestartPolicy sets RestartPolicy field to given value.
+
+
+### GetStartupProbe
+
+`func (o *ContainerGroup) GetStartupProbe() ContainerGroupStartupProbe`
+
+GetStartupProbe returns the StartupProbe field if non-nil, zero value otherwise.
+
+### GetStartupProbeOk
+
+`func (o *ContainerGroup) GetStartupProbeOk() (*ContainerGroupStartupProbe, bool)`
+
+GetStartupProbeOk returns a tuple with the StartupProbe field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetStartupProbe
+
+`func (o *ContainerGroup) SetStartupProbe(v ContainerGroupStartupProbe)`
+
+SetStartupProbe sets StartupProbe field to given value.
+
+### HasStartupProbe
+
+`func (o *ContainerGroup) HasStartupProbe() bool`
+
+HasStartupProbe returns a boolean if a field has been set.
 
 ### GetUpdateTime
 
@@ -393,26 +506,6 @@ and a boolean to check if the value has been set.
 SetUpdateTime sets UpdateTime field to given value.
 
 
-### GetPendingChange
-
-`func (o *ContainerGroup) GetPendingChange() bool`
-
-GetPendingChange returns the PendingChange field if non-nil, zero value otherwise.
-
-### GetPendingChangeOk
-
-`func (o *ContainerGroup) GetPendingChangeOk() (*bool, bool)`
-
-GetPendingChangeOk returns a tuple with the PendingChange field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetPendingChange
-
-`func (o *ContainerGroup) SetPendingChange(v bool)`
-
-SetPendingChange sets PendingChange field to given value.
-
-
 ### GetVersion
 
 `func (o *ContainerGroup) GetVersion() int32`
@@ -432,31 +525,6 @@ and a boolean to check if the value has been set.
 
 SetVersion sets Version field to given value.
 
-
-### GetQueueAutoscaler
-
-`func (o *ContainerGroup) GetQueueAutoscaler() QueueAutoscaler`
-
-GetQueueAutoscaler returns the QueueAutoscaler field if non-nil, zero value otherwise.
-
-### GetQueueAutoscalerOk
-
-`func (o *ContainerGroup) GetQueueAutoscalerOk() (*QueueAutoscaler, bool)`
-
-GetQueueAutoscalerOk returns a tuple with the QueueAutoscaler field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetQueueAutoscaler
-
-`func (o *ContainerGroup) SetQueueAutoscaler(v QueueAutoscaler)`
-
-SetQueueAutoscaler sets QueueAutoscaler field to given value.
-
-### HasQueueAutoscaler
-
-`func (o *ContainerGroup) HasQueueAutoscaler() bool`
-
-HasQueueAutoscaler returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

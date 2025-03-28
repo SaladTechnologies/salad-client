@@ -3,7 +3,7 @@ SaladCloud API
 
 The SaladCloud REST API. Please refer to the [SaladCloud API Documentation](https://docs.salad.com/api-reference) for more details.
 
-API version: 0.9.0-alpha.7
+API version: 0.9.0-alpha.11
 Contact: cloud@salad.com
 */
 
@@ -20,9 +20,11 @@ import (
 // checks if the ContainerLoggingTcp type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ContainerLoggingTcp{}
 
-// ContainerLoggingTcp struct for ContainerLoggingTcp
+// ContainerLoggingTcp Configuration for forwarding container logs to a remote TCP endpoint
 type ContainerLoggingTcp struct {
-	Host string `json:"host"`
+	// The hostname or IP address of the remote TCP logging endpoint
+	Host string `json:"host" validate:"regexp=^.*$"`
+	// The port number on which the TCP logging endpoint is listening
 	Port int32 `json:"port"`
 }
 

@@ -4,19 +4,19 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Detail** | **string** |  | 
-**FailedAt** | **time.Time** |  | 
-**InstanceId** | **string** |  | 
-**MachineId** | **string** |  | 
-**AllocatedAt** | **time.Time** |  | 
-**StartedAt** | Pointer to **NullableTime** |  | [optional] 
-**Version** | **int32** |  | 
+**AllocatedAt** | **time.Time** | The timestamp when the workload was initially allocated to a machine | 
+**Detail** | **string** | A detailed error message describing the nature and cause of the workload failure | 
+**FailedAt** | **time.Time** | The timestamp when the workload failure was detected or reported | 
+**InstanceId** | **string** | The container group instance identifier. | 
+**MachineId** | **string** | The container group machine identifier. | 
+**StartedAt** | Pointer to **time.Time** | The timestamp when the workload started execution, or null if it failed before starting | [optional] 
+**Version** | **int32** | The schema version number for this error record, used for tracking error format changes | 
 
 ## Methods
 
 ### NewWorkloadError
 
-`func NewWorkloadError(detail string, failedAt time.Time, instanceId string, machineId string, allocatedAt time.Time, version int32, ) *WorkloadError`
+`func NewWorkloadError(allocatedAt time.Time, detail string, failedAt time.Time, instanceId string, machineId string, version int32, ) *WorkloadError`
 
 NewWorkloadError instantiates a new WorkloadError object
 This constructor will assign default values to properties that have it defined,
@@ -30,6 +30,26 @@ will change when the set of required properties is changed
 NewWorkloadErrorWithDefaults instantiates a new WorkloadError object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetAllocatedAt
+
+`func (o *WorkloadError) GetAllocatedAt() time.Time`
+
+GetAllocatedAt returns the AllocatedAt field if non-nil, zero value otherwise.
+
+### GetAllocatedAtOk
+
+`func (o *WorkloadError) GetAllocatedAtOk() (*time.Time, bool)`
+
+GetAllocatedAtOk returns a tuple with the AllocatedAt field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAllocatedAt
+
+`func (o *WorkloadError) SetAllocatedAt(v time.Time)`
+
+SetAllocatedAt sets AllocatedAt field to given value.
+
 
 ### GetDetail
 
@@ -111,26 +131,6 @@ and a boolean to check if the value has been set.
 SetMachineId sets MachineId field to given value.
 
 
-### GetAllocatedAt
-
-`func (o *WorkloadError) GetAllocatedAt() time.Time`
-
-GetAllocatedAt returns the AllocatedAt field if non-nil, zero value otherwise.
-
-### GetAllocatedAtOk
-
-`func (o *WorkloadError) GetAllocatedAtOk() (*time.Time, bool)`
-
-GetAllocatedAtOk returns a tuple with the AllocatedAt field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetAllocatedAt
-
-`func (o *WorkloadError) SetAllocatedAt(v time.Time)`
-
-SetAllocatedAt sets AllocatedAt field to given value.
-
-
 ### GetStartedAt
 
 `func (o *WorkloadError) GetStartedAt() time.Time`
@@ -156,16 +156,6 @@ SetStartedAt sets StartedAt field to given value.
 
 HasStartedAt returns a boolean if a field has been set.
 
-### SetStartedAtNil
-
-`func (o *WorkloadError) SetStartedAtNil(b bool)`
-
- SetStartedAtNil sets the value for StartedAt to be an explicit nil
-
-### UnsetStartedAt
-`func (o *WorkloadError) UnsetStartedAt()`
-
-UnsetStartedAt ensures that no value is present for StartedAt, not even an explicit nil
 ### GetVersion
 
 `func (o *WorkloadError) GetVersion() int32`

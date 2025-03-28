@@ -3,7 +3,7 @@ SaladCloud API
 
 The SaladCloud REST API. Please refer to the [SaladCloud API Documentation](https://docs.salad.com/api-reference) for more details.
 
-API version: 0.9.0-alpha.7
+API version: 0.9.0-alpha.11
 Contact: cloud@salad.com
 */
 
@@ -16,10 +16,10 @@ import (
 	"fmt"
 )
 
-// InferenceEndpointJobEventAction the model 'InferenceEndpointJobEventAction'
+// InferenceEndpointJobEventAction The action that was taken on the inference endpoint job.
 type InferenceEndpointJobEventAction string
 
-// List of inference_endpoint_job_event_action
+// List of InferenceEndpointJobEventAction
 const (
 	INFERENCEENDPOINTJOBEVENTACTION_CREATED InferenceEndpointJobEventAction = "created"
 	INFERENCEENDPOINTJOBEVENTACTION_STARTED InferenceEndpointJobEventAction = "started"
@@ -75,7 +75,7 @@ func (v InferenceEndpointJobEventAction) IsValid() bool {
 	return false
 }
 
-// Ptr returns reference to inference_endpoint_job_event_action value
+// Ptr returns reference to InferenceEndpointJobEventAction value
 func (v InferenceEndpointJobEventAction) Ptr() *InferenceEndpointJobEventAction {
 	return &v
 }

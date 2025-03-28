@@ -3,7 +3,7 @@ SaladCloud API
 
 The SaladCloud REST API. Please refer to the [SaladCloud API Documentation](https://docs.salad.com/api-reference) for more details.
 
-API version: 0.9.0-alpha.7
+API version: 0.9.0-alpha.11
 Contact: cloud@salad.com
 */
 
@@ -23,7 +23,9 @@ var _ MappedNullable = &QueueJobEvent{}
 
 // QueueJobEvent Represents an event for queue job
 type QueueJobEvent struct {
+	// The action that was taken on the queue job
 	Action string `json:"action"`
+	// The time the action was taken on the queue job
 	Time time.Time `json:"time"`
 }
 

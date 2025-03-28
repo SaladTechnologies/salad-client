@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Action** | [**InferenceEndpointJobEventAction**](InferenceEndpointJobEventAction.md) |  | 
-**Time** | **time.Time** |  | 
+**Time** | **time.Time** | The time the event occurred. | 
 
 ## Methods
 

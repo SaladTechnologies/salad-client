@@ -3,7 +3,7 @@ SaladCloud API
 
 The SaladCloud REST API. Please refer to the [SaladCloud API Documentation](https://docs.salad.com/api-reference) for more details.
 
-API version: 0.9.0-alpha.7
+API version: 0.9.0-alpha.11
 Contact: cloud@salad.com
 */
 
@@ -20,8 +20,9 @@ import (
 // checks if the ContainerGroupProbeExec type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ContainerGroupProbeExec{}
 
-// ContainerGroupProbeExec struct for ContainerGroupProbeExec
+// ContainerGroupProbeExec Defines the exec action for a probe in a container group. This is used to execute a command inside a container for health checks.
 type ContainerGroupProbeExec struct {
+	// The command to execute inside the container. Exit status of 0 is considered successful, any other exit status is considered failure.
 	Command []string `json:"command"`
 }
 

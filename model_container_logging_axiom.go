@@ -3,7 +3,7 @@ SaladCloud API
 
 The SaladCloud REST API. Please refer to the [SaladCloud API Documentation](https://docs.salad.com/api-reference) for more details.
 
-API version: 0.9.0-alpha.7
+API version: 0.9.0-alpha.11
 Contact: cloud@salad.com
 */
 
@@ -20,11 +20,14 @@ import (
 // checks if the ContainerLoggingAxiom type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ContainerLoggingAxiom{}
 
-// ContainerLoggingAxiom struct for ContainerLoggingAxiom
+// ContainerLoggingAxiom Configuration settings for integrating container logs with the Axiom logging service. When specified, container logs will be forwarded to the Axiom instance defined by these parameters.
 type ContainerLoggingAxiom struct {
-	Host string `json:"host"`
-	ApiToken string `json:"api_token"`
-	Dataset string `json:"dataset"`
+	// The Axiom host URL where logs will be sent (e.g. logs.axiom.co)
+	Host string `json:"host" validate:"regexp=^.*$"`
+	// Authentication token for the Axiom API with appropriate write permissions
+	ApiToken string `json:"api_token" validate:"regexp=^.*$"`
+	// Name of the Axiom dataset where the container logs will be stored and indexed
+	Dataset string `json:"dataset" validate:"regexp=^.*$"`
 }
 
 type _ContainerLoggingAxiom ContainerLoggingAxiom

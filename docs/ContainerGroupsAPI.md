@@ -16,12 +16,13 @@ Method | HTTP request | Description
 [**StartContainerGroup**](ContainerGroupsAPI.md#StartContainerGroup) | **Post** /organizations/{organization_name}/projects/{project_name}/containers/{container_group_name}/start | Start Container Group
 [**StopContainerGroup**](ContainerGroupsAPI.md#StopContainerGroup) | **Post** /organizations/{organization_name}/projects/{project_name}/containers/{container_group_name}/stop | Stop Container Group
 [**UpdateContainerGroup**](ContainerGroupsAPI.md#UpdateContainerGroup) | **Patch** /organizations/{organization_name}/projects/{project_name}/containers/{container_group_name} | Update Container Group
+[**UpdateContainerGroupInstance**](ContainerGroupsAPI.md#UpdateContainerGroupInstance) | **Patch** /organizations/{organization_name}/projects/{project_name}/containers/{container_group_name}/instances/{container_group_instance_id} | Update Container Group Instance
 
 
 
 ## CreateContainerGroup
 
-> ContainerGroup CreateContainerGroup(ctx, organizationName, projectName).CreateContainerGroup(createContainerGroup).Execute()
+> ContainerGroup CreateContainerGroup(ctx, organizationName, projectName).ContainerGroupPrototype(containerGroupPrototype).Execute()
 
 Create Container Group
 
@@ -42,11 +43,11 @@ import (
 func main() {
 	organizationName := "organizationName_example" // string | Your organization name. This identifies the billing context for the API operation and represents a security boundary for SaladCloud resources. The organization must be created before using the API, and you must be a member of the organization.
 	projectName := "projectName_example" // string | Your project name. This represents a collection of related SaladCloud resources. The project must be created before using the API.
-	createContainerGroup := *openapiclient.NewCreateContainerGroup("Name_example", *openapiclient.NewCreateContainer("Image_example", *openapiclient.NewContainerResourceRequirements(int32(123), int32(123))), false, openapiclient.ContainerRestartPolicy("always"), int32(123)) // CreateContainerGroup | 
+	containerGroupPrototype := *openapiclient.NewContainerGroupPrototype(false, *openapiclient.NewCreateContainer("Image_example", *openapiclient.NewContainerResourceRequirements(int32(123), int32(123), []string{"GpuClasses_example"})), "Name_example", int32(123), openapiclient.ContainerRestartPolicy("always")) // ContainerGroupPrototype | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.ContainerGroupsAPI.CreateContainerGroup(context.Background(), organizationName, projectName).CreateContainerGroup(createContainerGroup).Execute()
+	resp, r, err := apiClient.ContainerGroupsAPI.CreateContainerGroup(context.Background(), organizationName, projectName).ContainerGroupPrototype(containerGroupPrototype).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `ContainerGroupsAPI.CreateContainerGroup``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -74,7 +75,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **createContainerGroup** | [**CreateContainerGroup**](CreateContainerGroup.md) |  | 
+ **containerGroupPrototype** | [**ContainerGroupPrototype**](ContainerGroupPrototype.md) |  | 
 
 ### Return type
 
@@ -268,7 +269,7 @@ func main() {
 	organizationName := "organizationName_example" // string | Your organization name. This identifies the billing context for the API operation and represents a security boundary for SaladCloud resources. The organization must be created before using the API, and you must be a member of the organization.
 	projectName := "projectName_example" // string | Your project name. This represents a collection of related SaladCloud resources. The project must be created before using the API.
 	containerGroupName := "containerGroupName_example" // string | The unique container group name
-	containerGroupInstanceId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The unique instance identifier
+	containerGroupInstanceId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The unique container group instance identifier
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -291,7 +292,7 @@ Name | Type | Description  | Notes
 **organizationName** | **string** | Your organization name. This identifies the billing context for the API operation and represents a security boundary for SaladCloud resources. The organization must be created before using the API, and you must be a member of the organization. | 
 **projectName** | **string** | Your project name. This represents a collection of related SaladCloud resources. The project must be created before using the API. | 
 **containerGroupName** | **string** | The unique container group name | 
-**containerGroupInstanceId** | **string** | The unique instance identifier | 
+**containerGroupInstanceId** | **string** | The unique container group instance identifier | 
 
 ### Other Parameters
 
@@ -325,7 +326,7 @@ Name | Type | Description  | Notes
 
 ## ListContainerGroupInstances
 
-> ContainerGroupInstances ListContainerGroupInstances(ctx, organizationName, projectName, containerGroupName).Execute()
+> ContainerGroupInstanceCollection ListContainerGroupInstances(ctx, organizationName, projectName, containerGroupName).Execute()
 
 List Container Group Instances
 
@@ -355,7 +356,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `ContainerGroupsAPI.ListContainerGroupInstances``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `ListContainerGroupInstances`: ContainerGroupInstances
+	// response from `ListContainerGroupInstances`: ContainerGroupInstanceCollection
 	fmt.Fprintf(os.Stdout, "Response from `ContainerGroupsAPI.ListContainerGroupInstances`: %v\n", resp)
 }
 ```
@@ -383,7 +384,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ContainerGroupInstances**](ContainerGroupInstances.md)
+[**ContainerGroupInstanceCollection**](ContainerGroupInstanceCollection.md)
 
 ### Authorization
 
@@ -401,7 +402,7 @@ Name | Type | Description  | Notes
 
 ## ListContainerGroups
 
-> ContainerGroupList ListContainerGroups(ctx, organizationName, projectName).Execute()
+> ContainerGroupCollection ListContainerGroups(ctx, organizationName, projectName).Execute()
 
 List Container Groups
 
@@ -430,7 +431,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `ContainerGroupsAPI.ListContainerGroups``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `ListContainerGroups`: ContainerGroupList
+	// response from `ListContainerGroups`: ContainerGroupCollection
 	fmt.Fprintf(os.Stdout, "Response from `ContainerGroupsAPI.ListContainerGroups`: %v\n", resp)
 }
 ```
@@ -456,7 +457,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ContainerGroupList**](ContainerGroupList.md)
+[**ContainerGroupCollection**](ContainerGroupCollection.md)
 
 ### Authorization
 
@@ -496,7 +497,7 @@ func main() {
 	organizationName := "organizationName_example" // string | Your organization name. This identifies the billing context for the API operation and represents a security boundary for SaladCloud resources. The organization must be created before using the API, and you must be a member of the organization.
 	projectName := "projectName_example" // string | Your project name. This represents a collection of related SaladCloud resources. The project must be created before using the API.
 	containerGroupName := "containerGroupName_example" // string | The unique container group name
-	containerGroupInstanceId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The unique instance identifier
+	containerGroupInstanceId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The unique container group instance identifier
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -517,7 +518,7 @@ Name | Type | Description  | Notes
 **organizationName** | **string** | Your organization name. This identifies the billing context for the API operation and represents a security boundary for SaladCloud resources. The organization must be created before using the API, and you must be a member of the organization. | 
 **projectName** | **string** | Your project name. This represents a collection of related SaladCloud resources. The project must be created before using the API. | 
 **containerGroupName** | **string** | The unique container group name | 
-**containerGroupInstanceId** | **string** | The unique instance identifier | 
+**containerGroupInstanceId** | **string** | The unique container group instance identifier | 
 
 ### Other Parameters
 
@@ -573,7 +574,7 @@ func main() {
 	organizationName := "organizationName_example" // string | Your organization name. This identifies the billing context for the API operation and represents a security boundary for SaladCloud resources. The organization must be created before using the API, and you must be a member of the organization.
 	projectName := "projectName_example" // string | Your project name. This represents a collection of related SaladCloud resources. The project must be created before using the API.
 	containerGroupName := "containerGroupName_example" // string | The unique container group name
-	containerGroupInstanceId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The unique instance identifier
+	containerGroupInstanceId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The unique container group instance identifier
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -594,7 +595,7 @@ Name | Type | Description  | Notes
 **organizationName** | **string** | Your organization name. This identifies the billing context for the API operation and represents a security boundary for SaladCloud resources. The organization must be created before using the API, and you must be a member of the organization. | 
 **projectName** | **string** | Your project name. This represents a collection of related SaladCloud resources. The project must be created before using the API. | 
 **containerGroupName** | **string** | The unique container group name | 
-**containerGroupInstanceId** | **string** | The unique instance identifier | 
+**containerGroupInstanceId** | **string** | The unique container group instance identifier | 
 
 ### Other Parameters
 
@@ -650,7 +651,7 @@ func main() {
 	organizationName := "organizationName_example" // string | Your organization name. This identifies the billing context for the API operation and represents a security boundary for SaladCloud resources. The organization must be created before using the API, and you must be a member of the organization.
 	projectName := "projectName_example" // string | Your project name. This represents a collection of related SaladCloud resources. The project must be created before using the API.
 	containerGroupName := "containerGroupName_example" // string | The unique container group name
-	containerGroupInstanceId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The unique instance identifier
+	containerGroupInstanceId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The unique container group instance identifier
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -671,7 +672,7 @@ Name | Type | Description  | Notes
 **organizationName** | **string** | Your organization name. This identifies the billing context for the API operation and represents a security boundary for SaladCloud resources. The organization must be created before using the API, and you must be a member of the organization. | 
 **projectName** | **string** | Your project name. This represents a collection of related SaladCloud resources. The project must be created before using the API. | 
 **containerGroupName** | **string** | The unique container group name | 
-**containerGroupInstanceId** | **string** | The unique instance identifier | 
+**containerGroupInstanceId** | **string** | The unique container group instance identifier | 
 
 ### Other Parameters
 
@@ -853,7 +854,7 @@ Name | Type | Description  | Notes
 
 ## UpdateContainerGroup
 
-> ContainerGroup UpdateContainerGroup(ctx, organizationName, projectName, containerGroupName).UpdateContainerGroup(updateContainerGroup).Execute()
+> ContainerGroup UpdateContainerGroup(ctx, organizationName, projectName, containerGroupName).ContainerGroupPatch(containerGroupPatch).Execute()
 
 Update Container Group
 
@@ -875,11 +876,11 @@ func main() {
 	organizationName := "organizationName_example" // string | Your organization name. This identifies the billing context for the API operation and represents a security boundary for SaladCloud resources. The organization must be created before using the API, and you must be a member of the organization.
 	projectName := "projectName_example" // string | Your project name. This represents a collection of related SaladCloud resources. The project must be created before using the API.
 	containerGroupName := "containerGroupName_example" // string | The unique container group name
-	updateContainerGroup := *openapiclient.NewUpdateContainerGroup() // UpdateContainerGroup | 
+	containerGroupPatch := *openapiclient.NewContainerGroupPatch() // ContainerGroupPatch | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.ContainerGroupsAPI.UpdateContainerGroup(context.Background(), organizationName, projectName, containerGroupName).UpdateContainerGroup(updateContainerGroup).Execute()
+	resp, r, err := apiClient.ContainerGroupsAPI.UpdateContainerGroup(context.Background(), organizationName, projectName, containerGroupName).ContainerGroupPatch(containerGroupPatch).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `ContainerGroupsAPI.UpdateContainerGroup``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -909,7 +910,7 @@ Name | Type | Description  | Notes
 
 
 
- **updateContainerGroup** | [**UpdateContainerGroup**](UpdateContainerGroup.md) |  | 
+ **containerGroupPatch** | [**ContainerGroupPatch**](ContainerGroupPatch.md) |  | 
 
 ### Return type
 
@@ -923,6 +924,87 @@ Name | Type | Description  | Notes
 
 - **Content-Type**: application/merge-patch+json
 - **Accept**: application/merge-patch+json, application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## UpdateContainerGroupInstance
+
+> ContainerGroupInstance UpdateContainerGroupInstance(ctx, organizationName, projectName, containerGroupName, containerGroupInstanceId).ContainerGroupInstancePatch(containerGroupInstancePatch).Execute()
+
+Update Container Group Instance
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/SaladTechnologies/salad-client"
+)
+
+func main() {
+	organizationName := "organizationName_example" // string | Your organization name. This identifies the billing context for the API operation and represents a security boundary for SaladCloud resources. The organization must be created before using the API, and you must be a member of the organization.
+	projectName := "projectName_example" // string | Your project name. This represents a collection of related SaladCloud resources. The project must be created before using the API.
+	containerGroupName := "containerGroupName_example" // string | The unique container group name
+	containerGroupInstanceId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The unique container group instance identifier
+	containerGroupInstancePatch := *openapiclient.NewContainerGroupInstancePatch() // ContainerGroupInstancePatch | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ContainerGroupsAPI.UpdateContainerGroupInstance(context.Background(), organizationName, projectName, containerGroupName, containerGroupInstanceId).ContainerGroupInstancePatch(containerGroupInstancePatch).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ContainerGroupsAPI.UpdateContainerGroupInstance``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `UpdateContainerGroupInstance`: ContainerGroupInstance
+	fmt.Fprintf(os.Stdout, "Response from `ContainerGroupsAPI.UpdateContainerGroupInstance`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**organizationName** | **string** | Your organization name. This identifies the billing context for the API operation and represents a security boundary for SaladCloud resources. The organization must be created before using the API, and you must be a member of the organization. | 
+**projectName** | **string** | Your project name. This represents a collection of related SaladCloud resources. The project must be created before using the API. | 
+**containerGroupName** | **string** | The unique container group name | 
+**containerGroupInstanceId** | **string** | The unique container group instance identifier | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiUpdateContainerGroupInstanceRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+
+ **containerGroupInstancePatch** | [**ContainerGroupInstancePatch**](ContainerGroupInstancePatch.md) |  | 
+
+### Return type
+
+[**ContainerGroupInstance**](ContainerGroupInstance.md)
+
+### Authorization
+
+[ApiKeyAuth](../README.md#ApiKeyAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/merge-patch+json
+- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)

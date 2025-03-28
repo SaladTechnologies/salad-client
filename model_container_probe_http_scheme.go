@@ -3,7 +3,7 @@ SaladCloud API
 
 The SaladCloud REST API. Please refer to the [SaladCloud API Documentation](https://docs.salad.com/api-reference) for more details.
 
-API version: 0.9.0-alpha.7
+API version: 0.9.0-alpha.11
 Contact: cloud@salad.com
 */
 
@@ -16,17 +16,19 @@ import (
 	"fmt"
 )
 
-// ContainerProbeHttpScheme the model 'ContainerProbeHttpScheme'
+// ContainerProbeHttpScheme The protocol scheme used for HTTP probe requests in container health checks.
 type ContainerProbeHttpScheme string
 
 // List of ContainerProbeHttpScheme
 const (
 	CONTAINERPROBEHTTPSCHEME_HTTP ContainerProbeHttpScheme = "http"
+	CONTAINERPROBEHTTPSCHEME_HTTPS ContainerProbeHttpScheme = "https"
 )
 
 // All allowed values of ContainerProbeHttpScheme enum
 var AllowedContainerProbeHttpSchemeEnumValues = []ContainerProbeHttpScheme{
 	"http",
+	"https",
 }
 
 func (v *ContainerProbeHttpScheme) UnmarshalJSON(src []byte) error {

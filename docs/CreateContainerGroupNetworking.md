@@ -4,19 +4,19 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**Auth** | **bool** | Determines whether authentication is required for network connections to the container group | 
+**ClientRequestTimeout** | Pointer to **int32** | The container group networking client request timeout. | [optional] [default to 100000]
+**LoadBalancer** | Pointer to [**ContainerGroupNetworkingLoadBalancer**](ContainerGroupNetworkingLoadBalancer.md) |  | [optional] [default to CONTAINERGROUPNETWORKINGLOADBALANCER_ROUND_ROBIN]
+**Port** | **int32** | The container group networking port. | 
 **Protocol** | [**ContainerNetworkingProtocol**](ContainerNetworkingProtocol.md) |  | 
-**Port** | **int32** |  | 
-**Auth** | **bool** |  | 
-**LoadBalancer** | Pointer to **string** |  | [optional] [default to "round_robin"]
-**SingleConnectionLimit** | Pointer to **bool** |  | [optional] [default to false]
-**ClientRequestTimeout** | Pointer to **int32** |  | [optional] [default to 100000]
-**ServerResponseTimeout** | Pointer to **int32** |  | [optional] [default to 100000]
+**ServerResponseTimeout** | Pointer to **int32** | The container group networking server response timeout. | [optional] [default to 100000]
+**SingleConnectionLimit** | Pointer to **bool** | The container group networking single connection limit flag. | [optional] [default to false]
 
 ## Methods
 
 ### NewCreateContainerGroupNetworking
 
-`func NewCreateContainerGroupNetworking(protocol ContainerNetworkingProtocol, port int32, auth bool, ) *CreateContainerGroupNetworking`
+`func NewCreateContainerGroupNetworking(auth bool, port int32, protocol ContainerNetworkingProtocol, ) *CreateContainerGroupNetworking`
 
 NewCreateContainerGroupNetworking instantiates a new CreateContainerGroupNetworking object
 This constructor will assign default values to properties that have it defined,
@@ -30,46 +30,6 @@ will change when the set of required properties is changed
 NewCreateContainerGroupNetworkingWithDefaults instantiates a new CreateContainerGroupNetworking object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
-
-### GetProtocol
-
-`func (o *CreateContainerGroupNetworking) GetProtocol() ContainerNetworkingProtocol`
-
-GetProtocol returns the Protocol field if non-nil, zero value otherwise.
-
-### GetProtocolOk
-
-`func (o *CreateContainerGroupNetworking) GetProtocolOk() (*ContainerNetworkingProtocol, bool)`
-
-GetProtocolOk returns a tuple with the Protocol field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetProtocol
-
-`func (o *CreateContainerGroupNetworking) SetProtocol(v ContainerNetworkingProtocol)`
-
-SetProtocol sets Protocol field to given value.
-
-
-### GetPort
-
-`func (o *CreateContainerGroupNetworking) GetPort() int32`
-
-GetPort returns the Port field if non-nil, zero value otherwise.
-
-### GetPortOk
-
-`func (o *CreateContainerGroupNetworking) GetPortOk() (*int32, bool)`
-
-GetPortOk returns a tuple with the Port field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetPort
-
-`func (o *CreateContainerGroupNetworking) SetPort(v int32)`
-
-SetPort sets Port field to given value.
-
 
 ### GetAuth
 
@@ -90,56 +50,6 @@ and a boolean to check if the value has been set.
 
 SetAuth sets Auth field to given value.
 
-
-### GetLoadBalancer
-
-`func (o *CreateContainerGroupNetworking) GetLoadBalancer() string`
-
-GetLoadBalancer returns the LoadBalancer field if non-nil, zero value otherwise.
-
-### GetLoadBalancerOk
-
-`func (o *CreateContainerGroupNetworking) GetLoadBalancerOk() (*string, bool)`
-
-GetLoadBalancerOk returns a tuple with the LoadBalancer field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetLoadBalancer
-
-`func (o *CreateContainerGroupNetworking) SetLoadBalancer(v string)`
-
-SetLoadBalancer sets LoadBalancer field to given value.
-
-### HasLoadBalancer
-
-`func (o *CreateContainerGroupNetworking) HasLoadBalancer() bool`
-
-HasLoadBalancer returns a boolean if a field has been set.
-
-### GetSingleConnectionLimit
-
-`func (o *CreateContainerGroupNetworking) GetSingleConnectionLimit() bool`
-
-GetSingleConnectionLimit returns the SingleConnectionLimit field if non-nil, zero value otherwise.
-
-### GetSingleConnectionLimitOk
-
-`func (o *CreateContainerGroupNetworking) GetSingleConnectionLimitOk() (*bool, bool)`
-
-GetSingleConnectionLimitOk returns a tuple with the SingleConnectionLimit field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetSingleConnectionLimit
-
-`func (o *CreateContainerGroupNetworking) SetSingleConnectionLimit(v bool)`
-
-SetSingleConnectionLimit sets SingleConnectionLimit field to given value.
-
-### HasSingleConnectionLimit
-
-`func (o *CreateContainerGroupNetworking) HasSingleConnectionLimit() bool`
-
-HasSingleConnectionLimit returns a boolean if a field has been set.
 
 ### GetClientRequestTimeout
 
@@ -166,6 +76,71 @@ SetClientRequestTimeout sets ClientRequestTimeout field to given value.
 
 HasClientRequestTimeout returns a boolean if a field has been set.
 
+### GetLoadBalancer
+
+`func (o *CreateContainerGroupNetworking) GetLoadBalancer() ContainerGroupNetworkingLoadBalancer`
+
+GetLoadBalancer returns the LoadBalancer field if non-nil, zero value otherwise.
+
+### GetLoadBalancerOk
+
+`func (o *CreateContainerGroupNetworking) GetLoadBalancerOk() (*ContainerGroupNetworkingLoadBalancer, bool)`
+
+GetLoadBalancerOk returns a tuple with the LoadBalancer field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLoadBalancer
+
+`func (o *CreateContainerGroupNetworking) SetLoadBalancer(v ContainerGroupNetworkingLoadBalancer)`
+
+SetLoadBalancer sets LoadBalancer field to given value.
+
+### HasLoadBalancer
+
+`func (o *CreateContainerGroupNetworking) HasLoadBalancer() bool`
+
+HasLoadBalancer returns a boolean if a field has been set.
+
+### GetPort
+
+`func (o *CreateContainerGroupNetworking) GetPort() int32`
+
+GetPort returns the Port field if non-nil, zero value otherwise.
+
+### GetPortOk
+
+`func (o *CreateContainerGroupNetworking) GetPortOk() (*int32, bool)`
+
+GetPortOk returns a tuple with the Port field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPort
+
+`func (o *CreateContainerGroupNetworking) SetPort(v int32)`
+
+SetPort sets Port field to given value.
+
+
+### GetProtocol
+
+`func (o *CreateContainerGroupNetworking) GetProtocol() ContainerNetworkingProtocol`
+
+GetProtocol returns the Protocol field if non-nil, zero value otherwise.
+
+### GetProtocolOk
+
+`func (o *CreateContainerGroupNetworking) GetProtocolOk() (*ContainerNetworkingProtocol, bool)`
+
+GetProtocolOk returns a tuple with the Protocol field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetProtocol
+
+`func (o *CreateContainerGroupNetworking) SetProtocol(v ContainerNetworkingProtocol)`
+
+SetProtocol sets Protocol field to given value.
+
+
 ### GetServerResponseTimeout
 
 `func (o *CreateContainerGroupNetworking) GetServerResponseTimeout() int32`
@@ -190,6 +165,31 @@ SetServerResponseTimeout sets ServerResponseTimeout field to given value.
 `func (o *CreateContainerGroupNetworking) HasServerResponseTimeout() bool`
 
 HasServerResponseTimeout returns a boolean if a field has been set.
+
+### GetSingleConnectionLimit
+
+`func (o *CreateContainerGroupNetworking) GetSingleConnectionLimit() bool`
+
+GetSingleConnectionLimit returns the SingleConnectionLimit field if non-nil, zero value otherwise.
+
+### GetSingleConnectionLimitOk
+
+`func (o *CreateContainerGroupNetworking) GetSingleConnectionLimitOk() (*bool, bool)`
+
+GetSingleConnectionLimitOk returns a tuple with the SingleConnectionLimit field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSingleConnectionLimit
+
+`func (o *CreateContainerGroupNetworking) SetSingleConnectionLimit(v bool)`
+
+SetSingleConnectionLimit sets SingleConnectionLimit field to given value.
+
+### HasSingleConnectionLimit
+
+`func (o *CreateContainerGroupNetworking) HasSingleConnectionLimit() bool`
+
+HasSingleConnectionLimit returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

@@ -4,8 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Host** | **string** |  | 
-**Port** | **int32** |  | 
+**Host** | **string** | The hostname or IP address of the remote TCP logging endpoint | 
+**Port** | **int32** | The port number on which the TCP logging endpoint is listening | 
 
 ## Methods
 

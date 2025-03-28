@@ -3,7 +3,7 @@ SaladCloud API
 
 The SaladCloud REST API. Please refer to the [SaladCloud API Documentation](https://docs.salad.com/api-reference) for more details.
 
-API version: 0.9.0-alpha.7
+API version: 0.9.0-alpha.11
 Contact: cloud@salad.com
 */
 
@@ -18,14 +18,14 @@ import (
 // checks if the ContainerLogging type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ContainerLogging{}
 
-// ContainerLogging struct for ContainerLogging
+// ContainerLogging Configuration options for directing container logs to a logging provider. This schema enables you to specify a single logging destination for container output, supporting monitoring, debugging, and analytics use cases. Each provider has its own configuration parameters defined in the referenced schemas. Only one logging provider can be selected at a time.
 type ContainerLogging struct {
 	Axiom *ContainerLoggingAxiom `json:"axiom,omitempty"`
 	Datadog *ContainerLoggingDatadog `json:"datadog,omitempty"`
+	Http *ContainerLoggingHttp `json:"http,omitempty"`
 	NewRelic *ContainerLoggingNewRelic `json:"new_relic,omitempty"`
 	Splunk *ContainerLoggingSplunk `json:"splunk,omitempty"`
 	Tcp *ContainerLoggingTcp `json:"tcp,omitempty"`
-	Http *ContainerLoggingHttp `json:"http,omitempty"`
 }
 
 // NewContainerLogging instantiates a new ContainerLogging object
@@ -107,6 +107,38 @@ func (o *ContainerLogging) HasDatadog() bool {
 // SetDatadog gets a reference to the given ContainerLoggingDatadog and assigns it to the Datadog field.
 func (o *ContainerLogging) SetDatadog(v ContainerLoggingDatadog) {
 	o.Datadog = &v
+}
+
+// GetHttp returns the Http field value if set, zero value otherwise.
+func (o *ContainerLogging) GetHttp() ContainerLoggingHttp {
+	if o == nil || IsNil(o.Http) {
+		var ret ContainerLoggingHttp
+		return ret
+	}
+	return *o.Http
+}
+
+// GetHttpOk returns a tuple with the Http field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ContainerLogging) GetHttpOk() (*ContainerLoggingHttp, bool) {
+	if o == nil || IsNil(o.Http) {
+		return nil, false
+	}
+	return o.Http, true
+}
+
+// HasHttp returns a boolean if a field has been set.
+func (o *ContainerLogging) HasHttp() bool {
+	if o != nil && !IsNil(o.Http) {
+		return true
+	}
+
+	return false
+}
+
+// SetHttp gets a reference to the given ContainerLoggingHttp and assigns it to the Http field.
+func (o *ContainerLogging) SetHttp(v ContainerLoggingHttp) {
+	o.Http = &v
 }
 
 // GetNewRelic returns the NewRelic field value if set, zero value otherwise.
@@ -205,38 +237,6 @@ func (o *ContainerLogging) SetTcp(v ContainerLoggingTcp) {
 	o.Tcp = &v
 }
 
-// GetHttp returns the Http field value if set, zero value otherwise.
-func (o *ContainerLogging) GetHttp() ContainerLoggingHttp {
-	if o == nil || IsNil(o.Http) {
-		var ret ContainerLoggingHttp
-		return ret
-	}
-	return *o.Http
-}
-
-// GetHttpOk returns a tuple with the Http field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *ContainerLogging) GetHttpOk() (*ContainerLoggingHttp, bool) {
-	if o == nil || IsNil(o.Http) {
-		return nil, false
-	}
-	return o.Http, true
-}
-
-// HasHttp returns a boolean if a field has been set.
-func (o *ContainerLogging) HasHttp() bool {
-	if o != nil && !IsNil(o.Http) {
-		return true
-	}
-
-	return false
-}
-
-// SetHttp gets a reference to the given ContainerLoggingHttp and assigns it to the Http field.
-func (o *ContainerLogging) SetHttp(v ContainerLoggingHttp) {
-	o.Http = &v
-}
-
 func (o ContainerLogging) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -253,6 +253,9 @@ func (o ContainerLogging) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Datadog) {
 		toSerialize["datadog"] = o.Datadog
 	}
+	if !IsNil(o.Http) {
+		toSerialize["http"] = o.Http
+	}
 	if !IsNil(o.NewRelic) {
 		toSerialize["new_relic"] = o.NewRelic
 	}
@@ -261,9 +264,6 @@ func (o ContainerLogging) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.Tcp) {
 		toSerialize["tcp"] = o.Tcp
-	}
-	if !IsNil(o.Http) {
-		toSerialize["http"] = o.Http
 	}
 	return toSerialize, nil
 }

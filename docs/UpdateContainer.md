@@ -4,14 +4,14 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Image** | Pointer to **string** |  | [optional] 
-**Resources** | Pointer to [**UpdateContainerResources**](UpdateContainerResources.md) |  | [optional] 
 **Command** | Pointer to **[]string** | Pass a command (and optional arguments) to override the ENTRYPOINT and CMD of a container image. | [optional] 
+**EnvironmentVariables** | Pointer to **map[string]string** | Environment variables to set in the container. | [optional] 
+**Image** | Pointer to **NullableString** | The container image to use. | [optional] 
+**ImageCaching** | Pointer to **bool** | The container image caching. | [optional] 
+**Logging** | Pointer to [**UpdateContainerLogging**](UpdateContainerLogging.md) |  | [optional] 
 **Priority** | Pointer to [**NullableContainerGroupPriority**](ContainerGroupPriority.md) |  | [optional] 
-**EnvironmentVariables** | Pointer to **map[string]string** |  | [optional] 
-**Logging** | Pointer to [**ContainerLogging**](ContainerLogging.md) |  | [optional] 
-**RegistryAuthentication** | Pointer to [**CreateContainerRegistryAuthentication**](CreateContainerRegistryAuthentication.md) |  | [optional] 
-**ImageCaching** | Pointer to **bool** |  | [optional] 
+**RegistryAuthentication** | Pointer to [**ContainerRegistryAuthentication**](ContainerRegistryAuthentication.md) |  | [optional] 
+**Resources** | Pointer to [**UpdateContainerResources**](UpdateContainerResources.md) |  | [optional] 
 
 ## Methods
 
@@ -31,6 +31,66 @@ will change when the set of required properties is changed
 NewUpdateContainerWithDefaults instantiates a new UpdateContainer object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetCommand
+
+`func (o *UpdateContainer) GetCommand() []string`
+
+GetCommand returns the Command field if non-nil, zero value otherwise.
+
+### GetCommandOk
+
+`func (o *UpdateContainer) GetCommandOk() (*[]string, bool)`
+
+GetCommandOk returns a tuple with the Command field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCommand
+
+`func (o *UpdateContainer) SetCommand(v []string)`
+
+SetCommand sets Command field to given value.
+
+### HasCommand
+
+`func (o *UpdateContainer) HasCommand() bool`
+
+HasCommand returns a boolean if a field has been set.
+
+### SetCommandNil
+
+`func (o *UpdateContainer) SetCommandNil(b bool)`
+
+ SetCommandNil sets the value for Command to be an explicit nil
+
+### UnsetCommand
+`func (o *UpdateContainer) UnsetCommand()`
+
+UnsetCommand ensures that no value is present for Command, not even an explicit nil
+### GetEnvironmentVariables
+
+`func (o *UpdateContainer) GetEnvironmentVariables() map[string]string`
+
+GetEnvironmentVariables returns the EnvironmentVariables field if non-nil, zero value otherwise.
+
+### GetEnvironmentVariablesOk
+
+`func (o *UpdateContainer) GetEnvironmentVariablesOk() (*map[string]string, bool)`
+
+GetEnvironmentVariablesOk returns a tuple with the EnvironmentVariables field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetEnvironmentVariables
+
+`func (o *UpdateContainer) SetEnvironmentVariables(v map[string]string)`
+
+SetEnvironmentVariables sets EnvironmentVariables field to given value.
+
+### HasEnvironmentVariables
+
+`func (o *UpdateContainer) HasEnvironmentVariables() bool`
+
+HasEnvironmentVariables returns a boolean if a field has been set.
 
 ### GetImage
 
@@ -57,55 +117,65 @@ SetImage sets Image field to given value.
 
 HasImage returns a boolean if a field has been set.
 
-### GetResources
+### SetImageNil
 
-`func (o *UpdateContainer) GetResources() UpdateContainerResources`
+`func (o *UpdateContainer) SetImageNil(b bool)`
 
-GetResources returns the Resources field if non-nil, zero value otherwise.
+ SetImageNil sets the value for Image to be an explicit nil
 
-### GetResourcesOk
+### UnsetImage
+`func (o *UpdateContainer) UnsetImage()`
 
-`func (o *UpdateContainer) GetResourcesOk() (*UpdateContainerResources, bool)`
+UnsetImage ensures that no value is present for Image, not even an explicit nil
+### GetImageCaching
 
-GetResourcesOk returns a tuple with the Resources field if it's non-nil, zero value otherwise
+`func (o *UpdateContainer) GetImageCaching() bool`
+
+GetImageCaching returns the ImageCaching field if non-nil, zero value otherwise.
+
+### GetImageCachingOk
+
+`func (o *UpdateContainer) GetImageCachingOk() (*bool, bool)`
+
+GetImageCachingOk returns a tuple with the ImageCaching field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetResources
+### SetImageCaching
 
-`func (o *UpdateContainer) SetResources(v UpdateContainerResources)`
+`func (o *UpdateContainer) SetImageCaching(v bool)`
 
-SetResources sets Resources field to given value.
+SetImageCaching sets ImageCaching field to given value.
 
-### HasResources
+### HasImageCaching
 
-`func (o *UpdateContainer) HasResources() bool`
+`func (o *UpdateContainer) HasImageCaching() bool`
 
-HasResources returns a boolean if a field has been set.
+HasImageCaching returns a boolean if a field has been set.
 
-### GetCommand
+### GetLogging
 
-`func (o *UpdateContainer) GetCommand() []string`
+`func (o *UpdateContainer) GetLogging() UpdateContainerLogging`
 
-GetCommand returns the Command field if non-nil, zero value otherwise.
+GetLogging returns the Logging field if non-nil, zero value otherwise.
 
-### GetCommandOk
+### GetLoggingOk
 
-`func (o *UpdateContainer) GetCommandOk() (*[]string, bool)`
+`func (o *UpdateContainer) GetLoggingOk() (*UpdateContainerLogging, bool)`
 
-GetCommandOk returns a tuple with the Command field if it's non-nil, zero value otherwise
+GetLoggingOk returns a tuple with the Logging field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetCommand
+### SetLogging
 
-`func (o *UpdateContainer) SetCommand(v []string)`
+`func (o *UpdateContainer) SetLogging(v UpdateContainerLogging)`
 
-SetCommand sets Command field to given value.
+SetLogging sets Logging field to given value.
 
-### HasCommand
+### HasLogging
 
-`func (o *UpdateContainer) HasCommand() bool`
+`func (o *UpdateContainer) HasLogging() bool`
 
-HasCommand returns a boolean if a field has been set.
+HasLogging returns a boolean if a field has been set.
 
 ### GetPriority
 
@@ -142,72 +212,22 @@ HasPriority returns a boolean if a field has been set.
 `func (o *UpdateContainer) UnsetPriority()`
 
 UnsetPriority ensures that no value is present for Priority, not even an explicit nil
-### GetEnvironmentVariables
-
-`func (o *UpdateContainer) GetEnvironmentVariables() map[string]string`
-
-GetEnvironmentVariables returns the EnvironmentVariables field if non-nil, zero value otherwise.
-
-### GetEnvironmentVariablesOk
-
-`func (o *UpdateContainer) GetEnvironmentVariablesOk() (*map[string]string, bool)`
-
-GetEnvironmentVariablesOk returns a tuple with the EnvironmentVariables field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetEnvironmentVariables
-
-`func (o *UpdateContainer) SetEnvironmentVariables(v map[string]string)`
-
-SetEnvironmentVariables sets EnvironmentVariables field to given value.
-
-### HasEnvironmentVariables
-
-`func (o *UpdateContainer) HasEnvironmentVariables() bool`
-
-HasEnvironmentVariables returns a boolean if a field has been set.
-
-### GetLogging
-
-`func (o *UpdateContainer) GetLogging() ContainerLogging`
-
-GetLogging returns the Logging field if non-nil, zero value otherwise.
-
-### GetLoggingOk
-
-`func (o *UpdateContainer) GetLoggingOk() (*ContainerLogging, bool)`
-
-GetLoggingOk returns a tuple with the Logging field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetLogging
-
-`func (o *UpdateContainer) SetLogging(v ContainerLogging)`
-
-SetLogging sets Logging field to given value.
-
-### HasLogging
-
-`func (o *UpdateContainer) HasLogging() bool`
-
-HasLogging returns a boolean if a field has been set.
-
 ### GetRegistryAuthentication
 
-`func (o *UpdateContainer) GetRegistryAuthentication() CreateContainerRegistryAuthentication`
+`func (o *UpdateContainer) GetRegistryAuthentication() ContainerRegistryAuthentication`
 
 GetRegistryAuthentication returns the RegistryAuthentication field if non-nil, zero value otherwise.
 
 ### GetRegistryAuthenticationOk
 
-`func (o *UpdateContainer) GetRegistryAuthenticationOk() (*CreateContainerRegistryAuthentication, bool)`
+`func (o *UpdateContainer) GetRegistryAuthenticationOk() (*ContainerRegistryAuthentication, bool)`
 
 GetRegistryAuthenticationOk returns a tuple with the RegistryAuthentication field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetRegistryAuthentication
 
-`func (o *UpdateContainer) SetRegistryAuthentication(v CreateContainerRegistryAuthentication)`
+`func (o *UpdateContainer) SetRegistryAuthentication(v ContainerRegistryAuthentication)`
 
 SetRegistryAuthentication sets RegistryAuthentication field to given value.
 
@@ -217,30 +237,30 @@ SetRegistryAuthentication sets RegistryAuthentication field to given value.
 
 HasRegistryAuthentication returns a boolean if a field has been set.
 
-### GetImageCaching
+### GetResources
 
-`func (o *UpdateContainer) GetImageCaching() bool`
+`func (o *UpdateContainer) GetResources() UpdateContainerResources`
 
-GetImageCaching returns the ImageCaching field if non-nil, zero value otherwise.
+GetResources returns the Resources field if non-nil, zero value otherwise.
 
-### GetImageCachingOk
+### GetResourcesOk
 
-`func (o *UpdateContainer) GetImageCachingOk() (*bool, bool)`
+`func (o *UpdateContainer) GetResourcesOk() (*UpdateContainerResources, bool)`
 
-GetImageCachingOk returns a tuple with the ImageCaching field if it's non-nil, zero value otherwise
+GetResourcesOk returns a tuple with the Resources field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetImageCaching
+### SetResources
 
-`func (o *UpdateContainer) SetImageCaching(v bool)`
+`func (o *UpdateContainer) SetResources(v UpdateContainerResources)`
 
-SetImageCaching sets ImageCaching field to given value.
+SetResources sets Resources field to given value.
 
-### HasImageCaching
+### HasResources
 
-`func (o *UpdateContainer) HasImageCaching() bool`
+`func (o *UpdateContainer) HasResources() bool`
 
-HasImageCaching returns a boolean if a field has been set.
+HasResources returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

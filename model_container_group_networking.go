@@ -3,7 +3,7 @@ SaladCloud API
 
 The SaladCloud REST API. Please refer to the [SaladCloud API Documentation](https://docs.salad.com/api-reference) for more details.
 
-API version: 0.9.0-alpha.7
+API version: 0.9.0-alpha.11
 Contact: cloud@salad.com
 */
 
@@ -20,16 +20,22 @@ import (
 // checks if the ContainerGroupNetworking type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ContainerGroupNetworking{}
 
-// ContainerGroupNetworking Represents container group networking parameters
+// ContainerGroupNetworking Network configuration for container groups that defines connectivity, routing, and access control settings
 type ContainerGroupNetworking struct {
-	Protocol ContainerNetworkingProtocol `json:"protocol"`
-	Port int32 `json:"port"`
+	// Whether authentication is required for network access to the container group
 	Auth bool `json:"auth"`
-	Dns string `json:"dns"`
-	LoadBalancer *string `json:"load_balancer,omitempty"`
-	SingleConnectionLimit *bool `json:"single_connection_limit,omitempty"`
+	// The container group networking client request timeout.
 	ClientRequestTimeout *int32 `json:"client_request_timeout,omitempty"`
+	// Domain name or URL endpoint for the container group's network interface
+	Dns string `json:"dns" validate:"regexp=^([a-z][a-z0-9-]{0,61}[a-z0-9]\\\\.)*[a-z][a-z0-9-]{0,61}[a-z0-9]$"`
+	LoadBalancer ContainerGroupNetworkingLoadBalancer `json:"load_balancer"`
+	// The container group networking port.
+	Port int32 `json:"port"`
+	Protocol ContainerNetworkingProtocol `json:"protocol"`
+	// The container group networking server response timeout.
 	ServerResponseTimeout *int32 `json:"server_response_timeout,omitempty"`
+	// The container group networking single connection limit flag.
+	SingleConnectionLimit *bool `json:"single_connection_limit,omitempty"`
 }
 
 type _ContainerGroupNetworking ContainerGroupNetworking
@@ -38,20 +44,19 @@ type _ContainerGroupNetworking ContainerGroupNetworking
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewContainerGroupNetworking(protocol ContainerNetworkingProtocol, port int32, auth bool, dns string) *ContainerGroupNetworking {
+func NewContainerGroupNetworking(auth bool, dns string, loadBalancer ContainerGroupNetworkingLoadBalancer, port int32, protocol ContainerNetworkingProtocol) *ContainerGroupNetworking {
 	this := ContainerGroupNetworking{}
-	this.Protocol = protocol
-	this.Port = port
 	this.Auth = auth
-	this.Dns = dns
-	var loadBalancer string = "round_robin"
-	this.LoadBalancer = &loadBalancer
-	var singleConnectionLimit bool = false
-	this.SingleConnectionLimit = &singleConnectionLimit
 	var clientRequestTimeout int32 = 100000
 	this.ClientRequestTimeout = &clientRequestTimeout
+	this.Dns = dns
+	this.LoadBalancer = loadBalancer
+	this.Port = port
+	this.Protocol = protocol
 	var serverResponseTimeout int32 = 100000
 	this.ServerResponseTimeout = &serverResponseTimeout
+	var singleConnectionLimit bool = false
+	this.SingleConnectionLimit = &singleConnectionLimit
 	return &this
 }
 
@@ -60,63 +65,15 @@ func NewContainerGroupNetworking(protocol ContainerNetworkingProtocol, port int3
 // but it doesn't guarantee that properties required by API are set
 func NewContainerGroupNetworkingWithDefaults() *ContainerGroupNetworking {
 	this := ContainerGroupNetworking{}
-	var loadBalancer string = "round_robin"
-	this.LoadBalancer = &loadBalancer
-	var singleConnectionLimit bool = false
-	this.SingleConnectionLimit = &singleConnectionLimit
 	var clientRequestTimeout int32 = 100000
 	this.ClientRequestTimeout = &clientRequestTimeout
+	var loadBalancer ContainerGroupNetworkingLoadBalancer = CONTAINERGROUPNETWORKINGLOADBALANCER_ROUND_ROBIN
+	this.LoadBalancer = loadBalancer
 	var serverResponseTimeout int32 = 100000
 	this.ServerResponseTimeout = &serverResponseTimeout
+	var singleConnectionLimit bool = false
+	this.SingleConnectionLimit = &singleConnectionLimit
 	return &this
-}
-
-// GetProtocol returns the Protocol field value
-func (o *ContainerGroupNetworking) GetProtocol() ContainerNetworkingProtocol {
-	if o == nil {
-		var ret ContainerNetworkingProtocol
-		return ret
-	}
-
-	return o.Protocol
-}
-
-// GetProtocolOk returns a tuple with the Protocol field value
-// and a boolean to check if the value has been set.
-func (o *ContainerGroupNetworking) GetProtocolOk() (*ContainerNetworkingProtocol, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Protocol, true
-}
-
-// SetProtocol sets field value
-func (o *ContainerGroupNetworking) SetProtocol(v ContainerNetworkingProtocol) {
-	o.Protocol = v
-}
-
-// GetPort returns the Port field value
-func (o *ContainerGroupNetworking) GetPort() int32 {
-	if o == nil {
-		var ret int32
-		return ret
-	}
-
-	return o.Port
-}
-
-// GetPortOk returns a tuple with the Port field value
-// and a boolean to check if the value has been set.
-func (o *ContainerGroupNetworking) GetPortOk() (*int32, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Port, true
-}
-
-// SetPort sets field value
-func (o *ContainerGroupNetworking) SetPort(v int32) {
-	o.Port = v
 }
 
 // GetAuth returns the Auth field value
@@ -141,94 +98,6 @@ func (o *ContainerGroupNetworking) GetAuthOk() (*bool, bool) {
 // SetAuth sets field value
 func (o *ContainerGroupNetworking) SetAuth(v bool) {
 	o.Auth = v
-}
-
-// GetDns returns the Dns field value
-func (o *ContainerGroupNetworking) GetDns() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.Dns
-}
-
-// GetDnsOk returns a tuple with the Dns field value
-// and a boolean to check if the value has been set.
-func (o *ContainerGroupNetworking) GetDnsOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Dns, true
-}
-
-// SetDns sets field value
-func (o *ContainerGroupNetworking) SetDns(v string) {
-	o.Dns = v
-}
-
-// GetLoadBalancer returns the LoadBalancer field value if set, zero value otherwise.
-func (o *ContainerGroupNetworking) GetLoadBalancer() string {
-	if o == nil || IsNil(o.LoadBalancer) {
-		var ret string
-		return ret
-	}
-	return *o.LoadBalancer
-}
-
-// GetLoadBalancerOk returns a tuple with the LoadBalancer field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *ContainerGroupNetworking) GetLoadBalancerOk() (*string, bool) {
-	if o == nil || IsNil(o.LoadBalancer) {
-		return nil, false
-	}
-	return o.LoadBalancer, true
-}
-
-// HasLoadBalancer returns a boolean if a field has been set.
-func (o *ContainerGroupNetworking) HasLoadBalancer() bool {
-	if o != nil && !IsNil(o.LoadBalancer) {
-		return true
-	}
-
-	return false
-}
-
-// SetLoadBalancer gets a reference to the given string and assigns it to the LoadBalancer field.
-func (o *ContainerGroupNetworking) SetLoadBalancer(v string) {
-	o.LoadBalancer = &v
-}
-
-// GetSingleConnectionLimit returns the SingleConnectionLimit field value if set, zero value otherwise.
-func (o *ContainerGroupNetworking) GetSingleConnectionLimit() bool {
-	if o == nil || IsNil(o.SingleConnectionLimit) {
-		var ret bool
-		return ret
-	}
-	return *o.SingleConnectionLimit
-}
-
-// GetSingleConnectionLimitOk returns a tuple with the SingleConnectionLimit field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *ContainerGroupNetworking) GetSingleConnectionLimitOk() (*bool, bool) {
-	if o == nil || IsNil(o.SingleConnectionLimit) {
-		return nil, false
-	}
-	return o.SingleConnectionLimit, true
-}
-
-// HasSingleConnectionLimit returns a boolean if a field has been set.
-func (o *ContainerGroupNetworking) HasSingleConnectionLimit() bool {
-	if o != nil && !IsNil(o.SingleConnectionLimit) {
-		return true
-	}
-
-	return false
-}
-
-// SetSingleConnectionLimit gets a reference to the given bool and assigns it to the SingleConnectionLimit field.
-func (o *ContainerGroupNetworking) SetSingleConnectionLimit(v bool) {
-	o.SingleConnectionLimit = &v
 }
 
 // GetClientRequestTimeout returns the ClientRequestTimeout field value if set, zero value otherwise.
@@ -263,6 +132,102 @@ func (o *ContainerGroupNetworking) SetClientRequestTimeout(v int32) {
 	o.ClientRequestTimeout = &v
 }
 
+// GetDns returns the Dns field value
+func (o *ContainerGroupNetworking) GetDns() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.Dns
+}
+
+// GetDnsOk returns a tuple with the Dns field value
+// and a boolean to check if the value has been set.
+func (o *ContainerGroupNetworking) GetDnsOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Dns, true
+}
+
+// SetDns sets field value
+func (o *ContainerGroupNetworking) SetDns(v string) {
+	o.Dns = v
+}
+
+// GetLoadBalancer returns the LoadBalancer field value
+func (o *ContainerGroupNetworking) GetLoadBalancer() ContainerGroupNetworkingLoadBalancer {
+	if o == nil {
+		var ret ContainerGroupNetworkingLoadBalancer
+		return ret
+	}
+
+	return o.LoadBalancer
+}
+
+// GetLoadBalancerOk returns a tuple with the LoadBalancer field value
+// and a boolean to check if the value has been set.
+func (o *ContainerGroupNetworking) GetLoadBalancerOk() (*ContainerGroupNetworkingLoadBalancer, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.LoadBalancer, true
+}
+
+// SetLoadBalancer sets field value
+func (o *ContainerGroupNetworking) SetLoadBalancer(v ContainerGroupNetworkingLoadBalancer) {
+	o.LoadBalancer = v
+}
+
+// GetPort returns the Port field value
+func (o *ContainerGroupNetworking) GetPort() int32 {
+	if o == nil {
+		var ret int32
+		return ret
+	}
+
+	return o.Port
+}
+
+// GetPortOk returns a tuple with the Port field value
+// and a boolean to check if the value has been set.
+func (o *ContainerGroupNetworking) GetPortOk() (*int32, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Port, true
+}
+
+// SetPort sets field value
+func (o *ContainerGroupNetworking) SetPort(v int32) {
+	o.Port = v
+}
+
+// GetProtocol returns the Protocol field value
+func (o *ContainerGroupNetworking) GetProtocol() ContainerNetworkingProtocol {
+	if o == nil {
+		var ret ContainerNetworkingProtocol
+		return ret
+	}
+
+	return o.Protocol
+}
+
+// GetProtocolOk returns a tuple with the Protocol field value
+// and a boolean to check if the value has been set.
+func (o *ContainerGroupNetworking) GetProtocolOk() (*ContainerNetworkingProtocol, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Protocol, true
+}
+
+// SetProtocol sets field value
+func (o *ContainerGroupNetworking) SetProtocol(v ContainerNetworkingProtocol) {
+	o.Protocol = v
+}
+
 // GetServerResponseTimeout returns the ServerResponseTimeout field value if set, zero value otherwise.
 func (o *ContainerGroupNetworking) GetServerResponseTimeout() int32 {
 	if o == nil || IsNil(o.ServerResponseTimeout) {
@@ -295,6 +260,38 @@ func (o *ContainerGroupNetworking) SetServerResponseTimeout(v int32) {
 	o.ServerResponseTimeout = &v
 }
 
+// GetSingleConnectionLimit returns the SingleConnectionLimit field value if set, zero value otherwise.
+func (o *ContainerGroupNetworking) GetSingleConnectionLimit() bool {
+	if o == nil || IsNil(o.SingleConnectionLimit) {
+		var ret bool
+		return ret
+	}
+	return *o.SingleConnectionLimit
+}
+
+// GetSingleConnectionLimitOk returns a tuple with the SingleConnectionLimit field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ContainerGroupNetworking) GetSingleConnectionLimitOk() (*bool, bool) {
+	if o == nil || IsNil(o.SingleConnectionLimit) {
+		return nil, false
+	}
+	return o.SingleConnectionLimit, true
+}
+
+// HasSingleConnectionLimit returns a boolean if a field has been set.
+func (o *ContainerGroupNetworking) HasSingleConnectionLimit() bool {
+	if o != nil && !IsNil(o.SingleConnectionLimit) {
+		return true
+	}
+
+	return false
+}
+
+// SetSingleConnectionLimit gets a reference to the given bool and assigns it to the SingleConnectionLimit field.
+func (o *ContainerGroupNetworking) SetSingleConnectionLimit(v bool) {
+	o.SingleConnectionLimit = &v
+}
+
 func (o ContainerGroupNetworking) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -305,21 +302,19 @@ func (o ContainerGroupNetworking) MarshalJSON() ([]byte, error) {
 
 func (o ContainerGroupNetworking) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["protocol"] = o.Protocol
-	toSerialize["port"] = o.Port
 	toSerialize["auth"] = o.Auth
-	toSerialize["dns"] = o.Dns
-	if !IsNil(o.LoadBalancer) {
-		toSerialize["load_balancer"] = o.LoadBalancer
-	}
-	if !IsNil(o.SingleConnectionLimit) {
-		toSerialize["single_connection_limit"] = o.SingleConnectionLimit
-	}
 	if !IsNil(o.ClientRequestTimeout) {
 		toSerialize["client_request_timeout"] = o.ClientRequestTimeout
 	}
+	toSerialize["dns"] = o.Dns
+	toSerialize["load_balancer"] = o.LoadBalancer
+	toSerialize["port"] = o.Port
+	toSerialize["protocol"] = o.Protocol
 	if !IsNil(o.ServerResponseTimeout) {
 		toSerialize["server_response_timeout"] = o.ServerResponseTimeout
+	}
+	if !IsNil(o.SingleConnectionLimit) {
+		toSerialize["single_connection_limit"] = o.SingleConnectionLimit
 	}
 	return toSerialize, nil
 }
@@ -329,10 +324,11 @@ func (o *ContainerGroupNetworking) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"protocol",
-		"port",
 		"auth",
 		"dns",
+		"load_balancer",
+		"port",
+		"protocol",
 	}
 
 	allProperties := make(map[string]interface{})

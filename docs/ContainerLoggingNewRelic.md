@@ -4,8 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Host** | **string** |  | 
-**IngestionKey** | **string** |  | 
+**Host** | **string** | The New Relic endpoint host for log ingestion (e.g., log-api.newrelic.com). | 
+**IngestionKey** | **string** | The New Relic license or ingestion key used for authentication and data routing. | 
 
 ## Methods
 

@@ -7,8 +7,8 @@ Name | Type | Description | Notes
 **Id** | **string** | The queue identifier. This is automatically generated and assigned when the queue is created. | 
 **Name** | **string** | The queue name. This must be unique within the project. | 
 **DisplayName** | **string** | The display name. This may be used as a more human-readable name. | 
-**Description** | Pointer to **NullableString** | The description. This may be used as a space for notes or other information about the queue. | [optional] 
-**ContainerGroups** | [**[]ContainerGroup**](ContainerGroup.md) |  | 
+**Description** | Pointer to **string** | The description. This may be used as a space for notes or other information about the queue. | [optional] 
+**ContainerGroups** | [**[]ContainerGroup**](ContainerGroup.md) | The container groups that are part of this queue. Each container group represents a scalable set of identical containers running as a distributed service. | 
 **CreateTime** | **time.Time** | The date and time the queue was created. | 
 **UpdateTime** | **time.Time** | The date and time the queue was last updated. | 
 
@@ -116,16 +116,6 @@ SetDescription sets Description field to given value.
 
 HasDescription returns a boolean if a field has been set.
 
-### SetDescriptionNil
-
-`func (o *Queue) SetDescriptionNil(b bool)`
-
- SetDescriptionNil sets the value for Description to be an explicit nil
-
-### UnsetDescription
-`func (o *Queue) UnsetDescription()`
-
-UnsetDescription ensures that no value is present for Description, not even an explicit nil
 ### GetContainerGroups
 
 `func (o *Queue) GetContainerGroups() []ContainerGroup`
